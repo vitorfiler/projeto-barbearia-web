@@ -5,13 +5,12 @@
 export const environment = {
   production: true,
   hmr       : false,
-  URL_API: "",
+  URL_API: "http://localhost:8080",
   URL_AWS: "",
-  URL_LOGIN: "http://localhost:8081/login",
   ambiente: "dsv",
 
-  comparacaoFaturas: "/comparacaov2",
-  mailingComparacaoFaturas: "/mailingcompfatura"
+  //SERVIÇOS
+    cadastro: '/cadastro',
 };
 
 

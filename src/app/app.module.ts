@@ -13,7 +13,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
@@ -36,11 +35,17 @@ import { LoginFinalComponent } from './pages/login-final/login-final.component';
 import { CalendarModule as AngularCalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarModule } from './pages/login-final/calendar/calendar.module';
+import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ScrollbarModule } from 'src/@vex/components/scrollbar/scrollbar.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginFinalComponent
+    LoginFinalComponent,
+    CadastroComponent
 
   ],
   imports: [
@@ -63,6 +68,7 @@ import { CalendarModule } from './pages/login-final/calendar/calendar.module';
     NgxChartsModule,
     MatSnackBarModule,
     ScrollingModule,
+    ScrollbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
     IconModule,
@@ -80,7 +86,8 @@ import { CalendarModule } from './pages/login-final/calendar/calendar.module';
     
     // Vex
     VexModule,
-    CustomLayoutModule
+    CustomLayoutModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     MatDatepickerModule,

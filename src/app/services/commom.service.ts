@@ -46,9 +46,9 @@ url: String = '/uc'
   //   return promise
   // }
 
-  // postMokoon(urlName: string, string: string): Observable<any>{
-  //   return this.http.post(`${environment.url}${urlName}`, string, { observe: "response", headers: this.headers });
-  // }
+  post(urlName: string, string: string): Observable<any>{
+    return this.http.post(`${environment.URL_API}${urlName}`, string, { observe: "response", headers: this.headers });
+  }
 
   // put(urlName: string, body: string, clientId: string): Observable<any> {
   //   return this.http.put(`${environment.url}${urlName}`, body, { params: {

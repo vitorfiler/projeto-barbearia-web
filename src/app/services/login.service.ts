@@ -12,7 +12,7 @@ export class LoginService {
 
   constructor(private http: HttpClient, private routes: ActivatedRoute) { }
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
-  urlLogin = `${environment.URL_LOGIN}`;
+  urlLogin = `${environment.URL_API}/login`;
     
   // login(username: string, password: string): Observable<any> {
   //   const body: any = {

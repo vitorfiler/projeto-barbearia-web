@@ -9,11 +9,15 @@ import arrowBack from '@iconify/icons-ic/keyboard-backspace';
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import icVisibilityOff from '@iconify/icons-ic/twotone-visibility-off';
 import { Observable } from 'rxjs';
+import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 
 @Component({
   selector: 'vex-login-final',
   templateUrl: './login-final.component.html',
-  styleUrls: ['./login-final.component.scss']
+  styleUrls: ['./login-final.component.scss'],
+  animations: [
+    fadeInUp400ms
+  ]
 })
 export class LoginFinalComponent implements OnInit {
 

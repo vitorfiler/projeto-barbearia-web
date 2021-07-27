@@ -1,0 +1,77 @@
+<div class="w-full h-full bg-pattern" fxLayout="column" fxLayoutAlign="center center">
+    <div @fadeInUp class="card overflow-hidden w-full max-w-xs align-card">
+    <vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
+      <div class="p-6 pb-0" fxLayout="column" fxLayoutAlign="center center">
+        <div class="fill-current text-center">
+          <img class="w-16" src="assets/images/logos/teste.png">
+        </div>
+      </div>
+  
+      <div class="text-center mt-4">
+        <h2 class="title m-0">Crie sua conta </h2>
+        <h4 class="body-2 text-secondary m-0">Informe os dados para realizar seu cadastro.
+        </h4>
+      </div>
+  
+      <div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
+        <div fxFlex="auto" fxLayout="column">
+          <mat-form-field fxFlex="grow" appearance="outline">
+            <mat-label>Nome Completo</mat-label>
+            <input formControlName="nome" matInput required>
+          </mat-form-field>
+  
+          <mat-form-field fxFlex="grow" appearance="outline">
+            <mat-label>Nome do Estabelecimento</mat-label>
+            <input formControlName="estabelecimento" matInput required>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="grow" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput required>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="grow" appearance="outline">
+            <mat-label>CPF/CNPJ</mat-label>
+            <input formControlName="cpf_cnpj" matInput required>
+          </mat-form-field>
+  
+          <mat-form-field fxFlex="grow" appearance="outline">
+            <mat-label>Senha</mat-label>
+            <input [type]="inputType" formControlName="senha" matInput required>
+            <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
+              <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
+              <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
+            </button>
+            <mat-hint>Click the eye to toggle visibility</mat-hint>
+          </mat-form-field>
+  
+          <mat-form-field fxFlex="grow" appearance="outline">
+            <mat-label>Confirmar Senha</mat-label>
+            <input [type]="inputType" formControlName="ConfirmarSenha" matInput required>
+            <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
+              <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
+              <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
+            </button>
+            <mat-hint>Please repeat your password from above</mat-hint>
+          </mat-form-field>
+        </div>
+  
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-checkbox class="caption">Li e concordo com os Termos e Condições.</mat-checkbox>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-checkbox class="caption">Li e concordo com as Políticas de Privacidade.</mat-checkbox>
+        </div>
+
+        <button (click)="cadastrar()" color="primary" mat-raised-button type="button">
+          Criar Conta
+        </button>
+        <p class="text-secondary text-center">
+          Já possui uma conta?<br/>
+          <a [routerLink]="['/login']">Faça login</a>
+        </p>
+      </div>
+    </vex-scrollbar>
+    </div>
+  </div>
+  

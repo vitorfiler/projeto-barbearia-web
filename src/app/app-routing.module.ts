@@ -5,6 +5,7 @@ import { VexRoutes } from 'src/@vex/interfaces/vex-route.interface';
 
 import { LoginFinalComponent } from './pages/login-final/login-final.component';
 import { CalendarComponent } from './pages/login-final/calendar/calendar.component';
+import { CadastroComponent } from './pages/cadastro/cadastro.component';
 
 
 const routes: VexRoutes = [
@@ -15,7 +16,8 @@ const routes: VexRoutes = [
       { path: 'agenda', component: CalendarComponent }
     ],
   },
-  { path: 'login', component: LoginFinalComponent }
+  { path: 'login', component: LoginFinalComponent },
+  { path: 'cadastro', component: CadastroComponent }
 ];
 
 @NgModule({
