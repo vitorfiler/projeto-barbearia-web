@@ -96,7 +96,9 @@
               ],
               "customWebpackConfig": {
                 "path": "./webpack.prod.config.js"
-              }
+              },
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
