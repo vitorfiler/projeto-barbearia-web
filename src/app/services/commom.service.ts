@@ -20,19 +20,9 @@ export class CommomService {
     ) { }
 
 headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
-url: String = '/uc'
   logout(){
     localStorage.clear();
     this.route.navigate(['/login']);
-  }
-
-  getUnidadesConsumidoras(clientId: string): Observable<any>{
-    return this.http.get(`${environment.URL_AWS}${this.url}`, {
-      params: {
-        clienteID: clientId,
-      },
-      observe: "response",
-  })
   }
 
   // get(urlName: string): Observable<any>{
@@ -47,6 +37,9 @@ url: String = '/uc'
   // }
 
   post(urlName: string, string: string): Observable<any>{
+    return this.http.post(`${environment.URL_API}${urlName}`, string, { observe: "response", headers: this.headers });
+  }
+  postMockoon(urlName: string, string: string): Observable<any>{
     return this.http.post(`${environment.URL_API}${urlName}`, string, { observe: "response", headers: this.headers });
   }
 

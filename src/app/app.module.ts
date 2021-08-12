@@ -40,6 +40,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ScrollbarModule } from 'src/@vex/components/scrollbar/scrollbar.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatProgressBarModule,
     MatIconModule,
     GaugeModule,
     NgxGaugeModule,

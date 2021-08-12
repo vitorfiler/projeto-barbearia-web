@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Unidade } from '../_models/unidade';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +34,11 @@ export class LoginService {
     return this.http.post(`${this.urlLogin}`, body, { observe: "response", headers: this.headers });
   }
 
+  // var validaSessao = this.commomService.validaSessao();
+  // if (!retornoValida) {
+  //     this.router.navigate(['login']);
+  //     return;
+  // }
 validaSessao(){
   let token = localStorage.getItem("token");
   if(token == null || token == '' || token == 'undefined'){

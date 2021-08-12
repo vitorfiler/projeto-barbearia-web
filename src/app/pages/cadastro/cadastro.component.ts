@@ -8,6 +8,7 @@ import { CommomService } from 'src/app/services/commom.service';
 import { environment } from 'src/environments/environment';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { ScrollbarComponent } from 'src/@vex/components/scrollbar/scrollbar.component';
+import { Estabelecimento } from 'src/app/_models/estabelecimento';
 
 @Component({
   selector: 'vex-cadastro',
@@ -18,9 +19,10 @@ import { ScrollbarComponent } from 'src/@vex/components/scrollbar/scrollbar.comp
     stagger20ms
   ]
 })
+
 export class CadastroComponent implements OnInit {
 
-
+  estabelecimento = new Estabelecimento();
   form: FormGroup;
 
   inputType = 'password';
@@ -57,7 +59,7 @@ export class CadastroComponent implements OnInit {
 
   cadastrar() {
     const body = this.montarBody();
-    this.commomService.post(`${environment.cadastro}`, body).subscribe(response=>{
+    this.commomService.postMockoon(`${environment.cadastro}`, body).subscribe(response=>{
       console.log(response.body);
       
     })
@@ -65,16 +67,17 @@ export class CadastroComponent implements OnInit {
 
   montarBody(): any{
     let body = {
-      "user_name": this.form.get('nome').value,
-      "establishment_name": this.form.get('estabelecimento').value,
+      "nome": this.form.get('nome').value,
+      "estabelecimento": this.form.get('estabelecimento').value,
       "email": this.form.get('email').value,
-      "CPF_CNPJ": this.form.get('cpf_cnpj').value,
-      "password": this.form.get('senha').value
+      "cpf_cnpj": this.form.get('cpf_cnpj').value,
+      "senha": this.form.get('senha').value
     }
     console.log(body);
     
     return body;
   }
+  
   scrollToBottom() {
     this.scrollbar.scrollbarRef.getScrollElement().scrollTo({
       behavior: 'smooth',

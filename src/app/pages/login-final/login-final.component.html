@@ -1,12 +1,14 @@
 <div class="w-full h-full estilo" fxLayout="column" fxLayoutAlign="center center">
-    <div @fadeInUp class="card overflow-hidden w-full max-w-xs align-card">
+  <mat-progress-bar *ngIf="logando" mode="indeterminate" color="primary"></mat-progress-bar>
+    <div @fadeInUp style="margin-top: 5%;" class="card overflow-hidden w-full max-w-xs align-card">
+      <vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
       <div class="p-6 pb-0" fxLayout="column" fxLayoutAlign="center center">
         <div class="fill-current text-center">
-          <img class="logo" src="assets/images/logos/teste.png">
+          <img class="logo" src="assets/images/logos/teste.png" style="max-width: 40px;">
         </div>
       </div>
   
-      <div class="text-center mt-4">
+      <div style="margin-top: -2%;" class="text-center mt-4">
         <h2 class="title m-0">Bem vindo de Volta</h2>
         <h4 class="body-2 text-secondary m-0">Entre com suas credenciais.</h4>
       </div>
@@ -33,16 +35,17 @@
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <mat-checkbox class="caption" color="primary">Lembrar-Me</mat-checkbox>
         </div>
-  
+        <p class="text-secondary text-center">
+          Não possui uma conta?<br/>
+           <a [routerLink]="['/cadastro']">Clique aqui para Criar uma</a>
+         </p>
         <button color="primary" (click)="login()" mat-raised-button type="button">
           Entrar
         </button>
   
-        <p class="text-secondary text-center">
-         Não possui uma conta?<br/>
-          <a [routerLink]="['/cadastro']">Clique aqui para Criar uma</a>
-        </p>
+
       </div>
+    </vex-scrollbar>
     </div>
   </div>
   

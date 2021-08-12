@@ -10,13 +10,16 @@ import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import icVisibilityOff from '@iconify/icons-ic/twotone-visibility-off';
 import { Observable } from 'rxjs';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
+import { stagger20ms } from 'src/@vex/animations/stagger.animation';
+import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 
 @Component({
   selector: 'vex-login-final',
   templateUrl: './login-final.component.html',
   styleUrls: ['./login-final.component.scss'],
   animations: [
-    fadeInUp400ms
+    fadeInUp400ms,
+    stagger20ms
   ]
 })
 export class LoginFinalComponent implements OnInit {
@@ -34,6 +37,7 @@ export class LoginFinalComponent implements OnInit {
 
   falhaLogin: boolean = false;
   consumo: any = [];
+  logando: Boolean = false;
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -44,20 +48,26 @@ export class LoginFinalComponent implements OnInit {
   ) {}
 
   login(){
+    this.logando = true;
     let username = this.form.get('email').value
     let password = this.form.get('password').value
     return this.loginService
         .login(username, password)
-        .subscribe((response) => {
-          // console.log(response.body.nomeUsuario);
+        .subscribe(response=> {
+           // console.log(response.body.nomeUsuario);
           // console.log(response.body.tipoUsuario);
           // console.log(response.body.token);
-          localStorage.setItem("currentUser", JSON.stringify(response.body.nomeUsuario))
+          // localStorage.setItem("typeUser", JSON.stringify(response.body.tipoUsuario))
+          localStorage.setItem("currentUser", JSON.stringify(response.body.estabelecimento))
           localStorage.setItem("token", JSON.stringify(response.body.token))
-          localStorage.setItem("typeUser", JSON.stringify(response.body.tipoUsuario))
           this.router.navigate(['/']);
-        })
-}
+          this.logando = false;
+        },
+        (error) => {
+          console.log(error.message);
+          this.snackbar.open(MessagesSnackBar.LOGIN_ERRO, 'Close', { duration: 9000 });
+        });
+      }
 
 ngOnInit(): void {
     this.form = this.fb.group({

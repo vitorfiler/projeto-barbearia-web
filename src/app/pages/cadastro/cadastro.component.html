@@ -1,4 +1,4 @@
-<div class="w-full h-full bg-pattern" fxLayout="column" fxLayoutAlign="center center">
+<div class="w-full h-full bg-pattern estilo" fxLayout="column" fxLayoutAlign="center center">
     <div @fadeInUp class="card overflow-hidden w-full max-w-xs align-card">
     <vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
       <div class="p-6 pb-0" fxLayout="column" fxLayoutAlign="center center">
@@ -22,7 +22,7 @@
   
           <mat-form-field fxFlex="grow" appearance="outline">
             <mat-label>Nome do Estabelecimento</mat-label>
-            <input formControlName="estabelecimento" matInput required>
+            <input formControlName="estabelecimento" [(ngModel)]="estabelecimento.user_name" matInput required>
           </mat-form-field>
 
           <mat-form-field fxFlex="grow" appearance="outline">
