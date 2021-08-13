@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   hmr       : false,
-  URL_API: "http://localhost:8080",
+  URL_API: "https://projeto-barbearia-api.vercel.app",
   URL_AWS: "",
   ambiente: "prod",
 
