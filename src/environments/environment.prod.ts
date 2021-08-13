@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   hmr       : false,
-  URL_API: "https://projeto-barbearia-api.vercel.app",
+  URL_API: "https://89199679ae19.ngrok.io",
   URL_AWS: "",
   ambiente: "prod",
 
