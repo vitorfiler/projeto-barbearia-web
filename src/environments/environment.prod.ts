@@ -6,5 +6,5 @@ export const environment = {
   ambiente: "prod",
 
   //SERVIÇOS
-    cadastro: '/cadastro',
+    cadastro: '/estabelecimento/cadastrar',
 };

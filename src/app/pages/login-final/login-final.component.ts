@@ -43,7 +43,6 @@ export class LoginFinalComponent implements OnInit {
               private fb: FormBuilder,
               private cd: ChangeDetectorRef,
               private snackbar: MatSnackBar,
-              private commomService: CommomService,
               private loginService: LoginService,
   ) {}
 
@@ -64,6 +63,7 @@ export class LoginFinalComponent implements OnInit {
           this.logando = false;
         },
         (error) => {
+          this.logando = false;
           console.log(error.message);
           this.snackbar.open(MessagesSnackBar.LOGIN_ERRO, 'Close', { duration: 9000 });
         });

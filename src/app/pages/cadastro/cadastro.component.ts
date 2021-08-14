@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { ScrollbarComponent } from 'src/@vex/components/scrollbar/scrollbar.component';
 import { Estabelecimento } from 'src/app/_models/estabelecimento';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 
 @Component({
   selector: 'vex-cadastro',
@@ -27,6 +29,7 @@ export class CadastroComponent implements OnInit {
 
   inputType = 'password';
   visible = false;
+  cadastrando: Boolean = false;
 
   icVisibility = icVisibility;
   icVisibilityOff = icVisibilityOff;
@@ -35,6 +38,7 @@ export class CadastroComponent implements OnInit {
   constructor(private router: Router,
               private fb: FormBuilder,
               private cd: ChangeDetectorRef,
+              private snackbar: MatSnackBar,
               private commomService: CommomService
   ) { }
 
@@ -61,7 +65,14 @@ export class CadastroComponent implements OnInit {
     const body = this.montarBody();
     this.commomService.postMockoon(`${environment.cadastro}`, body).subscribe(response=>{
       console.log(response.body);
-      
+      this.snackbar.open(MessagesSnackBar.CADASTRO_SUCESSO, 'Close', { duration: 9000 });
+      this.form.reset();
+      this.cadastrando = false;
+    },
+    (error) => {
+      console.log(error.message);
+      this.cadastrando = false;
+      this.snackbar.open(MessagesSnackBar.CADASTRO_ERRO, 'Close', { duration: 9000 });
     })
   }
 

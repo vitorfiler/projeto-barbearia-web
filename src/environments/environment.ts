@@ -10,7 +10,7 @@ export const environment = {
   ambiente: "dsv",
 
   //SERVIÇOS
-    cadastro: '/cadastro',
+    cadastro: '/estabelecimento/cadastrar',
 };
 
 

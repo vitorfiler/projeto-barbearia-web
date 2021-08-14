@@ -1,5 +1,6 @@
 <div class="w-full h-full bg-pattern estilo" fxLayout="column" fxLayoutAlign="center center">
-    <div @fadeInUp class="card overflow-hidden w-full max-w-xs align-card">
+  <div @fadeInUp class="card overflow-hidden w-full max-w-xs align-card">
+    <mat-progress-bar *ngIf="cadastrando" mode="indeterminate" color="primary"></mat-progress-bar>
     <vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
       <div class="p-6 pb-0" fxLayout="column" fxLayoutAlign="center center">
         <div class="fill-current text-center">

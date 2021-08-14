@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CalendarEditComponent } from './calendar-edit/calendar-edit.component';
 import icChevronLeft from '@iconify/icons-ic/twotone-chevron-left';
 import icChevronRight from '@iconify/icons-ic/twotone-chevron-right';
+import { Router } from '@angular/router';
+import { CommomService } from 'src/app/services/commom.service';
 
 const colors: any = {
   blue: {
@@ -107,9 +109,16 @@ export class CalendarComponent implements OnInit{
   activeDayIsOpen = true;
 
   constructor(private dialog: MatDialog,
+              private router: Router,
+              private commomService: CommomService,
               private snackbar: MatSnackBar) {}
 
   ngOnInit(): void {
+    var validaSessao = this.commomService.validaSessao();
+    if (!validaSessao) {
+        this.router.navigate(['login']);
+        return;
+    }
     console.log(startOfDay(new Date()));
     
   }
