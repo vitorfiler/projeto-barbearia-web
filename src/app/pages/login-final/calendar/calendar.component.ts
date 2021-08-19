@@ -116,7 +116,7 @@ export class CalendarComponent implements OnInit{
   ngOnInit(): void {
     var validaSessao = this.commomService.validaSessao();
     if (!validaSessao) {
-        this.router.navigate(['login']);
+        this.router.navigate(['login.html']);
         return;
     }
     console.log(startOfDay(new Date()));
