@@ -9,6 +9,7 @@ import icChevronLeft from '@iconify/icons-ic/twotone-chevron-left';
 import icChevronRight from '@iconify/icons-ic/twotone-chevron-right';
 import { Router } from '@angular/router';
 import { CommomService } from 'src/app/services/commom.service';
+import { environment } from 'src/environments/environment';
 
 const colors: any = {
   blue: {
@@ -116,7 +117,7 @@ export class CalendarComponent implements OnInit{
   ngOnInit(): void {
     var validaSessao = this.commomService.validaSessao();
     if (!validaSessao) {
-        this.router.navigate(['login.html']);
+        this.router.navigate(['login']);
         return;
     }
     console.log(startOfDay(new Date()));
