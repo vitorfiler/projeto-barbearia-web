@@ -111,9 +111,6 @@ export class AppComponent implements OnInit{
     ];
   }
   ngOnInit(): void {
-    let token = window.localStorage.getItem('token');
-    if(!token){
-      this.router.navigate(['/login']);
-    }
+
   }
 }

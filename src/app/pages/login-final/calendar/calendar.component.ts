@@ -120,7 +120,7 @@ export class CalendarComponent implements OnInit{
         this.router.navigate(['login']);
         return;
     }
-    console.log(startOfDay(new Date()));
+    // console.log(startOfDay(new Date()));
     
   }
 
