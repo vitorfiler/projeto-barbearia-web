@@ -36,13 +36,15 @@
           <mat-checkbox class="caption" color="primary">Lembrar-Me</mat-checkbox>
         </div>
         <p class="text-secondary text-center">
-          Não possui uma conta?<br/>
-           <a [routerLink]="['/cadastro']">Clique aqui para Criar uma</a>
-         </p>
+          <a [routerLink]="['/recuperar-senha']">Esqueci minha senha</a>
+        </p>
         <button color="primary" (click)="login()" mat-raised-button type="button">
           Entrar
         </button>
-  
+        <p class="text-secondary text-center">
+          Não possui uma conta?<br/>
+           <a [routerLink]="['/cadastro']">Clique aqui para Criar uma</a>
+        </p>
 
       </div>
     </vex-scrollbar>
