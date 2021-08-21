@@ -22,7 +22,7 @@ import { environment } from 'src/environments/environment';
 export class RecuperarSenhaComponent implements OnInit {
 
 	form: FormGroup;
-	logando: Boolean = false;
+	aguardando: Boolean = false;
 
 	constructor(private router: Router,
 		private fb: FormBuilder,
@@ -31,6 +31,7 @@ export class RecuperarSenhaComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
+		
 		this.form = this.fb.group({
 			email: new FormControl(
 				'',[Validators.required, Validators.email]
@@ -38,14 +39,14 @@ export class RecuperarSenhaComponent implements OnInit {
 		});
 	}
 	recuperarSenha() {
-		// this.logando = true;
+		this.aguardando = true;
 		let email = this.form.get('email').value
 		return this.commomService.recuperarSenha(email).subscribe(response => {
-			// this.router.navigate(['/']);
-			// this.logando = false;
+			this.router.navigate(['/enviado']);
+			this.aguardando = false;
 		},
 			(error) => {
-				// this.logando = false;
+				this.aguardando = false;
 				console.log(error.message);
 				this.snackbar.open(MessagesSnackBar.LOGIN_ERRO, 'Close', { duration: 9000 });
 			});

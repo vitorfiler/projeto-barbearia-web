@@ -58,23 +58,28 @@ export class CadastroComponent implements OnInit {
 			ConfirmarSenha: ['', Validators.required],
 			termosCondicoes: ['', Validators.requiredTrue],
 			politicasPrivacidade: ['', Validators.requiredTrue]
-		});
-		// this.form = this.fb.group({
-		//   nome: ['', ],
-		//   estabelecimento: ['', ],
-		//   email: ['', ],
-		//   cpf_cnpj: ['', ],
-		//   senha: ['', ],
-		//   ConfirmarSenha: ['', ], 
-		// });
+		}, {validator: this.checkPasswords });
 	}
+	checkPasswords(group: FormGroup) { 
+	  let senha = group.get('senha').value;
+	  let confirmaSenha = group.get('ConfirmarSenha').value;
+  
+	  return senha === confirmaSenha ? null : { notSame: true }     
+	}
+	// this.form = this.fb.group({
+	//   nome: ['', ],
+	//   estabelecimento: ['', ],
+	//   email: ['', ],
+	//   cpf_cnpj: ['', ],
+	//   senha: ['', ],
+	//   ConfirmarSenha: ['', ], 
+	// });
 
 	cadastrar() {
 		const body = this.montarBody();
 		this.commomService.post(`${environment.cadastro}`, body).subscribe(response => {
-			console.log(response.body);
 			this.snackbar.open(MessagesSnackBar.CADASTRO_SUCESSO, 'Close', { duration: 9000 });
-			this.form.reset();
+			// this.form.reset();
 			this.cadastrando = false;
 		},
 			(error) => {
@@ -92,7 +97,6 @@ export class CadastroComponent implements OnInit {
 			"cpf_cnpj": this.form.get('cpf_cnpj').value,
 			"senha": this.form.get('senha').value
 		}
-		console.log(body);
 
 		return body;
 	}

@@ -44,7 +44,7 @@ headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
   recuperarSenha(email: string): Observable<any> {
-    return this.http.put(`${environment.URL_API}${environment.recuperarSenha}`, { params: {
+    return this.http.get(`${environment.URL_API}${environment.recuperarSenha}`, { params: {
       email: email, }, observe: "response", headers: this.headers });
   }
 

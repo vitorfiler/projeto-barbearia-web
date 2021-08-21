@@ -1,13 +1,8 @@
 <div class="w-full h-full estilo" fxLayout="column" fxLayoutAlign="center center">
     <div @fadeInUp style="margin-top: 5%;" class="card overflow-hidden w-full max-w-xs align-card">
-      <mat-progress-bar *ngIf="logando" mode="indeterminate" color="primary"></mat-progress-bar>
+      <mat-progress-bar *ngIf="aguardando" mode="indeterminate" color="primary"></mat-progress-bar>
         <vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
-        <!-- <div class="p-6 pb-0" fxLayout="column" fxLayoutAlign="center center">
-          <div class="fill-current text-center">
-            <img class="logo" src="assets/images/logos/teste.png" style="max-width: 40px;">
-          </div>
-        </div> -->
-  
+
         <div style="margin-top: -2%;" class="text-center mt-4">
           <h2 class="title m-0">Esqueceu sua Senha?</h2>
           <h4 class="body-2 text-secondary m-0">Enviaremos um e-mail para recuperação da senha.</h4>
@@ -22,12 +17,15 @@
               <mat-error *ngIf="form.get('email').hasError('pattern')">favor verifique seu endereço de email</mat-error>
             </mat-form-field>
           </div>
-    
-          <button [disabled]="form.invalid" color="primary" (click)="recuperarSenha()" mat-raised-button type="button">
+          <button style="background-color: #000C6F; color: white;" [routerLink]="['/redefinir-senha']" mat-raised-button type="button">
+            Dev
+          </button>
+
+          <button style="background-color: #000C6F; color: white;" (click)="recuperarSenha()" mat-raised-button type="button">
             Recuperar Senha
           </button>
           <p class="text-secondary text-center">
-            <a [routerLink]="['/login']">Retornar ao login</a>
+          <u><a [routerLink]="['/login']">Retornar ao login</a></u>
           </p>
         </div>
       </vex-scrollbar>

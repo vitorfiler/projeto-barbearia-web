@@ -42,13 +42,17 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
+import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
+import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFinalComponent,
     CadastroComponent,
-    RecuperarSenhaComponent
+    RecuperarSenhaComponent,
+    RedefinirSenhaComponent,
+    RecuperarSenhaSucessoComponent
 
   ],
   imports: [
