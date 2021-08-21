@@ -35,10 +35,10 @@
             <mat-label>CPF/CNPJ</mat-label>
             <input formControlName="cpf_cnpj" matInput required>
           </mat-form-field>
-  
+          <!-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$" -->
           <mat-form-field fxFlex="grow" appearance="outline">
             <mat-label>Senha</mat-label>
-            <input [type]="inputType" formControlName="senha" matInput required>
+            <input pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$" [type]="inputType" formControlName="senha" matInput required>
             <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
               <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
               <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
@@ -58,10 +58,10 @@
         </div>
   
         <div fxLayout="row" fxLayoutAlign="center center">
-            <mat-checkbox class="caption">Li e concordo com os Termos e Condições.</mat-checkbox>
+            <mat-checkbox formControlName="termosCondicoes" class="caption">Li e concordo com os Termos e Condições.</mat-checkbox>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center">
-            <mat-checkbox class="caption">Li e concordo com as Políticas de Privacidade.</mat-checkbox>
+            <mat-checkbox formControlName="politicasPrivacidade" class="caption">Li e concordo com as Políticas de Privacidade.</mat-checkbox>
         </div>
 
         <button [disabled]="form.invalid" (click)="cadastrar()" color="primary" mat-raised-button type="button">

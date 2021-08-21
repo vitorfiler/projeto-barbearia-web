@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
@@ -17,10 +17,10 @@ import { environment } from 'src/environments/environment';
 	animations: [
 		fadeInUp400ms,
 		stagger20ms
-	  ]
+	]
 })
 export class RecuperarSenhaComponent implements OnInit {
-	
+
 	form: FormGroup;
 	logando: Boolean = false;
 
@@ -32,20 +32,22 @@ export class RecuperarSenhaComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.form = this.fb.group({
-			email: ["", [Validators.required]]
+			email: new FormControl(
+				'',[Validators.required, Validators.email]
+			)
 		});
 	}
 	recuperarSenha() {
 		// this.logando = true;
 		let email = this.form.get('email').value
 		return this.commomService.recuperarSenha(email).subscribe(response => {
-				// this.router.navigate(['/']);
+			// this.router.navigate(['/']);
+			// this.logando = false;
+		},
+			(error) => {
 				// this.logando = false;
-			},
-				(error) => {
-					// this.logando = false;
-					console.log(error.message);
-					this.snackbar.open(MessagesSnackBar.LOGIN_ERRO, 'Close', { duration: 9000 });
-				});
+				console.log(error.message);
+				this.snackbar.open(MessagesSnackBar.LOGIN_ERRO, 'Close', { duration: 9000 });
+			});
 	}
 }
