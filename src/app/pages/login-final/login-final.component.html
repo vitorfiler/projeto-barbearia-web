@@ -38,7 +38,7 @@
         <p class="text-secondary text-center">
           <a [routerLink]="['/recuperar-senha']">Esqueci minha senha</a>
         </p>
-        <button color="primary" (click)="login()" mat-raised-button type="button">
+        <button [disabled]="form.invalid" color="primary" (click)="login()" mat-raised-button type="button">
           Entrar
         </button>
         <p class="text-secondary text-center">

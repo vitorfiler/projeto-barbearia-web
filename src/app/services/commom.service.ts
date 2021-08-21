@@ -43,6 +43,11 @@ headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
     return this.http.post(`${environment.URL_API}${urlName}`, string, { observe: "response", headers: this.headers });
   }
 
+  recuperarSenha(email: string): Observable<any> {
+    return this.http.put(`${environment.URL_API}${environment.recuperarSenha}`, { params: {
+      email: email, }, observe: "response", headers: this.headers });
+  }
+
   // put(urlName: string, body: string, clientId: string): Observable<any> {
   //   return this.http.put(`${environment.url}${urlName}`, body, { params: {
   //     clienteID: clientId, }, observe: "response", headers: this.headers });

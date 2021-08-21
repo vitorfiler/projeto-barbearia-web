@@ -43,27 +43,27 @@ export class CadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.form = this.fb.group({
-    //   nome: ['', Validators.required],
-    //   estabelecimento: ['', Validators.required],
-    //   email: ['', Validators.required],
-    //   cpf_cnpj: ['', Validators.required],
-    //   senha: ['', Validators.required],
-    //   ConfirmarSenha: ['', Validators.required],
-    // });
     this.form = this.fb.group({
-      nome: ['', ],
-      estabelecimento: ['', ],
-      email: ['', ],
-      cpf_cnpj: ['', ],
-      senha: ['', ],
-      ConfirmarSenha: ['', ],
+      nome: ['', Validators.required],
+      estabelecimento: ['', Validators.required],
+      email: ['', Validators.required],
+      cpf_cnpj: ['', Validators.required],
+      senha: ['', Validators.required],
+      ConfirmarSenha: ['', Validators.required],
     });
+    // this.form = this.fb.group({
+    //   nome: ['', ],
+    //   estabelecimento: ['', ],
+    //   email: ['', ],
+    //   cpf_cnpj: ['', ],
+    //   senha: ['', ],
+    //   ConfirmarSenha: ['', ],
+    // });
   }
 
   cadastrar() {
     const body = this.montarBody();
-    this.commomService.postMockoon(`${environment.cadastro}`, body).subscribe(response=>{
+    this.commomService.post(`${environment.cadastro}`, body).subscribe(response=>{
       console.log(response.body);
       this.snackbar.open(MessagesSnackBar.CADASTRO_SUCESSO, 'Close', { duration: 9000 });
       this.form.reset();
@@ -78,7 +78,7 @@ export class CadastroComponent implements OnInit {
 
   montarBody(): any{
     let body = {
-      "nome": this.form.get('nome').value,
+      "nomeProprietario": this.form.get('nome').value,
       "estabelecimento": this.form.get('estabelecimento').value,
       "email": this.form.get('email').value,
       "cpf_cnpj": this.form.get('cpf_cnpj').value,

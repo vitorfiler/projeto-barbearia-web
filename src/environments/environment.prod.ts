@@ -7,4 +7,5 @@ export const environment = {
 
   //SERVIÇOS
     cadastro: '/estabelecimento/cadastrar',
+    recuperarSenha: '/estabelecimento/recuperar-senha'
 };

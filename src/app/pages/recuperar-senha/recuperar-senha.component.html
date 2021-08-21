@@ -22,7 +22,7 @@
             </mat-form-field>
           </div>
     
-          <button color="primary" (click)="login()" mat-raised-button type="button">
+          <button [disabled]="form.invalid" color="primary" (click)="recuperarSenha()" mat-raised-button type="button">
             Recuperar Senha
           </button>
           <p class="text-secondary text-center">

@@ -64,7 +64,7 @@
             <mat-checkbox class="caption">Li e concordo com as Políticas de Privacidade.</mat-checkbox>
         </div>
 
-        <button (click)="cadastrar()" color="primary" mat-raised-button type="button">
+        <button [disabled]="form.invalid" (click)="cadastrar()" color="primary" mat-raised-button type="button">
           Criar Conta
         </button>
         <p class="text-secondary text-center">
