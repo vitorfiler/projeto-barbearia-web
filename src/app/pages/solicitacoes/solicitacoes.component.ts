@@ -25,6 +25,7 @@ export class SolicitacoesComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+  
 }
 
 export interface Solicitacoes {
