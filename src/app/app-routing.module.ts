@@ -9,6 +9,7 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
+import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
 
 
 const routes: VexRoutes = [
@@ -16,7 +17,9 @@ const routes: VexRoutes = [
     path: '',
     component: CustomLayoutComponent,
     children: [
-      { path: 'agenda', component: CalendarComponent }
+      { path: 'agenda', component: CalendarComponent },
+      { path: 'solicitacoes', component: SolicitacoesComponent }
+
     ],
   },
   { path: 'login', component: LoginFinalComponent },

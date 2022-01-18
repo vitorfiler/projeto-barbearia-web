@@ -44,6 +44,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
+import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recupera
     CadastroComponent,
     RecuperarSenhaComponent,
     RedefinirSenhaComponent,
-    RecuperarSenhaSucessoComponent
+    RecuperarSenhaSucessoComponent,
+    SolicitacoesComponent
 
   ],
   imports: [

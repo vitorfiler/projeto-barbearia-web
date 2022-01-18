@@ -84,6 +84,12 @@ export class AppComponent implements OnInit{
     ).subscribe(queryParamMap => this.styleService.setStyle(queryParamMap.get('style') as Style));
     this.navigationService.items = [
       {
+        label: 'Solicitações',
+        type: 'link',
+        route: '/solicitacoes',
+        icon: icDateRange
+      },
+      {
         label: 'agenda',
         type: 'link',
         route: '/agenda',
@@ -107,7 +113,8 @@ export class AppComponent implements OnInit{
         type: 'link',
         route: '/credito-gd',
         icon: icDateRange
-      }
+      },
+      
     ];
   }
   ngOnInit(): void {
