@@ -11,7 +11,7 @@ export class SolicitacoesComponent implements OnInit {
 
   
   displayedColumns: string[] = ['cliente', 'servico', 'tempo', 'valor', 'data', 'responsavel', 'status'];
-  dataSource = new MatTableDataSource<Solicitacoes>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Solicitacoes>(SOLICITACOES);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -37,7 +37,7 @@ export interface Solicitacoes {
 	status: string;
 }
 
-const ELEMENT_DATA: Solicitacoes[] = [
+const SOLICITACOES: Solicitacoes[] = [
   {cliente: 'Joao', servico: 'Corte', tempo: 30, valor: 40.00, dataSolictacao: '17-01-2022', responsavel:'Vitor', status:'Aceito'},
   {cliente: 'Joao', servico: 'Corte', tempo: 30, valor: 40.00, dataSolictacao: '17-01-2022', responsavel:'Vitor', status:'Aceito'},
   {cliente: 'Joao', servico: 'Corte', tempo: 30, valor: 40.00, dataSolictacao: '17-01-2022', responsavel:'Vitor', status:'Aceito'},
