@@ -1,3 +1,4 @@
+import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
@@ -23,7 +24,8 @@ const routes: VexRoutes = [
   { path: 'cadastro', component: CadastroComponent },
   { path: 'recuperar-senha', component: RecuperarSenhaComponent },
   { path: 'enviado', component: RecuperarSenhaSucessoComponent },
-  { path: 'redefinir-senha', component: RedefinirSenhaComponent }
+  { path: 'redefinir-senha', component: RedefinirSenhaComponent },
+  {path: 'solicitacoes', component: SolicitacoesComponent}
 ];
 
 @NgModule({

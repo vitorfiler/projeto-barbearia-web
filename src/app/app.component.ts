@@ -107,7 +107,15 @@ export class AppComponent implements OnInit{
         type: 'link',
         route: '/credito-gd',
         icon: icDateRange
-      }
+      },
+
+      {
+        label: 'Solicitações',
+        type: 'link',
+        route: '/solicitacoes',
+        icon: icAssigment
+        
+      },
     ];
   }
   ngOnInit(): void {

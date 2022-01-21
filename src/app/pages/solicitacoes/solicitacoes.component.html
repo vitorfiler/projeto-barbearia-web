@@ -1,0 +1,8 @@
+<div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
+  <div fxFlex="auto" fxLayout="column">
+    <mat-form-field fxFlex="grow" appearance="standard">
+      <mat-label>Nome Completo</mat-label>
+      <input formControlName="filtro" (change)="filtrar()" matInput required />
+    </mat-form-field>
+  </div>
+</div>
