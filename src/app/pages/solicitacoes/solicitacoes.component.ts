@@ -11,7 +11,7 @@ import { Solicitacoes } from 'src/app/_models/solicitacoes';
 export class SolicitacoesComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['cliente', 'servico', 'tempo', 'valor', 'data', 'responsavel', 'status'];
+  displayedColumns: string[] = ['clienteID', 'nomeServico', 'tempoEstimado', 'valor', 'dt_atendimento', 'responsavel', 'status'];
   dataSource = new MatTableDataSource<Solicitacoes>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -25,7 +25,8 @@ export class SolicitacoesComponent implements OnInit {
   }
 
   getSolicitacoes() {
-    this.solicitacoesService.getSolicitacoes().subscribe(response => {
+    let estabelecimento_id = '1';
+    this.solicitacoesService.getSolicitacoes(estabelecimento_id).subscribe(response => {
       if (response) {
         this.solicitacoes = response.body;
         console.log(this.solicitacoes[0].cliente);

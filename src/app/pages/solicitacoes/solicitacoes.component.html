@@ -2,21 +2,21 @@
   <table mat-table [dataSource]="dataSource">
 
     <!-- Coluna Cliente -->
-    <ng-container matColumnDef="cliente">
+    <ng-container matColumnDef="clienteID">
       <th mat-header-cell *matHeaderCellDef> Cliente </th>
-      <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.cliente}} </td>
+      <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.clienteID}} </td>
     </ng-container>
     
     <!-- Coluna Serviços -->
-    <ng-container matColumnDef="servico">
+    <ng-container matColumnDef="nomeServico">
         <th mat-header-cell *matHeaderCellDef> Serviços </th>
-        <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.servico}} </td>
+        <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.nomeServico}} </td>
       </ng-container>
   
     <!-- Coluna Tempo -->
-    <ng-container matColumnDef="tempo">
+    <ng-container matColumnDef="tempoEstimado">
       <th mat-header-cell *matHeaderCellDef> Tempo </th>
-      <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.tempo}} </td>
+      <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.tempoEstimado}} </td>
     </ng-container>
 
     <!-- Coluna Valor -->
@@ -26,9 +26,9 @@
     </ng-container>
 
     <!-- Coluna Data -->
-    <ng-container matColumnDef="data">
+    <ng-container matColumnDef="dt_atendimento">
       <th mat-header-cell *matHeaderCellDef> Data </th>
-      <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.dataSolictacao}} </td>
+      <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.dt_atendimento}} </td>
     </ng-container>
 
     <!-- Coluna Responsável -->
@@ -42,8 +42,6 @@
         <th mat-header-cell *matHeaderCellDef> Status </th>
         <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.status}} </td>
       </ng-container>
-
-      
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

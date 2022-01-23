@@ -32,8 +32,8 @@ headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
   
   // post(urlName: string, body: string): Promise<any> {
 
-  //   let promise = this.http.post(`${environment.url}${urlName}`, body, { observe: "response", headers: this.headers }).toPromise();
-  //   return promise
+    // let promise = this.http.post(`${environment.url}${urlName}`, body, { observe: "response", headers: this.headers }).toPromise();
+    // return promise
   // }
 
   post(urlName: string, string: string): Observable<any>{
