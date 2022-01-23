@@ -6,12 +6,14 @@ import { Solicitacoes } from 'src/app/_models/solicitacoes';
 @Component({
   selector: 'vex-solicitacoes',
   templateUrl: './solicitacoes.component.html',
-  styleUrls: ['./solicitacoes.component.scss']
+  styleUrls: ['./solicitacoes.component.scss'],
 })
 export class SolicitacoesComponent implements OnInit {
-
-
-  displayedColumns: string[] = ['clienteID', 'nomeServico', 'tempoEstimado', 'valor', 'dt_atendimento', 'responsavel', 'status'];
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  displayedColumns: string[] = ['clienteID', 'nomeServico', 'tempoEstimado', 'valor', 'dtAtendimento', 'responsavel', 'status'];
   dataSource = new MatTableDataSource<Solicitacoes>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -34,9 +36,8 @@ export class SolicitacoesComponent implements OnInit {
       }
 
     })
-
+    
   }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
