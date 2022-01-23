@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SolicitacoesService } from './../../services/solicitacoes.service';
 import { Solicitacoes } from 'src/app/_models/solicitacoes';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'vex-solicitacoes',
   templateUrl: './solicitacoes.component.html',
@@ -13,10 +14,12 @@ export class SolicitacoesComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
   displayedColumns: string[] = ['clienteID', 'nomeServico', 'tempoEstimado', 'valor', 'dtAtendimento', 'responsavel', 'status'];
   dataSource = new MatTableDataSource<Solicitacoes>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   solicitacoes: Solicitacoes[] = [];
   constructor(private solicitacoesService: SolicitacoesService) {
@@ -36,7 +39,7 @@ export class SolicitacoesComponent implements OnInit {
       }
 
     })
-    
+
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
