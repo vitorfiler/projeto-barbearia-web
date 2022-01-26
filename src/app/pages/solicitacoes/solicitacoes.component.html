@@ -6,3 +6,59 @@
     </mat-form-field>
   </div>
 </div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z4" width="100%">
+
+ 
+  <ng-container matColumnDef="cliente">
+    <th mat-header-cell *matHeaderCellDef> Cliente </th>
+    <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.cliente.nome}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="servico">
+    <th mat-header-cell *matHeaderCellDef> Serviço </th>
+    <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.nomeServico}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="tempo">
+    <th mat-header-cell *matHeaderCellDef> Tempo </th>
+    <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.tempoEstimado}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="valor">
+    <th mat-header-cell *matHeaderCellDef> Valor </th>
+    <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.valor}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="data">
+    <th mat-header-cell *matHeaderCellDef> Data </th>
+    <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.dtAtendimento}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="responsavel">
+    <th mat-header-cell *matHeaderCellDef> Resposanvel </th>
+    <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.responsavel}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th class="colum" mat-header-cell *matHeaderCellDef> Status </th>
+    <mat-cell *matCellDef="let table">
+      <div>
+        <mat-form-field appearance="standard">
+          <mat-label>Favorite food</mat-label>
+          <mat-select name="status">
+            <mat-option *ngFor="let status of status" [value]="status.value">
+              {{status.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

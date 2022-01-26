@@ -1,3 +1,6 @@
+import { Solicitacao } from './../../_models/solicitacao';
+import { MatTableDataSource } from '@angular/material/table';
+import { Estabelecimento } from 'src/app/_models/estabelecimento';
 import { SolicitacaoService } from './../../services/solicitacao.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,6 +13,19 @@ import { Router } from '@angular/router';
 })
 export class SolicitacoesComponent implements OnInit {
 
+  estabelecimentoID = '1'
+  displayedColumns = ['cliente', 'servico', 'tempo', 'valor', 'data', 'responsavel', 'status']
+  
+  dataSource = new MatTableDataSource<Solicitacao>()
+
+  solicitacoes: Solicitacao [] = [] 
+
+  status: any[] = [
+    {value: 'PENDENTE', viewValue: 'Pendente'},
+    {value: 'ACEITO', viewValue: 'Aceito'},
+    {value: 'RECUSADO', viewValue: 'Recusado'},
+  ];
+  
   form: FormGroup;
   constructor(private router: Router,
 		private fb: FormBuilder,
@@ -19,13 +35,26 @@ export class SolicitacoesComponent implements OnInit {
     this.form = this.fb.group({
 			filtro: ['', Validators.required],
 		});
+
+    this.listar()
   }
 
   filtrar(){
     let filtro = this.form.get('filtro').value
-    let estabelecimentoID = '1'
-    this.solicitacaoService.filtrar(estabelecimentoID,filtro).subscribe(resposta => {
-      console.log(resposta)
+   
+    this.solicitacaoService.filtrar(this.estabelecimentoID,filtro).subscribe(resposta => {
+      this.solicitacoes = resposta.body
+      /*renderizando a tabela*/
+      this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes) 
+    })
+  }
+
+  listar(){
+  
+    this.solicitacaoService.getSolicitacoes(this.estabelecimentoID).subscribe(resposta => {
+        this.solicitacoes = resposta.body
+
+        this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes)
     })
   }
 

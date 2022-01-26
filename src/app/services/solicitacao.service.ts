@@ -22,6 +22,12 @@ export class SolicitacaoService {
       estabelecimento_ID: estabelecimentoID, filtro:filtro
     }, observe:'response', headers: this.headers})
   }
+
+  getSolicitacoes(estabelecimentoID: string): Observable<any>{
+
+
+    return this.http.get(`${environment.URL_API}/solicitacoes/todas`, {params:{
+      estabelecimento_ID: estabelecimentoID,
+    }, observe: 'response', headers: this.headers})
+  }
 }
-
-

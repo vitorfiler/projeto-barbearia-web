@@ -17,7 +17,8 @@ const routes: VexRoutes = [
     path: '',
     component: CustomLayoutComponent,
     children: [
-      { path: 'agenda', component: CalendarComponent }
+      { path: 'agenda', component: CalendarComponent },
+      {path: 'solicitacoes', component: SolicitacoesComponent}
     ],
   },
   { path: 'login', component: LoginFinalComponent },
@@ -25,7 +26,6 @@ const routes: VexRoutes = [
   { path: 'recuperar-senha', component: RecuperarSenhaComponent },
   { path: 'enviado', component: RecuperarSenhaSucessoComponent },
   { path: 'redefinir-senha', component: RedefinirSenhaComponent },
-  {path: 'solicitacoes', component: SolicitacoesComponent}
 ];
 
 @NgModule({
