@@ -10,6 +10,7 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
+import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
 
 
 const routes: VexRoutes = [
@@ -18,14 +19,18 @@ const routes: VexRoutes = [
     component: CustomLayoutComponent,
     children: [
       { path: 'agenda', component: CalendarComponent },
-      {path: 'solicitacoes', component: SolicitacoesComponent}
+      { path: 'solicitacoes-tabela', component: SolicitacoesComponent },
+      { path: 'solicitacoes', component: SolicitacoesReservasComponent },
+      { path: 'reservas', component: SolicitacoesReservasComponent }
+      
     ],
   },
   { path: 'login', component: LoginFinalComponent },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'recuperar-senha', component: RecuperarSenhaComponent },
   { path: 'enviado', component: RecuperarSenhaSucessoComponent },
-  { path: 'redefinir-senha', component: RedefinirSenhaComponent },
+  { path: 'redefinir-senha', component: RedefinirSenhaComponent }
+  
 ];
 
 @NgModule({

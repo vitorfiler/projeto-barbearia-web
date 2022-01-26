@@ -45,6 +45,9 @@ import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
 import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
+import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
+import { ReservasComponent } from './pages/reservas/reservas.component';
+
 
 @NgModule({
   declarations: [
@@ -54,7 +57,9 @@ import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.compone
     RecuperarSenhaComponent,
     RedefinirSenhaComponent,
     RecuperarSenhaSucessoComponent,
-    SolicitacoesComponent
+    SolicitacoesComponent,
+    SolicitacoesReservasComponent,
+    ReservasComponent
 
   ],
   imports: [
