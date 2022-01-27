@@ -35,7 +35,7 @@
 
   <ng-container matColumnDef="data">
     <th mat-header-cell *matHeaderCellDef> Data </th>
-    <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.dtAtendimento}} </td>
+    <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.dtAtendimento | date:'dd-MM-yyyy'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="responsavel">
