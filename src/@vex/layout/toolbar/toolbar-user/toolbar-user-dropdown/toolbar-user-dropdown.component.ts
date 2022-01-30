@@ -1,4 +1,3 @@
-import { CommomService } from 'src/app/services/commom.service';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MenuItem } from '../interfaces/menu-item.interface';
 import { trackById } from '../../../../utils/track-by';
@@ -20,7 +19,7 @@ import icLock from '@iconify/icons-ic/twotone-lock';
 import icNotificationsOff from '@iconify/icons-ic/twotone-notifications-off';
 import { Icon } from '@visurel/iconify-angular';
 import { PopoverRef } from '../../../../components/popover/popover-ref';
-import { Router } from '@angular/router';
+import { CommomService } from 'src/app/services/commom.service';
 
 export interface OnlineStatus {
   id: 'online' | 'away' | 'dnd' | 'offline';
@@ -38,22 +37,38 @@ export interface OnlineStatus {
 export class ToolbarUserDropdownComponent implements OnInit {
 
   items: MenuItem[] = [
-    // {
-    //   id: '1',
-    //   icon: icAccountCircle,
-    //   label: 'Área do Consumidor',
-    //   description: 'Informações Pessoais',
-    //   colorClass: 'text-teal',
-    //   route: 'perfil/timeline'
-    // },
-    // {
-    //   id: '2',
-    //   icon: icMoveToInbox,
-    //   label: 'Área da Empresa',
-    //   description: 'Respostas de reclamações',
-    //   colorClass: 'text-primary',
-    //   route: 'perfil/empresa'
-    // },
+    {
+      id: '1',
+      icon: icAccountCircle,
+      label: 'My Profile',
+      description: 'Personal Information',
+      colorClass: 'text-teal',
+      route: '/apps/social'
+    },
+    {
+      id: '2',
+      icon: icMoveToInbox,
+      label: 'My Inbox',
+      description: 'Messages & Latest News',
+      colorClass: 'text-primary',
+      route: '/apps/chat'
+    },
+    {
+      id: '3',
+      icon: icListAlt,
+      label: 'My Projects',
+      description: 'Tasks & Active Projects',
+      colorClass: 'text-amber',
+      route: '/apps/scrumboard'
+    },
+    {
+      id: '4',
+      icon: icTableChart,
+      label: 'Billing Information',
+      description: 'Pricing & Current Plan',
+      colorClass: 'text-purple',
+      route: '/pages/pricing'
+    }
   ];
 
   statuses: OnlineStatus[] = [
@@ -95,10 +110,10 @@ export class ToolbarUserDropdownComponent implements OnInit {
   icLock = icLock;
   icNotificationsOff = icNotificationsOff;
   userName: string = this.getUser();
+  
   constructor(private cd: ChangeDetectorRef,
               private popoverRef: PopoverRef<ToolbarUserDropdownComponent>,
-              private commomService: CommomService,
-              private route: Router) { }
+              private commomService: CommomService) { }
 
   ngOnInit() {
   }

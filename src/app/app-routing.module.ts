@@ -20,8 +20,7 @@ const routes: VexRoutes = [
     children: [
       { path: 'agenda', component: CalendarComponent },
       { path: 'solicitacoes-tabela', component: SolicitacoesComponent },
-      { path: 'solicitacoes', component: SolicitacoesReservasComponent },
-      { path: 'reservas', component: SolicitacoesReservasComponent }
+      { path: 'solicitacoes', component: SolicitacoesReservasComponent }
       
     ],
   },

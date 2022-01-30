@@ -3,6 +3,7 @@ import { Estabelecimento } from 'src/app/_models/estabelecimento';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CadSolicitacao } from '../_models/cad-solicitacao';
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +25,12 @@ export class SolicitacaoService {
   }
 
   getSolicitacoes(estabelecimentoID: string): Observable<any>{
-
-
     return this.http.get(`${environment.URL_API}/solicitacoes/todas`, {params:{
       estabelecimento_ID: estabelecimentoID,
     }, observe: 'response', headers: this.headers})
+  }
+
+  alterarSolicitacao(solicitacao: CadSolicitacao): Observable<any>{
+    return this.http.put(`${environment.URL_API}/solicitacoes`, solicitacao,{ observe: "response", headers: this.headers });
   }
 }

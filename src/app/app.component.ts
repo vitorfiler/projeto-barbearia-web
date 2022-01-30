@@ -83,42 +83,15 @@ export class AppComponent implements OnInit{
       filter(queryParamMap => queryParamMap.has('style'))
     ).subscribe(queryParamMap => this.styleService.setStyle(queryParamMap.get('style') as Style));
     this.navigationService.items = [
-      {
-        label: 'agenda',
-        type: 'link',
-        route: '/agenda',
-        icon: icLayers
-      },
-      {
-        label: 'Item 2',
-        type: 'link',
-        route: '/unidades',
-        icon: icAssigment
-        
-      },
-      {
-        label: 'Item 3',
-        type: 'link',
-        route: '/financeiro',
-        icon: icContactSupport
-      },
-      {
-        label: 'Item 4',
-        type: 'link',
-        route: '/credito-gd',
-        icon: icDateRange
-      },
+      // icon: icLayers
+      // icon: icAssigment
+      // icon: icContactSupport
+      // icon: icDateRange
       {
         label: 'Solicitações',
         type: 'link',
         route: '/solicitacoes',
-        icon: icContactSupport
-      },
-      {
-        label: 'Reservas',
-        type: 'link',
-        route: '/reservas',
-        icon: icContactSupport
+        icon: icAssigment
       }
     ];
   }
