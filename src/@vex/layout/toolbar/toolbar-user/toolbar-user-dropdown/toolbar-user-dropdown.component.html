@@ -7,6 +7,13 @@
       <div class="dropdown-heading">{{userName}}</div>
     </div>
 
+    <button [matMenuTriggerFor]="settingsMenu"
+            mat-icon-button
+            matTooltip="Settings"
+            matTooltipPosition="before"
+            type="button">
+      <mat-icon [icIcon]="icSettings" class="notifications-header-icon"></mat-icon>
+    </button>
   </div>
 
   <div class="dropdown-content">
@@ -29,8 +36,8 @@
     </a>
   </div>
 
-  <div class="dropdown-footer" style="float: right;" fxLayout="row" fxLayoutAlign="space-between center">
-    <!-- <button [matMenuTriggerFor]="statusMenu" class="dropdown-footer-select" mat-button type="button">
+  <div class="dropdown-footer" fxLayout="row" fxLayoutAlign="space-between center">
+    <button [matMenuTriggerFor]="statusMenu" class="dropdown-footer-select" mat-button type="button">
       <ng-container *ngFor="let status of statuses; trackBy: trackById">
         <span *ngIf="status === activeStatus">
           <mat-icon [icIcon]="status.icon" [ngClass]="status.colorClass"></mat-icon>
@@ -38,7 +45,7 @@
           <mat-icon [icIcon]="icArrowDropDown" class="dropdown-footer-select-caret"></mat-icon>
         </span>
       </ng-container>
-    </button> -->
+    </button>
     <a (click)="logout()" color="primary" mat-button>LOGOUT</a>
   </div>
 </div>

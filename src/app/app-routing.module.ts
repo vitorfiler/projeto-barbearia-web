@@ -1,3 +1,4 @@
+import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
@@ -9,6 +10,7 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
+import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
 
 
 const routes: VexRoutes = [
@@ -16,7 +18,10 @@ const routes: VexRoutes = [
     path: '',
     component: CustomLayoutComponent,
     children: [
-      { path: 'agenda', component: CalendarComponent }
+      { path: 'agenda', component: CalendarComponent },
+      { path: 'solicitacoes-tabela', component: SolicitacoesComponent },
+      { path: 'solicitacoes', component: SolicitacoesReservasComponent }
+      
     ],
   },
   { path: 'login', component: LoginFinalComponent },
@@ -24,6 +29,7 @@ const routes: VexRoutes = [
   { path: 'recuperar-senha', component: RecuperarSenhaComponent },
   { path: 'enviado', component: RecuperarSenhaSucessoComponent },
   { path: 'redefinir-senha', component: RedefinirSenhaComponent }
+  
 ];
 
 @NgModule({
