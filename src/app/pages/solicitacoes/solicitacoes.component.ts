@@ -43,7 +43,6 @@ export class SolicitacoesComponent implements OnInit {
 		this.form = this.fb.group({
 			filtro: [''],
 		});
-
 		this.listar()
 	}
 
