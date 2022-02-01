@@ -44,10 +44,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
-import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
+import { SolicitacoesComponent, SolicitacoesModal} from './pages/solicitacoes/solicitacoes.component';
 import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
 import { ReservasComponent } from './pages/reservas/reservas.component';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -59,13 +59,14 @@ import { ReservasComponent } from './pages/reservas/reservas.component';
     RecuperarSenhaSucessoComponent,
     SolicitacoesComponent,
     SolicitacoesReservasComponent,
-    ReservasComponent
-
+    ReservasComponent,
+    SolicitacoesModal
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CalendarModule,
+    MatDialogModule,
     AngularCalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
@@ -108,6 +109,6 @@ import { ReservasComponent } from './pages/reservas/reservas.component';
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
