@@ -1,6 +1,5 @@
 import { Solicitacao } from './../../_models/solicitacao';
 import { MatTableDataSource } from '@angular/material/table';
-import { Estabelecimento } from 'src/app/_models/estabelecimento';
 import { SolicitacaoService } from './../../services/solicitacao.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { CadSolicitacao } from 'src/app/_models/cad-solicitacao';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
 	selector: 'vex-solicitacoes',
@@ -22,6 +22,9 @@ export class SolicitacoesComponent implements OnInit {
 
 	dataSource = new MatTableDataSource<Solicitacao>()
 	@ViewChild(MatPaginator) paginator: MatPaginator;
+
+	//inserção do decorator Matsort
+	@ViewChild(MatSort) matSort: MatSort;
 
 	solicitacoes: Solicitacao[] = []
 	solicitacao: Solicitacao = new Solicitacao();
@@ -56,6 +59,7 @@ export class SolicitacoesComponent implements OnInit {
 
 			this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes)
 			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.matSort;
 		})
 	}
 
