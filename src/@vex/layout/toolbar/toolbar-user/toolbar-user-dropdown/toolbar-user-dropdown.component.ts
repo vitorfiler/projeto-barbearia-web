@@ -20,6 +20,7 @@ import icNotificationsOff from '@iconify/icons-ic/twotone-notifications-off';
 import { Icon } from '@visurel/iconify-angular';
 import { PopoverRef } from '../../../../components/popover/popover-ref';
 import { CommomService } from 'src/app/services/commom.service';
+import { Router } from '@angular/router';
 
 export interface OnlineStatus {
   id: 'online' | 'away' | 'dnd' | 'offline';
@@ -35,6 +36,7 @@ export interface OnlineStatus {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarUserDropdownComponent implements OnInit {
+  icAccountCircle = icAccountCircle;
 
   items: MenuItem[] = [
     {
@@ -113,7 +115,8 @@ export class ToolbarUserDropdownComponent implements OnInit {
   
   constructor(private cd: ChangeDetectorRef,
               private popoverRef: PopoverRef<ToolbarUserDropdownComponent>,
-              private commomService: CommomService) { }
+              private commomService: CommomService,
+              private route: Router) { }
 
   ngOnInit() {
   }
@@ -138,6 +141,11 @@ export class ToolbarUserDropdownComponent implements OnInit {
   setStatus(status: OnlineStatus) {
     this.activeStatus = status;
     this.cd.markForCheck();
+  }
+
+  cadastro(){
+    this.close();
+    this.route.navigate(['/cadastro']);
   }
 
   close() {

@@ -25,22 +25,13 @@ headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
     this.route.navigate(['/login']);
   }
 
-  // get(urlName: string): Observable<any>{
-  //    return this.http.get(`${environment.url}${urlName}`,{observe: "response"});
+  get(urlName: string): Observable<any>{
+     return this.http.get(`${environment.URL_API}${urlName}`,{observe: "response"});
 
-  // }
-  
-  // post(urlName: string, body: string): Promise<any> {
-
-  //   let promise = this.http.post(`${environment.url}${urlName}`, body, { observe: "response", headers: this.headers }).toPromise();
-  //   return promise
-  // }
-
-  post(urlName: string, string: string): Observable<any>{
-    return this.http.post(`${environment.URL_API}${urlName}`, string, { observe: "response", headers: this.headers });
   }
-  postMockoon(urlName: string, string: string): Observable<any>{
-    return this.http.post(`${environment.URL_API}${urlName}`, string, { observe: "response", headers: this.headers });
+
+  post(urlName: string, body: string): Observable<any>{
+    return this.http.post(`${environment.URL_API}${urlName}`, body, { observe: "response", headers: this.headers });
   }
 
   recuperarSenha(email: string): Observable<any> {
@@ -48,31 +39,14 @@ headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
       email: email, }, observe: "response", headers: this.headers });
   }
 
-  // put(urlName: string, body: string, clientId: string): Observable<any> {
-  //   return this.http.put(`${environment.url}${urlName}`, body, { params: {
-  //     clienteID: clientId, }, observe: "response", headers: this.headers });
-  // }
+  putWithParams(urlName: string, body: string, clientId: string): Observable<any> {
+    return this.http.put(`${environment.URL_API}${urlName}`, body, { params: {
+      clienteID: clientId, }, observe: "response", headers: this.headers });
+  }
 
-  // delete(urlName: string): Promise<any> {
-  //   let promise = this.http.get(`${environment.url}${urlName}`, { observe: "response", headers: this.headers }).toPromise();
-  //   return promise
-  // }
-
-  // public upload(formData): Promise<any> {
-
-  //   return this.http.post<any>(`${environment.url}/Arquivos`, formData, {
-  //     reportProgress: true,
-  //     observe: 'response'
-  //   }).toPromise();
-  // }
-
-  showMessage(msg: string, isError: boolean = false): void {
-    this.snackBar.open(msg, "X", {
-      duration: 3000,
-      horizontalPosition: "right",
-      verticalPosition: "top",
-      panelClass: isError ? ["msg-error"] : ["msg-success"],
-    });
+  delete(urlName: string): Promise<any> {
+    let promise = this.http.get(`${environment.URL_API}${urlName}`, { observe: "response", headers: this.headers }).toPromise();
+    return promise
   }
 
   validaSessao(){
@@ -85,6 +59,6 @@ headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
     let month: string = (date.getMonth() + 1).toString();
     month = +month < 10 ? '0' + month : month;
     let year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+    return `${year}-${month}-${day}`;
   };
 }
