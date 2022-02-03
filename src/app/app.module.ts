@@ -67,6 +67,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     AppRoutingModule,
     CalendarModule,
     MatDialogModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     AngularCalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory

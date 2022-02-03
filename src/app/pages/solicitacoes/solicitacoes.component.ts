@@ -14,6 +14,18 @@ import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger60ms } from 'src/@vex/animations/stagger.animation';
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import icVisibilityOff from '@iconify/icons-ic/twotone-visibility-off';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Inject,
+	OnDestroy,
+  } from '@angular/core';
+import {MatCalendar} from '@angular/material/datepicker';
+import {DateAdapter, MAT_DATE_FORMATS, MatDateFormats} from '@angular/material/core';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+
 
 @Component({
 	selector: 'vex-solicitacoes',
@@ -110,6 +122,8 @@ export interface CountryState {
 @Component({
 	selector: 'dialog-content-example-dialog',
 	templateUrl: 'solicitacoes-modal.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	
 	animations: [
 		stagger60ms,
 		fadeInUp400ms
@@ -121,41 +135,25 @@ selectCtrl: FormControl = new FormControl();
   inputType = 'password';
   visible = false;
 
-
-  icVisibility = icVisibility;
-  icVisibilityOff = icVisibilityOff;
-
-  stateCtrl = new FormControl();
-  states: CountryState[] = [
-    {
-      name: 'Arkansas',
-      population: '2.978M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Arkansas.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg'
-    },
-    {
-      name: 'California',
-      population: '39.14M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_California.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg'
-    },
-    {
-      name: 'Florida',
-      population: '20.27M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Florida.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg'
-    },
-    {
-      name: 'Texas',
-      population: '27.47M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Texas.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg'
-    }
-  ];
-}
+//   Campo tempo de Serviço
+  	options: FormGroup;
+	colorControl = new FormControl('primary');
+	fontSizeControl = new FormControl(15, Validators.min(10));
 	
-
-
+	constructor(fb: FormBuilder) {
+		this.options = fb.group({
+		  color: this.colorControl,
+		  fontSize: this.fontSizeControl,
+		});
+	  }
+	
+	  getFontSize() {
+		return Math.max(10, this.fontSizeControl.value);
+	  }
+	  
+}
+  
+	
 
 
 

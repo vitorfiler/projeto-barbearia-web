@@ -1,24 +1,35 @@
 <div @fadeInUp class="card" fxFlex="auto">
   <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
-    <h2 class="title m-0">Basic Forms</h2>
+    <h2 class="title m-0">Novo Agendamento</h2>
   </div>
 
   <div class="px-6 py-4" fxLayout="column">
     <mat-form-field>
-      <mat-label>Company</mat-label>
+      <mat-label>Serviço</mat-label>
       <input matInput required>
     </mat-form-field>
 
     <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
-      <mat-form-field fxFlex="auto">
-        <mat-label>First Name</mat-label>
-        <input matInput>
+      <mat-form-field appearance="fill" [color]="colorControl.value">
+        <mat-label>Tempo Estimado</mat-label>
+        <input matInput type="number" placeholder="Ex. 12" [formControl]="fontSizeControl" min="10">
+        <span matSuffix>Minutos</span>
+        <mat-error *ngIf="fontSizeControl.invalid">Tempo Mínimo: 10 minutos</mat-error>
       </mat-form-field>
+
       <mat-form-field fxFlex="auto">
-        <mat-label>Last Name</mat-label>
+        <mat-label>Valor do Serviço</mat-label>
         <input matInput required>
       </mat-form-field>
     </div>
+    
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Custom calendar header</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker [calendarHeaderComponent]="exampleHeader"></mat-datepicker>
+    </mat-form-field> -->
+
 
     <mat-form-field>
       <mat-label>State</mat-label>
@@ -32,10 +43,6 @@
     <mat-form-field>
       <mat-label>Password</mat-label>
       <input [type]="inputType" matInput required value="Hello!">
-      
-        <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
-        <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
-
       <mat-hint>Try clicking the eye to toggle the visibility.</mat-hint>
     </mat-form-field>
 
