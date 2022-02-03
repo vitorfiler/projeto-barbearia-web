@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SolicitacoesComponent implements OnInit {
 
-	estabelecimentoID = '1'
+	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
 	displayedColumns: string[] = ['cliente', 'nomeServico', 'tempoEstimado', 'valor', 'dtAtendimento', 'responsavel', 'status'];
 
 	dataSource = new MatTableDataSource<Solicitacao>()
