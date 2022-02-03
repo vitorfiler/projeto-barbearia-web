@@ -73,7 +73,7 @@ export class SolicitacoesComponent implements OnInit {
 		this.solicitacaoService.alterarSolicitacao(solicitacao).subscribe(() => {
 			this.snackbar.open(MessagesSnackBar.SOLICITACAO_STATUS_SUCESSO, 'Close', { duration: 4000 });
 			this.filtrar();
-		}, (error)=>{
+		}, (error) => {
 			this.snackbar.open(MessagesSnackBar.SOLICITACAO_STATUS_ERRO, 'Close', { duration: 4000 });
 			console.log(error);
 		})
@@ -85,7 +85,13 @@ export class SolicitacoesComponent implements OnInit {
 
 			this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes)
 			this.dataSource.paginator = this.paginator;
+			setTimeout(() => {
+				this.dataSource.sort = this.matSort
+			});
 		})
 	}
 
+	ngAfterViewInit() {
+		this.dataSource.sort = this.matSort;
+	}
 }
