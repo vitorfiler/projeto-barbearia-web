@@ -10,7 +10,7 @@
         <div class= "col-md-2">
           <mat-form-field  fxFlex="grow" appearance="standard">
             <mat-label>Status</mat-label>
-                <mat-select   formControlName="status" (ngModelChange)="filtrar()" name="filtroStatus">
+                <mat-select formControlName="status" (ngModelChange)="filtrar()" name="filtroStatus">
                   <mat-option *ngFor="let selecaoStatus of selecaoStatus" [value]="selecaoStatus.value">
                     {{selecaoStatus.viewValue}}
                   </mat-option>
@@ -34,9 +34,10 @@
         <mat-datepicker #picker2 color="primary"></mat-datepicker>
       </mat-form-field> 
     </div>
-    <div class= "col-md-1"  >
-      <a mat-stroked-button (click)="novaSolicitacao()" >Nova solicitacao</a>
+    <div class= "col-md-2"  fxLayout="linha" >
+      <button mat-stroked-button color="primary" (click)="novaSolicitacao()">Nova solicitacao</button>
     </div>
+    <div class="overlay"></div>
 </div>
 </div>
 </div>

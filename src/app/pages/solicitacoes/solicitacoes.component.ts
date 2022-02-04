@@ -17,7 +17,13 @@ registerLocaleData(localePt);
 
 export class DatepickerColorExample { }
 
+export class ModalComponent {
+  mostrar: boolean = false;
 
+  toggle() {
+    this.mostrar = !this.mostrar;
+  }
+}
 
 @Component({
   selector: 'vex-solicitacoes',
@@ -48,7 +54,7 @@ export class SolicitacoesComponent implements OnInit {
     { value: 'PENDENTE', viewValue: 'Pendente' },
     { value: 'ACEITO', viewValue: 'Aceito' },
     { value: 'RECUSADO', viewValue: 'Recusado' },
-  ];
+  ]; valorSelecionado: { value: { value: 'Todos' } };
 
 
 
@@ -56,7 +62,11 @@ export class SolicitacoesComponent implements OnInit {
   constructor(private router: Router,
     private fb: FormBuilder,
     private solicitacaoService: SolicitacaoService,
-    private snackbar: MatSnackBar) { }
+    /* correção de data para Português, importanções feitas no app.module.ts*/
+    private snackbar: MatSnackBar, private dateAdapter: DateAdapter<any>) {
+    this.dateAdapter.setLocale('pt-BR');
+  }
+
 
   ngOnInit(): void {
     window.localStorage.setItem('isSolicitacoes', 'true');
@@ -71,16 +81,6 @@ export class SolicitacoesComponent implements OnInit {
 
     this.listar()
   }
-  validarData(dt_inicial?, dt_final?) {
-
-  }
-
-  vitinho(date) {
-    var theDate = new Date(Date.parse(date));
-    const localDate = theDate.toLocaleString().split(" ");
-
-    console.log(localDate);
-  }
 
   filtrar() {
 
@@ -93,7 +93,7 @@ export class SolicitacoesComponent implements OnInit {
     if (dt_inicial && dt_final) {
 
       if (dt_inicial > dt_final) {
-        this.snackbar.open("Data final não pode ser menor que inicial", 'Close', { duration: 4000 });
+        this.snackbar.open("Insira uma data final maior que inicial", 'Ok', { duration: 4000 });
         return;
       }
       dt_inicial = (dt_inicial.getFullYear() + "-" + ((dt_inicial.getMonth() + 1)) + "-" + (dt_inicial.getDate()));
@@ -137,7 +137,7 @@ export class SolicitacoesComponent implements OnInit {
   }
 
   novaSolicitacao() {
-    console.log();
+    console.log("TESTE");
   }
 
 }
