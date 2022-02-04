@@ -47,6 +47,7 @@ import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recupera
 import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
 import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
 import { ReservasComponent } from './pages/reservas/reservas.component';
+import { CoreModule } from './core.module';
 
 
 @NgModule({
@@ -98,7 +99,7 @@ import { ReservasComponent } from './pages/reservas/reservas.component';
     MatTabsModule,
     MatPaginatorModule,
     FormsModule,
-    
+    CoreModule,
     // Vex
     VexModule,
     CustomLayoutModule,
