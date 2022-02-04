@@ -55,11 +55,10 @@ export class SolicitacoesComponent implements OnInit {
 
 		this.solicitacaoService.filtrar(this.estabelecimentoID, filtro).subscribe(resposta => {
 			this.solicitacoes = resposta.body
-			/*renderizando a tabela*/
 
+			/*renderizando a tabela*/
 			this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes)
 			this.dataSource.paginator = this.paginator;
-			this.dataSource.sort = this.matSort;
 		})
 	}
 
