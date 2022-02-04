@@ -3,7 +3,8 @@ export const environment = {
   hmr       : false,
   URL_API: "https://easycut-api.herokuapp.com",
   URL_AWS: "",
-  ambiente: "dsv",
+  ambiente: "prd",
+
 
     recuperarSenha: '/estabelecimento/recuperar-senha'
 };
