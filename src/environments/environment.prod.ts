@@ -5,6 +5,5 @@ export const environment = {
   URL_AWS: "",
   ambiente: "dsv",
 
-  //SERVIÇOS
     recuperarSenha: '/estabelecimento/recuperar-senha'
 };
