@@ -44,7 +44,7 @@ export class SolicitacoesComponent implements OnInit {
 	solicitacoes: Solicitacao[] = []
 	solicitacao: Solicitacao = new Solicitacao();
 	color = "red"
-  
+
   status: any[] = [
     { value: 'PENDENTE', viewValue: 'Pendente' },
     { value: 'ACEITO', viewValue: 'Aceito' },
@@ -123,9 +123,7 @@ export class SolicitacoesComponent implements OnInit {
       this.carregando = false;
       this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes)
       this.dataSource.paginator = this.paginator;
-      setTimeout(() => {
-				this.dataSource.sort = this.matSort
-			});
+
     })
   }
 
@@ -154,6 +152,9 @@ export class SolicitacoesComponent implements OnInit {
 
       this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes)
       this.dataSource.paginator = this.paginator;
+      setTimeout(() => {
+				this.dataSource.sort = this.matSort
+			});
     })
   }
 
