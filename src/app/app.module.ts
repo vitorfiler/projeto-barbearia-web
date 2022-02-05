@@ -14,6 +14,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSortModule } from '@angular/material/sort';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
@@ -102,6 +104,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     MatTabsModule,
     MatPaginatorModule,
     FormsModule,
+    MatSortModule,
+    
     CoreModule,
     // Vex
     VexModule,
