@@ -61,6 +61,10 @@ export class ToolbarComponent implements OnInit {
   dropdownOpen: boolean;
   botao: string = 'Vitor Nunes'
   userName: String = this.getUser();
+
+  width = window.innerWidth;
+  setPadding = this.verifyWidth()
+
   constructor(private layoutService: LayoutService,
               private configService: ConfigService,
               private navigationService: NavigationService,
@@ -92,6 +96,10 @@ export class ToolbarComponent implements OnInit {
     this.layoutService.openSidenav();
   }
 
+  verifyWidth() {
+    return this.width < 600 ? -320 : -250
+  }
+
   showPopover(originRef: HTMLElement) {
     this.dropdownOpen = true;
     this.cd.markForCheck();
@@ -100,7 +108,7 @@ export class ToolbarComponent implements OnInit {
       content: ToolbarUserDropdownComponent,
       origin: originRef,
       offsetY: 12,
-      offsetX: -250 ,
+      offsetX: this.setPadding,
       position: [
         {
           originX: 'center',

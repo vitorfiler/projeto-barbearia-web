@@ -49,6 +49,9 @@ import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.compone
 import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
 import { ReservasComponent } from './pages/reservas/reservas.component';
 import { CoreModule } from './core.module';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { NgxLoadingModule } from 'ngx-loading';
+
 
 
 @NgModule({
@@ -68,6 +71,7 @@ import { CoreModule } from './core.module';
     BrowserModule,
     AppRoutingModule,
     CalendarModule,
+    NgxLoadingModule.forRoot({}),
     AngularCalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
@@ -110,7 +114,8 @@ import { CoreModule } from './core.module';
   ],
   providers: [
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }]
   ],
   bootstrap: [AppComponent]
 })

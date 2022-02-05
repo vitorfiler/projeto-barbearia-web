@@ -25,11 +25,11 @@ export class TokenInterceptorService implements HttpInterceptor {
             cloned.headers.set("Content-Type", "application/json");
 
             return next.handle(cloned).pipe(catchError(err => {
-                if (err.status === 401) {
+                if (err.status === 401 || err.status === 403) {
                     this.commomService.logout();
                     setTimeout(() => {alert("Sessão Expirada!")}, 200);
                 }
-                const error = err.error.message || err.statusText;
+                const error = err.error || err.statusText;
                     return throwError(error);
             }));
         }
