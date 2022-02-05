@@ -49,6 +49,7 @@ import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/sol
 import { ReservasComponent } from './pages/reservas/reservas.component';
 import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 
@@ -69,6 +70,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     BrowserModule,
     AppRoutingModule,
     CalendarModule,
+    NgxLoadingModule.forRoot({}),
     AngularCalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory

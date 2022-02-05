@@ -12,6 +12,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
+import { stagger20ms } from 'src/@vex/animations/stagger.animation';
+import { MatSelect } from '@angular/material/select';
+import { EventEmitterService } from 'src/app/services/event.service';
 
 registerLocaleData(localePt);
 
@@ -29,7 +33,11 @@ export class ModalComponent {
   selector: 'vex-solicitacoes',
   templateUrl: './solicitacoes.component.html',
   styleUrls: ['./solicitacoes.component.scss'],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt' }]
+  providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
+  animations: [
+    fadeInUp400ms,
+    stagger20ms
+  ]
 
 })
 export class SolicitacoesComponent implements OnInit {
@@ -39,6 +47,7 @@ export class SolicitacoesComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Solicitacao>()
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('select') matSelect: MatSelect;
   
   solicitacoes: Solicitacao[] = []
   solicitacao: Solicitacao = new Solicitacao();
@@ -59,6 +68,7 @@ export class SolicitacoesComponent implements OnInit {
   ];
 
   // selectedStatus: string = this.selecaoStatus[0].value;
+  public carregando = false;
 
   form: FormGroup;
   constructor(private router: Router,
@@ -74,15 +84,18 @@ export class SolicitacoesComponent implements OnInit {
     this.inicializarFiltro();
   }
 
+  showAlert(){
+    alert('teste')
+  }
   clearForm(form) {
-
     form.reset();
+    this.carregando = true
     setTimeout(() => {
       this.inicializarFiltro();
     });
   }
-  
-  inicializarFiltro(){
+
+  inicializarFiltro() {
     this.form = this.fb.group({
       filtro: [''],
       status: [this.selecaoStatus[0].value],
@@ -110,33 +123,33 @@ export class SolicitacoesComponent implements OnInit {
       dt_final = (dt_final.getFullYear() + "-" + ((dt_final.getMonth() + 1)) + "-" + (dt_final.getDate()));
       this.filtrar(filtro, status, dt_inicial, dt_final);
     }
-    else{
+    else {
       this.filtrar(filtro, status, dt_inicial, dt_final);
     }
   }
 
-  filtrar(filtro: string, status: string, dt_inicial: string, dt_final){
+  filtrar(filtro: string, status: string, dt_inicial: string, dt_final) {
+    this.carregando = true;
     this.solicitacaoService.filtrar(this.estabelecimentoID, filtro, status, dt_inicial, dt_final).subscribe(resposta => {
       this.solicitacoes = resposta.body
       /*renderizando a tabela*/
-
+      this.carregando = false;
       this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes)
       this.dataSource.paginator = this.paginator;
     })
   }
 
-
-
   alterarStatus(solicitacaoId) {
+    this.carregando = true;
     let solicitacao = new CadSolicitacao();
     this.solicitacao = this.solicitacoes.find(s => s.id == solicitacaoId);
 
     delete this.solicitacao.cliente
     solicitacao = this.solicitacao;
-
     this.solicitacaoService.alterarSolicitacao(solicitacao).subscribe(() => {
       this.snackbar.open(MessagesSnackBar.SOLICITACAO_STATUS_SUCESSO, 'Close', { duration: 4000 });
-      this.validarFiltro();
+      this.carregando = false;
+      this.listar();
     }, (error) => {
       this.snackbar.open(MessagesSnackBar.SOLICITACAO_STATUS_ERRO, 'Close', { duration: 4000 });
       console.log(error);
@@ -144,8 +157,10 @@ export class SolicitacoesComponent implements OnInit {
   }
 
   listar() {
+    this.carregando = true;
     this.solicitacaoService.getSolicitacoes(this.estabelecimentoID).subscribe(resposta => {
       this.solicitacoes = resposta.body
+      this.carregando = false;
 
       this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes)
       this.dataSource.paginator = this.paginator;
@@ -153,6 +168,8 @@ export class SolicitacoesComponent implements OnInit {
   }
 
   novaSolicitacao() {
+    
+    EventEmitterService.get('mostra-load').emit();
     console.log("TESTE");
   }
 
