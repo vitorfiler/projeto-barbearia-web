@@ -19,16 +19,6 @@ import { EventEmitterService } from 'src/app/services/event.service';
 
 registerLocaleData(localePt);
 
-export class DatepickerColorExample { }
-
-export class ModalComponent {
-  mostrar: boolean = false;
-
-  toggle() {
-    this.mostrar = !this.mostrar;
-  }
-}
-
 @Component({
   selector: 'vex-solicitacoes',
   templateUrl: './solicitacoes.component.html',
@@ -48,11 +38,9 @@ export class SolicitacoesComponent implements OnInit {
   dataSource = new MatTableDataSource<Solicitacao>()
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('select') matSelect: MatSelect;
-  
+
   solicitacoes: Solicitacao[] = []
   solicitacao: Solicitacao = new Solicitacao();
-
-  color = "red"
 
   status: any[] = [
     { value: 'PENDENTE', viewValue: 'Pendente' },
@@ -67,7 +55,6 @@ export class SolicitacoesComponent implements OnInit {
     { value: 'RECUSADO', viewValue: 'Recusado' },
   ];
 
-  // selectedStatus: string = this.selecaoStatus[0].value;
   public carregando = false;
 
   form: FormGroup;
@@ -84,9 +71,6 @@ export class SolicitacoesComponent implements OnInit {
     this.inicializarFiltro();
   }
 
-  showAlert(){
-    alert('teste')
-  }
   clearForm(form) {
     form.reset();
     this.carregando = true
@@ -168,8 +152,6 @@ export class SolicitacoesComponent implements OnInit {
   }
 
   novaSolicitacao() {
-    
-    EventEmitterService.get('mostra-load').emit();
     console.log("TESTE");
   }
 
