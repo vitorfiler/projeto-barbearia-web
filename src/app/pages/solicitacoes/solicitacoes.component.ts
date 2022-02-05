@@ -39,9 +39,12 @@ export class SolicitacoesComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Solicitacao>()
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  
   solicitacoes: Solicitacao[] = []
   solicitacao: Solicitacao = new Solicitacao();
+
   color = "red"
+
   status: any[] = [
     { value: 'PENDENTE', viewValue: 'Pendente' },
     { value: 'ACEITO', viewValue: 'Aceito' },
@@ -66,29 +69,30 @@ export class SolicitacoesComponent implements OnInit {
     this.dateAdapter.setLocale('pt-BR');
   }
 
-
   ngOnInit(): void {
     window.localStorage.setItem('isSolicitacoes', 'true');
-    this.form = this.fb.group({
-      filtro: [''],
-      status: [this.selecaoStatus[0].value],
-      dt_inicial: [''],
-      dt_final: [''],
-
-
-    });
-
-    this.listar()
+    this.inicializarFiltro();
   }
 
   clearForm(form) {
 
     form.reset();
-    this.ngOnInit();
-
+    setTimeout(() => {
+      this.inicializarFiltro();
+    });
+  }
+  
+  inicializarFiltro(){
+    this.form = this.fb.group({
+      filtro: [''],
+      status: [this.selecaoStatus[0].value],
+      dt_inicial: [''],
+      dt_final: [''],
+    });
+    this.listar();
   }
 
-  filtrar() {
+  validarFiltro() {
 
     let filtro = this.form.get('filtro').value
     let status = this.form.get('status').value
@@ -104,18 +108,23 @@ export class SolicitacoesComponent implements OnInit {
       }
       dt_inicial = (dt_inicial.getFullYear() + "-" + ((dt_inicial.getMonth() + 1)) + "-" + (dt_inicial.getDate()));
       dt_final = (dt_final.getFullYear() + "-" + ((dt_final.getMonth() + 1)) + "-" + (dt_final.getDate()));
-
-
-
-      this.solicitacaoService.filtrar(this.estabelecimentoID, filtro, status, dt_inicial, dt_final).subscribe(resposta => {
-        this.solicitacoes = resposta.body
-        /*renderizando a tabela*/
-
-        this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes)
-        this.dataSource.paginator = this.paginator;
-      })
+      this.filtrar(filtro, status, dt_inicial, dt_final);
+    }
+    else{
+      this.filtrar(filtro, status, dt_inicial, dt_final);
     }
   }
+
+  filtrar(filtro: string, status: string, dt_inicial: string, dt_final){
+    this.solicitacaoService.filtrar(this.estabelecimentoID, filtro, status, dt_inicial, dt_final).subscribe(resposta => {
+      this.solicitacoes = resposta.body
+      /*renderizando a tabela*/
+
+      this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes)
+      this.dataSource.paginator = this.paginator;
+    })
+  }
+
 
 
   alterarStatus(solicitacaoId) {
@@ -127,7 +136,7 @@ export class SolicitacoesComponent implements OnInit {
 
     this.solicitacaoService.alterarSolicitacao(solicitacao).subscribe(() => {
       this.snackbar.open(MessagesSnackBar.SOLICITACAO_STATUS_SUCESSO, 'Close', { duration: 4000 });
-      this.filtrar();
+      this.validarFiltro();
     }, (error) => {
       this.snackbar.open(MessagesSnackBar.SOLICITACAO_STATUS_ERRO, 'Close', { duration: 4000 });
       console.log(error);

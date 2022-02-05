@@ -11,15 +11,6 @@ td, th {
   width: 25%;
 }
 
-.button {
-  display: flex;
-  width: 490px;
-  justify-content: space-around;
-  
-
+.mat-raised-button, .mat-stroked-button{    
+  margin: auto;
 }
-
-// ::ng-deep .mat-select-value{    
-//   color: red!important;
-// }
-
