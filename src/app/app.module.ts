@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,9 +21,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
-
 import { IconModule } from '@visurel/iconify-angular';
-
+import {MatDialogModule} from '@angular/material/dialog';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
@@ -45,7 +43,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
-import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
+import { ModalSelectStatusSolicitacaoComponent, SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
 import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
 import { ReservasComponent } from './pages/reservas/reservas.component';
 import { CoreModule } from './core.module';
@@ -64,7 +62,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     RecuperarSenhaSucessoComponent,
     SolicitacoesComponent,
     SolicitacoesReservasComponent,
-    ReservasComponent
+    ReservasComponent,
+    ModalSelectStatusSolicitacaoComponent
 
   ],
   imports: [
@@ -95,6 +94,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     IconModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatDialogModule,
     MatRadioModule,
     MatAutocompleteModule,
     MatTableModule,

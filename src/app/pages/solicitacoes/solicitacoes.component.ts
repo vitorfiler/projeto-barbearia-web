@@ -2,19 +2,20 @@ import { Solicitacao } from './../../_models/solicitacao';
 import { MatTableDataSource } from '@angular/material/table';
 import { SolicitacaoService } from './../../services/solicitacao.service';
 import { Component, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { CadSolicitacao } from 'src/app/_models/cad-solicitacao';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DateAdapter } from '@angular/material/core';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MatSelect } from '@angular/material/select';
-import { EventEmitterService } from 'src/app/services/event.service';
+import { MatDialog } from '@angular/material/dialog';
+
 import { MatSort } from '@angular/material/sort';
 registerLocaleData(localePt);
 
@@ -65,7 +66,8 @@ export class SolicitacoesComponent implements OnInit {
     private fb: FormBuilder,
     private solicitacaoService: SolicitacaoService,
     /* correção de data para Português, importanções feitas no app.module.ts*/
-    private snackbar: MatSnackBar, private dateAdapter: DateAdapter<any>) {
+    private snackbar: MatSnackBar, private dateAdapter: DateAdapter<any>,
+    public dialog: MatDialog) {
     this.dateAdapter.setLocale('pt-BR');
   }
 
@@ -74,8 +76,8 @@ export class SolicitacoesComponent implements OnInit {
     this.inicializarFiltro();
   }
 
-  clearForm(form) {
-    form.reset();
+  clearForm() {
+    this.form.reset();
     this.carregando = true
     setTimeout(() => {
       this.inicializarFiltro();
@@ -132,7 +134,7 @@ export class SolicitacoesComponent implements OnInit {
     let solicitacao = new CadSolicitacao();
     this.solicitacao = this.solicitacoes.find(s => s.id == solicitacaoId);
 
-    delete this.solicitacao.cliente
+    this.solicitacao.cliente = null;
     solicitacao = this.solicitacao;
     this.solicitacaoService.alterarSolicitacao(solicitacao).subscribe(() => {
       this.snackbar.open(MessagesSnackBar.SOLICITACAO_STATUS_SUCESSO, 'Close', { duration: 4000 });
@@ -158,6 +160,21 @@ export class SolicitacoesComponent implements OnInit {
     })
   }
 
+  openDialog(solicitacaoId: string) {
+    console.log(solicitacaoId);
+    
+    const dialogRef = this.dialog.open(ModalSelectStatusSolicitacaoComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if(result){
+        this.alterarStatus(solicitacaoId);
+      }
+      else{
+        this.clearForm();
+      }
+    });
+  }
+
   novaSolicitacao() {
     console.log("TESTE");
   }
@@ -166,3 +183,9 @@ export class SolicitacoesComponent implements OnInit {
 		this.dataSource.sort = this.matSort;
 	}
 }
+
+@Component({
+  selector: 'modal-select-status-solicitacao',
+  templateUrl: 'modal-select-status-solicitacao.html',
+})
+export class ModalSelectStatusSolicitacaoComponent {}
