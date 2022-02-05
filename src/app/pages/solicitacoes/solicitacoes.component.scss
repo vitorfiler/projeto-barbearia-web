@@ -11,6 +11,14 @@ td, th {
   width: 25%;
 }
 
+.button {
+  display: flex;
+  width: 490px;
+  justify-content: space-around;
+  
+
+}
+
 // ::ng-deep .mat-select-value{    
 //   color: red!important;
 // }

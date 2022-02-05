@@ -39,7 +39,6 @@ export class SolicitacoesComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Solicitacao>()
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  selectedStatus: any = "Pendente";
   solicitacoes: Solicitacao[] = []
   solicitacao: Solicitacao = new Solicitacao();
   color = "red"
@@ -54,9 +53,9 @@ export class SolicitacoesComponent implements OnInit {
     { value: 'PENDENTE', viewValue: 'Pendente' },
     { value: 'ACEITO', viewValue: 'Aceito' },
     { value: 'RECUSADO', viewValue: 'Recusado' },
-  ]; valorSelecionado: { value: { value: 'Todos' } };
+  ];
 
-
+  // selectedStatus: string = this.selecaoStatus[0].value;
 
   form: FormGroup;
   constructor(private router: Router,
@@ -72,7 +71,7 @@ export class SolicitacoesComponent implements OnInit {
     window.localStorage.setItem('isSolicitacoes', 'true');
     this.form = this.fb.group({
       filtro: [''],
-      status: [''],
+      status: [this.selecaoStatus[0].value],
       dt_inicial: [''],
       dt_final: [''],
 
@@ -80,6 +79,13 @@ export class SolicitacoesComponent implements OnInit {
     });
 
     this.listar()
+  }
+
+  clearForm(form) {
+
+    form.reset();
+    this.ngOnInit();
+
   }
 
   filtrar() {
@@ -110,6 +116,7 @@ export class SolicitacoesComponent implements OnInit {
       })
     }
   }
+
 
   alterarStatus(solicitacaoId) {
     let solicitacao = new CadSolicitacao();

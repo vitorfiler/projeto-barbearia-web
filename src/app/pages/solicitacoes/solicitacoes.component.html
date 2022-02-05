@@ -1,7 +1,7 @@
 <div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
   <div fxFlex="auto" fxLayout="column">  
       <div class="row">
-        <div class= "col-md-4">
+        <div class= "col-md-3">
           <mat-form-field fxFlex="grow" appearance="standard">
             <mat-label>Filtro</mat-label>
             <input formControlName="filtro" (ngModelChange)="filtrar()" matInput/>
@@ -10,8 +10,8 @@
         <div class= "col-md-2">
           <mat-form-field  fxFlex="grow" appearance="standard">
             <mat-label>Status</mat-label>
-                <mat-select formControlName="status" (ngModelChange)="filtrar()" name="filtroStatus">
-                  <mat-option *ngFor="let selecaoStatus of selecaoStatus" [value]="selecaoStatus.value">
+                <mat-select  formControlName="status" (ngModelChange)="filtrar()" name="filtroStatus">
+                    <mat-option *ngFor="let selecaoStatus of selecaoStatus" [value]="selecaoStatus.value">
                     {{selecaoStatus.viewValue}}
                   </mat-option>
                 </mat-select>
@@ -34,10 +34,12 @@
         <mat-datepicker #picker2 color="primary"></mat-datepicker>
       </mat-form-field> 
     </div>
-    <div class= "col-md-2"  fxLayout="linha" >
-      <button mat-stroked-button color="primary" (click)="novaSolicitacao()">Nova solicitacao</button>
+    <div    class="col-md-2"  >
+      <button mat-raised-button color="primary" (click)="novaSolicitacao()">Nova solicitacao</button>
     </div>
-    <div class="overlay"></div>
+    <div fxLayout="linha" class="col-md-2">
+      <button mat-stroked-button color="primary" (click)="clearForm(form)">Limpar</button>
+    </div>
 </div>
 </div>
 </div>
