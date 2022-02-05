@@ -1,6 +1,5 @@
 import { Solicitacao } from './../../_models/solicitacao';
 import { MatTableDataSource } from '@angular/material/table';
-import { Estabelecimento } from 'src/app/_models/estabelecimento';
 import { SolicitacaoService } from './../../services/solicitacao.service';
 import { Component, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +15,7 @@ import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MatSelect } from '@angular/material/select';
 import { EventEmitterService } from 'src/app/services/event.service';
-
+import { MatSort } from '@angular/material/sort';
 registerLocaleData(localePt);
 
 @Component({
@@ -39,9 +38,13 @@ export class SolicitacoesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('select') matSelect: MatSelect;
 
-  solicitacoes: Solicitacao[] = []
-  solicitacao: Solicitacao = new Solicitacao();
+	//inserção do decorator Matsort
+	@ViewChild(MatSort) matSort: MatSort;
 
+	solicitacoes: Solicitacao[] = []
+	solicitacao: Solicitacao = new Solicitacao();
+	color = "red"
+  
   status: any[] = [
     { value: 'PENDENTE', viewValue: 'Pendente' },
     { value: 'ACEITO', viewValue: 'Aceito' },
@@ -120,6 +123,9 @@ export class SolicitacoesComponent implements OnInit {
       this.carregando = false;
       this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacoes)
       this.dataSource.paginator = this.paginator;
+      setTimeout(() => {
+				this.dataSource.sort = this.matSort
+			});
     })
   }
 
@@ -155,4 +161,7 @@ export class SolicitacoesComponent implements OnInit {
     console.log("TESTE");
   }
 
+	ngAfterViewInit() {
+		this.dataSource.sort = this.matSort;
+	}
 }
