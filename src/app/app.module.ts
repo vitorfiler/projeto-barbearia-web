@@ -49,6 +49,7 @@ import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/sol
 import { ReservasComponent } from './pages/reservas/reservas.component';
 import {MatDialogModule} from '@angular/material/dialog';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,6 +112,6 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, SolicitacoesModal],
 })
 export class AppModule { }
