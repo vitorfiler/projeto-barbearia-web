@@ -17,6 +17,7 @@ import { MatSelect } from '@angular/material/select';
 import { MatDialog } from '@angular/material/dialog';
 
 import { MatSort } from '@angular/material/sort';
+import { Status } from 'src/app/_models/status';
 registerLocaleData(localePt);
 
 @Component({
@@ -46,13 +47,13 @@ export class SolicitacoesComponent implements OnInit {
 	solicitacao: Solicitacao = new Solicitacao();
 	color = "red"
 
-  status: any[] = [
+  status: Status[] = [
     { value: 'PENDENTE', viewValue: 'Pendente' },
     { value: 'ACEITO', viewValue: 'Aceito' },
     { value: 'RECUSADO', viewValue: 'Recusado' },
   ];
 
-  selecaoStatus: any[] = [
+  selecaoStatus: Status[] = [
     { value: 'TODOS', viewValue: 'Todos' },
     { value: 'PENDENTE', viewValue: 'Pendente' },
     { value: 'ACEITO', viewValue: 'Aceito' },
@@ -131,15 +132,12 @@ export class SolicitacoesComponent implements OnInit {
 
   alterarStatus(solicitacaoId) {
     this.carregando = true;
-    let solicitacao = new CadSolicitacao();
     this.solicitacao = this.solicitacoes.find(s => s.id == solicitacaoId);
 
-    this.solicitacao.cliente = null;
-    solicitacao = this.solicitacao;
-    this.solicitacaoService.alterarSolicitacao(solicitacao).subscribe(() => {
+    this.solicitacaoService.alterarSolicitacao( this.solicitacao).subscribe(() => {
       this.snackbar.open(MessagesSnackBar.SOLICITACAO_STATUS_SUCESSO, 'Close', { duration: 4000 });
       this.carregando = false;
-      this.listar();
+      this.validarFiltro();
     }, (error) => {
       this.snackbar.open(MessagesSnackBar.SOLICITACAO_STATUS_ERRO, 'Close', { duration: 4000 });
       console.log(error);
@@ -160,7 +158,7 @@ export class SolicitacoesComponent implements OnInit {
     })
   }
 
-  openDialog(solicitacaoId: string) {
+  openDialog(solicitacaoId: string, status) {
     console.log(solicitacaoId);
     
     const dialogRef = this.dialog.open(ModalSelectStatusSolicitacaoComponent);

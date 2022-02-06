@@ -93,7 +93,7 @@
         <mat-form-field style="color: red!important" appearance="standard">
           <mat-label>Status</mat-label>
           <mat-select #select [(ngModel)]="solicitacao.status" name="status">
-            <mat-option *ngFor="let status of status" [value]="status.value" (click)='openDialog(solicitacao.id)' [ngStyle]="{
+            <mat-option *ngFor="let status of status" [value]="status.value" (click)='openDialog(solicitacao.id, solicitacao.status)' [ngStyle]="{
                   'color':status.value === 'PENDENTE' ? 
                   '#DAAA00' : status.value === 'ACEITO' ? 
                   '#219653' : '#EB5757'
