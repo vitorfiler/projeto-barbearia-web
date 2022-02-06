@@ -96,11 +96,10 @@ export class SolicitacoesComponent implements OnInit {
 			console.log(`Dialog result: ${result}`);
 		});
 	}
-
 }
 
 @Component({
-	selector: 'dialog-content-example-dialog',
+	selector: 'solicitacoes-modal.html',
 	templateUrl: 'solicitacoes-modal.html',
 
 	animations: [
@@ -130,7 +129,7 @@ export class SolicitacoesModal implements OnInit {
 
 	}
 	ngOnInit(): void {
-		// Capturando dados dos campos
+	// Capturando dados dos campos
 		this.form = this.fb.group({
 			nomeServico: ['', Validators.required],
 			tempoEstimado: ['', Validators.required],
