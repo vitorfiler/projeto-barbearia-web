@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CadSolicitacao } from '../_models/cad-solicitacao';
+import { Solicitacao } from '../_models/solicitacao';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class SolicitacaoService {
   }
 
 
-  alterarSolicitacao(solicitacao: CadSolicitacao): Observable<any> {
+  alterarSolicitacao(solicitacao: Solicitacao): Observable<any> {
     return this.http.put(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response" });
   }
 
