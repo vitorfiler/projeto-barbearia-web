@@ -110,18 +110,22 @@ export class SolicitacoesComponent implements OnInit {
 
 export class SolicitacoesModal implements OnInit {
 
-	solicitacao: Solicitacao = new Solicitacao();
-
 	// Valores de campo de Status
 	status: any[] = [
 		{ value: 'ACEITO', viewValue: 'Aceito' },
 		{ value: 'PENDENTE', viewValue: 'Pendente' },
 		{ value: 'RECUSADO', viewValue: 'Recusado' },
 	];
+	
+	solicitacao: Solicitacao = new Solicitacao();
 
 	//   Campo tempo de Serviço
 	form: FormGroup;
-	
+	idSolicitacao = localStorage.getItem('idSolicitacao');
+	legendaBotao = this.idSolicitacao? 'Alterar': 'Cadastrar';
+	estabelecimentoID = 1;
+	clienteID = 1;
+
 	constructor(
 		private fb: FormBuilder,
 		private solicitacaoService: SolicitacaoService,
@@ -129,23 +133,54 @@ export class SolicitacoesModal implements OnInit {
 
 	}
 	ngOnInit(): void {
-	// Capturando dados dos campos
-		this.form = this.fb.group({
-			nomeServico: ['', Validators.required],
-			tempoEstimado: ['', Validators.required],
-			valorServico: ['', Validators.required],
-			dtAtendimento: ['', Validators.required],
-			responsvel: ['', Validators.required],
-			status: ['', Validators.required]
-		});
-
+		this.idSolicitacao? this.inicializarFormEditar() : this.inicializarFormVazio();
 	}
-	cadastrarSolicitacao(solicitacao: CadSolicitacao) {
-		console.log(solicitacao);
-		solicitacao.dtAtendimento = "1995-07-03"
-		solicitacao.clienteID = 1;
-		solicitacao.estabelecimentoID = 1;
 
+	inicializarFormVazio(){
+	// iniciando formulário vazio
+	this.form = this.fb.group({
+		nomeServico: ['', Validators.required],
+		tempoEstimado: ['', Validators.required],
+		valorServico: ['', Validators.required],
+		dtAtendimento: ['', Validators.required],
+		responsvel: ['', Validators.required],
+		status: ['', Validators.required]
+	});
+	}
+	inicializarFormEditar(){
+	// iniciando formulário preenchido
+	this.form = this.fb.group({
+		nomeServico: ['', Validators.required],
+		tempoEstimado: ['', Validators.required],
+		valorServico: ['', Validators.required],
+		dtAtendimento: ['', Validators.required],
+		responsvel: ['', Validators.required],
+		status: ['', Validators.required]
+	});
+	}
+
+	enviarSolicitacao(solicitacao: Solicitacao) {
+		let dtAtendimento = this.form.get('dtAtendimento').value
+		solicitacao.dtAtendimento = (dtAtendimento.getFullYear() + "-" + ((dtAtendimento.getMonth() + 1)) + "-" + (dtAtendimento.getDate()));
+		
+		solicitacao.clienteID = this.clienteID;
+		solicitacao.estabelecimentoID = this.estabelecimentoID;
+
+		this.idSolicitacao? this.alterar(solicitacao) : this.cadastrar(solicitacao);
+	}
+
+	cadastrar(solicitacao: Solicitacao){
+		// Subscribe
+		this.solicitacaoService.cadastrarSolicitacao(solicitacao).subscribe(response => {
+			console.log(response);
+			this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_SUCESSO, 'Fechar', { duration: 9000 })
+		}, (error) => {
+			console.log(error);
+			this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_ERRO, 'Fechar', { duration: 9000 })
+		})
+	}
+
+	alterar(solicitacao: Solicitacao){
 		// Subscribe
 		this.solicitacaoService.cadastrarSolicitacao(solicitacao).subscribe(response => {
 			console.log(response);

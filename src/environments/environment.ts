@@ -5,7 +5,7 @@
 export const environment = {
   production: true,
   hmr       : false,
-  URL_API: "http://localhost:8080",
+  URL_API: "https://265f56d98302.ngrok.io",
   URL_AWS: "",
   ambiente: "dsv",
 
