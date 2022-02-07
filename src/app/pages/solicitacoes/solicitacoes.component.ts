@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { CadSolicitacao } from 'src/app/_models/cad-solicitacao';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
 	selector: 'vex-solicitacoes',
@@ -18,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SolicitacoesComponent implements OnInit {
 
 	estabelecimentoID = '1'
-	displayedColumns: string[] = ['cliente', 'nomeServico', 'tempoEstimado', 'valor', 'dtAtendimento', 'responsavel', 'status'];
+	displayedColumns: string[] = ['cliente', 'nomeServico', 'tempoEstimado', 'valor', 'dtAtendimento', 'responsavel', 'status', 'acoes'];
 
 	dataSource = new MatTableDataSource<Solicitacao>()
 	@ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,7 +37,8 @@ export class SolicitacoesComponent implements OnInit {
 	constructor(private router: Router,
 		private fb: FormBuilder,
 		private solicitacaoService: SolicitacaoService,
-		private snackbar: MatSnackBar) { }
+		private snackbar: MatSnackBar,
+		public dialog: MatDialog) { }
 
 	ngOnInit(): void {
 		window.localStorage.setItem('isSolicitacoes', 'true');
@@ -83,5 +85,45 @@ export class SolicitacoesComponent implements OnInit {
 			this.dataSource.paginator = this.paginator;
 		})
 	}
+
+	deleteSolicitacoes() {
+		this.solicitacaoService.deleteSolicitacao(this.estabelecimentoID).subscribe(
+		  () => console.log(`${this.estabelecimentoID} Deleted`),
+		  (err) => console.log(err)
+		);
+	}
+
+	openDelete() {
+		this.dialog.open(ModalDeletarComponents);
+	}
+
+	openEdit() {
+		this.dialog.open(ModalDeletarComponents);
+	}
+
+}
+
+
+
+@Component({
+	selector: 'vex-modal-deletar',
+	template: `
+	
+	<div class="titulo">
+	
+	<h2>Gostária de cancelar esse serviço?</h2>
+	<h1 style="color: red">Atenção!!!</h1>
+	</div>
+
+	<div class="buttonDelete">
+		<button mat-button color="primary" (click)="deleteSolicitacoes()">Sim</button>
+		<button mat-button color="primary">Não</button>
+    </div>
+	`
+	,
+	styleUrls: ['./solicitacoes.component.scss']
+})
+export class ModalDeletarComponents {
+
 
 }

@@ -33,4 +33,10 @@ export class SolicitacaoService {
   alterarSolicitacao(solicitacao: CadSolicitacao): Observable<any>{
     return this.http.put(`${environment.URL_API}/solicitacoes`, solicitacao,{ observe: "response", headers: this.headers });
   }
+
+  deleteSolicitacao(estabelecimentoID: string): Observable<any>{
+    return this.http.delete<void>(`${environment.URL_API}/solicitacoes`, {params: 
+      {estabelecimentoID: estabelecimentoID}, observe:'response', headers: this.headers});
+  }
+
 }
