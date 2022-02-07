@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CadSolicitacao } from '../_models/cad-solicitacao';
+import { Solicitacao } from '../_models/solicitacao';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +30,16 @@ export class SolicitacaoService {
     })
   }
 
-
-  alterarSolicitacao(solicitacao: CadSolicitacao): Observable<any> {
-    return this.http.put(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response" });
+  alterarSolicitacao(solicitacao: Solicitacao): Observable<any> {
+    return this.http.put(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response"});
   }
 
+  cadastrarSolicitacao(solicitacao: Solicitacao): Observable<any> {
+    return this.http.post(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response" });
+  }
+
+  deleteSolicitacao(solicitacaoID: string): Observable<any>{
+    return this.http.delete(`${environment.URL_API}/solicitacoes`, {params: 
+      {solicitacao_ID: solicitacaoID}, observe:'response'});
+  }
 }
