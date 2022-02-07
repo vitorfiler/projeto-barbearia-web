@@ -57,8 +57,8 @@ export class SolicitacoesComponent implements OnInit {
 
 	selecaoStatus: Status[] = [
 		{ value: 'TODOS', viewValue: 'Todos' },
-		{ value: 'PENDENTE', viewValue: 'Pendente' },
 		{ value: 'ACEITO', viewValue: 'Aceito' },
+		{ value: 'PENDENTE', viewValue: 'Pendente' },
 		{ value: 'RECUSADO', viewValue: 'Recusado' },
 	];
 

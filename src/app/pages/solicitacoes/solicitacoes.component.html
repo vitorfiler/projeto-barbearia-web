@@ -9,14 +9,19 @@
       <div class="col-md-2">
         <mat-form-field fxFlex="grow" appearance="standard">
           <mat-label>Filtro</mat-label>
-          <input formControlName="filtro" (ngModelChange)="validarFiltro()" matInput />
+          <input placeholder="Ex. Nome do cliente" formControlName="filtro" (ngModelChange)="validarFiltro()" matInput />
         </mat-form-field>
       </div>
       <div class="col-md-2">
         <mat-form-field fxFlex="grow" appearance="standard">
           <mat-label>Status</mat-label>
           <mat-select formControlName="status" (ngModelChange)="validarFiltro()" name="filtroStatus">
-            <mat-option *ngFor="let selecaoStatus of selecaoStatus" [value]="selecaoStatus.value">
+            <mat-option *ngFor="let selecaoStatus of selecaoStatus" [value]="selecaoStatus.value"[ngStyle]="{
+              'color':selecaoStatus.value === 'PENDENTE' ? '#DAAA00' 
+                : selecaoStatus.value === 'ACEITO' ? '#219653' 
+                : selecaoStatus.value === 'TODOS'? '#5c77ff' 
+                : '#EB5757'
+            }">
               {{selecaoStatus.viewValue}}
             </mat-option>
           </mat-select>
