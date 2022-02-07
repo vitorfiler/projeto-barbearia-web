@@ -122,6 +122,6 @@ import { NgxLoadingModule } from 'ngx-loading';
     MatNativeDateModule,
     [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }]
   ],
-  bootstrap: [AppComponent, SolicitacoesModal],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

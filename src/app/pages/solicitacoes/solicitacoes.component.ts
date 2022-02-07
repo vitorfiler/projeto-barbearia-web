@@ -1,7 +1,7 @@
 import { Solicitacao } from './../../_models/solicitacao';
 import { MatTableDataSource } from '@angular/material/table';
 import { SolicitacaoService } from './../../services/solicitacao.service';
-import { Component, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, LOCALE_ID, OnInit, Optional, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,10 +14,11 @@ import localePt from '@angular/common/locales/pt';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms, stagger60ms } from 'src/@vex/animations/stagger.animation';
 import { MatSelect } from '@angular/material/select';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { MatSort } from '@angular/material/sort';
 import { Status } from 'src/app/_models/status';
+import { EventEmitterService } from 'src/app/services/event.service';
 registerLocaleData(localePt);
 
 @Component({
@@ -45,11 +46,10 @@ export class SolicitacoesComponent implements OnInit {
 	@ViewChild(MatSort) matSort: MatSort;
 
 	solicitacoes: Solicitacao[] = []
-	solicitacao: Solicitacao = new Solicitacao();
+	solicitacao: Solicitacao;
 	color = "red"
 
 	status: Status[] = [
-		{ value: 'PENDENTE', viewValue: 'Pendente' },
 		{ value: 'ACEITO', viewValue: 'Aceito' },
 		{ value: 'PENDENTE', viewValue: 'Pendente' },
 		{ value: 'RECUSADO', viewValue: 'Recusado' },
@@ -75,13 +75,13 @@ export class SolicitacoesComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		window.localStorage.setItem('isSolicitacoes', 'true');
+		EventEmitterService.get('buscar').subscribe(()=>this.listar())
 		this.inicializarFiltro();
 	}
 
 	clearForm() {
-		this.form.reset();
 		this.carregando = true
+		this.form.reset();
 		setTimeout(() => {
 			this.inicializarFiltro();
 		});
@@ -160,7 +160,7 @@ export class SolicitacoesComponent implements OnInit {
 		})
 	}
 
-	openDialog(solicitacaoId: string, status) {
+	openEditStatus(solicitacaoId: string, status) {
 		console.log(solicitacaoId);
 
 		const dialogRef = this.dialog.open(ModalSelectStatusSolicitacaoComponent);
@@ -181,16 +181,25 @@ export class SolicitacoesComponent implements OnInit {
 			console.log(`Dialog result: ${result}`);
 		});
 	}
-	
-	openEdit() {
-		const dialogRef = this.dialog.open(ModalDeletarSolicitacaoComponent);
+
+	openModalEditarCadastrar(isCadastrar: boolean, idSolicitacao?: number) {
+		let dialogRef;
+		let solicitacao = this.solicitacoes.find(s=>s.id== idSolicitacao)
+		console.log(solicitacao);
+		
+		if(isCadastrar){
+			dialogRef = this.dialog.open(SolicitacoesModal)
+		}else{
+			dialogRef = this.dialog.open(SolicitacoesModal, {
+				data: { solicitacao: solicitacao }
+			});
+		}
 		dialogRef.afterClosed().subscribe(result => {
 			console.log(`Dialog result: ${result}`);
+			if(result){
+				this.carregando = true;
+			}
 		});
-	}
-
-	novaSolicitacao() {
-		console.log("TESTE");
 	}
 
 	ngAfterViewInit() {
@@ -199,7 +208,7 @@ export class SolicitacoesComponent implements OnInit {
 }
 
 @Component({
-	selector: 'solicitacoes-modal.html',
+	selector: 'modal-cadastrar-solicitacao',
 	templateUrl: 'solicitacoes-modal.html',
 	animations: [
 		stagger60ms,
@@ -215,63 +224,62 @@ export class SolicitacoesModal implements OnInit {
 		{ value: 'PENDENTE', viewValue: 'Pendente' },
 		{ value: 'RECUSADO', viewValue: 'Recusado' },
 	];
-	
+
 	solicitacao: Solicitacao = new Solicitacao();
 
 	//   Campo tempo de Serviço
 	form: FormGroup;
 	idSolicitacao = localStorage.getItem('idSolicitacao');
-	legendaBotao = this.idSolicitacao? 'Alterar': 'Cadastrar';
+	legendaBotao = 'Cadastrar';
 	estabelecimentoID = 1;
-	clienteID = 1;
+	clienteID = 4;
 
 	constructor(
 		private fb: FormBuilder,
 		private solicitacaoService: SolicitacaoService,
-		private snackbar: MatSnackBar) {
-
+		private snackbar: MatSnackBar,
+		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacaoToEdit: any) {
+			this.legendaBotao = solicitacaoToEdit ? 'Alterar' : 'Cadastrar';
 	}
 	ngOnInit(): void {
-		this.idSolicitacao? this.inicializarFormEditar() : this.inicializarFormVazio();
-	}
 
-	inicializarFormVazio(){
-	// iniciando formulário vazio
-	this.form = this.fb.group({
-		nomeServico: ['', Validators.required],
-		tempoEstimado: ['', Validators.required],
-		valorServico: ['', Validators.required],
-		dtAtendimento: ['', Validators.required],
-		responsvel: ['', Validators.required],
-		status: ['', Validators.required]
-	});
-	}
-	inicializarFormEditar(){
-	// iniciando formulário preenchido
-	this.form = this.fb.group({
-		nomeServico: ['', Validators.required],
-		tempoEstimado: ['', Validators.required],
-		valorServico: ['', Validators.required],
-		dtAtendimento: ['', Validators.required],
-		responsvel: ['', Validators.required],
-		status: ['', Validators.required]
-	});
+		if(this.solicitacaoToEdit){
+			this.solicitacao = new Solicitacao(this.solicitacaoToEdit.solicitacao)
+		}
+		console.log(this.solicitacao);
+		
+		this.form = this.fb.group({
+			nomeServico: ['', Validators.required],
+			tempoEstimado: ['', Validators.required],
+			valorServico: ['', Validators.required],
+			dtAtendimento: ['', Validators.required],
+			responsvel: ['', Validators.required],
+			status: ['', Validators.required]
+		});
 	}
 
 	enviarSolicitacao(solicitacao: Solicitacao) {
-		let dtAtendimento = this.form.get('dtAtendimento').value
-		solicitacao.dtAtendimento = (dtAtendimento.getFullYear() + "-" + ((dtAtendimento.getMonth() + 1)) + "-" + (dtAtendimento.getDate()));
-		
 		solicitacao.clienteID = this.clienteID;
 		solicitacao.estabelecimentoID = this.estabelecimentoID;
 
-		this.idSolicitacao? this.alterar(solicitacao) : this.cadastrar(solicitacao);
+		solicitacao.id ? this.alterar(solicitacao) : this.cadastrar(solicitacao);
 	}
 
-	cadastrar(solicitacao: Solicitacao){
+	cadastrar(solicitacao: Solicitacao) {
+		let dtAtendimento = this.form.get('dtAtendimento').value
+		let mes = (dtAtendimento.getMonth() + 1)
+		let dia = dtAtendimento.getDate()
+		if(mes < 10){
+			mes = "0" + (dtAtendimento.getMonth() + 1)
+		}if(dia < 10){
+			dia = "0" + dtAtendimento.getDate()
+		}
+		solicitacao.dtAtendimento = (dtAtendimento.getFullYear() + "-" + mes + "-" + dia);
+
 		// Subscribe
 		this.solicitacaoService.cadastrarSolicitacao(solicitacao).subscribe(response => {
 			console.log(response);
+			EventEmitterService.get('buscar').emit();
 			this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_SUCESSO, 'Fechar', { duration: 9000 })
 		}, (error) => {
 			console.log(error);
@@ -279,14 +287,15 @@ export class SolicitacoesModal implements OnInit {
 		})
 	}
 
-	alterar(solicitacao: Solicitacao){
+	alterar(solicitacao: Solicitacao) {
 		// Subscribe
-		this.solicitacaoService.cadastrarSolicitacao(solicitacao).subscribe(response => {
+		this.solicitacaoService.alterarSolicitacao(solicitacao).subscribe(response => {
 			console.log(response);
-			this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_SUCESSO, 'Fechar', { duration: 9000 })
+			EventEmitterService.get('buscar').emit();
+			this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_SUCESSO, 'Fechar', { duration: 9000 })
 		}, (error) => {
 			console.log(error);
-			this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_ERRO, 'Fechar', { duration: 9000 })
+			this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_ERRO, 'Fechar', { duration: 9000 })
 		})
 	}
 }

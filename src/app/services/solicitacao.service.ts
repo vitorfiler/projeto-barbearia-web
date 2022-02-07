@@ -30,11 +30,11 @@ export class SolicitacaoService {
     })
   }
 
-  alterarSolicitacao(solicitacao: CadSolicitacao): Observable<any> {
+  alterarSolicitacao(solicitacao: Solicitacao): Observable<any> {
     return this.http.put(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response"});
   }
 
-  cadastrarSolicitacao(solicitacao: CadSolicitacao): Observable<any> {
+  cadastrarSolicitacao(solicitacao: Solicitacao): Observable<any> {
     return this.http.post(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response" });
   }
 
