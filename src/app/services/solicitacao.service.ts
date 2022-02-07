@@ -35,4 +35,9 @@ export class SolicitacaoService {
     return this.http.put(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response" });
   }
 
+  deleteSolicitacao(estabelecimentoID: string): Observable<any>{
+    return this.http.delete<void>(`${environment.URL_API}/solicitacoes`, {params: 
+      {estabelecimentoID: estabelecimentoID}, observe:'response'});
+  }
+
 }
