@@ -43,7 +43,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
-import { ModalSelectStatusSolicitacaoComponent, SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
+import { ModalDeletarSolicitacaoComponent, ModalSelectStatusSolicitacaoComponent, SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
 import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
 import { ReservasComponent } from './pages/reservas/reservas.component';
 import { CoreModule } from './core.module';
@@ -63,7 +63,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     SolicitacoesComponent,
     SolicitacoesReservasComponent,
     ReservasComponent,
-    ModalSelectStatusSolicitacaoComponent
+    ModalSelectStatusSolicitacaoComponent,
+    ModalDeletarSolicitacaoComponent
 
   ],
   imports: [
