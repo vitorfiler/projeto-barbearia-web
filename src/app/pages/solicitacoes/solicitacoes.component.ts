@@ -175,10 +175,15 @@ export class SolicitacoesComponent implements OnInit {
 		});
 	}
 
-	openDelete() {
-		const dialogRef = this.dialog.open(ModalDeletarSolicitacaoComponent);
+	openDelete(solicitacaoID) {
+		const dialogRef = this.dialog.open(ModalDeletarSolicitacaoComponent, {
+			data: { solicitacao: solicitacaoID }
+		});
 		dialogRef.afterClosed().subscribe(result => {
 			console.log(`Dialog result: ${result}`);
+			if(result){
+				this.carregando = true;
+			}
 		});
 	}
 
@@ -280,10 +285,10 @@ export class SolicitacoesModal implements OnInit {
 		this.solicitacaoService.cadastrarSolicitacao(solicitacao).subscribe(response => {
 			console.log(response);
 			EventEmitterService.get('buscar').emit();
-			this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_SUCESSO, 'Fechar', { duration: 9000 })
+			this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_SUCESSO, 'Fechar', { duration: 4000 })
 		}, (error) => {
 			console.log(error);
-			this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_ERRO, 'Fechar', { duration: 9000 })
+			this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_ERRO, 'Fechar', { duration: 4000 })
 		})
 	}
 
@@ -292,10 +297,10 @@ export class SolicitacoesModal implements OnInit {
 		this.solicitacaoService.alterarSolicitacao(solicitacao).subscribe(response => {
 			console.log(response);
 			EventEmitterService.get('buscar').emit();
-			this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_SUCESSO, 'Fechar', { duration: 9000 })
+			this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_SUCESSO, 'Fechar', { duration: 4000 })
 		}, (error) => {
 			console.log(error);
-			this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_ERRO, 'Fechar', { duration: 9000 })
+			this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_ERRO, 'Fechar', { duration: 4000 })
 		})
 	}
 }
@@ -310,4 +315,23 @@ export class ModalSelectStatusSolicitacaoComponent { }
 	selector: 'modal-deletar-solicitacao',
 	templateUrl: 'modal-deletar-solicitacao.html',
 })
-export class ModalDeletarSolicitacaoComponent { }
+export class ModalDeletarSolicitacaoComponent {
+
+	constructor(
+		private solicitacaoService: SolicitacaoService,
+		private snackbar: MatSnackBar,
+		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacaoID: any) {}
+
+	deletar() {
+		// Subscribe
+		console.log(this.solicitacaoID);
+		this.solicitacaoService.deleteSolicitacao(this.solicitacaoID.solicitacao).subscribe(response => {
+			console.log(response);
+			EventEmitterService.get('buscar').emit();
+			this.snackbar.open(MessagesSnackBar.DELETAR_SOLICITACAO_SUCESSO, 'Fechar', { duration: 4000 })
+		}, (error) => {
+			console.log(error);
+			this.snackbar.open(MessagesSnackBar.DELETAR_SOLICITACAO_ERRO, 'Fechar', { duration: 4000 })
+		})
+	}
+ }

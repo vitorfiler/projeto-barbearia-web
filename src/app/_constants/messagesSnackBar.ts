@@ -9,4 +9,6 @@ export enum MessagesSnackBar {
     CADASTRO_SOLICITACAO_ERRO = "Falha ao cadastrar solicicitação",
     ALTERAÇÃO_SOLICITACAO_SUCESSO = "Solicitação alterada com sucesso",
     ALTERAÇÃO_SOLICITACAO_ERRO = "Falha ao alterar solicicitação",
+    DELETAR_SOLICITACAO_SUCESSO = "Solicitação apagada com sucesso",
+    DELETAR_SOLICITACAO_ERRO = "Falha ao apagar solicicitação",
   }
