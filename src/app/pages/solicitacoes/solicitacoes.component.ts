@@ -94,13 +94,20 @@ export class SolicitacoesComponent implements OnInit {
 	}
 
 	openDelete() {
-		this.dialog.open(ModalDeletarComponents);
+		const dialogRef = this.dialog.open(ModalDeletarComponents);
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log(`Dialog result: ${result}`);
+		});
 	}
 
 	openEdit() {
-		this.dialog.open(ModalDeletarComponents);
-	}
+		const dialogRef = this.dialog.open(ModalDeletarComponents);
 
+		dialogRef.afterClosed().subscribe(result => {
+			console.log(`Dialog result: ${result}`);
+		});
+	}
 }
 
 
@@ -125,5 +132,7 @@ export class SolicitacoesComponent implements OnInit {
 })
 export class ModalDeletarComponents {
 
-
+	deleteSolicitacoes(){
+		console.log("teste");
+	}
 }
