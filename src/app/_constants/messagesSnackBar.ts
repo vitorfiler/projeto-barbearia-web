@@ -5,4 +5,10 @@ export enum MessagesSnackBar {
     RECUPERAR_SENHA_ERRO = "Falha ao procurar o email informado!",
     SOLICITACAO_STATUS_SUCESSO="Status da Solicitação alterado com sucesso",
     SOLICITACAO_STATUS_ERRO="Falha ao alterar status da solicitação",
+    CADASTRO_SOLICITACAO_SUCESSO = "Solicitação cadstrada com sucesso",
+    CADASTRO_SOLICITACAO_ERRO = "Falha ao cadastrar solicicitação",
+    ALTERAÇÃO_SOLICITACAO_SUCESSO = "Solicitação alterada com sucesso",
+    ALTERAÇÃO_SOLICITACAO_ERRO = "Falha ao alterar solicicitação",
+    DELETAR_SOLICITACAO_SUCESSO = "Solicitação apagada com sucesso",
+    DELETAR_SOLICITACAO_ERRO = "Falha ao apagar solicicitação",
   }

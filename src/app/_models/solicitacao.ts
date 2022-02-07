@@ -1,4 +1,3 @@
-
 import { Cliente } from './cliente';
 
 export class Solicitacao{
@@ -12,6 +11,10 @@ export class Solicitacao{
     status: string;
     clienteID: number;
     estabelecimentoID: number;
-    cliente: Cliente;  
+    cliente: Cliente; 
+
+    constructor(solicitacao: Solicitacao= {} as Solicitacao){
+        Object.assign(this, solicitacao);
+    }
 }
 

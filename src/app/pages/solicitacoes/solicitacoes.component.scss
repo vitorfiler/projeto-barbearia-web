@@ -15,42 +15,6 @@ td, th {
 //   color: red!important;
 // }
 
-.titulo {
-  display: flex;
-  margin: 30px;
-  flex-direction: column;
-  align-items: center;
-  
-}
-
-.titulo h2 {
-  justify-items: center;
-  padding-bottom: 25px;
-}
-
-.buttonDelete {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  
-  
-}
-
-.buttonDelete button { 
-  border: 1px solid #13293d;
-  border-radius: 5px;
-  display: table-cell;
-  padding: 15px;
-  padding-left: 35px;
-  padding-right: 35px;
-  transition-duration: 0.2s;
-}
-
-.buttonDelete button:hover {
-  background-color: #13293d;
-  color: white;
-}
-
 .mat-raised-button, .mat-stroked-button{    
   margin: auto;
 }

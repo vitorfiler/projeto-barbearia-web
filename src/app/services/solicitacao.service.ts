@@ -30,14 +30,16 @@ export class SolicitacaoService {
     })
   }
 
-
   alterarSolicitacao(solicitacao: Solicitacao): Observable<any> {
-    return this.http.put(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response" });
+    return this.http.put(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response"});
   }
 
-  deleteSolicitacao(estabelecimentoID: string): Observable<any>{
-    return this.http.delete<void>(`${environment.URL_API}/solicitacoes`, {params: 
-      {estabelecimentoID: estabelecimentoID}, observe:'response'});
+  cadastrarSolicitacao(solicitacao: Solicitacao): Observable<any> {
+    return this.http.post(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response" });
   }
 
+  deleteSolicitacao(solicitacaoID: string): Observable<any>{
+    return this.http.delete(`${environment.URL_API}/solicitacoes`, {params: 
+      {solicitacao_ID: solicitacaoID}, observe:'response'});
+  }
 }

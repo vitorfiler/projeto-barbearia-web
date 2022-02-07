@@ -22,7 +22,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
 import { IconModule } from '@visurel/iconify-angular';
-import {MatDialogModule} from '@angular/material/dialog';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
@@ -43,7 +42,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
-import { ModalDeletarSolicitacaoComponent, ModalSelectStatusSolicitacaoComponent, SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ModalDeletarSolicitacaoComponent, ModalSelectStatusSolicitacaoComponent, SolicitacoesComponent, SolicitacoesModal } from './pages/solicitacoes/solicitacoes.component';
 import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
 import { ReservasComponent } from './pages/reservas/reservas.component';
 import { CoreModule } from './core.module';
@@ -63,6 +63,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     SolicitacoesComponent,
     SolicitacoesReservasComponent,
     ReservasComponent,
+    SolicitacoesModal,
     ModalSelectStatusSolicitacaoComponent,
     ModalDeletarSolicitacaoComponent
 
@@ -71,6 +72,9 @@ import { NgxLoadingModule } from 'ngx-loading';
     BrowserModule,
     AppRoutingModule,
     CalendarModule,
+    MatDialogModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     NgxLoadingModule.forRoot({}),
     AngularCalendarModule.forRoot({
       provide: DateAdapter,
@@ -118,6 +122,6 @@ import { NgxLoadingModule } from 'ngx-loading';
     MatNativeDateModule,
     [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }]
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
