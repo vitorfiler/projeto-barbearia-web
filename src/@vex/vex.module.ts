@@ -16,7 +16,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@ang
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: {
-        appearance: 'fill'
+        appearance: 'standard'
       } as MatFormFieldDefaultOptions
     }
   ]

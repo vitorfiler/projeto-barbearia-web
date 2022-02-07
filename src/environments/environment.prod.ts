@@ -1,11 +1,9 @@
 export const environment = {
-  production: false,
+  production: true,
   hmr       : false,
-  URL_API: "https://265f56d98302.ngrok.io",
+  URL_API: "https://easycut-api.herokuapp.com",
   URL_AWS: "",
-  ambiente: "prod",
+  ambiente: "prd",
 
-  //SERVIÇOS
-    cadastro: '/estabelecimento/cadastrar',
     recuperarSenha: '/estabelecimento/recuperar-senha'
 };

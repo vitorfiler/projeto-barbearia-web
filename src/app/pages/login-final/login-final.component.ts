@@ -66,7 +66,8 @@ export class LoginFinalComponent implements OnInit {
 				// console.log(response.body.token);
 				// localStorage.setItem("typeUser", JSON.stringify(response.body.tipoUsuario))
 				localStorage.setItem("currentUser", JSON.stringify(response.body.estabelecimento))
-				localStorage.setItem("token", JSON.stringify(response.body.token))
+				localStorage.setItem("token", response.body.token)
+				localStorage.setItem("estabelecimento_ID", response.body.estabelecimento_ID)
 				this.router.navigate(['/']);
 				this.logando = false;
 			},

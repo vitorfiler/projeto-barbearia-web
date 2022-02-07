@@ -77,7 +77,7 @@ export class CadastroComponent implements OnInit {
 
 	cadastrar() {
 		const body = this.montarBody();
-		this.commomService.post(`${environment.cadastro}`, body).subscribe(response => {
+		this.commomService.post(`/estabelecimento`, body).subscribe(response => {
 			this.snackbar.open(MessagesSnackBar.CADASTRO_SUCESSO, 'Close', { duration: 9000 });
 			// this.form.reset();
 			this.cadastrando = false;

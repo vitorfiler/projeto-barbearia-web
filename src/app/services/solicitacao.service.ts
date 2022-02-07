@@ -4,26 +4,21 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CadSolicitacao } from '../_models/cad-solicitacao';
-import { Solicitacao } from './../_models/solicitacao';
+import { Solicitacao } from '../_models/solicitacao';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SolicitacaoService {
 
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': localStorage.getItem('token').replace('"', "").replace('"', "")
-  })
-
   constructor(private http: HttpClient) { }
 
-  filtrar(estabelecimentoID: string, filtro: string): Observable<any> {
+  filtrar(estabelecimentoID: string, filtro: string, status: string, dt_inicial: string, dt_final: string): Observable<any> {
 
     return this.http.get(`${environment.URL_API}/solicitacoes/filtro`, {
       params: {
-        estabelecimento_ID: estabelecimentoID, filtro: filtro
-      }, observe: 'response', headers: this.headers
+        estabelecimento_ID: estabelecimentoID, filtro: filtro, status: status || "", dt_final: dt_final, dt_inicial: dt_inicial,
+      }, observe: 'response'
     })
   }
 
@@ -31,16 +26,20 @@ export class SolicitacaoService {
     return this.http.get(`${environment.URL_API}/solicitacoes/todas`, {
       params: {
         estabelecimento_ID: estabelecimentoID,
-      }, observe: 'response', headers: this.headers
+      }, observe: 'response'
     })
   }
 
   alterarSolicitacao(solicitacao: CadSolicitacao): Observable<any> {
-    return this.http.put(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response", headers: this.headers });
+    return this.http.put(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response"});
   }
 
   cadastrarSolicitacao(solicitacao: CadSolicitacao): Observable<any> {
-    return this.http.post(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response", headers: this.headers });
+    return this.http.post(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response" });
   }
 
+  deleteSolicitacao(estabelecimentoID: string): Observable<any>{
+    return this.http.delete<void>(`${environment.URL_API}/solicitacoes`, {params: 
+      {estabelecimentoID: estabelecimentoID}, observe:'response'});
+  }
 }

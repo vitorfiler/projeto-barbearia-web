@@ -3,14 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
+  production: false,
   hmr       : false,
-  URL_API: "https://265f56d98302.ngrok.io",
+  URL_API: "https://easycut-api.herokuapp.com",
   URL_AWS: "",
   ambiente: "dsv",
 
   //SERVIÇOS
-    cadastro: '/estabelecimento/cadastrar',
     recuperarSenha: '/estabelecimento/recuperar-senha'
 };
 

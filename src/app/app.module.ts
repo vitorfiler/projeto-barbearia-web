@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,15 +14,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSortModule } from '@angular/material/sort';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
-
 import { IconModule } from '@visurel/iconify-angular';
-
 import { NgxMaskModule } from 'ngx-mask';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
@@ -44,10 +42,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
-import { SolicitacoesComponent, SolicitacoesModal} from './pages/solicitacoes/solicitacoes.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ModalDeletarSolicitacaoComponent, ModalSelectStatusSolicitacaoComponent, SolicitacoesComponent, SolicitacoesModal } from './pages/solicitacoes/solicitacoes.component';
 import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
 import { ReservasComponent } from './pages/reservas/reservas.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { CoreModule } from './core.module';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { NgxLoadingModule } from 'ngx-loading';
+
 
 
 @NgModule({
@@ -61,7 +63,10 @@ import {MatDialogModule} from '@angular/material/dialog';
     SolicitacoesComponent,
     SolicitacoesReservasComponent,
     ReservasComponent,
-    SolicitacoesModal
+    SolicitacoesModal,
+    ModalSelectStatusSolicitacaoComponent,
+    ModalDeletarSolicitacaoComponent
+
   ],
   imports: [
     BrowserModule,
@@ -70,6 +75,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatDialogModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    NgxLoadingModule.forRoot({}),
     AngularCalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
@@ -93,6 +99,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     IconModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatDialogModule,
     MatRadioModule,
     MatAutocompleteModule,
     MatTableModule,
@@ -102,7 +109,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTabsModule,
     MatPaginatorModule,
     FormsModule,
+    MatSortModule,
     
+    CoreModule,
     // Vex
     VexModule,
     CustomLayoutModule,
@@ -110,7 +119,8 @@ import {MatDialogModule} from '@angular/material/dialog';
   ],
   providers: [
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }]
   ],
   bootstrap: [AppComponent, SolicitacoesModal],
 })
