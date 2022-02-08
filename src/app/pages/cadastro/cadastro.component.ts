@@ -93,6 +93,7 @@ export class CadastroComponent implements OnInit {
 		let body = {
 			"nomeProprietario": this.form.get('nome').value,
 			"estabelecimento": this.form.get('estabelecimento').value,
+			"cadastroCompleto": false,
 			"email": this.form.get('email').value,
 			"cpf_cnpj": this.form.get('cpf_cnpj').value,
 			"senha": this.form.get('senha').value

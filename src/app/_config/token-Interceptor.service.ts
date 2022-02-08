@@ -28,15 +28,14 @@ export class TokenInterceptorService implements HttpInterceptor {
             return next.handle(cloned).pipe(catchError(err => {
                 if (err.status === 401 || err.status === 403 || err.status == 0) {
                     this.commomService.logout();
-                    setTimeout(() => { alert("Sessão Expirada!") }, 200);
+                    err.status != 0? setTimeout(() => { alert("Sessão Expirada!") }, 200) : null;
                 }
                 const error = err.error || err.statusText;
                 return throwError(error);
             }));
         }
-        else if (this.router.url != "/login" && this.router.url != "/cadastro") {
+        else if (this.router.url != "/login" && this.router.url != "/cadastro") { 
             this.commomService.logout();
-            setTimeout(() => { alert("Sessão Expirada!") }, 100);
         }
         else {
             return next.handle(req);
