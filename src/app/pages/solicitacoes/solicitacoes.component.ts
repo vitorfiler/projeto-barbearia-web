@@ -75,8 +75,14 @@ export class SolicitacoesComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		//let cadastroCompleto = localStorage.getItem('cadastroCompleto')
 		EventEmitterService.get('buscar').subscribe(()=>this.listar())
 		this.inicializarFiltro();
+
+		// if(!cadastroCompleto && this.router.url == '/solicitacoes'){
+		// 	this.openDelete(undefined)
+		// 	console.log(`aqui é o teste ${this.router.url}`)
+		// }
 	}
 
 	clearForm() {

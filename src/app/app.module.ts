@@ -49,6 +49,7 @@ import { ReservasComponent } from './pages/reservas/reservas.component';
 import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
+import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 
 
 
@@ -65,7 +66,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     ReservasComponent,
     SolicitacoesModal,
     ModalSelectStatusSolicitacaoComponent,
-    ModalDeletarSolicitacaoComponent
+    ModalDeletarSolicitacaoComponent,
+    CadastroEstabelecimentoModal
 
   ],
   imports: [
