@@ -47,58 +47,41 @@ export class CadastroComponent implements OnInit {
 			nome: ['', Validators.required],
 			estabelecimento: ['', Validators.required],
 			email: new FormControl(
-				'',[Validators.required, 
-					Validators.email
-				]
+				'', [Validators.required,
+				Validators.email
+			]
 			),
 			cpf_cnpj: ['', Validators.required],
-			senha:  new FormControl(
-				'',[Validators.required]
+			senha: new FormControl(
+				'', [Validators.required]
 			),
 			ConfirmarSenha: ['', Validators.required],
 			termosCondicoes: ['', Validators.requiredTrue],
 			politicasPrivacidade: ['', Validators.requiredTrue]
-		}, {validator: this.checkPasswords });
+		}, { validator: this.checkPasswords });
 	}
-	checkPasswords(group: FormGroup) { 
-	  let senha = group.get('senha').value;
-	  let confirmaSenha = group.get('ConfirmarSenha').value;
-  
-	  return senha === confirmaSenha ? null : { notSame: true }     
-	}
-	// this.form = this.fb.group({
-	//   nome: ['', ],
-	//   estabelecimento: ['', ],
-	//   email: ['', ],
-	//   cpf_cnpj: ['', ],
-	//   senha: ['', ],
-	//   ConfirmarSenha: ['', ], 
-	// });
+	checkPasswords(group: FormGroup) {
+		let senha = group.get('senha').value;
+		let confirmaSenha = group.get('ConfirmarSenha').value;
 
-	cadastrar() {
-		const body = this.montarBody();
-		this.commomService.post(`/estabelecimento`, body).subscribe(response => {
-			this.snackbar.open(MessagesSnackBar.CADASTRO_SUCESSO, 'Close', { duration: 9000 });
-			// this.form.reset();
+		return senha === confirmaSenha ? null : { notSame: true }
+	}
+
+	cadastrar(estabelecimento: Estabelecimento) {
+		estabelecimento.cadastroCompleto = false;
+		estabelecimento.planoID = undefined;
+		estabelecimento.enderecoID = undefined;
+
+		this.commomService.post(`/estabelecimento`, estabelecimento).subscribe(response => {
+			this.snackbar.open(MessagesSnackBar.CADASTRO_SUCESSO, 'Fechar', { duration: 5000 });
+			this.form.reset();
 			this.cadastrando = false;
 		},
 			(error) => {
 				console.log(error.message);
 				this.cadastrando = false;
-				this.snackbar.open(MessagesSnackBar.CADASTRO_ERRO, 'Close', { duration: 9000 });
+				this.snackbar.open(MessagesSnackBar.CADASTRO_ERRO, 'Fechar', { duration: 5000 });
 			})
-	}
-
-	montarBody(): any {
-		let body = {
-			"nomeProprietario": this.form.get('nome').value,
-			"estabelecimento": this.form.get('estabelecimento').value,
-			"email": this.form.get('email').value,
-			"cpf_cnpj": this.form.get('cpf_cnpj').value,
-			"senha": this.form.get('senha').value
-		}
-
-		return body;
 	}
 
 	scrollToBottom() {
