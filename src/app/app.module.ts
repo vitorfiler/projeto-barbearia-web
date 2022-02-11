@@ -50,6 +50,7 @@ import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
 import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
+import { PlanosModalComponent } from './pages/modais/planos/planos-modal.component';
 
 
 
@@ -67,7 +68,8 @@ import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabeleci
     SolicitacoesModal,
     ModalSelectStatusSolicitacaoComponent,
     ModalDeletarSolicitacaoComponent,
-    CadastroEstabelecimentoModal
+    CadastroEstabelecimentoModal,
+    PlanosModalComponent
 
   ],
   imports: [
