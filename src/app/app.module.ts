@@ -72,6 +72,8 @@ import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabeleci
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     CalendarModule,
     MatDialogModule,
@@ -90,7 +92,7 @@ import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabeleci
     MatIconModule,
     GaugeModule,
     NgxGaugeModule,
-    ReactiveFormsModule,
+   
     MatCardModule,
     NgxChartsModule,
     MatSnackBarModule,
@@ -110,7 +112,6 @@ import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabeleci
     MatInputModule,
     MatTabsModule,
     MatPaginatorModule,
-    FormsModule,
     MatSortModule,
     
     CoreModule,

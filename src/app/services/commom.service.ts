@@ -61,4 +61,11 @@ headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
     let year = date.getFullYear();
     return `${year}-${month}-${day}`;
   };
+
+  //metodo para buscar cep da API viaCep
+  consultaCep(cep: string): Observable<any> {
+		this.headers.set('Access-Control-Allow-Origin', '*');
+    this.http.get(`https://cors-anywhere.herokuapp.com//viacep.com.br/ws/88058400/json`);
+		return this.http.get(`http://viacep.com.br/ws/${cep}/json`, { observe: "response", headers: this.headers });
+	}
 }
