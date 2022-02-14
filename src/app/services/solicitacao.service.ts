@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CadSolicitacao } from '../_models/cad-solicitacao';
 import { Solicitacao } from '../_models/solicitacao';
+import { Endereco } from '../_models/endereco';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,10 @@ export class SolicitacaoService {
 
   cadastrarSolicitacao(solicitacao: Solicitacao): Observable<any> {
     return this.http.post(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response" });
+  }
+
+  cadastrarEndereco(endereco: Endereco): Observable<any> {
+    return this.http.post(`${environment.URL_API}/solicitacoes`, endereco, { observe: "response" });
   }
 
   deleteSolicitacao(solicitacaoID: string): Observable<any>{

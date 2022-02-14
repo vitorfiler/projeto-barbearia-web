@@ -92,6 +92,12 @@ export class AppComponent implements OnInit{
         type: 'link',
         route: '/solicitacoes',
         icon: icAssigment
+      }, 
+      {
+        label: 'Serviços',
+        type: 'link',
+        route: '/servicos',
+        icon: icLayers
       }
     ];
   }
