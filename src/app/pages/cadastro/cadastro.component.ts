@@ -55,17 +55,16 @@ export class CadastroComponent implements OnInit {
 			senha: new FormControl(
 				'', [Validators.required]
 			),
-			ConfirmarSenha: ['', Validators.required],
+			confirmarSenha: ['', Validators.required],
 			termosCondicoes: ['', Validators.requiredTrue],
 			politicasPrivacidade: ['', Validators.requiredTrue]
 		}, { validator: this.checkPasswords }); // chamada de função para validação de senha
 	}
-	checkPasswords(estabelecimento: Estabelecimento) {
-		const senha = estabelecimento.senha;
-		const confirmarSenha = estabelecimento.confirmarSenha;
+	checkPasswords(form: FormGroup) {
+		const senha = form.get('senha').value;
+		const confirmarSenha = form.get('confirmarSenha').value;
 
 		return senha === confirmarSenha ? null : { notSame: true }
-
 	}
 
 	cadastrar(estabelecimento: Estabelecimento) {
