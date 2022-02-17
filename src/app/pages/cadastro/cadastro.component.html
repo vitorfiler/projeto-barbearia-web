@@ -43,12 +43,12 @@
               <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
               <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
             </button>
-            <mat-error *ngIf="form.get('senha').hasError('pattern')">Mínimo de seis caracteres, pelo menos uma letra e um número</mat-error>
+            <mat-error *ngIf="form.get('senha').hasError('pattern')">Mínimo de seis caracteres, pelo menos uma letra e um número sem caracters especiais</mat-error>
           </mat-form-field>
   
           <mat-form-field fxFlex="grow" appearance="outline">
             <mat-label>Confirmar Senha</mat-label>
-            <input [type]="inputType" formControlName="ConfirmarSenha" matInput required>
+            <input [type]="inputType" formControlName="ConfirmarSenha" [(ngModel)]="estabelecimento.confirmarSenha" matInput required>
             <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
               <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
               <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>

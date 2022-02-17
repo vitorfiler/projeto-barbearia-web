@@ -6,9 +6,12 @@ export class Estabelecimento {
     email: string;
     cpf_cnpj: string;
     senha: string;
+    confirmarSenha: string;
     cadastroCompleto: boolean;
     enderecoID: number;
     planoID: number;
     endereco: string;
     plano: any
+
 }
+

@@ -23,7 +23,6 @@ import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 })
 
 export class CadastroComponent implements OnInit {
-
 	estabelecimento = new Estabelecimento();
 	form: FormGroup;
 
@@ -43,6 +42,7 @@ export class CadastroComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+
 		this.form = this.fb.group({
 			nome: ['', Validators.required],
 			estabelecimento: ['', Validators.required],
@@ -58,13 +58,14 @@ export class CadastroComponent implements OnInit {
 			ConfirmarSenha: ['', Validators.required],
 			termosCondicoes: ['', Validators.requiredTrue],
 			politicasPrivacidade: ['', Validators.requiredTrue]
-		}, { validator: this.checkPasswords });
+		}, { validator: this.checkPasswords }); // chamada de função para validação de senha
 	}
-	checkPasswords(group: FormGroup) {
-		let senha = group.get('senha').value;
-		let confirmaSenha = group.get('ConfirmarSenha').value;
+	checkPasswords(estabelecimento: Estabelecimento) {
+		const senha = estabelecimento.senha;
+		const confirmarSenha = estabelecimento.confirmarSenha;
 
-		return senha === confirmaSenha ? null : { notSame: true }
+		return senha === confirmarSenha ? null : { notSame: true }
+
 	}
 
 	cadastrar(estabelecimento: Estabelecimento) {
@@ -73,8 +74,8 @@ export class CadastroComponent implements OnInit {
 		estabelecimento.enderecoID = undefined;
 
 		this.commomService.post(`/estabelecimento`, estabelecimento).subscribe(response => {
-			this.snackbar.open(MessagesSnackBar.CADASTRO_SUCESSO, 'Fechar', { duration: 5000 });
-			this.form.reset();
+			this.snackbar.open(MessagesSnackBar.CADASTRO_SUCESSO, 'Fechar', { duration: 5000 }); //tempo de duração de mensagem 
+			this.form.reset(); // limpeza de formulário após envio de dados 
 			this.cadastrando = false;
 		},
 			(error) => {
