@@ -19,6 +19,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { Status } from 'src/app/_models/status';
 import { EventEmitterService } from 'src/app/services/event.service';
+import { Endereco } from 'src/app/_models/endereco';
 registerLocaleData(localePt);
 
 @Component({
@@ -320,6 +321,8 @@ export class SolicitacoesModal implements OnInit {
 			this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_ERRO, 'Fechar', { duration: 4000 })
 		})
 	}
+
+
 }
 
 @Component({

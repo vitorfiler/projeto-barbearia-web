@@ -31,7 +31,7 @@ export class CadastroEstabelecimentoModal implements OnInit {
 
 	constructor(
 		private fb: FormBuilder,
-		private CommomService: CommomService,
+		private commomService: CommomService,
 		private snackbar: MatSnackBar,
 		private http: HttpClient,
 		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacaoToEdit: any) {
@@ -53,7 +53,11 @@ export class CadastroEstabelecimentoModal implements OnInit {
 	//metodo para envio de confirmação de cadastro(formulario aberto no modal da tela de solicitações)
 	confirmarcadastro(endereco: Endereco) {
 
-		console.log(endereco);
+		// Subscribe
+		this.commomService.cadastrarEndereco(endereco).subscribe(response => {
+			console.log(response);
+			
+		})
 	}
 
 	//metodo que sera utilizado para fazer busca de endereço por CEP

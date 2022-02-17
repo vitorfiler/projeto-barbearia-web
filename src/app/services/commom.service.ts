@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { LoginService } from './login.service';
 import { Estabelecimento } from '../_models/estabelecimento';
+import { Endereco } from '../_models/endereco';
 
 
 
@@ -74,5 +75,13 @@ export class CommomService {
     this.headers.set('Access-Control-Allow-Origin', '*');
     this.http.get(`https://cors-anywhere.herokuapp.com//viacep.com.br/ws/88058400/json`);
     return this.http.get(`http://viacep.com.br/ws/${cep}/json`, { observe: "response", headers: this.headers });
+  }
+
+  cadastrarEndereco(endereco: Endereco): Observable<any> {
+    return this.http.post(`${environment.URL_API}/endereco`, endereco, { observe: "response" });
+  }
+
+  atualizarEstabelecimento(estabelecimento: Estabelecimento): Observable<any>{
+    return this.http.put(`${environment.URL_API}/estabelecimento`, estabelecimento, { observe: "response" });
   }
 }
