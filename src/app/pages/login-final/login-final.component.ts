@@ -1,17 +1,17 @@
+import { CadastroEstabelecimentoModal } from './../modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { CommomService } from 'src/app/services/commom.service';
 import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/_models/user';
 import arrowBack from '@iconify/icons-ic/keyboard-backspace';
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import icVisibilityOff from '@iconify/icons-ic/twotone-visibility-off';
-import { Observable } from 'rxjs';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
 	selector: 'vex-login-final',
@@ -44,16 +44,30 @@ export class LoginFinalComponent implements OnInit {
 		private cd: ChangeDetectorRef,
 		private snackbar: MatSnackBar,
 		private loginService: LoginService,
+		public dialog: MatDialog
 	) { }
 
-	
+
 	ngOnInit(): void {
 		this.form = this.fb.group({
 			email: new FormControl(
-				'',[Validators.required]),
+				'', [Validators.required]),
 			password: ["", Validators.required],
 		});
+
 	}
+	//metodo para exibir o modal na tela de solicitações, assim que fizer o login esse modal sera apresentado
+	MostrarModalCadastroCompleto() {
+		let cadastroCompleto = JSON.parse(localStorage.getItem('cadastroCompleto'))
+		if (!cadastroCompleto) {
+			const dialogRef = this.dialog.open(CadastroEstabelecimentoModal);
+			dialogRef.afterClosed().subscribe(result => {
+				console.log(`Dialog result: ${result}`);
+			});
+
+		}
+	}
+
 	login() {
 		this.logando = true;
 		let username = this.form.get('email').value
@@ -61,15 +75,16 @@ export class LoginFinalComponent implements OnInit {
 		return this.loginService
 			.login(username, password)
 			.subscribe(response => {
-				// console.log(response.body.nomeUsuario);
-				// console.log(response.body.tipoUsuario);
-				// console.log(response.body.token);
-				// localStorage.setItem("typeUser", JSON.stringify(response.body.tipoUsuario))
+
 				localStorage.setItem("currentUser", JSON.stringify(response.body.estabelecimento))
 				localStorage.setItem("token", response.body.token)
 				localStorage.setItem("estabelecimento_ID", response.body.estabelecimento_ID)
+				localStorage.setItem("cadastroCompleto", response.body.cadastroCompleto)
 				this.router.navigate(['/']);
+				this.MostrarModalCadastroCompleto()
 				this.logando = false;
+
+
 			},
 				(error) => {
 					this.logando = false;

@@ -53,6 +53,7 @@ import { ServicosComponent } from './pages/servicos/servicos.component';
 import { ListagemServicosComponent } from './pages/servicos/listagem-servicos/listagem-servicos.component';
 import { ListagemProdutosComponent } from './pages/servicos/listagem-produtos/listagem-produtos.component';
 import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/listagem-promocoes.component';
+import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 
 
 
@@ -73,11 +74,14 @@ import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/
     ServicosComponent,
     ListagemServicosComponent,
     ListagemProdutosComponent,
-    ListagemPromocoesComponent
+    ListagemPromocoesComponent,
+    CadastroEstabelecimentoModal
 
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     CalendarModule,
     MatDialogModule,
@@ -96,7 +100,7 @@ import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/
     MatIconModule,
     GaugeModule,
     NgxGaugeModule,
-    ReactiveFormsModule,
+   
     MatCardModule,
     NgxChartsModule,
     MatSnackBarModule,
@@ -116,7 +120,6 @@ import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/
     MatInputModule,
     MatTabsModule,
     MatPaginatorModule,
-    FormsModule,
     MatSortModule,
     
     CoreModule,
