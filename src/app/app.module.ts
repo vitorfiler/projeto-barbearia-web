@@ -49,6 +49,11 @@ import { ReservasComponent } from './pages/reservas/reservas.component';
 import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
+import { ServicosComponent } from './pages/servicos/servicos.component';
+import { ListagemServicosComponent } from './pages/servicos/listagem-servicos/listagem-servicos.component';
+import { ListagemProdutosComponent } from './pages/servicos/listagem-produtos/listagem-produtos.component';
+import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/listagem-promocoes.component';
+import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 
 
 
@@ -65,11 +70,18 @@ import { NgxLoadingModule } from 'ngx-loading';
     ReservasComponent,
     SolicitacoesModal,
     ModalSelectStatusSolicitacaoComponent,
-    ModalDeletarSolicitacaoComponent
+    ModalDeletarSolicitacaoComponent,
+    ServicosComponent,
+    ListagemServicosComponent,
+    ListagemProdutosComponent,
+    ListagemPromocoesComponent,
+    CadastroEstabelecimentoModal
 
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     CalendarModule,
     MatDialogModule,
@@ -88,7 +100,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     MatIconModule,
     GaugeModule,
     NgxGaugeModule,
-    ReactiveFormsModule,
+   
     MatCardModule,
     NgxChartsModule,
     MatSnackBarModule,
@@ -108,7 +120,6 @@ import { NgxLoadingModule } from 'ngx-loading';
     MatInputModule,
     MatTabsModule,
     MatPaginatorModule,
-    FormsModule,
     MatSortModule,
     
     CoreModule,
