@@ -84,4 +84,11 @@ export class CommomService {
   atualizarEstabelecimento(estabelecimento: Estabelecimento): Observable<any>{
     return this.http.put(`${environment.URL_API}/estabelecimento`, estabelecimento, { observe: "response" });
   }
+
+  finalizaCadastroEstabelecimento(body: string, estabelecimentoId: string): Observable<any>{
+
+    return this.http.put(`${environment.URL_API}/estabelecimento/finaliza-cadastro`, body, {params: {
+      estabelecimento_ID: estabelecimentoId
+    }, observe: "response" });
+  }
 }
