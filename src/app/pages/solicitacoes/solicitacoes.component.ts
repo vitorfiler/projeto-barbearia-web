@@ -1,3 +1,4 @@
+import { ClientesService } from './../../services/clientes.service';
 import { Solicitacao } from './../../_models/solicitacao';
 import { MatTableDataSource } from '@angular/material/table';
 import { SolicitacaoService } from './../../services/solicitacao.service';
@@ -19,6 +20,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { Status } from 'src/app/_models/status';
 import { EventEmitterService } from 'src/app/services/event.service';
+import { Cliente } from 'src/app/_models/cliente';
 registerLocaleData(localePt);
 
 @Component({
@@ -254,16 +256,20 @@ export class SolicitacoesModal implements OnInit {
 	idSolicitacao = localStorage.getItem('idSolicitacao');
 	legendaBotao = 'Cadastrar';
 	estabelecimentoID = 1;
-	clienteID = 4;
+	cliente = new Cliente();
+	clientes = this.buscarClientesAtivos;
 
 	constructor(
 		private fb: FormBuilder,
 		private solicitacaoService: SolicitacaoService,
+		private clientesService: ClientesService,
 		private snackbar: MatSnackBar,
 		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacaoToEdit: any) {
 		this.legendaBotao = solicitacaoToEdit ? 'Alterar' : 'Cadastrar';
 	}
 	ngOnInit(): void {
+
+		this.buscarClientesAtivos()
 
 		if (this.solicitacaoToEdit) {
 			this.solicitacao = new Solicitacao(this.solicitacaoToEdit.solicitacao)
@@ -276,12 +282,28 @@ export class SolicitacoesModal implements OnInit {
 			valorServico: ['', Validators.required],
 			dtAtendimento: ['', Validators.required],
 			responsvel: ['', Validators.required],
+			cliente: ['', Validators.required],
 			status: ['', Validators.required]
 		});
 	}
 
+	filtrarClientes(){
+		let filtro = this.form.get('cliente').value
+		this.clientesService.filtrarCliente(filtro).subscribe(response =>{
+			this.clientes = response.body
+			//console.log(response)
+		})
+	}
+
+	buscarClientesAtivos(){
+		this.clientesService.buscarClientesAtivos().subscribe(response =>{
+			this.clientes = response.body
+			//console.log(this.clientes)
+		})
+	}
+
 	enviarSolicitacao(solicitacao: Solicitacao) {
-		solicitacao.clienteID = this.clienteID;
+		solicitacao.clienteID = this.cliente.id;
 		solicitacao.estabelecimentoID = this.estabelecimentoID;
 
 		solicitacao.id ? this.alterar(solicitacao) : this.cadastrar(solicitacao);
