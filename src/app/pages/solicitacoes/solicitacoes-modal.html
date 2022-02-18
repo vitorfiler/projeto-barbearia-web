@@ -1,3 +1,7 @@
+<!-- <ng-template #customLoadingTemplate>
+</ng-template>
+<ngx-loading [show]="carregando" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+</ngx-loading> -->
 <div @fadeInUp fxFlex="auto" [formGroup]="form">
   <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
     <h2 class="title m-0">Novo Agendamento</h2>
@@ -5,18 +9,20 @@
  
  
   <div class="px-6 py-4" fxLayout="column">
-
     <mat-form-field fxFlex="grow">
       <mat-label>Cliente</mat-label>
       <input type="text"
-             placeholder="Pick one"
+             placeholder="Busque um cliente pelo Nome ou CPF"
              aria-label="Number"
+             formControlName="cliente"
+             [formControl] = "myControl" 
+             [matAutocomplete]="auto"
+             [textContent]="textoAutoComplete"
              matInput
-             (onChange)="filtrarClientes()"
-             [formControl]="cliente"
-             [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let cliente of clientes" [value]="cliente.nome">
+             [(ngModel)]="clienteIdSelecionado"
+             (keypress)="filtrarClientes()">
+      <mat-autocomplete  #auto="matAutocomplete" [displayWith]="getTitle.bind(this)">
+        <mat-option *ngFor="let cliente of filteredOptions | async" [value]="cliente.id">
           {{cliente.nome}}
         </mat-option>
       </mat-autocomplete>

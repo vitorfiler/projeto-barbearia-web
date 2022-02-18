@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment.prod';
+import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -19,5 +19,11 @@ export class ClientesService {
 
   buscarClientesAtivos():Observable<any>{
     return this.http.get(`${environment.URL_API}/clientes/ativos`, {observe: 'response'})
+  }
+
+  buscarClientePorId(clienteID: string):Observable<any>{
+    return this.http.get(`${environment.URL_API}/clientes/ativos`, {params:{
+      cliente_ID: clienteID
+    },observe: 'response'})
   }
 }
