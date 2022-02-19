@@ -19,6 +19,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { Status } from 'src/app/_models/status';
 import { EventEmitterService } from 'src/app/services/event.service';
+import { Endereco } from 'src/app/_models/endereco';
 registerLocaleData(localePt);
 
 @Component({
@@ -138,7 +139,7 @@ export class SolicitacoesComponent implements OnInit {
 		})
 	}
 
-	alterarStatus(solicitacaoId, status) {
+	alterarStatus(solicitacaoId) {
 		this.carregando = true;
 		this.solicitacao = this.solicitacoes.find(s => s.id == solicitacaoId);
 
@@ -170,7 +171,7 @@ export class SolicitacoesComponent implements OnInit {
 		})
 	}
 
-	openEditStatus(solicitacaoId: number, status) {
+	openEditStatus(solicitacaoId: number) {
 
 		this.solicitacao = this.solicitacoes.find(s => s.id == solicitacaoId);
 		const dialogRef = this.dialog.open(ModalSelectStatusSolicitacaoComponent, {
@@ -178,7 +179,7 @@ export class SolicitacoesComponent implements OnInit {
 		});
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) {
-				this.alterarStatus(solicitacaoId, status);
+				this.alterarStatus(solicitacaoId);
 			}
 			else {
 				this.clearForm();
@@ -318,6 +319,8 @@ export class SolicitacoesModal implements OnInit {
 			this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_ERRO, 'Fechar', { duration: 4000 })
 		})
 	}
+
+
 }
 
 @Component({
@@ -329,7 +332,6 @@ export class ModalSelectStatusSolicitacaoComponent implements OnInit {
 	mostraFormulario: boolean = false;
 	constructor(
 		private fb: FormBuilder,
-		private snackbar: MatSnackBar,
 		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacao: any) { // abstrair objeto de outra classe
 
 

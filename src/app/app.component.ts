@@ -8,7 +8,12 @@ import icLayers from '@iconify/icons-ic/twotone-layers';
 import icAssigment from '@iconify/icons-ic/twotone-assignment';
 import icContactSupport from '@iconify/icons-ic/twotone-contact-support';
 import icDateRange from '@iconify/icons-ic/twotone-date-range';
-
+import icCalendar from '@iconify/icons-ic/baseline-calendar-today';
+import icDashboard from '@iconify/icons-ic/baseline-dashboard';
+import icCashier from '@iconify/icons-ic/attach-money';
+import icSetting from '@iconify/icons-ic/baseline-settings';
+import icWork from '@iconify/icons-ic/baseline-work';
+import icComment from '@iconify/icons-ic/baseline-comment';
 import { LayoutService } from '../@vex/services/layout.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
@@ -92,12 +97,42 @@ export class AppComponent implements OnInit{
         type: 'link',
         route: '/solicitacoes',
         icon: icAssigment
+      },
+      {
+        label: 'Painel',
+        type: 'link',
+        route: '/painel',
+        icon: icDashboard
       }, 
+      {
+        label: 'Caixa',
+        type: 'link',
+        route: '/caixa',
+        icon: icCashier
+      },
+      {
+        label: 'Agenda',
+        type: 'link',
+        route: '/agenda',
+        icon: icCalendar
+      },
       {
         label: 'Serviços',
         type: 'link',
         route: '/servicos',
-        icon: icLayers
+        icon: icWork
+      },
+      {
+        label: 'Comentários',
+        type: 'link',
+        route: '/comentarios',
+        icon: icComment
+      },
+      {
+        label: 'Configurações',
+        type: 'link',
+        route: '/configuracoes',
+        icon: icSetting
       }
     ];
   }
