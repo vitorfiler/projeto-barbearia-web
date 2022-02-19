@@ -139,7 +139,7 @@ export class SolicitacoesComponent implements OnInit {
 		})
 	}
 
-	alterarStatus(solicitacaoId, status) {
+	alterarStatus(solicitacaoId) {
 		this.carregando = true;
 		this.solicitacao = this.solicitacoes.find(s => s.id == solicitacaoId);
 
@@ -171,7 +171,7 @@ export class SolicitacoesComponent implements OnInit {
 		})
 	}
 
-	openEditStatus(solicitacaoId: number, status) {
+	openEditStatus(solicitacaoId: number) {
 
 		this.solicitacao = this.solicitacoes.find(s => s.id == solicitacaoId);
 		const dialogRef = this.dialog.open(ModalSelectStatusSolicitacaoComponent, {
@@ -179,7 +179,7 @@ export class SolicitacoesComponent implements OnInit {
 		});
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) {
-				this.alterarStatus(solicitacaoId, status);
+				this.alterarStatus(solicitacaoId);
 			}
 			else {
 				this.clearForm();
@@ -332,7 +332,6 @@ export class ModalSelectStatusSolicitacaoComponent implements OnInit {
 	mostraFormulario: boolean = false;
 	constructor(
 		private fb: FormBuilder,
-		private snackbar: MatSnackBar,
 		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacao: any) { // abstrair objeto de outra classe
 
 
