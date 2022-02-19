@@ -1,11 +1,11 @@
+import { ClientesService } from './../../services/clientes.service';
 import { Solicitacao } from './../../_models/solicitacao';
 import { MatTableDataSource } from '@angular/material/table';
 import { SolicitacaoService } from './../../services/solicitacao.service';
-import { Component, Inject, Input, LOCALE_ID, OnInit, Optional, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, Inject, Input, LOCALE_ID, OnInit, Optional, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
-import { CadSolicitacao } from 'src/app/_models/cad-solicitacao';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateAdapter } from '@angular/material/core';
@@ -19,7 +19,10 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { Status } from 'src/app/_models/status';
 import { EventEmitterService } from 'src/app/services/event.service';
-import { Endereco } from 'src/app/_models/endereco';
+import { Cliente } from 'src/app/_models/cliente';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
 registerLocaleData(localePt);
 
 @Component({
@@ -76,14 +79,9 @@ export class SolicitacoesComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		//let cadastroCompleto = localStorage.getItem('cadastroCompleto')
 		EventEmitterService.get('buscar').subscribe(() => this.listar())
 		this.inicializarFiltro();
 
-		// if(!cadastroCompleto && this.router.url == '/solicitacoes'){
-		// 	this.openDelete(undefined)
-		// 	console.log(`aqui é o teste ${this.router.url}`)
-		// }
 	}
 
 	clearForm() {
@@ -168,6 +166,9 @@ export class SolicitacoesComponent implements OnInit {
 			setTimeout(() => {
 				this.dataSource.sort = this.matSort
 			});
+		}, (error)=>{
+			console.log(error);
+			this.carregando = false;
 		})
 	}
 
@@ -240,7 +241,7 @@ export class SolicitacoesComponent implements OnInit {
 	]
 })
 
-export class SolicitacoesModal implements OnInit {
+export class SolicitacoesModal implements OnInit,AfterViewInit  {
 
 	// Valores de campo de Status
 	status: any[] = [
@@ -256,16 +257,36 @@ export class SolicitacoesModal implements OnInit {
 	idSolicitacao = localStorage.getItem('idSolicitacao');
 	legendaBotao = 'Cadastrar';
 	estabelecimentoID = 1;
-	clienteID = 4;
+	cliente = new Cliente();
+	clientes = this.buscarClientesAtivos();
+	filteredOptions: Observable<Cliente[]>;
+	myControl = new FormControl();
+	public carregando = false;
+
+	textoAutoComplete = '';
 
 	constructor(
 		private fb: FormBuilder,
 		private solicitacaoService: SolicitacaoService,
+		private clientesService: ClientesService,
 		private snackbar: MatSnackBar,
 		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacaoToEdit: any) {
 		this.legendaBotao = solicitacaoToEdit ? 'Alterar' : 'Cadastrar';
 	}
+	ngAfterViewInit(): void {
+		this.filteredOptions = this.myControl.valueChanges
+		.pipe(
+		  startWith(''),
+		  map(value => this._filter(value))
+		);
+	}
 	ngOnInit(): void {
+
+		this.filteredOptions = this.myControl.valueChanges
+		.pipe(
+		  startWith(''),
+		  map(value => this._filter(value))
+		);
 
 		if (this.solicitacaoToEdit) {
 			this.solicitacao = new Solicitacao(this.solicitacaoToEdit.solicitacao)
@@ -277,18 +298,73 @@ export class SolicitacoesModal implements OnInit {
 			valorServico: ['', Validators.required],
 			dtAtendimento: ['', Validators.required],
 			responsavel: ['', Validators.required],
+			cliente: ['', Validators.required],
 			status: ['', Validators.required]
 		});
 	}
 
+	getTitle(clienteId) {
+		if (!clienteId) return '';
+
+		if(this.clientes){
+			return this.clientes?.find(cliente => cliente?.id === clienteId)?.nome;
+		}
+	}
+	filtrarClientes(){
+		this.carregando = true
+
+		let filtro = this.form.get('cliente').value
+		this.clientesService.filtrarCliente(filtro).subscribe(response =>{
+			this.clientes = response.body
+			this.carregando = false;
+			this.filteredOptions = this.myControl.valueChanges
+			.pipe(
+			  startWith(''),
+			  map(value => this._filter(value))
+			);
+			
+		}, (error)=>{
+			this.carregando = false;
+			console.log(error);
+		})
+	}
+
+	buscarClientesAtivos(): any{
+		this.carregando = true
+		this.clientesService.buscarClientesAtivos().subscribe(response =>{
+			this.carregando = false;
+			this.clientes = response.body
+			return this.clientes;
+		}, (error)=>{
+			this.carregando = false;
+			console.log(error);
+		})
+	}
+
+	private _filter(value: string): Cliente[] {
+		if (typeof value === "string") {
+			// do something
+			if(this.clientes == undefined) return;
+			if (value == undefined) return this.clientes;
+			return this.clientes.filter(x => x.nome.toLowerCase().includes(value.toLowerCase()));
+		}
+	  }
+	
+	  private _filterById(value: number): Cliente {
+		if(this.clientes == undefined) return;
+		if (value == undefined) return this.clientes;
+		return this.clientes.filter(x => x.id == value);
+	  }
+
 	enviarSolicitacao(solicitacao: Solicitacao) {
-		solicitacao.clienteID = this.clienteID;
+		solicitacao.clienteID = this.form.get('cliente').value;
 		solicitacao.estabelecimentoID = this.estabelecimentoID;
 
 		solicitacao.id ? this.alterar(solicitacao) : this.cadastrar(solicitacao);
 	}
 
 	cadastrar(solicitacao: Solicitacao) {
+
 		let dtAtendimento = this.form.get('dtAtendimento').value
 		let mes = (dtAtendimento.getMonth() + 1)
 		let dia = dtAtendimento.getDate()
@@ -298,7 +374,7 @@ export class SolicitacoesModal implements OnInit {
 			dia = "0" + dtAtendimento.getDate()
 		}
 		solicitacao.dtAtendimento = (dtAtendimento.getFullYear() + "-" + mes + "-" + dia);
-
+		
 		// Subscribe
 		this.solicitacaoService.cadastrarSolicitacao(solicitacao).subscribe(response => {
 			EventEmitterService.get('buscar').emit();
