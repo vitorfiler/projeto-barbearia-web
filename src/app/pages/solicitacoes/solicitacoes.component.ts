@@ -322,7 +322,7 @@ export class SolicitacoesModal implements OnInit,AfterViewInit  {
 			  startWith(''),
 			  map(value => this._filter(value))
 			);
-			//console.log(response)
+			
 		}, (error)=>{
 			this.carregando = false;
 			console.log(error);
@@ -334,7 +334,6 @@ export class SolicitacoesModal implements OnInit,AfterViewInit  {
 		this.clientesService.buscarClientesAtivos().subscribe(response =>{
 			this.carregando = false;
 			this.clientes = response.body
-			// this.filteredOptions = response.body
 			return this.clientes;
 		}, (error)=>{
 			this.carregando = false;
