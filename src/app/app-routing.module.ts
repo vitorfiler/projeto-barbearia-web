@@ -1,18 +1,20 @@
 import { ServicosComponent } from './pages/servicos/servicos.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 import { VexRoutes } from 'src/@vex/interfaces/vex-route.interface';
-
 import { LoginFinalComponent } from './pages/login-final/login-final.component';
-import { CalendarComponent } from './pages/login-final/calendar/calendar.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
 import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
+import { AgendaComponent } from './pages/agenda/agenda.component';
+import { CaixaComponent } from './pages/caixa/caixa.component';
+import { ComentariosComponent } from './pages/comentarios/comentarios.component';
+import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
+import { PainelComponent } from './pages/painel/painel.component';
 
 
 const routes: VexRoutes = [
@@ -20,10 +22,14 @@ const routes: VexRoutes = [
     path: '',
     component: CustomLayoutComponent,
     children: [
-      { path: 'agenda', component: CalendarComponent },
+      { path: 'agenda', component: AgendaComponent },
       { path: 'solicitacoes-tabela', component: SolicitacoesComponent },
       { path: 'solicitacoes', component: SolicitacoesReservasComponent },
-      { path: 'servicos', component: ServicosComponent }   
+      { path: 'servicos', component: ServicosComponent },
+      { path: 'caixa', component: CaixaComponent },
+      { path: 'comentarios', component: ComentariosComponent },
+      { path: 'configuracoes', component: ConfiguracoesComponent },
+      { path: 'painel', component: PainelComponent }   
     ],
   },
   { path: 'login', component: LoginFinalComponent },
