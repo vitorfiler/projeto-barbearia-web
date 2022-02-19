@@ -19,6 +19,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { Status } from 'src/app/_models/status';
 import { EventEmitterService } from 'src/app/services/event.service';
+import { Endereco } from 'src/app/_models/endereco';
 registerLocaleData(localePt);
 
 @Component({
@@ -197,7 +198,7 @@ export class SolicitacoesComponent implements OnInit {
 		});
 	}
 
-	openModalEditarCadastrar(isCadastrar: boolean, idSolicitacao?: number) {
+	openModalEditarCadastrar(isCadastrar: boolean, idSolicitacao?: number, status?: string) {
 		let dialogRef;
 		let solicitacao = this.solicitacoes.find(s => s.id == idSolicitacao)
 
@@ -207,12 +208,22 @@ export class SolicitacoesComponent implements OnInit {
 			dialogRef = this.dialog.open(SolicitacoesModal, {
 				data: { solicitacao: solicitacao }
 			});
+			if (status == "PENDENTE") {
+				this.solicitacao.responsavel = "";
+				console.log(this.solicitacao.responsavel)
+			}
+			else if (status == "ACEITO") {
+
+			}
 		}
+
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) {
 				this.carregando = true;
 			}
 		});
+
+
 	}
 
 	ngAfterViewInit() {
@@ -308,6 +319,8 @@ export class SolicitacoesModal implements OnInit {
 			this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_ERRO, 'Fechar', { duration: 4000 })
 		})
 	}
+
+
 }
 
 @Component({

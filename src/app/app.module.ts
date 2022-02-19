@@ -15,7 +15,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSortModule } from '@angular/material/sort';
-
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
@@ -42,14 +41,23 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ModalDeletarSolicitacaoComponent, ModalSelectStatusSolicitacaoComponent, SolicitacoesComponent, SolicitacoesModal } from './pages/solicitacoes/solicitacoes.component';
 import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
 import { ReservasComponent } from './pages/reservas/reservas.component';
 import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
+import { ServicosComponent } from './pages/servicos/servicos.component';
+import { ListagemServicosComponent } from './pages/servicos/listagem-servicos/listagem-servicos.component';
+import { ListagemProdutosComponent } from './pages/servicos/listagem-produtos/listagem-produtos.component';
+import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/listagem-promocoes.component';
 import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
+import { ComentariosComponent } from './pages/comentarios/comentarios.component';
+import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
+import { AgendaComponent } from './pages/agenda/agenda.component';
+import { PainelComponent } from './pages/painel/painel.component';
+import { CaixaComponent } from './pages/caixa/caixa.component';
 
 
 
@@ -67,7 +75,16 @@ import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabeleci
     SolicitacoesModal,
     ModalSelectStatusSolicitacaoComponent,
     ModalDeletarSolicitacaoComponent,
-    CadastroEstabelecimentoModal
+    ServicosComponent,
+    ListagemServicosComponent,
+    ListagemProdutosComponent,
+    ListagemPromocoesComponent,
+    CadastroEstabelecimentoModal,
+    CaixaComponent,
+    ComentariosComponent,
+    ConfiguracoesComponent,
+    AgendaComponent,
+    PainelComponent
 
   ],
   imports: [

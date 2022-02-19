@@ -1,9 +1,17 @@
-export class Estabelecimento{
-    user_name: string;
-    establishment_name: string;
+export class Estabelecimento {
+    id: number;
+    hashSenha: string;
+    nomeProprietario: string;
+    estabelecimento: string;
     email: string;
-    CPF_CNPJ: string;
-    password: string;
-    terms_accept: boolean;
-    policies_accept: boolean;
+    cpf_cnpj: string;
+    senha: string;
+    confirmarSenha: string;
+    cadastroCompleto: boolean;
+    enderecoID: number;
+    planoID: number;
+    endereco: string;
+    plano: any
+
 }
+
