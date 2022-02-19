@@ -23,6 +23,7 @@ import { MessagesSnackBar } from "src/app/_constants/messagesSnackBar";
 
 export class CadastroEstabelecimentoModal implements OnInit {
 
+	estabelecimentoID: string = localStorage.getItem('estabelecimento_ID')
 	endereco: Endereco = new Endereco()
 
 	//   Campo tempo de Serviço
@@ -31,7 +32,7 @@ export class CadastroEstabelecimentoModal implements OnInit {
 
 	constructor(
 		private fb: FormBuilder,
-		private CommomService: CommomService,
+		private commomService: CommomService,
 		private snackbar: MatSnackBar,
 		private http: HttpClient,
 		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacaoToEdit: any) {
@@ -52,8 +53,20 @@ export class CadastroEstabelecimentoModal implements OnInit {
 
 	//metodo para envio de confirmação de cadastro(formulario aberto no modal da tela de solicitações)
 	confirmarcadastro(endereco: Endereco) {
-
-		console.log(endereco);
+		// Subscribe
+		this.commomService.cadastrarEndereco(endereco).subscribe(response => {
+			console.log(response);
+			endereco = response.body;
+			const body: any = {
+				enderecoID: endereco.id,
+				cadastroCompleto: true
+			}
+			this.commomService.finalizaCadastroEstabelecimento(body, this.estabelecimentoID).subscribe(data => {
+				console.log(data);
+			})
+		}, (error) => {
+			console.log(error)
+		})
 	}
 
 	//metodo que sera utilizado para fazer busca de endereço por CEP

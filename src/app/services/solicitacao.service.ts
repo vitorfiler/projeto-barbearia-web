@@ -39,10 +39,6 @@ export class SolicitacaoService {
     return this.http.post(`${environment.URL_API}/solicitacoes`, solicitacao, { observe: "response" });
   }
 
-  cadastrarEndereco(endereco: Endereco): Observable<any> {
-    return this.http.post(`${environment.URL_API}/solicitacoes`, endereco, { observe: "response" });
-  }
-
   deleteSolicitacao(solicitacaoID: string): Observable<any>{
     return this.http.delete(`${environment.URL_API}/solicitacoes`, {params: 
       {solicitacao_ID: solicitacaoID}, observe:'response'});
