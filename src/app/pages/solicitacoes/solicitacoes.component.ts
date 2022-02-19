@@ -2,8 +2,8 @@ import { ClientesService } from './../../services/clientes.service';
 import { Solicitacao } from './../../_models/solicitacao';
 import { MatTableDataSource } from '@angular/material/table';
 import { SolicitacaoService } from './../../services/solicitacao.service';
-import { Component, Inject, Input, LOCALE_ID, OnInit, Optional, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, Inject, Input, LOCALE_ID, OnInit, Optional, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { CadSolicitacao } from 'src/app/_models/cad-solicitacao';
@@ -21,6 +21,8 @@ import { MatSort } from '@angular/material/sort';
 import { Status } from 'src/app/_models/status';
 import { EventEmitterService } from 'src/app/services/event.service';
 import { Cliente } from 'src/app/_models/cliente';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 registerLocaleData(localePt);
 
 @Component({
@@ -165,6 +167,9 @@ export class SolicitacoesComponent implements OnInit {
 			setTimeout(() => {
 				this.dataSource.sort = this.matSort
 			});
+		}, (error)=>{
+			console.log(error);
+			this.carregando = false;
 		})
 	}
 
@@ -218,9 +223,9 @@ export class SolicitacoesComponent implements OnInit {
 
 		dialogRef.afterClosed().subscribe(result => {
 			console.log(`Dialog result: ${result}`);
-			if (result) {
-				this.carregando = true;
-			}
+			// if (result) {
+			// 	this.carregando = true;
+			// }
 		});
 
 
@@ -240,7 +245,7 @@ export class SolicitacoesComponent implements OnInit {
 	]
 })
 
-export class SolicitacoesModal implements OnInit {
+export class SolicitacoesModal implements OnInit,AfterViewInit  {
 
 	// Valores de campo de Status
 	status: any[] = [
@@ -257,7 +262,12 @@ export class SolicitacoesModal implements OnInit {
 	legendaBotao = 'Cadastrar';
 	estabelecimentoID = 1;
 	cliente = new Cliente();
-	clientes = this.buscarClientesAtivos;
+	clientes = this.buscarClientesAtivos();
+	filteredOptions: Observable<Cliente[]>;
+	myControl = new FormControl();
+	public carregando = false;
+
+	textoAutoComplete = '';
 
 	constructor(
 		private fb: FormBuilder,
@@ -267,14 +277,24 @@ export class SolicitacoesModal implements OnInit {
 		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacaoToEdit: any) {
 		this.legendaBotao = solicitacaoToEdit ? 'Alterar' : 'Cadastrar';
 	}
+	ngAfterViewInit(): void {
+		this.filteredOptions = this.myControl.valueChanges
+		.pipe(
+		  startWith(''),
+		  map(value => this._filter(value))
+		);
+	}
 	ngOnInit(): void {
 
-		this.buscarClientesAtivos()
+		this.filteredOptions = this.myControl.valueChanges
+		.pipe(
+		  startWith(''),
+		  map(value => this._filter(value))
+		);
 
 		if (this.solicitacaoToEdit) {
 			this.solicitacao = new Solicitacao(this.solicitacaoToEdit.solicitacao)
 		}
-		console.log(this.solicitacao);
 
 		this.form = this.fb.group({
 			nomeServico: ['', Validators.required],
@@ -287,29 +307,69 @@ export class SolicitacoesModal implements OnInit {
 		});
 	}
 
+	getTitle(clienteId) {
+		if (!clienteId) return '';
+
+		if(this.clientes){
+			return this.clientes?.find(cliente => cliente?.id === clienteId)?.nome;
+		}
+	}
 	filtrarClientes(){
+		this.carregando = true
+
 		let filtro = this.form.get('cliente').value
 		this.clientesService.filtrarCliente(filtro).subscribe(response =>{
 			this.clientes = response.body
+			this.carregando = false;
+			this.filteredOptions = this.myControl.valueChanges
+			.pipe(
+			  startWith(''),
+			  map(value => this._filter(value))
+			);
 			//console.log(response)
+		}, (error)=>{
+			this.carregando = false;
+			console.log(error);
 		})
 	}
 
-	buscarClientesAtivos(){
+	buscarClientesAtivos(): any{
+		this.carregando = true
 		this.clientesService.buscarClientesAtivos().subscribe(response =>{
+			this.carregando = false;
 			this.clientes = response.body
-			//console.log(this.clientes)
+			// this.filteredOptions = response.body
+			return this.clientes;
+		}, (error)=>{
+			this.carregando = false;
+			console.log(error);
 		})
 	}
+
+	private _filter(value: string): Cliente[] {
+		if (typeof value === "string") {
+			// do something
+			if(this.clientes == undefined) return;
+			if (value == undefined) return this.clientes;
+			return this.clientes.filter(x => x.nome.toLowerCase().includes(value.toLowerCase()));
+		}
+	  }
+	
+	  private _filterById(value: number): Cliente {
+		if(this.clientes == undefined) return;
+		if (value == undefined) return this.clientes;
+		return this.clientes.filter(x => x.id == value);
+	  }
 
 	enviarSolicitacao(solicitacao: Solicitacao) {
-		solicitacao.clienteID = this.cliente.id;
+		solicitacao.clienteID = this.form.get('cliente').value;
 		solicitacao.estabelecimentoID = this.estabelecimentoID;
 
 		solicitacao.id ? this.alterar(solicitacao) : this.cadastrar(solicitacao);
 	}
 
 	cadastrar(solicitacao: Solicitacao) {
+
 		let dtAtendimento = this.form.get('dtAtendimento').value
 		let mes = (dtAtendimento.getMonth() + 1)
 		let dia = dtAtendimento.getDate()
@@ -319,7 +379,7 @@ export class SolicitacoesModal implements OnInit {
 			dia = "0" + dtAtendimento.getDate()
 		}
 		solicitacao.dtAtendimento = (dtAtendimento.getFullYear() + "-" + mes + "-" + dia);
-
+		
 		// Subscribe
 		this.solicitacaoService.cadastrarSolicitacao(solicitacao).subscribe(response => {
 			console.log(response);
