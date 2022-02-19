@@ -197,7 +197,7 @@ export class SolicitacoesComponent implements OnInit {
 		});
 	}
 
-	openModalEditarCadastrar(isCadastrar: boolean, idSolicitacao?: number) {
+	openModalEditarCadastrar(isCadastrar: boolean, idSolicitacao?: number, status?: string) {
 		let dialogRef;
 		let solicitacao = this.solicitacoes.find(s => s.id == idSolicitacao)
 
@@ -207,12 +207,22 @@ export class SolicitacoesComponent implements OnInit {
 			dialogRef = this.dialog.open(SolicitacoesModal, {
 				data: { solicitacao: solicitacao }
 			});
+			if (status == "PENDENTE") {
+				this.solicitacao.responsavel = "";
+				console.log(this.solicitacao.responsavel)
+			}
+			else if (status == "ACEITO") {
+
+			}
 		}
+
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) {
 				this.carregando = true;
 			}
 		});
+
+
 	}
 
 	ngAfterViewInit() {

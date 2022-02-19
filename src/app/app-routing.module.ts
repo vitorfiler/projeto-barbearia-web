@@ -1,3 +1,5 @@
+import { ServicosComponent } from './pages/servicos/servicos.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -20,8 +22,8 @@ const routes: VexRoutes = [
     children: [
       { path: 'agenda', component: CalendarComponent },
       { path: 'solicitacoes-tabela', component: SolicitacoesComponent },
-      { path: 'solicitacoes', component: SolicitacoesReservasComponent }
-      
+      { path: 'solicitacoes', component: SolicitacoesReservasComponent },
+      { path: 'servicos', component: ServicosComponent }   
     ],
   },
   { path: 'login', component: LoginFinalComponent },
