@@ -18,37 +18,37 @@
         <div fxFlex="auto" fxLayout="column">
           <mat-form-field fxFlex="grow" appearance="outline">
             <mat-label>Nome Completo</mat-label>
-            <input formControlName="nome" matInput required>
+            <input formControlName="nome"  [(ngModel)]="estabelecimento.nomeProprietario" matInput required>
           </mat-form-field>
   
           <mat-form-field fxFlex="grow" appearance="outline">
             <mat-label>Nome do Estabelecimento</mat-label>
-            <input formControlName="estabelecimento" [(ngModel)]="estabelecimento.user_name" matInput required>
+            <input formControlName="estabelecimento" [(ngModel)]="estabelecimento.estabelecimento" matInput required>
           </mat-form-field>
 
           <mat-form-field fxFlex="grow" appearance="outline">
             <mat-label>E-mail</mat-label>
-            <input formControlName="email" matInput required>
+            <input formControlName="email" [(ngModel)]="estabelecimento.email" matInput required>
           </mat-form-field>
 
           <mat-form-field fxFlex="grow" appearance="outline">
             <mat-label>CPF/CNPJ</mat-label>
-            <input mask="000.000.000-00 || 00.000.000/0000-00" formControlName="cpf_cnpj" matInput required>
+            <input mask="000.000.000-00 || 00.000.000/0000-00" formControlName="cpf_cnpj"  [(ngModel)]="estabelecimento.cpf_cnpj" matInput required>
           </mat-form-field>
           <!-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$" -->
           <mat-form-field fxFlex="grow" appearance="outline">
             <mat-label>Senha</mat-label>
-            <input pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" [type]="inputType" formControlName="senha" matInput required>
+            <input pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" [type]="inputType" formControlName="senha" [(ngModel)]="estabelecimento.senha" matInput required>
             <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
               <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
               <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
             </button>
-            <mat-error *ngIf="form.get('senha').hasError('pattern')">Mínimo de seis caracteres, pelo menos uma letra e um número</mat-error>
+            <mat-error *ngIf="form.get('senha').hasError('pattern')">Mínimo de seis caracteres, pelo menos uma letra e um número sem caracters especiais</mat-error>
           </mat-form-field>
   
           <mat-form-field fxFlex="grow" appearance="outline">
             <mat-label>Confirmar Senha</mat-label>
-            <input [type]="inputType" formControlName="ConfirmarSenha" matInput required>
+            <input [type]="inputType" formControlName="confirmarSenha" [(ngModel)]="estabelecimento.confirmarSenha" matInput required>
             <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
               <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
               <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
@@ -65,7 +65,7 @@
             <mat-checkbox formControlName="politicasPrivacidade" class="caption">Li e concordo com as <u><a>Políticas de Privacidade.</a></u></mat-checkbox>
         </div>
 
-        <button style="background-color: #000C6F; color: white;" [disabled]="form.invalid" (click)="cadastrar()" color="primary" mat-raised-button type="button">
+        <button style="background-color: #000C6F; color: white;" [disabled]="form.invalid" (click)="cadastrar(estabelecimento)" color="primary" mat-raised-button type="button">
           Criar Conta
         </button>
         <p class="text-secondary text-center">

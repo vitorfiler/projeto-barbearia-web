@@ -55,6 +55,7 @@
   </div>
 </div>
 <div>
+  
   <vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
   <table mat-table matSort [dataSource]="dataSource" matSort>
 
@@ -105,7 +106,7 @@
                   'color':status.value === 'PENDENTE' ? 
                   '#DAAA00' : status.value === 'ACEITO' ? 
                   '#219653' : '#EB5757'
-                }">
+                }" [disabled] = "!solicitacao.responsavel && status.value =='PENDENTE'"> 
                 {{status.viewValue}}
               </mat-option>
             </mat-select>

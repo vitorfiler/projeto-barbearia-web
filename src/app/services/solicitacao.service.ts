@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CadSolicitacao } from '../_models/cad-solicitacao';
 import { Solicitacao } from '../_models/solicitacao';
+import { Endereco } from '../_models/endereco';
 
 @Injectable({
   providedIn: 'root'

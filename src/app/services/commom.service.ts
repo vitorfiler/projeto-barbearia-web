@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { LoginService } from './login.service';
+import { Estabelecimento } from '../_models/estabelecimento';
+import { Endereco } from '../_models/endereco';
 
 
 
@@ -14,34 +16,40 @@ import { LoginService } from './login.service';
 export class CommomService {
 
   constructor(private http: HttpClient,
-              private route: Router,
-              private snackBar: MatSnackBar,
-              private loginService: LoginService
-    ) { }
+    private route: Router,
+    private snackBar: MatSnackBar,
+    private loginService: LoginService
+  ) { }
 
-headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
-  logout(){
+  headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
+  logout() {
     localStorage.clear();
     this.route.navigate(['/login']);
   }
 
-  get(urlName: string): Observable<any>{
-     return this.http.get(`${environment.URL_API}${urlName}`,{observe: "response"});
+  get(urlName: string): Observable<any> {
+    return this.http.get(`${environment.URL_API}${urlName}`, { observe: "response" });
 
   }
 
-  post(urlName: string, body: string): Observable<any>{
-    return this.http.post(`${environment.URL_API}${urlName}`, body, { observe: "response", headers: this.headers });
+  post(urlName: string, estabelecimento: Estabelecimento): Observable<any> {
+    return this.http.post(`${environment.URL_API}${urlName}`, estabelecimento, { observe: "response", headers: this.headers });
   }
 
   recuperarSenha(email: string): Observable<any> {
-    return this.http.get(`${environment.URL_API}${environment.recuperarSenha}`, { params: {
-      email: email, }, observe: "response", headers: this.headers });
+    return this.http.get(`${environment.URL_API}${environment.recuperarSenha}`, {
+      params: {
+        email: email,
+      }, observe: "response", headers: this.headers
+    });
   }
 
   putWithParams(urlName: string, body: string, clientId: string): Observable<any> {
-    return this.http.put(`${environment.URL_API}${urlName}`, body, { params: {
-      clienteID: clientId, }, observe: "response", headers: this.headers });
+    return this.http.put(`${environment.URL_API}${urlName}`, body, {
+      params: {
+        clienteID: clientId,
+      }, observe: "response", headers: this.headers
+    });
   }
 
   delete(urlName: string): Promise<any> {
@@ -49,11 +57,11 @@ headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
     return promise
   }
 
-  validaSessao(){
-    return this.loginService.validaSessao();  
+  validaSessao() {
+    return this.loginService.validaSessao();
   }
-  
-  formatDate(date: Date){
+
+  formatDate(date: Date) {
     let day: string = date.getDate().toString();
     day = +day < 10 ? '0' + day : day;
     let month: string = (date.getMonth() + 1).toString();
@@ -61,4 +69,26 @@ headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
     let year = date.getFullYear();
     return `${year}-${month}-${day}`;
   };
+
+  //metodo para buscar cep da API viaCep
+  consultaCep(cep: string): Observable<any> {
+    this.headers.set('Access-Control-Allow-Origin', '*');
+    this.http.get(`https://cors-anywhere.herokuapp.com//viacep.com.br/ws/88058400/json`);
+    return this.http.get(`http://viacep.com.br/ws/${cep}/json`, { observe: "response", headers: this.headers });
+  }
+
+  cadastrarEndereco(endereco: Endereco): Observable<any> {
+    return this.http.post(`${environment.URL_API}/endereco`, endereco, { observe: "response" });
+  }
+
+  atualizarEstabelecimento(estabelecimento: Estabelecimento): Observable<any>{
+    return this.http.put(`${environment.URL_API}/estabelecimento`, estabelecimento, { observe: "response" });
+  }
+
+  finalizaCadastroEstabelecimento(body: string, estabelecimentoId: string): Observable<any>{
+
+    return this.http.put(`${environment.URL_API}/estabelecimento/finaliza-cadastro`, body, {params: {
+      estabelecimento_ID: estabelecimentoId
+    }, observe: "response" });
+  }
 }
