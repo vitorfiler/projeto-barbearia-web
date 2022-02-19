@@ -266,7 +266,7 @@ export class SolicitacoesModal implements OnInit,AfterViewInit  {
 	filteredOptions: Observable<Cliente[]>;
 	myControl = new FormControl();
 	public carregando = false;
-	clienteIdSelecionado: any;
+
 	textoAutoComplete = '';
 
 	constructor(
@@ -286,8 +286,6 @@ export class SolicitacoesModal implements OnInit,AfterViewInit  {
 	}
 	ngOnInit(): void {
 
-		// this.buscarClientesAtivos()
-
 		this.filteredOptions = this.myControl.valueChanges
 		.pipe(
 		  startWith(''),
@@ -297,7 +295,6 @@ export class SolicitacoesModal implements OnInit,AfterViewInit  {
 		if (this.solicitacaoToEdit) {
 			this.solicitacao = new Solicitacao(this.solicitacaoToEdit.solicitacao)
 		}
-		console.log(this.solicitacao);
 
 		this.form = this.fb.group({
 			nomeServico: ['', Validators.required],
@@ -310,28 +307,16 @@ export class SolicitacoesModal implements OnInit,AfterViewInit  {
 		});
 	}
 
-	getNomeCliente(){
-		var cliente = this._filterById(this.clienteIdSelecionado);
-		this.cliente = cliente;
-		console.log("clientezinho "+ JSON.stringify(this.cliente));
-	}
+	getTitle(clienteId) {
+		if (!clienteId) return '';
 
-	filtrar(clienteIdSelecionado){
-		console.log("teste");
-		console.log(clienteIdSelecionado);
-		
-		
-	}
-	getTitle(clienteId: string) {
 		if(this.clientes){
 			return this.clientes?.find(cliente => cliente?.id === clienteId)?.nome;
 		}
-		// else{
-		// 	return this.clientes[0].nome
-		// }
 	}
 	filtrarClientes(){
 		this.carregando = true
+
 		let filtro = this.form.get('cliente').value
 		this.clientesService.filtrarCliente(filtro).subscribe(response =>{
 			this.clientes = response.body
@@ -377,20 +362,14 @@ export class SolicitacoesModal implements OnInit,AfterViewInit  {
 	  }
 
 	enviarSolicitacao(solicitacao: Solicitacao) {
-		console.log(this.cliente.nome);
-		console.log("teste");
-		console.log(this.clienteIdSelecionado);
-		
-		solicitacao.clienteID = this.clienteIdSelecionado;
+		solicitacao.clienteID = this.form.get('cliente').value;
 		solicitacao.estabelecimentoID = this.estabelecimentoID;
 
 		solicitacao.id ? this.alterar(solicitacao) : this.cadastrar(solicitacao);
 	}
 
 	cadastrar(solicitacao: Solicitacao) {
-		// this.clientesService.buscarClientePorId(this.cliente.id.toString()).subscribe(response=>{
-		// 	console.log(response);
-		// })
+
 		let dtAtendimento = this.form.get('dtAtendimento').value
 		let mes = (dtAtendimento.getMonth() + 1)
 		let dia = dtAtendimento.getDate()
