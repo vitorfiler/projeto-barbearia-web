@@ -416,7 +416,7 @@ export class ModalSelectStatusSolicitacaoComponent implements OnInit {
 		this.form = this.fb.group({
 			responsavel: ['', Validators.required],
 		});
-		if (this.solicitacao.status == 'PENDENTE') {
+		if (this.solicitacao.status == 'PENDENTE' || this.solicitacao.status == 'RECUSADO') {
 			this.form = this.fb.group({
 				responsavel: [''],
 			});
