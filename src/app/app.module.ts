@@ -58,6 +58,7 @@ import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.comp
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { PainelComponent } from './pages/painel/painel.component';
 import { CaixaComponent } from './pages/caixa/caixa.component';
+import { PlanosModalComponent } from './pages/modais/planos/planos-modal.component';
 
 
 
@@ -84,7 +85,9 @@ import { CaixaComponent } from './pages/caixa/caixa.component';
     ComentariosComponent,
     ConfiguracoesComponent,
     AgendaComponent,
-    PainelComponent
+    PainelComponent,
+    CadastroEstabelecimentoModal,
+    PlanosModalComponent
 
   ],
   imports: [

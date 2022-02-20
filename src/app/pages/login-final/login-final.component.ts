@@ -12,6 +12,7 @@ import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { MatDialog } from '@angular/material/dialog';
+import { PlanosModalComponent } from '../modais/planos/planos-modal.component';
 
 @Component({
 	selector: 'vex-login-final',
@@ -62,9 +63,17 @@ export class LoginFinalComponent implements OnInit {
 		if (!cadastroCompleto) {
 			const dialogRef = this.dialog.open(CadastroEstabelecimentoModal);
 			dialogRef.afterClosed().subscribe(result => {
-				console.log(`Dialog result: ${result}`);	
+				console.log(`Dialog result: ${result}`);
+				this.abrirModalPlanos();
 			});
 		}
+	}
+	// Metodo para abrir modal de planos
+	abrirModalPlanos() {
+		const dialogRef = this.dialog.open(PlanosModalComponent);
+		dialogRef.afterClosed().subscribe(result => {
+			console.log(`Dialog result: ${result}`);
+		});
 	}
 
 	login() {
@@ -74,7 +83,6 @@ export class LoginFinalComponent implements OnInit {
 		return this.loginService
 			.login(username, password)
 			.subscribe(response => {
-
 				localStorage.setItem("currentUser", JSON.stringify(response.body.estabelecimento))
 				localStorage.setItem("token", response.body.token)
 				localStorage.setItem("estabelecimento_ID", response.body.estabelecimento_ID)
@@ -82,8 +90,9 @@ export class LoginFinalComponent implements OnInit {
 				this.router.navigate(['/']);
 				this.MostrarModalCadastroCompleto()
 				this.logando = false;
-
-
+				if (!response.body.planoID && response.body.cadastroCompleto) {
+					this.abrirModalPlanos();
+				}
 			},
 				(error) => {
 					this.logando = false;
