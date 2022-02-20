@@ -55,17 +55,18 @@ export class CadastroEstabelecimentoModal implements OnInit {
 	confirmarcadastro(endereco: Endereco) {
 		// Subscribe
 		this.commomService.cadastrarEndereco(endereco).subscribe(response => {
-			console.log(response);
+			
 			endereco = response.body;
 			const body: any = {
 				enderecoID: endereco.id,
 				cadastroCompleto: true
 			}
 			this.commomService.finalizaCadastroEstabelecimento(body, this.estabelecimentoID).subscribe(data => {
-				console.log(data);
+			this.snackbar.open(MessagesSnackBar.CADASTRO_CONCLUIDO, 'Fechar', { duration: 4000 })
 			})
 		}, (error) => {
 			console.log(error)
+			this.snackbar.open(MessagesSnackBar.CADASTRO_CONCLUIDO_ERRO, 'Fechar', {duration: 4000})
 		})
 	}
 
