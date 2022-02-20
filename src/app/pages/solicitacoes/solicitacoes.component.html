@@ -102,7 +102,7 @@
             <mat-label>Status</mat-label>
             <mat-select #select [(ngModel)]="solicitacao.status" name="status">
               <mat-option *ngFor="let status of status" [value]="status.value"
-                (click)='openEditStatus(solicitacao.id, solicitacao.status)' [ngStyle]="{
+                (click)='openEditStatus(solicitacao.id)' [ngStyle]="{
                   'color':status.value === 'PENDENTE' ? 
                   '#DAAA00' : status.value === 'ACEITO' ? 
                   '#219653' : '#EB5757'

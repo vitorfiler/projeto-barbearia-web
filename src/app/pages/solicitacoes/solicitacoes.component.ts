@@ -1,11 +1,11 @@
+import { ClientesService } from './../../services/clientes.service';
 import { Solicitacao } from './../../_models/solicitacao';
 import { MatTableDataSource } from '@angular/material/table';
 import { SolicitacaoService } from './../../services/solicitacao.service';
-import { Component, Inject, Input, LOCALE_ID, OnInit, Optional, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, Inject, Input, LOCALE_ID, OnInit, Optional, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
-import { CadSolicitacao } from 'src/app/_models/cad-solicitacao';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateAdapter } from '@angular/material/core';
@@ -19,6 +19,10 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { Status } from 'src/app/_models/status';
 import { EventEmitterService } from 'src/app/services/event.service';
+import { Cliente } from 'src/app/_models/cliente';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
 registerLocaleData(localePt);
 
 @Component({
@@ -75,14 +79,9 @@ export class SolicitacoesComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		//let cadastroCompleto = localStorage.getItem('cadastroCompleto')
-		EventEmitterService.get('buscar').subscribe(()=>this.listar())
+		EventEmitterService.get('buscar').subscribe(() => this.listar())
 		this.inicializarFiltro();
 
-		// if(!cadastroCompleto && this.router.url == '/solicitacoes'){
-		// 	this.openDelete(undefined)
-		// 	console.log(`aqui é o teste ${this.router.url}`)
-		// }
 	}
 
 	clearForm() {
@@ -142,6 +141,10 @@ export class SolicitacoesComponent implements OnInit {
 		this.carregando = true;
 		this.solicitacao = this.solicitacoes.find(s => s.id == solicitacaoId);
 
+		if (this.solicitacao.status == 'PENDENTE') {
+			this.solicitacao.responsavel = "";
+		}
+
 		this.solicitacaoService.alterarSolicitacao(this.solicitacao).subscribe(() => {
 			this.snackbar.open(MessagesSnackBar.SOLICITACAO_STATUS_SUCESSO, 'Close', { duration: 4000 });
 			this.carregando = false;
@@ -163,15 +166,19 @@ export class SolicitacoesComponent implements OnInit {
 			setTimeout(() => {
 				this.dataSource.sort = this.matSort
 			});
+		}, (error)=>{
+			console.log(error);
+			this.carregando = false;
 		})
 	}
 
-	openEditStatus(solicitacaoId: string, status) {
-		console.log(solicitacaoId);
+	openEditStatus(solicitacaoId: number) {
 
-		const dialogRef = this.dialog.open(ModalSelectStatusSolicitacaoComponent);
+		this.solicitacao = this.solicitacoes.find(s => s.id == solicitacaoId);
+		const dialogRef = this.dialog.open(ModalSelectStatusSolicitacaoComponent, {
+			data: this.solicitacao
+		});
 		dialogRef.afterClosed().subscribe(result => {
-			console.log(`Dialog result: ${result}`);
 			if (result) {
 				this.alterarStatus(solicitacaoId);
 			}
@@ -186,8 +193,7 @@ export class SolicitacoesComponent implements OnInit {
 			data: { solicitacao: solicitacaoID }
 		});
 		dialogRef.afterClosed().subscribe(result => {
-			console.log(`Dialog result: ${result}`);
-			if(result){
+			if (result) {
 				this.carregando = true;
 			}
 		});
@@ -195,10 +201,9 @@ export class SolicitacoesComponent implements OnInit {
 
 	openModalEditarCadastrar(isCadastrar: boolean, idSolicitacao?: number) {
 		let dialogRef;
-		let solicitacao = this.solicitacoes.find(s=>s.id== idSolicitacao)
-		console.log(solicitacao);
-		
-		if(isCadastrar){
+		let solicitacao = this.solicitacoes.find(s => s.id == idSolicitacao)
+
+		if (isCadastrar) {
 			dialogRef = this.dialog.open(SolicitacoesModal)
 		}else{
 			dialogRef = this.dialog.open(SolicitacoesModal, {
@@ -206,8 +211,7 @@ export class SolicitacoesComponent implements OnInit {
 			});
 		}
 		dialogRef.afterClosed().subscribe(result => {
-			console.log(`Dialog result: ${result}`);
-			if(result){
+			if (result) {
 				this.carregando = true;
 			}
 		});
@@ -227,7 +231,7 @@ export class SolicitacoesComponent implements OnInit {
 	]
 })
 
-export class SolicitacoesModal implements OnInit {
+export class SolicitacoesModal implements OnInit,AfterViewInit  {
 
 	// Valores de campo de Status
 	status: any[] = [
@@ -243,40 +247,114 @@ export class SolicitacoesModal implements OnInit {
 	idSolicitacao = localStorage.getItem('idSolicitacao');
 	legendaBotao = 'Cadastrar';
 	estabelecimentoID = 1;
-	clienteID = 4;
+	cliente = new Cliente();
+	clientes = this.buscarClientesAtivos();
+	filteredOptions: Observable<Cliente[]>;
+	myControl = new FormControl();
+	public carregando = false;
+
+	textoAutoComplete = '';
 
 	constructor(
 		private fb: FormBuilder,
 		private solicitacaoService: SolicitacaoService,
+		private clientesService: ClientesService,
 		private snackbar: MatSnackBar,
 		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacaoToEdit: any) {
 			this.legendaBotao = solicitacaoToEdit ? 'Alterar' : 'Cadastrar';
 	}
+	ngAfterViewInit(): void {
+		this.filteredOptions = this.myControl.valueChanges
+		.pipe(
+		  startWith(''),
+		  map(value => this._filter(value))
+		);
+	}
 	ngOnInit(): void {
 
-		if(this.solicitacaoToEdit){
+		this.filteredOptions = this.myControl.valueChanges
+		.pipe(
+		  startWith(''),
+		  map(value => this._filter(value))
+		);
+
+		if (this.solicitacaoToEdit) {
 			this.solicitacao = new Solicitacao(this.solicitacaoToEdit.solicitacao)
 		}
-		console.log(this.solicitacao);
-		
+
 		this.form = this.fb.group({
 			nomeServico: ['', Validators.required],
 			tempoEstimado: ['', Validators.required],
 			valorServico: ['', Validators.required],
 			dtAtendimento: ['', Validators.required],
-			responsavel: [''],
-			// status: ['', Validators.required]
+			responsavel: ['', Validators.required],
+			cliente: ['', Validators.required],
+			status: ['', Validators.required]
 		});
 	}
 
+	getTitle(clienteId) {
+		if (!clienteId) return '';
+
+		if(this.clientes){
+			return this.clientes?.find(cliente => cliente?.id === clienteId)?.nome;
+		}
+	}
+	filtrarClientes(){
+		this.carregando = true
+
+		let filtro = this.form.get('cliente').value
+		this.clientesService.filtrarCliente(filtro).subscribe(response =>{
+			this.clientes = response.body
+			this.carregando = false;
+			this.filteredOptions = this.myControl.valueChanges
+			.pipe(
+			  startWith(''),
+			  map(value => this._filter(value))
+			);
+			
+		}, (error)=>{
+			this.carregando = false;
+			console.log(error);
+		})
+	}
+
+	buscarClientesAtivos(): any{
+		this.carregando = true
+		this.clientesService.buscarClientesAtivos().subscribe(response =>{
+			this.carregando = false;
+			this.clientes = response.body
+			return this.clientes;
+		}, (error)=>{
+			this.carregando = false;
+			console.log(error);
+		})
+	}
+
+	private _filter(value: string): Cliente[] {
+		if (typeof value === "string") {
+			// do something
+			if(this.clientes == undefined) return;
+			if (value == undefined) return this.clientes;
+			return this.clientes.filter(x => x.nome.toLowerCase().includes(value.toLowerCase()));
+		}
+	  }
+	
+	  private _filterById(value: number): Cliente {
+		if(this.clientes == undefined) return;
+		if (value == undefined) return this.clientes;
+		return this.clientes.filter(x => x.id == value);
+	  }
+
 	enviarSolicitacao(solicitacao: Solicitacao) {
-		solicitacao.clienteID = this.clienteID;
+		solicitacao.clienteID = this.form.get('cliente').value;
 		solicitacao.estabelecimentoID = this.estabelecimentoID;
 
 		solicitacao.id ? this.alterar(solicitacao) : this.cadastrar(solicitacao);
 	}
 
 	cadastrar(solicitacao: Solicitacao) {
+
 		let dtAtendimento = this.form.get('dtAtendimento').value
 		let mes = (dtAtendimento.getMonth() + 1)
 		let dia = dtAtendimento.getDate()
@@ -298,7 +376,6 @@ export class SolicitacoesModal implements OnInit {
 
 		// Subscribe
 		this.solicitacaoService.cadastrarSolicitacao(solicitacao).subscribe(response => {
-			console.log(response);
 			EventEmitterService.get('buscar').emit();
 			this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_SUCESSO, 'Fechar', { duration: 4000 })
 		}, (error) => {
@@ -319,7 +396,6 @@ export class SolicitacoesModal implements OnInit {
 		
 		// Subscribe
 		this.solicitacaoService.alterarSolicitacao(solicitacao).subscribe(response => {
-			console.log(response);
 			EventEmitterService.get('buscar').emit();
 			this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_SUCESSO, 'Fechar', { duration: 4000 })
 		}, (error) => {
@@ -327,13 +403,39 @@ export class SolicitacoesModal implements OnInit {
 			this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_ERRO, 'Fechar', { duration: 4000 })
 		})
 	}
+
+
 }
 
 @Component({
 	selector: 'modal-select-status-solicitacao',
 	templateUrl: 'modal-select-status-solicitacao.html',
 })
-export class ModalSelectStatusSolicitacaoComponent { }
+export class ModalSelectStatusSolicitacaoComponent implements OnInit {
+	form: FormGroup;
+	mostraFormulario: boolean = false;
+	constructor(
+		private fb: FormBuilder,
+		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacao: any) { // abstrair objeto de outra classe
+
+
+	}
+	ngOnInit(): void {
+		this.form = this.fb.group({
+			responsavel: ['', Validators.required],
+		});
+		if (this.solicitacao.status == 'PENDENTE' || this.solicitacao.status == 'RECUSADO') {
+			this.form = this.fb.group({
+				responsavel: [''],
+			});
+			this.mostraFormulario = false;
+		}
+		else if (this.solicitacao.status == 'ACEITO') {
+			this.mostraFormulario = true;
+		}
+	}
+
+}
 
 @Component({
 	selector: 'modal-deletar-solicitacao',
@@ -348,9 +450,8 @@ export class ModalDeletarSolicitacaoComponent {
 
 	deletar() {
 		// Subscribe
-		console.log(this.solicitacaoID);
+
 		this.solicitacaoService.deleteSolicitacao(this.solicitacaoID.solicitacao).subscribe(response => {
-			console.log(response);
 			EventEmitterService.get('buscar').emit();
 			this.snackbar.open(MessagesSnackBar.DELETAR_SOLICITACAO_SUCESSO, 'Fechar', { duration: 4000 })
 		}, (error) => {

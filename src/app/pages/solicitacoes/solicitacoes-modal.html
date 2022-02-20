@@ -1,12 +1,36 @@
+<ng-template #customLoadingTemplate>
+</ng-template>
+<ngx-loading [show]="carregando" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+</ngx-loading>
 <div @fadeInUp fxFlex="auto" [formGroup]="form">
   <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
     <h2 class="title m-0">Novo Agendamento</h2>
   </div>
-
+ 
+ 
   <div class="px-6 py-4" fxLayout="column">
     <mat-form-field fxFlex="grow">
+      <mat-label>Cliente</mat-label>
+      <input type="text"
+             placeholder="nome do cliente"
+             aria-label="Number"
+             formControlName="cliente"
+             [formControl] = "myControl" 
+             [matAutocomplete]="auto"
+             [textContent]="textoAutoComplete"
+             matInput
+             (keypress)="filtrarClientes()" required>
+      <mat-autocomplete  #auto="matAutocomplete" [displayWith]="getTitle.bind(this)">
+        <mat-option *ngFor="let cliente of filteredOptions | async" [value]="cliente.id">
+          {{cliente.nome}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  
+
+    <mat-form-field fxFlex="grow">
       <mat-label>Serviço</mat-label>
-      <input matInput formControlName="nomeServico" [(ngModel)]="solicitacao.nomeServico" required>
+      <input matInput (change)="filtrarClientes()" formControlName="nomeServico" [(ngModel)]="solicitacao.nomeServico" required>
     </mat-form-field>
 
     <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
