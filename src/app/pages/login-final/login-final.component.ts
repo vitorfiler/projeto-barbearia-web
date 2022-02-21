@@ -62,9 +62,8 @@ export class LoginFinalComponent implements OnInit {
 		if (!cadastroCompleto) {
 			const dialogRef = this.dialog.open(CadastroEstabelecimentoModal);
 			dialogRef.afterClosed().subscribe(result => {
-				console.log(`Dialog result: ${result}`);
+				console.log(`Dialog result: ${result}`);	
 			});
-
 		}
 	}
 
