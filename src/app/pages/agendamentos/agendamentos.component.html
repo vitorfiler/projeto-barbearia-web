@@ -1,0 +1,15 @@
+<div class="agendamentos">
+    <h1 *ngIf="isAgendamentos"> Meus Agendamentos </h1>
+    <h1 *ngIf="!isAgendamentos"> Minhas Reservas </h1>
+</div>
+    
+<mat-tab-group (selectedTabChange)="trocaTitulo($event)">
+    <mat-tab label="Agendamentos">
+        <vex-listagem-agendamentos></vex-listagem-agendamentos>
+    </mat-tab>
+    <mat-tab label="Reservas">
+        <vex-reservas></vex-reservas>    
+    </mat-tab>
+</mat-tab-group>
+
+
