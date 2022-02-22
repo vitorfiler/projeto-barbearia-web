@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FluxoDeCaixa implements OnInit {
 
-  aba: String = '';
   caixa: boolean = false;
   novaVenda: boolean = true;
   historicoVenda: boolean = false;
