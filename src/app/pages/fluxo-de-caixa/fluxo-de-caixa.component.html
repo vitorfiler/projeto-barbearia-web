@@ -1,13 +1,13 @@
 <div class="fluxoCaixa">
     <h1 *ngIf="caixa"> Caixa </h1>
-    <h1 *ngIf="novaVenda"> Novas Vendas </h1>
+    <h1 *ngIf="novaVenda"> Nova Venda </h1>
     <h1 *ngIf="historicoVenda"> Histórico de Vendas</h1>
     
 </div>
     
 <mat-tab-group (selectedTabChange)="alterarTitulo($event)">
   
-        <mat-tab label="Novas Vendas" >
+        <mat-tab label="Nova Venda" >
            <vex-nova-venda></vex-nova-venda>
         </mat-tab>
 
