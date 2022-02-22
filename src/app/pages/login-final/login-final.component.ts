@@ -56,7 +56,7 @@ export class LoginFinalComponent implements OnInit {
 		});
 
 	}
-	//metodo para exibir o modal na tela de solicitações, assim que fizer o login esse modal sera apresentado
+	//metodo para exibir o modal na tela de agendamentos, assim que fizer o login esse modal sera apresentado
 	MostrarModalCadastroCompleto() {
 		let cadastroCompleto = JSON.parse(localStorage.getItem('cadastroCompleto'))
 		if (!cadastroCompleto) {

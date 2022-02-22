@@ -1,8 +1,8 @@
 import { Cliente } from './cliente';
 
-export class Solicitacao{
+export class Agendamento{
     id: number;
-    cdSolicitacao: string;
+    cdAgendamento: string;
     valor: number;
     nomeServico: string;
     tempoEstimado: string;
@@ -13,8 +13,8 @@ export class Solicitacao{
     estabelecimentoID: number;
     cliente: Cliente; 
 
-    constructor(solicitacao: Solicitacao= {} as Solicitacao){
-        Object.assign(this, solicitacao);
+    constructor(agendamento: Agendamento= {} as Agendamento){
+        Object.assign(this, agendamento);
     }
 }
 

@@ -93,9 +93,9 @@ export class AppComponent implements OnInit{
       // icon: icContactSupport
       // icon: icDateRange
       {
-        label: 'Solicitações',
+        label: 'Agendamentos',
         type: 'link',
-        route: '/solicitacoes',
+        route: '/agendamentos',
         icon: icAssigment
       },
       {
