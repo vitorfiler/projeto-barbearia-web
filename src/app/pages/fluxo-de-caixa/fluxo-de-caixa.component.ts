@@ -9,8 +9,8 @@ export class FluxoDeCaixa implements OnInit {
 
   aba: String = '';
   caixa: boolean = false;
-  novaVenda: boolean = false;
-  historicoVenda: boolean = true;
+  novaVenda: boolean = true;
+  historicoVenda: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -20,21 +20,21 @@ export class FluxoDeCaixa implements OnInit {
     
     switch ($event.index) {
       case 0:
+        this.novaVenda = true;
+        this.caixa = false;
         this.historicoVenda = false;
-        this.novaVenda = false;
-        this.caixa = true;
         break;
     
       case 1:
-        this.caixa = false;
-        this.novaVenda = true;
+        this.novaVenda = false;
+        this.caixa = true;
         this.historicoVenda = false;
         break;
 
       case 2:
-        this.historicoVenda = true;
-        this.caixa = false;
         this.novaVenda = false;
+        this.caixa = false;
+        this.historicoVenda = true;
         break;
       default:
         break;
