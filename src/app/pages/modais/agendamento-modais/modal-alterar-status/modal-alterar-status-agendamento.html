@@ -1,9 +1,9 @@
 <mat-dialog-content class="mat-typography">
-    <p >Tem certeza que deseja mudar o status da Solicitação?</p>
+    <p >Tem certeza que deseja mudar o status do agendamento?</p>
   <div [formGroup]="form" *ngIf="mostraFormulario" class="px-6 py-4" fxLayout="column">
     <mat-form-field>
         <mat-label>Informe o Responsável</mat-label>
-        <input matInput formControlName="responsavel" [(ngModel)]="solicitacao.responsavel" required>
+        <input matInput formControlName="responsavel" [(ngModel)]="agendamento.responsavel" required>
       </mat-form-field>
     </div>
 </mat-dialog-content>

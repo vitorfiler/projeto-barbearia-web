@@ -42,8 +42,6 @@ import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ModalDeletarSolicitacaoComponent, ModalSelectStatusSolicitacaoComponent, SolicitacoesComponent, SolicitacoesModal } from './pages/solicitacoes/solicitacoes.component';
-import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
 import { ReservasComponent } from './pages/reservas/reservas.component';
 import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -58,6 +56,11 @@ import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.comp
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { PainelComponent } from './pages/painel/painel.component';
 import { CaixaComponent } from './pages/caixa/caixa.component';
+import { ModalDeletarAgendamento } from './pages/modais/agendamento-modais/modal-deletar/modal-deletar-agendamento';
+import { ModalAlterarStatusAgendamento } from './pages/modais/agendamento-modais/modal-alterar-status/modal-alterar-status-agendamento';
+import { ModalCadastrarEditarAgendamento } from './pages/modais/agendamento-modais/modal-cadastrar-editar/modal-cadastrar-editar-agendamento';
+import { ListagemAgendamentosComponent } from './pages/agendamentos/listagem-agendamentos/listagem-agendamentos.component';
+import { AgendamentosComponent } from './pages/agendamentos/agendamentos.component';
 
 
 
@@ -69,12 +72,12 @@ import { CaixaComponent } from './pages/caixa/caixa.component';
     RecuperarSenhaComponent,
     RedefinirSenhaComponent,
     RecuperarSenhaSucessoComponent,
-    SolicitacoesComponent,
-    SolicitacoesReservasComponent,
+    ListagemAgendamentosComponent,
+    AgendamentosComponent,
     ReservasComponent,
-    SolicitacoesModal,
-    ModalSelectStatusSolicitacaoComponent,
-    ModalDeletarSolicitacaoComponent,
+    ModalCadastrarEditarAgendamento,
+    ModalAlterarStatusAgendamento,
+    ModalDeletarAgendamento,
     ServicosComponent,
     ListagemServicosComponent,
     ListagemProdutosComponent,

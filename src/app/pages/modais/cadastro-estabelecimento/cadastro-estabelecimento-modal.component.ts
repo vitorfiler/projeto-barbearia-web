@@ -35,8 +35,8 @@ export class CadastroEstabelecimentoModal implements OnInit {
 		private commomService: CommomService,
 		private snackbar: MatSnackBar,
 		private http: HttpClient,
-		@Optional() @Inject(MAT_DIALOG_DATA) public solicitacaoToEdit: any) {
-		this.legendaBotao = solicitacaoToEdit ? 'Alterar' : 'Cadastrar';
+		@Optional() @Inject(MAT_DIALOG_DATA) public agendamentoToEdit: any) {
+		this.legendaBotao = agendamentoToEdit ? 'Alterar' : 'Cadastrar';
 	}
 	ngOnInit() {
 
@@ -51,21 +51,22 @@ export class CadastroEstabelecimentoModal implements OnInit {
 		});
 	}
 
-	//metodo para envio de confirmação de cadastro(formulario aberto no modal da tela de solicitações)
+	//metodo para envio de confirmação de cadastro(formulario aberto no modal da tela de agendamentos)
 	confirmarcadastro(endereco: Endereco) {
 		// Subscribe
 		this.commomService.cadastrarEndereco(endereco).subscribe(response => {
-			console.log(response);
+			
 			endereco = response.body;
 			const body: any = {
 				enderecoID: endereco.id,
 				cadastroCompleto: true
 			}
 			this.commomService.finalizaCadastroEstabelecimento(body, this.estabelecimentoID).subscribe(data => {
-				console.log(data);
+			this.snackbar.open(MessagesSnackBar.CADASTRO_CONCLUIDO, 'Fechar', { duration: 4000 })
 			})
 		}, (error) => {
 			console.log(error)
+			this.snackbar.open(MessagesSnackBar.CADASTRO_CONCLUIDO_ERRO, 'Fechar', {duration: 4000})
 		})
 	}
 

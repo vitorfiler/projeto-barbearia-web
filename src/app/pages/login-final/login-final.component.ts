@@ -56,19 +56,14 @@ export class LoginFinalComponent implements OnInit {
 		});
 
 	}
-	//metodo para exibir o modal na tela de solicitações, assim que fizer o login esse modal sera apresentado
+	//metodo para exibir o modal na tela de agendamentos, assim que fizer o login esse modal sera apresentado
 	MostrarModalCadastroCompleto() {
 		let cadastroCompleto = JSON.parse(localStorage.getItem('cadastroCompleto'))
 		if (!cadastroCompleto) {
 			const dialogRef = this.dialog.open(CadastroEstabelecimentoModal);
 			dialogRef.afterClosed().subscribe(result => {
-				console.log(`Dialog result: ${result}`);
-				this.snackbar.open(MessagesSnackBar.CADASTRO_CONCLUIDO, 'Fechar', { duration: 4000 })
-			},(error) =>{
-				console.log(error);
-				this.snackbar.open(MessagesSnackBar.CADASTRO_CONCLUIDO_ERRO, 'Fechar', {duration: 4000})
+				console.log(`Dialog result: ${result}`);	
 			});
-
 		}
 	}
 

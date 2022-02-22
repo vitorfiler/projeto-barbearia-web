@@ -48,8 +48,7 @@
         <button fxFlex="grow" mat-stroked-button color="primary" (click)="clearForm()">Limpar</button>
       </div>
       <div class="col-md-2">
-        <button fxFlex="grow" mat-raised-button color="primary" (click)="openModalEditarCadastrar(true)">Nova
-          solicitacao</button>
+        <button fxFlex="grow" mat-raised-button color="primary" (click)="abrirModalEditarCadastrar(true)">Adicionar</button>
       </div>
     </div>
   </div>
@@ -62,47 +61,47 @@
       <!-- Coluna Cliente -->
       <ng-container matColumnDef="cliente">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Cliente </th>
-        <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.cliente.nome}} </td>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.cliente.nome}} </td>
       </ng-container>
 
       <!-- Coluna Serviços -->
       <ng-container matColumnDef="nomeServico">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef> Serviços </th>
-        <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.nomeServico}} </td>
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Serviço </th>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.nomeServico}} </td>
       </ng-container>
 
       <!-- Coluna Tempo -->
       <ng-container matColumnDef="tempoEstimado">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Tempo </th>
-        <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.tempoEstimado}} </td>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.tempoEstimado}} </td>
       </ng-container>
 
       <!-- Coluna Valor -->
       <ng-container matColumnDef="valor">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Valor </th>
-        <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.valor |currency:'R$':'symbol-narrow'}} </td>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.valor |currency:'R$':'symbol-narrow'}} </td>
       </ng-container>
 
       <!-- Coluna Data -->
       <ng-container matColumnDef="dtAtendimento">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Data / Hora</th>
-        <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.dtAtendimento | date:'dd-MM-yyyy hh:MM'}} </td>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.dtAtendimento | date:'dd-MM-yyyy hh:MM'}} </td>
       </ng-container>
 
       <!-- Coluna Responsável -->
       <ng-container matColumnDef="responsavel">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Responsável </th>
-        <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.responsavel}} </td>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.responsavel}} </td>
       </ng-container>
 
       <ng-container matColumnDef="status">
         <th class="colum" mat-header-cell mat-sort-header *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let solicitacao">
+        <td mat-cell *matCellDef="let agendamento">
           <mat-form-field style="color: red!important" appearance="standard">
             <mat-label>Status</mat-label>
-            <mat-select #select [(ngModel)]="solicitacao.status" name="status">
+            <mat-select #select [(ngModel)]="agendamento.status" name="status">
               <mat-option *ngFor="let status of status" [value]="status.value"
-                (click)='openEditStatus(solicitacao.id)' [ngStyle]="{
+                (click)='abrirModalTrocaStatus(agendamento.id)' [ngStyle]="{
                   'color':status.value === 'PENDENTE' ? 
                   '#DAAA00' : status.value === 'ACEITO' ? 
                   '#219653' : '#EB5757'
@@ -116,12 +115,12 @@
 
       <ng-container matColumnDef="acoes">
         <th class="colum" mat-header-cell *matHeaderCellDef> Ações </th>
-        <td mat-cell *matCellDef="let solicitacao">
-          <button mat-icon-button color="primary" (click)="openModalEditarCadastrar(false, solicitacao.id)">
+        <td mat-cell *matCellDef="let agendamento">
+          <button mat-icon-button color="primary" (click)="abrirModalEditarCadastrar(false, agendamento.id)">
             <mat-icon>edit</mat-icon>
           </button>
 
-          <button mat-icon-button color="warn" (click)="openDelete(solicitacao.id)">
+          <button mat-icon-button color="warn" (click)="abrirModalDeletar(agendamento.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
