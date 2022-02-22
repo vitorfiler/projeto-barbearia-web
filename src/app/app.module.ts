@@ -55,13 +55,15 @@ import { ComentariosComponent } from './pages/comentarios/comentarios.component'
 import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { PainelComponent } from './pages/painel/painel.component';
-import { CaixaComponent } from './pages/caixa/caixa.component';
+import { FluxoDeCaixa } from './pages/fluxo-de-caixa/fluxo-de-caixa.component';
 import { ModalDeletarAgendamento } from './pages/modais/agendamento-modais/modal-deletar/modal-deletar-agendamento';
 import { ModalAlterarStatusAgendamento } from './pages/modais/agendamento-modais/modal-alterar-status/modal-alterar-status-agendamento';
 import { ModalCadastrarEditarAgendamento } from './pages/modais/agendamento-modais/modal-cadastrar-editar/modal-cadastrar-editar-agendamento';
 import { ListagemAgendamentosComponent } from './pages/agendamentos/listagem-agendamentos/listagem-agendamentos.component';
 import { AgendamentosComponent } from './pages/agendamentos/agendamentos.component';
-
+import { CaixaComponent } from './pages/fluxo-de-caixa/caixa/caixa.component';
+import { NovaVendaComponent } from './pages/fluxo-de-caixa/nova-venda/nova-venda.component';
+import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-venda/historico-de-venda.component';
 
 
 @NgModule({
@@ -83,11 +85,16 @@ import { AgendamentosComponent } from './pages/agendamentos/agendamentos.compone
     ListagemProdutosComponent,
     ListagemPromocoesComponent,
     CadastroEstabelecimentoModal,
-    CaixaComponent,
+    FluxoDeCaixa,
     ComentariosComponent,
     ConfiguracoesComponent,
     AgendaComponent,
-    PainelComponent
+    PainelComponent,
+    CaixaComponent,
+    NovaVendaComponent,
+    HistoricoDeVendaComponent,
+
+
 
   ],
   imports: [
