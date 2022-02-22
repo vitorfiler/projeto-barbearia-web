@@ -1,74 +1,86 @@
-<div @fadeInUp fxFlex="auto" [formGroup]="form">
   <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
-    <h2 class="title m-0">Complete Seu Cadastro</h2>
+    <h2 class="title m-0" mat-dialog-tittle>Complete Seu Cadastro</h2>
   </div>
-
-  <div class="container py-gutter">
-    <div class="card overflow-hidden">
-      <div class="h-24 relative overflow-hidden">
-        <img class="w-full h-full object-cover" src="assets/img/demo/landscape.jpg">
-        <div class="absolute bg-contrast-black opacity-25 top-0 right-0 bottom-0 left-0 w-full h-full z-0"></div>
-  
+<mat-dialog-content class="mat-typography">
+  <div @fadeInUp fxFlex="auto" [formGroup]="form">
+    <!-- <div class="container py-gutter">
+      <div class="card overflow-hidden">
+        <div class="h-24 relative overflow-hidden">
+          <img class="w-full h-full object-cover" src="assets/img/demo/landscape.jpg">
+          <div class="absolute bg-contrast-black opacity-25 top-0 right-0 bottom-0 left-0 w-full h-full z-0"></div>
+          <img class="avatar h-24 w-24 absolute top-6 ltr:left-4 rtl:right-4 sm:hidden" src="../../../../assets/img/demo/mountain-cinematic.jpg">
+        </div>
+        <div class="z-10 relative -mt-16 px-gutter flex items-center">
+          <img @scaleIn
+           class="avatar h-24 w-24 flex-none align-start hidden sm:block border-3 border-white"
+           src="../../../../assets/img/demo/logo.svg">
+        </div>
+      </div>
+    </div> -->
+    <div class="container py-gutter">
+      <div class="card overflow-hidden">
+        <div class="h-32 relative overflow-hidden">
+          <!-- <img class="w-full h-full object-cover" src="assets/img/demo/landscape.jpg"> -->
+          <div class="absolute bg-contrast-black opacity-25 top-0 right-0 bottom-0 left-0 w-full h-full z-0"></div>
+          <div class="h-32 relative overflow-hidden">
+            <mat-icon>add_a_photo</mat-icon>
+            <!-- <img class="avatar h-24 w-24 absolute top-6 ltr:left-4 rtl:right-4 sm:block border-3 border-white"
+               src="../../../../assets/img/demo/mountain-cinematic.jpg"> -->
+          
+          </div>
+          
+          
+        </div>
         
       </div>
-  
-      <div class="z-10 relative -mt-16 px-gutter flex items-center">
-  
-        <img @scaleIn
-             class="avatar h-24 w-24 sm:block border-3 border-white"
-             src="../../../../assets/img/demo/mountain-cinematic.jpg">
-  
-        
+    </div>
+
+    <div class="px-6 py-4" fxLayout="column">
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+        <mat-form-field fxFlex="grow">
+          <mat-label>CEP</mat-label>
+          <input matInput (blur)="consultarCEP('cep')" formControlName="cep" [(ngModel)]="endereco.cep" required>
+        </mat-form-field>
+        <mat-form-field fxFlex="grow">
+          <mat-label>Numero</mat-label>
+          <input matInput type="number" placeholder="Ex. 12" formControlName="numero" [(ngModel)]="endereco.numero"
+            required>
+        </mat-form-field>
+
+      </div>
+
+      <mat-form-field fxFlex="grow">
+        <mat-label>Complemento</mat-label>
+        <input matInput formControlName="complemento" [(ngModel)]="endereco.complemento">
+      </mat-form-field>
+
+      <mat-form-field fxFlex="grow">
+        <mat-label>Logradouro</mat-label>
+        <input matInput formControlName="rua" [(ngModel)]="endereco.logradouro" required>
+      </mat-form-field>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+        <mat-form-field fxFlex="grow">
+          <mat-label>Bairro</mat-label>
+          <input matInput formControlName="bairro" [(ngModel)]="endereco.bairro" required>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+        <mat-form-field fxFlex="grow">
+          <mat-label>Estado</mat-label>
+          <input matInput formControlName="estado" [(ngModel)]="endereco.estado" required>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow">
+          <mat-label>Cidade</mat-label>
+          <input matInput formControlName="cidade" [(ngModel)]="endereco.cidade" required>
+        </mat-form-field>
       </div>
     </div>
   </div>
-
-  <div class="px-6 py-4" fxLayout="column">
-    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
-      <mat-form-field fxFlex="grow">
-        <mat-label>CEP</mat-label>
-        <input matInput (blur)="consultarCEP('cep')" formControlName="cep" [(ngModel)]="endereco.cep" required>
-      </mat-form-field>
-      <mat-form-field fxFlex="grow">
-        <mat-label>Numero</mat-label>
-        <input matInput type="number" placeholder="Ex. 12" formControlName="numero" [(ngModel)]="endereco.numero"
-          required>
-      </mat-form-field>
-
-    </div>
-
-    <mat-form-field fxFlex="grow">
-      <mat-label>Complemento</mat-label>
-      <input matInput formControlName="complemento" [(ngModel)]="endereco.complemento">
-    </mat-form-field>
-
-    <mat-form-field fxFlex="grow">
-      <mat-label>Logradouro</mat-label>
-      <input matInput formControlName="rua" [(ngModel)]="endereco.logradouro" required>
-    </mat-form-field>
-    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
-      <mat-form-field fxFlex="grow">
-        <mat-label>Bairro</mat-label>
-        <input matInput formControlName="bairro" [(ngModel)]="endereco.bairro" required>
-      </mat-form-field>
-    </div>
-
-    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
-      <mat-form-field fxFlex="grow">
-        <mat-label>Estado</mat-label>
-        <input matInput formControlName="estado" [(ngModel)]="endereco.estado" required>
-      </mat-form-field>
-
-      <mat-form-field fxFlex="grow">
-        <mat-label>Cidade</mat-label>
-        <input matInput formControlName="cidade" [(ngModel)]="endereco.cidade" required>
-      </mat-form-field>
-    </div>
-
-    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
-      <button mat-button type="button" mat-dialog-close>Pular</button>
-      <button color="primary" mat-raised-button type="button" [mat-dialog-close]="true" [disabled]="form.invalid"
-        (click)="confirmarcadastro(endereco)">{{legendaBotao}}</button>
-    </div>
-  </div>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" mat-dialog-close>Pular</button>
+  <button color="primary" mat-raised-button type="button" [mat-dialog-close]="true" [disabled]="form.invalid"
+    (click)="confirmarcadastro(endereco)">{{legendaBotao}}</button>
+</mat-dialog-actions>

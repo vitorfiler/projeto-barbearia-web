@@ -48,16 +48,16 @@ import { ReservasComponent } from './pages/reservas/reservas.component';
 import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
-import { ServicosComponent } from './pages/servicos/servicos.component';
 import { ListagemServicosComponent } from './pages/servicos/listagem-servicos/listagem-servicos.component';
 import { ListagemProdutosComponent } from './pages/servicos/listagem-produtos/listagem-produtos.component';
 import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/listagem-promocoes.component';
 import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 import { ComentariosComponent } from './pages/comentarios/comentarios.component';
-import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
 import { AgendaComponent } from './pages/agenda/agenda.component';
-import { PainelComponent } from './pages/painel/painel.component';
 import { CaixaComponent } from './pages/caixa/caixa.component';
+import { PainelComponent } from './pages/painel/painel.component';
+import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
+import { ServicosComponent } from './pages/servicos/servicos.component';
 
 
 
