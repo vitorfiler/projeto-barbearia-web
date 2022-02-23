@@ -3,25 +3,25 @@
   
 <table mat-table matSort [dataSource]="dataSource" matSort>
 
-    <!-- Coluna Cliente -->
+   
     <ng-container matColumnDef="categoria">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Categoria </th>
         <td mat-cell *matCellDef="let servico"> {{servico.categoria}} </td>
       </ng-container>
 
-      <!-- Coluna Serviços -->
+      
       <ng-container matColumnDef="descricao">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Serviço </th>
         <td mat-cell *matCellDef="let servico"> {{servico.dsServico}} </td>
       </ng-container>
 
-      <!-- Coluna Tempo -->
+     
       <ng-container matColumnDef="tempoEstimado">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Tempo </th>
         <td mat-cell *matCellDef="let servico"> {{servico.tempoEstimado}} </td>
       </ng-container>
 
-      <!-- Coluna Valor -->
+      
       <ng-container matColumnDef="valor">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Valor </th>
         <td mat-cell *matCellDef="let servico"> {{servico.valor}} </td>
