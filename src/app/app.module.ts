@@ -64,6 +64,8 @@ import { AgendamentosComponent } from './pages/agendamentos/agendamentos.compone
 import { CaixaComponent } from './pages/fluxo-de-caixa/caixa/caixa.component';
 import { NovaVendaComponent } from './pages/fluxo-de-caixa/nova-venda/nova-venda.component';
 import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-venda/historico-de-venda.component';
+import { ModalAdicionarServico } from './pages/modais/servicoes-modais/modal-adicionar-servicos';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -93,8 +95,7 @@ import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-v
     CaixaComponent,
     NovaVendaComponent,
     HistoricoDeVendaComponent,
-
-
+    ModalAdicionarServico
 
   ],
   imports: [
@@ -119,7 +120,7 @@ import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-v
     MatIconModule,
     GaugeModule,
     NgxGaugeModule,
-   
+
     MatCardModule,
     NgxChartsModule,
     MatSnackBarModule,
@@ -140,7 +141,8 @@ import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-v
     MatTabsModule,
     MatPaginatorModule,
     MatSortModule,
-    
+
+
     CoreModule,
     // Vex
     VexModule,
