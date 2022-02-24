@@ -8,27 +8,26 @@ import { stagger60ms } from "src/@vex/animations/stagger.animation";
 
 
 @Component({
-  selector: 'modal-adicionar-servicos',
-  templateUrl: 'modal-adicionar-servicos.html',
-  animations: [
-    stagger60ms,
-    fadeInUp400ms
-  ]
+	selector: 'modal-adicionar-servicos',
+	templateUrl: 'modal-adicionar-servicos.html',
+	animations: [
+		stagger60ms,
+		fadeInUp400ms
+	]
 
 })
 
 
 export class ModalAdicionarServico implements OnInit {
-  form: FormGroup;
-  ngOnInit(): void {
-    // throw new Error("Method not implemented.");
-  }
-  constructor(
-    public dialogRef: MatDialogRef<ModalAdicionarServico>,
-  ) { }
-  adicionarServico() { }
+	form: FormGroup;
+	ngOnInit(): void {
+	}
+	constructor(
+		public dialogRef: MatDialogRef<ModalAdicionarServico>,
+	) { }
+	adicionarServico() { }
 
-  cancelar(): void {
-    this.dialogRef.close();
-  }
+	cancelar(): void {
+		this.dialogRef.close();
+	}
 }
