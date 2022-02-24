@@ -27,10 +27,11 @@ export class ListagemServicosComponent implements OnInit {
   public carregando = false;
 
   servico: Servico;
+  
+  servicos: Servico[] = []
 
   constructor(private servicoService: ServicoService) { }
 
-    servicos: Servico[] = []
 
   ngOnInit(): void {
     this.listarServicos()
