@@ -11,13 +11,20 @@ table {
   td, th {
     width: 25%;
   }
-  
-  // ::ng-deep .mat-select-value{    
-  //   color: red!important;
-  // }
+
+.customIconSize{    
+  margin-top: 20px;
+  transform: scale(1.2);
+  height: auto;
+  width: auto;
+}
   
   .mat-raised-button, .mat-stroked-button{    
     margin: auto;
+    color:white;
+    background-color: #DAAA00;
+    
+
   }
   .mat-raised-button, .mat-stroked-button{    
     margin: auto;
@@ -25,5 +32,5 @@ table {
 
   mat-icon{
     color:#DAAA00;
+    
   }
-  

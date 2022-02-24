@@ -11,13 +11,22 @@ export class ServicoService {
 
   constructor(private http: HttpClient) { }
 
-  listarServicos(estabelecimentoID: string):Observable<any>{
+  filtrar(estabelecimentoID: string, filtro: string, categoria: string): Observable<any> {
+
+    return this.http.get(`${environment.URL_API}/servicos/filtro`, {
+      params: {
+        estabelecimento_ID: estabelecimentoID, filtroCategoria: filtro, categoria: categoria
+      }, observe: 'response'
+    })
+  }
+
+  listarServicos(estabelecimentoID: string): Observable<any> {
     return this.http.get(`${environment.URL_API}/servicos/todos`, {
-      params:{
+      params: {
         estabelecimento_ID: estabelecimentoID,
-      },observe: 'response'
+      }, observe: 'response'
     });
   }
 
-  
+
 }

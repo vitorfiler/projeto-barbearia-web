@@ -9,8 +9,10 @@ import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Categoria } from 'src/app/_models/categoria';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalAdicionarServico } from '../../modais/servicoes-modais/modal-adicionar-servicos';
+import { MatGridListModule } from '@angular/material/grid-list';
+
 
 @Component({
   selector: 'vex-listagem-servicos',
@@ -23,12 +25,19 @@ import { ModalAdicionarServico } from '../../modais/servicoes-modais/modal-adici
 })
 export class ListagemServicosComponent implements OnInit {
   form: FormGroup;
+  filtroCategoria: string;
+  lista: boolean = true;
+  categoria: string;
+  servico: Servico;
   servicos: Servico[] = []
+  //select com categorias 
   selecaoCategoria: Categoria[] = [
     { value: 'TODOS', viewValue: 'Todos' },
     { value: 'CABELOF', viewValue: 'Cabelo Feminino' },
     { value: 'CABELOM', viewValue: 'Cabelo Masculino' },
-    { value: 'UNHAEPELE', viewValue: 'Unha e pele' },
+    { value: 'UNHA', viewValue: 'Unha' },
+    { value: 'PELE', viewValue: 'Pele' },
+
   ];
   constructor(private router: Router,
     private fb: FormBuilder,
@@ -37,8 +46,10 @@ export class ListagemServicosComponent implements OnInit {
 
   }
 
-  inicializarFiltro() {
+
+  inicializarFiltro() { //inicializar filtros de pesquisa
     this.form = this.fb.group({
+      filtro: [''],
       categoria: [this.selecaoCategoria[0].value]
     });
   }
@@ -48,13 +59,14 @@ export class ListagemServicosComponent implements OnInit {
     this.listarServicos();
   }
 
+  // modal criado para adição de formulario inclusão de servicos
   abrirModalAdicionarServico(isAdicionar: boolean) {
     let dialogRef;
-
     if (isAdicionar) {
       dialogRef = this.dialog.open(ModalAdicionarServico)
     }
   }
+
   dataSource = new MatTableDataSource<Servico>()
   displayedColumns: string[] = ['categoria', 'descricao', 'tempoEstimado', 'valor', 'acoes'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -62,10 +74,6 @@ export class ListagemServicosComponent implements OnInit {
 
   estabelecimentoID = localStorage.getItem('estabelecimento_ID')
   public carregando = false;
-
-  servico: Servico;
-
-
 
   listarServicos() {
     this.carregando = true;
@@ -89,5 +97,17 @@ export class ListagemServicosComponent implements OnInit {
     this.dataSource.sort = this.matSort;
   }
 
+  filtrar() {
+    this.servicoService.filtrar(this.estabelecimentoID, this.filtroCategoria, this.categoria)
+      .subscribe(resposta => {
+        this.servico = resposta.body
+        /*renderizando a tabela*/
+        this.carregando = false;
+        this.dataSource = new MatTableDataSource<Servico>(this.servicos)
+
+      })
+  }
 
 }
+
+
