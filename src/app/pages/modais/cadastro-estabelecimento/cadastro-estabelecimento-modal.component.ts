@@ -15,6 +15,7 @@ import { MessagesSnackBar } from "src/app/_constants/messagesSnackBar";
 @Component({
 	selector: 'cadastro-estabelecimento-modal',
 	templateUrl: 'cadastro-estabelecimento-modal.html',
+	styleUrls: ['cadastro-estabelecimento-modal.scss'],
 	animations: [
 		stagger60ms,
 		fadeInUp400ms
@@ -25,6 +26,9 @@ export class CadastroEstabelecimentoModal implements OnInit {
 
 	estabelecimentoID: string = localStorage.getItem('estabelecimento_ID')
 	endereco: Endereco = new Endereco()
+	imagemPerfil: String = '../../../../assets/CentralizadorImagem.png'
+	imagemPerfilFundo: String = '../../../../assets/img/demo/landscape.jpg';
+	// imagemPerfil: any;
 
 	//   Campo tempo de Serviço
 	form: FormGroup;
@@ -77,4 +81,13 @@ export class CadastroEstabelecimentoModal implements OnInit {
 
 		// })
 	}
+
+	
+  	// enviarFotoPerfil(event) {
+	// 	for (let index = 0; index < event.length; index++) {
+	// 	const element = event[index];
+	// 	let fileElement = <File>event[index]
+	// 	this.imagemPerfil = fileElement;
+	// 	}
+  	// }
 }
