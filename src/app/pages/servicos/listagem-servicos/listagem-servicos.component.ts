@@ -11,7 +11,6 @@ import { Categoria } from 'src/app/_models/categoria';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAdicionarServico } from '../../modais/servicoes-modais/modal-adicionar-servicos';
-import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @Component({

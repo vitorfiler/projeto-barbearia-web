@@ -1,5 +1,4 @@
 import { environment } from './../../environments/environment';
-import { Servico } from 'src/app/_models/servico';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

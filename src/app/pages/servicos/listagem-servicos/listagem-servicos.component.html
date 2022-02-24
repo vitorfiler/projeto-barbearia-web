@@ -1,10 +1,10 @@
 <div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
 	<div fxFlex="auto" fxLayout="column">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-7">
 				<mat-form-field fxFlex="grow" appearance="standard">
 					<mat-label>Filtro</mat-label>
-					<input placeholder="Ex. valor do serviço" formControlName="filtro" [(ngModel)]="filtroCategoria"
+					<input placeholder="Ex. nome do serviço" formControlName="filtro" [(ngModel)]="filtroCategoria"
 						(ngModelChange)="filtrar()" matInput />
 				</mat-form-field>
 			</div>
@@ -18,17 +18,16 @@
 					</mat-select>
 				</mat-form-field>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<button fxFlex="grow" mat-raised-button (click)="abrirModalAdicionarServico(true)">Adicionar
 					Serviço</button>
 			</div>
-			<div class="col-md-0.5">
-				<button mat-icon-button class="customIconSize" title="visualização em grade">
-					<mat-icon>view_module</mat-icon>
+			<div class="col-md-1">
+				<button fxFlex="grow" class="customIconSize" title="visualização em grade" *ngIf="true">
+					<mat-icon style="vertical-align: middle;">view_module</mat-icon>
 				</button>
-			</div>
-			<div class="col-md-0.5 ">
-				<button mat-icon-button class="customIconSize" title="visualização em lista">
+				<button fxFlex="grow" mat-icon-button class="customIconSize" title="visualização em lista"
+					*ngIf="false">
 					<mat-icon>view_headline</mat-icon>
 				</button>
 			</div>
@@ -93,4 +92,10 @@
 		</table>
 	</div>
 </vex-scrollbar>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+<div style="">
+	<button class="customIconSize" title="visualização em grade" *ngIf="true">
+		<mat-icon>view_module</mat-icon>
+	</button>
+	<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
