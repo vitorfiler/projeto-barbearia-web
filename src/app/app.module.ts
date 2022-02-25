@@ -42,7 +42,6 @@ import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReservasComponent } from './pages/reservas/reservas.component';
 import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
@@ -65,7 +64,7 @@ import { CaixaComponent } from './pages/fluxo-de-caixa/caixa/caixa.component';
 import { NovaVendaComponent } from './pages/fluxo-de-caixa/nova-venda/nova-venda.component';
 import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-venda/historico-de-venda.component';
 import { ModalAdicionarServico } from './pages/modais/servicoes-modais/modal-adicionar-servicos';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { ListagemReservasComponent } from './pages/agendamentos/listagem-reservas/listagem-reservas.component';
 
 
 @NgModule({
@@ -78,7 +77,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
     RecuperarSenhaSucessoComponent,
     ListagemAgendamentosComponent,
     AgendamentosComponent,
-    ReservasComponent,
     ModalCadastrarEditarAgendamento,
     ModalAlterarStatusAgendamento,
     ModalDeletarAgendamento,
@@ -95,7 +93,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     CaixaComponent,
     NovaVendaComponent,
     HistoricoDeVendaComponent,
-    ModalAdicionarServico
+    ModalAdicionarServico,
+    ListagemReservasComponent
 
   ],
   imports: [
