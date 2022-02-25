@@ -4,19 +4,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class ReservasService {
 
-  constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 
-  filtrar(estabelecimentoID: string, filtroReserva: string, selecaoStatus: string, dt_inicial: string, dt_final: string): Observable<any> {
+	filtrar(estabelecimentoID: string, filtroReserva: string, selecaoStatus: string, dt_inicial: string, dt_final: string): Observable<any> {
 
-    return this.http.get(`${environment.URL_API}/reservas/filtro`, {
-      params: {
-        estabelecimento_ID: estabelecimentoID, filtroReserva: filtroReserva, selecaoStatus: selecaoStatus || "", dt_inicial, dt_final: dt_final
-      }, observe: 'response'
-    })
-  }
+		return this.http.get(`${environment.URL_API}/reservas/filtro`, {
+			params: {
+				estabelecimento_ID: estabelecimentoID, filtroReserva: filtroReserva, selecaoStatus: selecaoStatus || "", dt_inicial, dt_final: dt_final
+			}, observe: 'response'
+		})
+	}
 
 }
