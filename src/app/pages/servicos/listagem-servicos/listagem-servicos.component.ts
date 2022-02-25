@@ -1,5 +1,5 @@
 import { ServicoService } from './../../../services/servico.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -34,6 +34,11 @@ export class ListagemServicosComponent implements OnInit {
 	displayedColumns: string[] = ['categoria', 'descricao', 'tempoEstimado', 'valor', 'acoes'];
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) matSort: MatSort;
+	alturaTela: any;
+	larguraTela: any;
+	mostraBotaoListaGradeNaTabela = false;
+	mostraBotaoListaGradeNoFiltro = false;
+
 
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
 	public carregando = false;
@@ -51,11 +56,30 @@ export class ListagemServicosComponent implements OnInit {
 		public dialog: MatDialog,
 		private servicoService: ServicoService) {
 
+		this.botaoGradeListaPorPixel();
 	}
 
 	ngOnInit(): void {
 		this.inicializarFiltro();
 		this.listarServicos();
+	}
+
+	@HostListener('window:resize', ['$event'])
+	botaoGradeListaPorPixel(event?) {
+
+		this.alturaTela = window.innerHeight;
+		this.larguraTela = window.innerWidth;
+		if (this.larguraTela >= 407 && this.larguraTela <= 767) {
+			this.mostraBotaoListaGradeNaTabela = true
+			this.mostraBotaoListaGradeNoFiltro = false
+		} else if(this.larguraTela > 767){
+			this.mostraBotaoListaGradeNaTabela = false
+			this.mostraBotaoListaGradeNoFiltro = true;
+		} else {
+			this.mostraBotaoListaGradeNaTabela = false
+			this.mostraBotaoListaGradeNoFiltro = false;
+		}
+		// this.mostraBotaoListaGradeNaTabela = ((this.larguraTela >= 407) && (this.larguraTela <= 767)) ? true : false;
 	}
 
 	inicializarFiltro() { //inicializar filtros de pesquisa
