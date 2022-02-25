@@ -11,7 +11,6 @@ import { Categoria } from 'src/app/_models/categoria';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAdicionarServico } from '../../modais/servicoes-modais/modal-adicionar-servicos';
-import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @Component({
@@ -27,6 +26,7 @@ export class ListagemServicosComponent implements OnInit {
 	form: FormGroup;
 	filtroCategoria: string;
 	lista: boolean = true;
+	visible = false;
 	categoria: string;
 	servico: Servico;
 	servicos: Servico[] = []
@@ -99,6 +99,11 @@ export class ListagemServicosComponent implements OnInit {
 				this.dataSource = new MatTableDataSource<Servico>(this.servicos)
 
 			})
+	}
+
+	botaoVisualizacao() {
+		this.visible = this.visible ? false : true
+
 	}
 
 	ngAfterViewInit() {
