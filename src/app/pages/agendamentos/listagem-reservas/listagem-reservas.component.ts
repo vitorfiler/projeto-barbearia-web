@@ -8,13 +8,13 @@ import { Reserva } from 'src/app/_models/reserva';
 import { Status } from 'src/app/_models/status';
 
 @Component({
-	selector: 'vex-reservas',
-	templateUrl: './reservas.component.html',
-	styleUrls: ['./reservas.component.scss'],
+	selector: 'vex-listagem-reservas',
+	templateUrl: './listagem-reservas.component.html',
+	styleUrls: ['./listagem-reservas.component.scss'],
 	providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
 
 })
-export class ReservasComponent implements OnInit {
+export class ListagemReservasComponent implements OnInit {
 	filtroReserva: string;
 	selecaoStatus: string;
 	formReserva: FormGroup;

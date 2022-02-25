@@ -11,10 +11,10 @@
 			<div class="col-md-2">
 				<mat-form-field fxFlex="grow" appearance="standard">
 					<mat-label>Status</mat-label>
-					<mat-select formControlName="statusReserva" [(ngModel)]="selecaoStatus"
-						(ngModelChange)="validarFiltro()" name="selecaoStatus">
-						<mat-option *ngFor="let statusReserva of statusReserva" [value]="statusReserva.value">
-							{{statusReserva.viewValue}}
+					<mat-select formControlName="statusReserva" name="filtroStatus" [(ngModel)]="selecaoStatus"
+						(ngModelChange)="validarFiltro()">
+						<mat-option *ngFor="let status of statusReserva" [value]="status.value">
+							{{status.viewValue}}
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
