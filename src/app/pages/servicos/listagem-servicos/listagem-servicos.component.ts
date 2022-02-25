@@ -79,7 +79,6 @@ export class ListagemServicosComponent implements OnInit {
 			this.mostraBotaoListaGradeNaTabela = false
 			this.mostraBotaoListaGradeNoFiltro = false;
 		}
-		// this.mostraBotaoListaGradeNaTabela = ((this.larguraTela >= 407) && (this.larguraTela <= 767)) ? true : false;
 	}
 
 	inicializarFiltro() { //inicializar filtros de pesquisa
