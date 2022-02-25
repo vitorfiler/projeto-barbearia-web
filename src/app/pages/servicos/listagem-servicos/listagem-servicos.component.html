@@ -11,25 +11,17 @@
 			<div class="col-md-2">
 				<mat-form-field fxFlex="grow" appearance="standard">
 					<mat-label>Categoria</mat-label>
-					<mat-select formControlName="categoria" name="filtroCategoria">
+					<mat-select formControlName="categoria" name="filtroCategoria" [(ngModel)]="categoria"
+						(ngModelChange)="filtrar()">
 						<mat-option *ngFor="let selecaoCategoria of selecaoCategoria" [value]="selecaoCategoria.value">
 							{{selecaoCategoria.viewValue}}
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<button fxFlex="grow" mat-raised-button (click)="abrirModalAdicionarServico(true)">Adicionar
 					Serviço</button>
-			</div>
-			<div class="col-md-1">
-				<button fxFlex="grow" class="customIconSize" title="visualização em grade" *ngIf="true">
-					<mat-icon style="vertical-align: middle;">view_module</mat-icon>
-				</button>
-				<button fxFlex="grow" mat-icon-button class="customIconSize" title="visualização em lista"
-					*ngIf="false">
-					<mat-icon>view_headline</mat-icon>
-				</button>
 			</div>
 		</div>
 	</div>
@@ -93,9 +85,12 @@
 	</div>
 </vex-scrollbar>
 
-<div style="">
-	<button class="customIconSize" title="visualização em grade" *ngIf="true">
-		<mat-icon>view_module</mat-icon>
+<div style="margin-left: auto; float: right;" class="row">
+	<button title="visualização em grade" (click)="botaoVisualizacao()">
+		<mat-icon *ngIf="visible" style="vertical-align: middle;">view_module</mat-icon>
+	</button>
+	<button title="visualização em lista" (click)="botaoVisualizacao()">
+		<mat-icon *ngIf="!visible" style="vertical-align: middle;">view_headline</mat-icon>
 	</button>
 	<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>

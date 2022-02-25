@@ -26,6 +26,7 @@ export class ListagemServicosComponent implements OnInit {
 	form: FormGroup;
 	filtroCategoria: string;
 	lista: boolean = true;
+	visible = false;
 	categoria: string;
 	servico: Servico;
 	servicos: Servico[] = []
@@ -98,6 +99,11 @@ export class ListagemServicosComponent implements OnInit {
 				this.dataSource = new MatTableDataSource<Servico>(this.servicos)
 
 			})
+	}
+
+	botaoVisualizacao() {
+		this.visible = this.visible ? false : true
+
 	}
 
 	ngAfterViewInit() {
