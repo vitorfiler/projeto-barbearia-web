@@ -16,14 +16,13 @@ import { Status } from 'src/app/_models/status';
 })
 export class ReservasComponent implements OnInit {
 	filtroReserva: string;
-	selecaoStatus: string;
 	formReserva: FormGroup;
 	public carregando = false;
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
 	reservas: Reserva[] = [];
 	dataSource = new MatTableDataSource<Reserva>()
 
-	statusReserva: any[] = [
+	statusReserva: Status[] = [
 		{ value: 'TODOS', viewValue: 'Todos' },
 		{ value: 'AGUARDANDORETIRADA', viewValue: 'Aguardando Retirada' },
 		{ value: 'CANCELADO', viewValue: 'Cancelado' },
@@ -44,8 +43,9 @@ export class ReservasComponent implements OnInit {
 	inicializarFiltro() {
 		this.formReserva = this.fb.group({
 			filtro: [''],
-			statusReserva: [this.statusReserva[0].value],
-			dataReserva: ['']
+			status: [this.statusReserva[0].value],
+			dt_inicial: [''],
+			dt_final: [''],
 		});
 	}
 	clearForm() {
@@ -53,16 +53,27 @@ export class ReservasComponent implements OnInit {
 	}
 
 	validarFiltro() {
-		let filtroData = this.formReserva.get('dataReserva').value
-		if (filtroData) {
-			filtroData = (filtroData.getFullYear() + "-" + ((filtroData.getMonth() + 1)) + "-" + (filtroData.getDate()));
-			this.filtrar(this.filtroReserva, filtroData, this.selecaoStatus);
+		let dt_inicial = this.formReserva.get('dt_inicial').value
+		let dt_final = this.formReserva.get('dt_final').value
+		let selecaoStatus = this.formReserva.get('status').value
+		if (dt_inicial && dt_final) {
+
+			if (dt_inicial > dt_final) {
+				this.snackbar.open("Insira uma data final maior que inicial", 'Ok', { duration: 4000 });
+				return;
+			}
+			dt_inicial = (dt_inicial.getFullYear() + "-" + ((dt_inicial.getMonth() + 1)) + "-" + (dt_inicial.getDate()));
+			dt_final = (dt_final.getFullYear() + "-" + ((dt_final.getMonth() + 1)) + "-" + (dt_final.getDate()));
+			this.filtrar(this.filtroReserva, selecaoStatus, dt_inicial, dt_final);
+		}
+		else {
+			this.filtrar(this.filtroReserva, selecaoStatus, dt_inicial, dt_final);
 		}
 	}
 
-	filtrar(filtroReserva, filtroData, selecaoStatus) {
+	filtrar(filtroReserva, selecaoStatus, dt_inicial, dt_final) {
 		this.carregando = true;
-		this.reservasService.filtrar(this.estabelecimentoID, filtroReserva, filtroData, selecaoStatus).subscribe(resposta => {
+		this.reservasService.filtrar(this.estabelecimentoID, filtroReserva, selecaoStatus, dt_inicial, dt_final).subscribe(resposta => {
 			this.reservas = resposta.body
 			/*renderizando a tabela*/
 			this.carregando = false;
