@@ -1,0 +1,47 @@
+<div [formGroup]="formReserva" class="p-6" fxLayout="column" fxLayoutGap="16px">
+	<div fxFlex="auto" fxLayout="column">
+		<div class="row">
+			<div class="col-md-2">
+				<mat-form-field fxFlex="grow" appearance="standard">
+					<mat-label>Pesquisa</mat-label>
+					<input placeholder="Ex. Nome do cliente" formControlName="filtro" [(ngModel)]="filtroReserva"
+						(ngModelChange)="validarFiltro()" matInput />
+				</mat-form-field>
+			</div>
+			<div class="col-md-2">
+				<mat-form-field fxFlex="grow" appearance="standard">
+					<mat-label>Status</mat-label>
+					<mat-select formControlName="status" name="filtroStatus" (ngModelChange)="validarFiltro()">
+						<mat-option *ngFor="let status of statusReserva" [value]="status.value">
+							{{status.viewValue}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div class="col-md-2">
+				<mat-form-field fxFlex="grow" color="accent" appearance="standard">
+					<mat-label>Data Inicial</mat-label>
+					<input matInput [matDatepicker]="picker1" (ngModelChange)="validarFiltro()"
+						formControlName="dt_inicial">
+					<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+					<mat-datepicker #picker1></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<div class="col-md-2">
+				<mat-form-field fxFlex="grow" color="accent" appearance="standard">
+					<mat-label>Data final</mat-label>
+					<input matInput [matDatepicker]="picker2" (ngModelChange)="validarFiltro()"
+						formControlName="dt_final">
+					<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+					<mat-datepicker #picker2 color="primary"></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<div class="col-md-2">
+				<button fxFlex="grow" mat-stroked-button color="primary" (click)="clearForm()">Limpar</button>
+			</div>
+			<div class="col-md-2">
+				<button fxFlex="grow" mat-raised-button color="primary">Adicionar</button>
+			</div>
+		</div>
+	</div>
+</div>
