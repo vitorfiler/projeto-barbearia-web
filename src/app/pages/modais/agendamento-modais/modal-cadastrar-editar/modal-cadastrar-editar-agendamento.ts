@@ -50,8 +50,8 @@ export class ModalCadastrarEditarAgendamento implements OnInit,AfterViewInit  {
 		private agendamentoService: AgendamentoService,
 		private clientesService: ClientesService,
 		private snackbar: MatSnackBar,
-		@Optional() @Inject(MAT_DIALOG_DATA) public agendamentoToEdit: any) {
-		this.legendaBotao = agendamentoToEdit ? 'Alterar' : 'Cadastrar';
+		@Optional() @Inject(MAT_DIALOG_DATA) public alterarAgendamento: any) {
+		this.legendaBotao = alterarAgendamento ? 'Alterar' : 'Cadastrar';
 	}
 	ngAfterViewInit(): void {
 		this.filteredOptions = this.myControl.valueChanges
@@ -68,8 +68,8 @@ export class ModalCadastrarEditarAgendamento implements OnInit,AfterViewInit  {
 		  map(value => this._filter(value))
 		);
 
-		if (this.agendamentoToEdit) {
-			this.agendamento = new Agendamento(this.agendamentoToEdit)
+		if (this.alterarAgendamento) {
+			this.agendamento = new Agendamento(this.alterarAgendamento)
 		}
 
 		this.form = this.fb.group({
