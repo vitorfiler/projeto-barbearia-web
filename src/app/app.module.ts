@@ -65,6 +65,7 @@ import { NovaVendaComponent } from './pages/fluxo-de-caixa/nova-venda/nova-venda
 import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-venda/historico-de-venda.component';
 import { ModalAdicionarServico } from './pages/modais/servicoes-modais/modal-adicionar-servicos';
 import { ListagemReservasComponent } from './pages/agendamentos/listagem-reservas/listagem-reservas.component';
+import { ConstrucaoComponent } from './pages/construcao/construcao.component';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { ListagemReservasComponent } from './pages/agendamentos/listagem-reserva
     NovaVendaComponent,
     HistoricoDeVendaComponent,
     ModalAdicionarServico,
-    ListagemReservasComponent
+    ListagemReservasComponent,
+    ConstrucaoComponent
 
   ],
   imports: [
