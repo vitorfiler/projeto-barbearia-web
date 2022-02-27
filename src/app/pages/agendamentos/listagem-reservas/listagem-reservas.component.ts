@@ -17,12 +17,14 @@ import { ConstrucaoModal } from '../../modais/construcao-modal/modal-adicionar-s
 
 })
 export class ListagemReservasComponent implements OnInit {
+
 	filtroReserva: string;
 	formReserva: FormGroup;
 	public carregando = false;
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
 	reservas: Reserva[] = [];
 	dataSource = new MatTableDataSource<Reserva>()
+	statusPadrao: String;
 
 	statusReserva: Status[] = [
 		{ value: 'TODOS', viewValue: 'Todos' },
@@ -46,10 +48,11 @@ export class ListagemReservasComponent implements OnInit {
 	inicializarFiltro() {
 		this.formReserva = this.fb.group({
 			filtro: [''],
-			status: [this.statusReserva[0].value],
+			status: [''],
 			dt_inicial: [''],
 			dt_final: [''],
 		});
+		this.statusPadrao = this.statusReserva[0].value
 	}
 	clearForm() {
 		this.formReserva.reset();

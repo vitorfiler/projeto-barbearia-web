@@ -11,7 +11,7 @@
 			<div class="col-md-2">
 				<mat-form-field fxFlex="grow" appearance="standard">
 					<mat-label>Status</mat-label>
-					<mat-select formControlName="status" name="filtroStatus" (ngModelChange)="validarFiltro()">
+					<mat-select formControlName="status" name="filtroStatus" [(ngModel)]="statusPadrao" (ngModelChange)="validarFiltro()">
 						<mat-option *ngFor="let status of statusReserva" [value]="status.value">
 							{{status.viewValue}}
 						</mat-option>

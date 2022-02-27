@@ -84,8 +84,9 @@ export class ListagemServicosComponent implements OnInit {
 	inicializarFiltro() { //inicializar filtros de pesquisa
 		this.form = this.fb.group({
 			filtro: [''],
-			categoria: [this.selecaoCategoria[0].value]
+			categoria: ['']
 		});
+		this.categoria = this.selecaoCategoria[0].value;
 	}
 
 	// modal criado para adição de formulario inclusão de servicos
