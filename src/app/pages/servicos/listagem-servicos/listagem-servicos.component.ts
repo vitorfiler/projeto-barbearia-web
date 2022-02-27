@@ -1,17 +1,17 @@
-import { ServicoService } from './../../../services/servico.service';
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Servico } from 'src/app/_models/servico';
+
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Categoria } from 'src/app/_models/categoria';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalAdicionarServico } from '../../modais/servicoes-modais/modal-adicionar-servicos';
-
+import { ServicoService } from 'src/app/services/servico.service';
+import { Servico } from 'src/app/_models/servico';
+import { ConstrucaoModal } from '../../modais/construcao-modal/modal-adicionar-servicos';
 
 @Component({
 	selector: 'vex-listagem-servicos',
@@ -92,7 +92,7 @@ export class ListagemServicosComponent implements OnInit {
 	abrirModalAdicionarServico(isAdicionar: boolean) {
 		let dialogRef;
 		if (isAdicionar) {
-			dialogRef = this.dialog.open(ModalAdicionarServico)
+			dialogRef = this.dialog.open(ConstrucaoModal)
 		}
 	}
 

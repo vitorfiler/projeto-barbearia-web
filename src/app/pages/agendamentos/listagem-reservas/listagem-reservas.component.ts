@@ -1,11 +1,13 @@
 import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReservasService } from 'src/app/services/reservas.service';
 import { Reserva } from 'src/app/_models/reserva';
 import { Status } from 'src/app/_models/status';
+import { ConstrucaoModal } from '../../modais/construcao-modal/modal-adicionar-servicos';
 
 @Component({
 	selector: 'vex-listagem-reservas',
@@ -32,6 +34,7 @@ export class ListagemReservasComponent implements OnInit {
 		private reservasService: ReservasService,
 		/* correção de data para Português, importanções feitas no app.module.ts*/
 		private snackbar: MatSnackBar, private dateAdapter: DateAdapter<any>,
+		public dialog: MatDialog
 	) {
 		this.dateAdapter.setLocale('pt-BR');
 	}
@@ -50,6 +53,13 @@ export class ListagemReservasComponent implements OnInit {
 	}
 	clearForm() {
 		this.formReserva.reset();
+	}
+
+	abrirModalAdicionarServico(isAdicionar: boolean) {
+		let dialogRef;
+		if (isAdicionar) {
+			dialogRef = this.dialog.open(ConstrucaoModal)
+		}
 	}
 
 	validarFiltro() {

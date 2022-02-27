@@ -63,9 +63,10 @@ import { AgendamentosComponent } from './pages/agendamentos/agendamentos.compone
 import { CaixaComponent } from './pages/fluxo-de-caixa/caixa/caixa.component';
 import { NovaVendaComponent } from './pages/fluxo-de-caixa/nova-venda/nova-venda.component';
 import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-venda/historico-de-venda.component';
-import { ModalAdicionarServico } from './pages/modais/servicoes-modais/modal-adicionar-servicos';
+import { ModalAdicionarServico } from './pages/modais/servicos-modais/modal-adicionar-servicos';
 import { ListagemReservasComponent } from './pages/agendamentos/listagem-reservas/listagem-reservas.component';
 import { ConstrucaoComponent } from './pages/construcao/construcao.component';
+import { ConstrucaoModal } from './pages/modais/construcao-modal/modal-adicionar-servicos';
 
 
 @NgModule({
@@ -96,8 +97,8 @@ import { ConstrucaoComponent } from './pages/construcao/construcao.component';
     HistoricoDeVendaComponent,
     ModalAdicionarServico,
     ListagemReservasComponent,
-    ConstrucaoComponent
-
+    ConstrucaoComponent,
+    ConstrucaoModal
   ],
   imports: [
     BrowserModule,
