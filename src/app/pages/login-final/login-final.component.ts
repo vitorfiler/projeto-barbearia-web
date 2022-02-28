@@ -69,13 +69,15 @@ export class LoginFinalComponent implements OnInit {
 	}
 	// Metodo para abrir modal de planos
 	abrirModalPlanos() {
-		const dialogRef = this.dialog.open(PlanosModalComponent, {
-			width: '1000px', 
-			height: 'auto', 
-		});
-		dialogRef.afterClosed().subscribe(result => {
-			console.log(`Dialog result: ${result}`);
-		});
+		let planoId = localStorage.getItem("planoId")
+		if (!planoId) {
+			const dialogRef = this.dialog.open(PlanosModalComponent, {
+				width: '1000px',
+				height: 'auto',
+			});
+			dialogRef.afterClosed().subscribe(result => {
+			});
+		}
 	}
 
 	login() {
@@ -89,6 +91,9 @@ export class LoginFinalComponent implements OnInit {
 				localStorage.setItem("token", response.body.token)
 				localStorage.setItem("estabelecimento_ID", response.body.estabelecimento_ID)
 				localStorage.setItem("cadastroCompleto", response.body.cadastroCompleto)
+				localStorage.setItem("planoId", response.body.plano_ID)
+				localStorage.setItem("planoId", response.body.plano_ID)
+				localStorage.setItem("nomePlano", "BASIC")
 				this.router.navigate(['/']);
 				this.MostrarModalCadastroCompleto()
 				this.logando = false;

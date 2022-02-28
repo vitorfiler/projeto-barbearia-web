@@ -37,7 +37,7 @@ export class PlanosModalComponent implements OnInit {
       console.log(this.listaPlanos);
     }, (error) => {
       console.log(error);
-      this.snackbar.open(MessagesSnackBar.ALTERAÇÃO_SOLICITACAO_ERRO, 'Fechar', { duration: 4000 })
+      this.snackbar.open(MessagesSnackBar.LISTAR_PLANO_ERRO, 'Fechar', { duration: 4000 })
     }
     )
   }
@@ -48,10 +48,10 @@ export class PlanosModalComponent implements OnInit {
       plano_ID: planoID
     }
     this.planosServices.contratarPlano(body).subscribe(() => {
-      this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_SUCESSO, 'Fechar', { duration: 4000 })
+      this.snackbar.open(MessagesSnackBar.CONTRATAR_PLANO_SUCESSO, 'Fechar', { duration: 4000 })
     }, (error) => {
       console.log(error);
-      this.snackbar.open(MessagesSnackBar.CADASTRO_SOLICITACAO_ERRO, 'Fechar', { duration: 4000 })
+      this.snackbar.open(MessagesSnackBar.CONTRATAR_PLANO_ERRO, 'Fechar', { duration: 4000 })
     })
   }
 
