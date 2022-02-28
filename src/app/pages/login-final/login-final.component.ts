@@ -3,13 +3,11 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { CommomService } from 'src/app/services/commom.service';
 import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/_models/user';
 import arrowBack from '@iconify/icons-ic/keyboard-backspace';
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import icVisibilityOff from '@iconify/icons-ic/twotone-visibility-off';
-import { Observable } from 'rxjs';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
@@ -59,16 +57,14 @@ export class LoginFinalComponent implements OnInit {
 		});
 
 	}
-	//metodo para exibir o modal na tela de solicitações, assim que fizer o login esse modal sera apresentado
+	//metodo para exibir o modal na tela de agendamentos, assim que fizer o login esse modal sera apresentado
 	MostrarModalCadastroCompleto() {
 		let cadastroCompleto = JSON.parse(localStorage.getItem('cadastroCompleto'))
 		if (!cadastroCompleto) {
 			const dialogRef = this.dialog.open(CadastroEstabelecimentoModal);
 			dialogRef.afterClosed().subscribe(result => {
-				console.log(`Dialog result: ${result}`);
 				this.abrirModalPlanos();
 			});
-
 		}
 	}
 	// Metodo para abrir modal de planos

@@ -1,16 +1,19 @@
-import { SolicitacoesComponent } from './pages/solicitacoes/solicitacoes.component';
+import { ServicosComponent } from './pages/servicos/servicos.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 import { VexRoutes } from 'src/@vex/interfaces/vex-route.interface';
-
 import { LoginFinalComponent } from './pages/login-final/login-final.component';
-import { CalendarComponent } from './pages/login-final/calendar/calendar.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
 import { RecuperarSenhaSucessoComponent } from './pages/recuperar-senha/recuperar-senha-sucesso/recuperar-senha-sucesso.component';
-import { SolicitacoesReservasComponent } from './pages/solicitacoes-reservas/solicitacoes-reservas.component';
+import { AgendaComponent } from './pages/agenda/agenda.component';
+import { FluxoDeCaixa } from './pages/fluxo-de-caixa/fluxo-de-caixa.component';
+import { ComentariosComponent } from './pages/comentarios/comentarios.component';
+import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
+import { PainelComponent } from './pages/painel/painel.component';
+import { AgendamentosComponent } from './pages/agendamentos/agendamentos.component';
 
 
 const routes: VexRoutes = [
@@ -18,10 +21,13 @@ const routes: VexRoutes = [
     path: '',
     component: CustomLayoutComponent,
     children: [
-      { path: 'agenda', component: CalendarComponent },
-      { path: 'solicitacoes-tabela', component: SolicitacoesComponent },
-      { path: 'solicitacoes', component: SolicitacoesReservasComponent }
-      
+      { path: 'agenda', component: AgendaComponent },
+      { path: 'agendamentos', component: AgendamentosComponent },
+      { path: 'servicos', component: ServicosComponent },
+      { path: 'caixa', component: FluxoDeCaixa },
+      { path: 'comentarios', component: ComentariosComponent },
+      { path: 'configuracoes', component: ConfiguracoesComponent },
+      { path: 'painel', component: PainelComponent }   
     ],
   },
   { path: 'login', component: LoginFinalComponent },
