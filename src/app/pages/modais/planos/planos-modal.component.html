@@ -1,18 +1,16 @@
-<mat-dialog-content class="mat-typography">
-  <div>
+<mat-dialog-content class="mat-typography" >
+  <div class = "espacamentoTexto">
     <h1 class="text-center">Preços e Planos</h1>
     <h2 class="subheading-2 text-hint text-center max-w-lg mx-auto m-0">Escolha o plano que melhor se adequa ao seu negócio.</h2>
   </div>
 
-  <div class="my-12 container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start"
+  <div class="my-31 container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start"
     fxLayoutAlign.xs="start stretch" fxLayoutGap="24px">
 
-    <div class="card p-6" *ngFor="let plano of listaPlanos" fxFlex fxLayout="column" fxLayoutAlign="start center">
+    <div class="card p-8" *ngFor="let plano of listaPlanos" fxFlex fxLayout="column" fxLayoutAlign="start center">
       <div class="inline-block p-6 rounded-full bg-primary-light text-primary mx-auto" fxLayout="row"
         fxLayoutAlign="center center">
        <img src="{{plano.icone}}" alt="">
-       
-        <!-- <ic-icon [icon]="icBeenhere" size="48px"></ic-icon> -->
       </div>
 
       <h2 class="headline my-6">{{plano.nome}}</h2>

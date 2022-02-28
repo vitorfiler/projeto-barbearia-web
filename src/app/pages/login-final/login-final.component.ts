@@ -73,7 +73,10 @@ export class LoginFinalComponent implements OnInit {
 	}
 	// Metodo para abrir modal de planos
 	abrirModalPlanos() {
-		const dialogRef = this.dialog.open(PlanosModalComponent);
+		const dialogRef = this.dialog.open(PlanosModalComponent, {
+			width: '1000px', 
+			height: 'auto', 
+		});
 		dialogRef.afterClosed().subscribe(result => {
 			console.log(`Dialog result: ${result}`);
 		});

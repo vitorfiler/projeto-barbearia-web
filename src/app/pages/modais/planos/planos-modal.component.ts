@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import icBeenhere from '@iconify/icons-ic/twotone-beenhere';
-import icStars from '@iconify/icons-ic/twotone-stars';
-import icBusinessCenter from '@iconify/icons-ic/twotone-business-center';
 import { MatDialog } from '@angular/material/dialog';
 import { PlanosServiceComponent } from 'src/app/services/planos.services';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,15 +8,11 @@ import { Plano } from 'src/app/_models/plano';
 @Component({
   selector: 'vex-planos',
   templateUrl: './planos-modal.component.html',
+  styleUrls: ['./planos-modal.component.scss']
 })
 export class PlanosModalComponent implements OnInit {
 
   estabelecimentoID = localStorage.getItem('estabelecimento_ID')
-
-  icone = "../../../../assets/img/icones/mercadoLivre.png";
-  icBeenhere = icBeenhere;
-  icStars = icStars;
-  icBusinessCenter = icBusinessCenter;
 
   listaPlanos: Plano[] = [];
 
