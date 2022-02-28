@@ -10,7 +10,9 @@
     <div class="card p-6" *ngFor="let plano of listaPlanos" fxFlex fxLayout="column" fxLayoutAlign="start center">
       <div class="inline-block p-6 rounded-full bg-primary-light text-primary mx-auto" fxLayout="row"
         fxLayoutAlign="center center">
-        <ic-icon [icon]="icBeenhere" size="48px"></ic-icon>
+       <img src="{{plano.icone}}" alt="">
+       
+        <!-- <ic-icon [icon]="icBeenhere" size="48px"></ic-icon> -->
       </div>
 
       <h2 class="headline my-6">{{plano.nome}}</h2>
