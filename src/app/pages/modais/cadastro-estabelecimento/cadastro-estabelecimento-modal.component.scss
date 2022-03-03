@@ -18,12 +18,25 @@ input[type="file"]{
   color: rgb(92,119,255);
 }
 .alteraFundo{
-  margin-left: 300px;
+  float: right;
   margin-top: 90px;
+  margin-right: 2%;
+  border-radius: 3px;
+  background-color: white;
+
+  width: 40px;
+  height: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 }
-.alterarFundoLabel{
-  width: auto;
-  background-color: red;
+.alteraFundo .mat-icon{
   color: black;
-  
+  opacity: 0.5;
+}
+.alteraFundo:hover .mat-icon{
+  cursor: pointer;
+  color: black;
+  opacity: 1;
 }
