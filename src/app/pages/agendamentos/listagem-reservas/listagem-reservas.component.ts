@@ -26,6 +26,14 @@ export class ListagemReservasComponent implements OnInit {
 	dataSource = new MatTableDataSource<Reserva>()
 	statusPadrao: String;
 
+	displayedColumns: string[] = ['cliente', 'produto', 'quantidade', 'valor', 'dataRetirada', 'status', 'acoes'];
+
+	status: Status[] = [
+		{ value: 'AGUARDANDORETIRADA', viewValue: 'Aguardando Retirada' },
+		{ value: 'CANCELADO', viewValue: 'Cancelado' },
+		{ value: 'ENTREGUE', viewValue: 'Entregue' },
+	];
+
 	statusReserva: Status[] = [
 		{ value: 'TODOS', viewValue: 'Todos' },
 		{ value: 'AGUARDANDORETIRADA', viewValue: 'Aguardando Retirada' },
