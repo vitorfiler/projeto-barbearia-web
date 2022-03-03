@@ -60,7 +60,9 @@ export class LoginFinalComponent implements OnInit {
 	MostrarModalCadastroCompleto() {
 		let cadastroCompleto = JSON.parse(localStorage.getItem('cadastroCompleto'))
 		if (!cadastroCompleto) {
-			const dialogRef = this.dialog.open(CadastroEstabelecimentoModal);
+			const dialogRef = this.dialog.open(CadastroEstabelecimentoModal,{
+				maxWidth: '600px'
+			});
 			dialogRef.afterClosed().subscribe(result => {
 				console.log(`Dialog result: ${result}`);	
 			});

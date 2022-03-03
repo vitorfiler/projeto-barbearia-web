@@ -1,5 +1,5 @@
-<div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
-  <h2 class="title m-0" mat-dialog-tittle>Complete Seu Cadastro</h2>
+<div class="px-6 py-3 border-b" fxLayout="row" fxLayoutAlign="start center">
+  <h2 class="title m-0 corPrimaria" mat-dialog-tittle >Complete Seu Cadastro</h2>
 </div>
 <mat-dialog-content class="mat-typography">
   <div @fadeInUp fxFlex="auto" [formGroup]="form">
@@ -7,9 +7,9 @@
       <div class="card overflow-hidden">
         <div class="h-32 relative overflow-hidden">
           <img class="w-full h-full object-cover" src="assets/img/demo/landscape.jpg">      
-          <div class="absolute bg-contrast-black opacity-25 top-0 right-0 bottom-0 left-0 w-full h-full z-0">
-            <div class="absolute opacity-50">
-              <label for="file-up"><mat-icon>add_a_photo</mat-icon></label>
+          <div class="absolute opacity-25 top-0 right-0 bottom-0 left-0 w-full h-full z-0">
+            <div class="absolute alteraFundo">
+              <label for="file-up" class="alterarFundoLabel"><mat-icon>add_a_photo</mat-icon>Alterar fundo</label>
               <input id="file-up" type="file"/>
             </div>
           </div>
@@ -28,8 +28,25 @@
       </div>
     </div>
 
+    <div class="alterarFundoLabel">
+      <label for="file-up" mat-raised-button ><mat-icon style="color: black">add_a_photo</mat-icon>Alterar fundo</label>
 
-    <div class="px-6 py-4" fxLayout="column">
+    </div>
+    <div class="px-6 py-2" fxLayout="row" fxLayoutAlign="start center">
+      <h3 class="corPrimaria relative overflow-hidden">Sobre</h3>
+    </div>
+    <div class="px-6 py-2 border-b" fxLayout="column">
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Sobre o estabelecimento</mat-label>
+          <textarea matInput [matTextareaAutosize]="true"></textarea>
+        </mat-form-field>
+    </div>
+
+    <div class="px-6 py-2" fxLayout="row" fxLayoutAlign="start center">
+      <h3 class="corPrimaria">Endereço</h3>
+    </div>
+
+    <div class="px-6 border-b" fxLayout="column">
       <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
         <mat-form-field fxFlex="grow">
           <mat-label>CEP</mat-label>
@@ -40,37 +57,54 @@
           <input matInput type="number" placeholder="Ex. 12" formControlName="numero" [(ngModel)]="endereco.numero"
             required>
         </mat-form-field>
-
       </div>
-
-      <mat-form-field fxFlex="grow">
-        <mat-label>Complemento</mat-label>
-        <input matInput formControlName="complemento" [(ngModel)]="endereco.complemento">
-      </mat-form-field>
-
-      <mat-form-field fxFlex="grow">
-        <mat-label>Logradouro</mat-label>
-        <input matInput formControlName="rua" [(ngModel)]="endereco.logradouro" required>
-      </mat-form-field>
+        <mat-form-field fxFlex="grow">
+          <mat-label>Complemento</mat-label>
+          <input matInput formControlName="complemento" [(ngModel)]="endereco.complemento">
+        </mat-form-field>
+        <mat-form-field fxFlex="grow">
+          <mat-label>Logradouro</mat-label>
+          <input matInput formControlName="rua" [(ngModel)]="endereco.logradouro" required>
+        </mat-form-field>
       <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
         <mat-form-field fxFlex="grow">
           <mat-label>Bairro</mat-label>
           <input matInput formControlName="bairro" [(ngModel)]="endereco.bairro" required>
         </mat-form-field>
       </div>
-
       <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
         <mat-form-field fxFlex="grow">
           <mat-label>Estado</mat-label>
           <input matInput formControlName="estado" [(ngModel)]="endereco.estado" required>
         </mat-form-field>
-
         <mat-form-field fxFlex="grow">
           <mat-label>Cidade</mat-label>
           <input matInput formControlName="cidade" [(ngModel)]="endereco.cidade" required>
         </mat-form-field>
       </div>
     </div>
+
+    <div class="px-6 py-2" fxLayout="row" fxLayoutAlign="start center">
+      <h3 class="corPrimaria">Contato</h3>
+    </div>
+
+    <div class="px-6" fxLayout="column">
+      <mat-form-field fxFlex="grow">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email"  required>
+      </mat-form-field>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+        <mat-form-field fxFlex="grow">
+          <mat-label>Celular</mat-label>
+          <input matInput type="number" placeholder="(DD) 99999-9999" formControlName="celular"  required>
+        </mat-form-field>
+        <mat-form-field fxFlex="grow">
+          <mat-label>Telefone</mat-label>
+          <input matInput type="number" placeholder="(DD) 99999-9999" formControlName="telefone"  required>
+        </mat-form-field>
+      </div>
+    </div>
+
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

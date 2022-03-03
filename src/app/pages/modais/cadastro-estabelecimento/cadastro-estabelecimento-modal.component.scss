@@ -1,19 +1,29 @@
 .foto{
-    cursor: pointer;
-  }
-  .foto:hover {
-    opacity: 0.5;
-  }
+  cursor: pointer;
+}
+.foto:hover {
+  opacity: 0.5;
+}
+.mat-icon{
+  color: white;
+}
+input[type="file"]{
+  display: none;
+}
+.centInputImg{
+  margin-top: 36px;
+  margin-left: 36px;
+}
+.corPrimaria{
+  color: rgb(92,119,255);
+}
+.alteraFundo{
+  margin-left: 300px;
+  margin-top: 90px;
+}
+.alterarFundoLabel{
+  width: auto;
+  background-color: red;
+  color: black;
   
-  .mat-icon{
-    color: white;
-  }
-  
-  input[type="file"]{
-    display: none;
-  }
-  
-  .centInputImg{
-    margin-top: 36px;
-    margin-left: 36px;
-  }
+}

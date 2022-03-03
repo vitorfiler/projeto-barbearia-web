@@ -24,9 +24,9 @@ import { MessagesSnackBar } from "src/app/_constants/messagesSnackBar";
 
 export class CadastroEstabelecimentoModal implements OnInit {
 
-	estabelecimentoID: string = localStorage.getItem('estabelecimento_ID')
-	endereco: Endereco = new Endereco()
-	imagemPerfil: String = '../../../../assets/CentralizadorImagem.png'
+	estabelecimentoID: string = localStorage.getItem('estabelecimento_ID');
+	endereco: Endereco = new Endereco();
+	imagemPerfil: String = '../../../../assets/CentralizadorImagem.png';
 	imagemPerfilFundo: String = '../../../../assets/img/demo/landscape.jpg';
 	mostraIcone: boolean = true;
 	// imagemPerfil: any;
@@ -53,6 +53,9 @@ export class CadastroEstabelecimentoModal implements OnInit {
 			bairro: ['', Validators.required],
 			estado: ['', Validators.required],
 			cidade: ['', Validators.required],
+			email: ['', Validators.required],
+			celular: ['',Validators.required],
+			telefone: ['',Validators.required]
 		});
 	}
 
