@@ -69,7 +69,7 @@ export class LoginFinalComponent implements OnInit {
 	}
 	// Metodo para abrir modal de planos
 	abrirModalPlanos() {
-		let planoId = localStorage.getItem("planoId")
+		let planoId = JSON.parse(localStorage.getItem('planoId'))
 		if (!planoId) {
 			const dialogRef = this.dialog.open(PlanosModalComponent, {
 				width: '1000px',
