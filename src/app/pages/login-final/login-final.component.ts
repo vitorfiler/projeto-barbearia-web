@@ -86,6 +86,7 @@ export class LoginFinalComponent implements OnInit {
 
 			},
 				(error) => {
+					this.router.navigate(['/']);
 					this.logando = false;
 					console.log(error.message);
 					this.snackbar.open(MessagesSnackBar.LOGIN_ERRO, 'Close', { duration: 9000 });

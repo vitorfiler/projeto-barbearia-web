@@ -49,6 +49,7 @@ export class ListagemAgendamentosComponent implements OnInit {
 	//variaveis
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
 	public carregando = false;
+	mostraIcone: boolean = true;
 	
 	//objetos
 	agendamento: Agendamento;
