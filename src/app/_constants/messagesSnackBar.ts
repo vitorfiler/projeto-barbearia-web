@@ -13,4 +13,7 @@ export enum MessagesSnackBar {
     ALTERAÇÃO_AGENDAMENTO_ERRO = "Falha ao alterar agendamento",
     DELETAR_AGENDAMENTO_SUCESSO = "Agendamento apagado com sucesso",
     DELETAR_AGENDAMENTO_ERRO = "Falha ao apagar agendamento",
+    CONTRATAR_PLANO_SUCESSO = "Plano contratado com sucesso",
+    CONTRATAR_PLANO_ERRO = "Falha ao contratar plano",
+    LISTAR_PLANO_ERRO = "Falha ao alterar plano"
   }

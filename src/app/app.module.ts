@@ -50,6 +50,7 @@ import { ListagemServicosComponent } from './pages/servicos/listagem-servicos/li
 import { ListagemProdutosComponent } from './pages/servicos/listagem-produtos/listagem-produtos.component';
 import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/listagem-promocoes.component';
 import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
+import { PlanosModalComponent } from './pages/modais/planos/planos-modal.component';
 import { ComentariosComponent } from './pages/comentarios/comentarios.component';
 import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
 import { AgendaComponent } from './pages/agenda/agenda.component';
@@ -85,6 +86,8 @@ import { ConstrucaoModal } from './pages/modais/construcao-modal/modal-adicionar
     ServicosComponent,
     ListagemServicosComponent,
     ListagemProdutosComponent,
+    CadastroEstabelecimentoModal,
+    PlanosModalComponent,
     ListagemPromocoesComponent,
     CadastroEstabelecimentoModal,
     FluxoDeCaixa,
