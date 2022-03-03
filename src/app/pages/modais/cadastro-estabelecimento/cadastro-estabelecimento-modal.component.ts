@@ -14,8 +14,8 @@ import { MessagesSnackBar } from "src/app/_constants/messagesSnackBar";
 
 @Component({
 	selector: 'cadastro-estabelecimento-modal',
-	templateUrl: 'cadastro-estabelecimento-modal.html',
-	styleUrls: ['cadastro-estabelecimento-modal.scss'],
+	templateUrl: 'cadastro-estabelecimento-modal.component.html',
+	styleUrls: ['cadastro-estabelecimento-modal.component.scss'],
 	animations: [
 		stagger60ms,
 		fadeInUp400ms
