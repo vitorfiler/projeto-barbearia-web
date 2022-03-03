@@ -1,0 +1,133 @@
+<ng-template #customLoadingTemplate>
+</ng-template>
+<ngx-loading [show]="carregando" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+</ngx-loading>
+
+<div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
+  <div fxFlex="auto" fxLayout="column">
+    <div class="row">
+      <div class="col-md-2">
+        <mat-form-field fxFlex="grow" appearance="standard">
+          <mat-label>Filtro</mat-label>
+          <input placeholder="Ex. Nome do cliente" formControlName="filtro" (ngModelChange)="validarFiltro()" matInput />
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field fxFlex="grow" appearance="standard">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" (ngModelChange)="validarFiltro()" name="filtroStatus">
+            <mat-option *ngFor="let selecaoStatus of selecaoStatus" [value]="selecaoStatus.value"[ngStyle]="{
+              'color':selecaoStatus.value === 'PENDENTE' ? '#DAAA00' 
+                : selecaoStatus.value === 'ACEITO' ? '#219653' 
+                : selecaoStatus.value === 'TODOS'? '#5c77ff' 
+                : '#EB5757'
+            }">
+              {{selecaoStatus.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2">
+        <mat-form-field fxFlex="grow" color="accent" appearance="standard">
+          <mat-label>Data Inicial</mat-label>
+          <input matInput [matDatepicker]="picker1" (ngModelChange)="validarFiltro()" formControlName="dt_inicial">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field fxFlex="grow" color="accent" appearance="standard">
+          <mat-label>Data final</mat-label>
+          <input matInput [matDatepicker]="picker2" (ngModelChange)="validarFiltro()" formControlName="dt_final">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2 color="primary"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <button fxFlex="grow" mat-stroked-button color="primary" (click)="clearForm()">Limpar</button>
+      </div>
+      <div class="col-md-2">
+        <button fxFlex="grow" mat-raised-button color="primary" (click)="abrirModalEditarCadastrar(true)">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  
+  <vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
+  <table mat-table matSort [dataSource]="dataSource" matSort>
+
+      <!-- Coluna Cliente -->
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Cliente </th>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.cliente.nome}} </td>
+      </ng-container>
+
+      <!-- Coluna Serviços -->
+      <ng-container matColumnDef="nomeServico">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Serviço </th>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.nomeServico}} </td>
+      </ng-container>
+
+      <!-- Coluna Tempo -->
+      <ng-container matColumnDef="tempoEstimado">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Tempo </th>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.tempoEstimado}} </td>
+      </ng-container>
+
+      <!-- Coluna Valor -->
+      <ng-container matColumnDef="valor">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Valor </th>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.valor |currency:'R$':'symbol-narrow'}} </td>
+      </ng-container>
+
+      <!-- Coluna Data -->
+      <ng-container matColumnDef="dtAtendimento">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Data / Hora</th>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.dtAtendimento | date:'dd-MM-yyyy hh:MM'}} </td>
+      </ng-container>
+
+      <!-- Coluna Responsável -->
+      <ng-container matColumnDef="responsavel">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Responsável </th>
+        <td mat-cell *matCellDef="let agendamento"> {{agendamento.responsavel}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th class="colum" mat-header-cell mat-sort-header *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let agendamento">
+          <mat-form-field style="color: red!important" appearance="standard">
+            <mat-label>Status</mat-label>
+            <mat-select #select [(ngModel)]="agendamento.status" name="status">
+              <mat-option *ngFor="let status of status" [value]="status.value"
+                (click)='abrirModalTrocaStatus(agendamento.id)' [ngStyle]="{
+                  'color':status.value === 'PENDENTE' ? 
+                  '#DAAA00' : status.value === 'ACEITO' ? 
+                  '#219653' : '#EB5757'
+                }">
+                {{status.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th class="colum" mat-header-cell *matHeaderCellDef> Ações </th>
+        <td mat-cell *matCellDef="let agendamento">
+          <button mat-icon-button color="primary" (click)="abrirModalEditarCadastrar(false, agendamento.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="warn" (click)="abrirModalDeletar(agendamento.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </vex-scrollbar>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>

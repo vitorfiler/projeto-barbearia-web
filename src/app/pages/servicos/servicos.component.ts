@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServicosComponent implements OnInit {
 
-  aba: String = '';
   promocoes: boolean = false;
   produtos: boolean = false;
   servicos: boolean = true;

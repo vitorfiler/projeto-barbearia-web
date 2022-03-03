@@ -12,6 +12,7 @@ import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { MatDialog } from '@angular/material/dialog';
+import { PlanosModalComponent } from '../modais/planos/planos-modal.component';
 
 @Component({
 	selector: 'vex-login-final',
@@ -56,7 +57,7 @@ export class LoginFinalComponent implements OnInit {
 		});
 
 	}
-	//metodo para exibir o modal na tela de solicitações, assim que fizer o login esse modal sera apresentado
+	//metodo para exibir o modal na tela de agendamentos, assim que fizer o login esse modal sera apresentado
 	MostrarModalCadastroCompleto() {
 		let cadastroCompleto = JSON.parse(localStorage.getItem('cadastroCompleto'))
 		if (!cadastroCompleto) {
@@ -64,7 +65,19 @@ export class LoginFinalComponent implements OnInit {
 				maxWidth: '600px'
 			});
 			dialogRef.afterClosed().subscribe(result => {
-				console.log(`Dialog result: ${result}`);	
+				this.abrirModalPlanos();
+			});
+		}
+	}
+	// Metodo para abrir modal de planos
+	abrirModalPlanos() {
+		let planoId = JSON.parse(localStorage.getItem('planoId'))
+		if (!planoId) {
+			const dialogRef = this.dialog.open(PlanosModalComponent, {
+				width: '1000px',
+				height: 'auto',
+			});
+			dialogRef.afterClosed().subscribe(result => {
 			});
 		}
 	}
@@ -76,16 +89,19 @@ export class LoginFinalComponent implements OnInit {
 		return this.loginService
 			.login(username, password)
 			.subscribe(response => {
-
 				localStorage.setItem("currentUser", JSON.stringify(response.body.estabelecimento))
 				localStorage.setItem("token", response.body.token)
 				localStorage.setItem("estabelecimento_ID", response.body.estabelecimento_ID)
 				localStorage.setItem("cadastroCompleto", response.body.cadastroCompleto)
+				localStorage.setItem("planoId", response.body.plano_ID)
+				localStorage.setItem("planoId", response.body.plano_ID)
+				localStorage.setItem("nomePlano", "BASIC")
 				this.router.navigate(['/']);
 				this.MostrarModalCadastroCompleto()
 				this.logando = false;
-
-
+				if (!response.body.planoID && response.body.cadastroCompleto) {
+					this.abrirModalPlanos();
+				}
 			},
 				(error) => {
 					this.logando = false;
