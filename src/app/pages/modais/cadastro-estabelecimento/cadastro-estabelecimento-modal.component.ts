@@ -28,6 +28,7 @@ export class CadastroEstabelecimentoModal implements OnInit {
 	endereco: Endereco = new Endereco()
 	imagemPerfil: String = '../../../../assets/CentralizadorImagem.png'
 	imagemPerfilFundo: String = '../../../../assets/img/demo/landscape.jpg';
+	mostraIcone: boolean = true;
 	// imagemPerfil: any;
 
 	//   Campo tempo de Serviço

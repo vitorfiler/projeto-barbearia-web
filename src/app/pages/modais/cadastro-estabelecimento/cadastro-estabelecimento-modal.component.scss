@@ -1,0 +1,19 @@
+.foto{
+    cursor: pointer;
+  }
+  .foto:hover {
+    opacity: 0.5;
+  }
+  
+  .mat-icon{
+    color: white;
+  }
+  
+  input[type="file"]{
+    display: none;
+  }
+  
+  .centInputImg{
+    margin-top: 36px;
+    margin-left: 36px;
+  }
