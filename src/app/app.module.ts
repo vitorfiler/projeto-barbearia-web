@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -68,97 +68,99 @@ import { ConstrucaoComponent } from './pages/construcao/construcao.component';
 import { ConstrucaoModal } from './pages/modais/construcao-modal/modal-adicionar-servicos';
 import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
 import { ServicosComponent } from './pages/servicos/servicos.component';
+import { ValueTimePipe } from './value-time.pipe';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginFinalComponent,
-    CadastroComponent,
-    RecuperarSenhaComponent,
-    RedefinirSenhaComponent,
-    RecuperarSenhaSucessoComponent,
-    ListagemAgendamentosComponent,
-    AgendamentosComponent,
-    ModalCadastrarEditarAgendamento,
-    ModalAlterarStatusAgendamento,
-    ModalDeletarAgendamento,
-    ServicosComponent,
-    ListagemServicosComponent,
-    ListagemProdutosComponent,
-    CadastroEstabelecimentoModal,
-    PlanosModalComponent,
-    ListagemPromocoesComponent,
-    CadastroEstabelecimentoModal,
-    FluxoDeCaixa,
-    ComentariosComponent,
-    ConfiguracoesComponent,
-    AgendaComponent,
-    PainelComponent,
-    CaixaComponent,
-    NovaVendaComponent,
-    HistoricoDeVendaComponent,
-    ModalAdicionarServico,
-    ListagemReservasComponent,
-    ConstrucaoComponent,
-    ConstrucaoModal
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    CalendarModule,
-    MatDialogModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    NgxLoadingModule.forRoot({}),
-    AngularCalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatProgressBarModule,
-    MatIconModule,
-    GaugeModule,
-    NgxGaugeModule,
+	declarations: [
+		AppComponent,
+		LoginFinalComponent,
+		CadastroComponent,
+		RecuperarSenhaComponent,
+		RedefinirSenhaComponent,
+		RecuperarSenhaSucessoComponent,
+		ListagemAgendamentosComponent,
+		AgendamentosComponent,
+		ModalCadastrarEditarAgendamento,
+		ModalAlterarStatusAgendamento,
+		ModalDeletarAgendamento,
+		ServicosComponent,
+		ListagemServicosComponent,
+		ListagemProdutosComponent,
+		CadastroEstabelecimentoModal,
+		PlanosModalComponent,
+		ListagemPromocoesComponent,
+		CadastroEstabelecimentoModal,
+		FluxoDeCaixa,
+		ComentariosComponent,
+		ConfiguracoesComponent,
+		AgendaComponent,
+		PainelComponent,
+		CaixaComponent,
+		NovaVendaComponent,
+		HistoricoDeVendaComponent,
+		ModalAdicionarServico,
+		ListagemReservasComponent,
+		ConstrucaoComponent,
+		ConstrucaoModal,
+		ValueTimePipe
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		ReactiveFormsModule,
+		AppRoutingModule,
+		CalendarModule,
+		MatDialogModule,
+		MatNativeDateModule,
+		MatDatepickerModule,
+		NgxLoadingModule.forRoot({}),
+		AngularCalendarModule.forRoot({
+			provide: DateAdapter,
+			useFactory: adapterFactory
+		}),
+		BrowserAnimationsModule,
+		HttpClientModule,
+		MatFormFieldModule,
+		MatSelectModule,
+		MatProgressBarModule,
+		MatIconModule,
+		GaugeModule,
+		NgxGaugeModule,
 
-    MatCardModule,
-    NgxChartsModule,
-    MatSnackBarModule,
-    ScrollingModule,
-    ScrollbarModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    IconModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatRadioModule,
-    MatAutocompleteModule,
-    MatTableModule,
-    NgxMaskModule.forRoot(),
-    MatCheckboxModule,
-    MatInputModule,
-    MatTabsModule,
-    MatPaginatorModule,
-    MatSortModule,
+		MatCardModule,
+		NgxChartsModule,
+		MatSnackBarModule,
+		ScrollingModule,
+		ScrollbarModule,
+		MatDatepickerModule,
+		MatNativeDateModule,
+		IconModule,
+		FlexLayoutModule,
+		MatButtonModule,
+		MatDialogModule,
+		MatRadioModule,
+		MatAutocompleteModule,
+		MatTableModule,
+		NgxMaskModule.forRoot(),
+		MatCheckboxModule,
+		MatInputModule,
+		MatTabsModule,
+		MatPaginatorModule,
+		MatSortModule,
+		CoreModule,
+		// Vex
+		VexModule,
+		CustomLayoutModule,
+		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+	],
+	providers: [
+		MatDatepickerModule,
+		MatNativeDateModule,
+		[{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }],
+		[{ provide: LOCALE_ID, useValue: 'pt' }]
 
-
-    CoreModule,
-    // Vex
-    VexModule,
-    CustomLayoutModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-  ],
-  providers: [
-    MatDatepickerModule,
-    MatNativeDateModule,
-    [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }]
-  ],
-  bootstrap: [AppComponent],
+	],
+	bootstrap: [AppComponent],
 })
 export class AppModule { }
