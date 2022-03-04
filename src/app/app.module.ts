@@ -64,6 +64,7 @@ import { AgendamentosComponent } from './pages/agendamentos/agendamentos.compone
 import { CaixaComponent } from './pages/fluxo-de-caixa/caixa/caixa.component';
 import { NovaVendaComponent } from './pages/fluxo-de-caixa/nova-venda/nova-venda.component';
 import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-venda/historico-de-venda.component';
+import ModalOcultarServico from './pages/modais/agendamento-modais/modeal-ocultar-servicos/modal-ocultar-servico';
 
 
 @NgModule({
@@ -93,7 +94,7 @@ import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-v
     CaixaComponent,
     NovaVendaComponent,
     HistoricoDeVendaComponent,
-
+    ModalOcultarServico
 
 
   ],

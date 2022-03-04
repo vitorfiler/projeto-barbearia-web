@@ -19,5 +19,9 @@ export class ServicoService {
     });
   }
 
+  trocarStatusServico(body: Servico): Observable<any> {
+      return this.http.put(`${environment.URL_API}/servicos`, body, { observe: "response"});   
+  }
+
   
 }

@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Servico } from 'src/app/_models/servico';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
+import { MatDialog } from '@angular/material/dialog';
+import ModalOcultarServico from '../../modais/agendamento-modais/modeal-ocultar-servicos/modal-ocultar-servico';
 
 @Component({
   selector: 'vex-listagem-servicos',
@@ -28,7 +30,8 @@ export class ListagemServicosComponent implements OnInit {
 
   servico: Servico;
 
-  constructor(private servicoService: ServicoService) { }
+  constructor(private servicoService: ServicoService,
+              public dialog: MatDialog) { }
 
     servicos: Servico[] = []
 
@@ -52,6 +55,15 @@ export class ListagemServicosComponent implements OnInit {
 			this.carregando = false;
     })
   }
+
+  trocarStatusServico(servico: Servico) {
+    
+		const dialogRef = this.dialog.open(ModalOcultarServico, {
+			data: servico
+		});
+		dialogRef.afterClosed().subscribe(result => {
+		});
+	}
 
 
   ngAfterViewInit() {

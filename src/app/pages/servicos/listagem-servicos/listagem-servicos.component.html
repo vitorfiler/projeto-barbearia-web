@@ -29,9 +29,9 @@
 
       <ng-container matColumnDef="acoes">
         <th class="colum" mat-header-cell *matHeaderCellDef> Ações </th>
-        <td mat-cell *matCellDef="let agendamento">
+        <td mat-cell *matCellDef="let servico">
 
-          <button mat-icon-button>
+          <button mat-icon-button (click)="trocarStatusServico(servico)">
             <mat-icon>visibility</mat-icon>
           </button>
 
