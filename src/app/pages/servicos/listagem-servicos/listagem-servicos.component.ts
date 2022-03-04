@@ -1,9 +1,8 @@
-import { ServicoService } from './../../../services/servico.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Servico } from 'src/app/_models/servico';
+
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,54 +10,114 @@ import { EventEmitterService } from 'src/app/services/event.service';
 import ModalServicoPromocional from '../../modais/servico-modais/modal-servico-promocional/modal-servico-promocional';
 import { ModalDeletarServico } from '../../modais/servico-modais/modal-deletar-servico/modal-deletar-servico';
 import ModalOcultarServico from '../../modais/servico-modais/modal-ocultar-servicos/modal-ocultar-servico';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Categoria } from 'src/app/_models/categoria';
+import { Router } from '@angular/router';
+import { ServicoService } from 'src/app/services/servico.service';
+import { Servico } from 'src/app/_models/servico';
+import { ConstrucaoModal } from '../../modais/construcao-modal/modal-adicionar-servicos';
 
 @Component({
-  selector: 'vex-listagem-servicos',
-  templateUrl: './listagem-servicos.component.html',
-  styleUrls: ['./listagem-servicos.component.scss'],
-  animations: [
+	selector: 'vex-listagem-servicos',
+	templateUrl: './listagem-servicos.component.html',
+	styleUrls: ['./listagem-servicos.component.scss'],
+	animations: [
 		fadeInUp400ms,
 		stagger20ms
 	]
 })
 export class ListagemServicosComponent implements OnInit {
-
-  dataSource = new MatTableDataSource<Servico>()
-	displayedColumns: string[] = ['categoria', 'descricao', 'tempoEstimado', 'valor',  'acoes'];
+	form: FormGroup;
+	filtroCategoria: string;
+	lista: boolean = true;
+	visible = false;
+	categoria: string;
+	servico: Servico;
+	servicos: Servico[] = []
+	dataSource = new MatTableDataSource<Servico>()
+	displayedColumns: string[] = ['categoria', 'descricao', 'tempoEstimado', 'valor', 'acoes'];
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) matSort: MatSort;
-
-  estabelecimentoID = localStorage.getItem('estabelecimento_ID')
-  public carregando = false;
-
-  servico: Servico;
-  servicos: Servico[] = []
-
-  constructor(private servicoService: ServicoService,
-              public dialog: MatDialog) { }
+	alturaTela: any;
+	larguraTela: any;
+	mostraBotaoListaGradeNaTabela = false;
+	mostraBotaoListaGradeNoFiltro = false;
 
 
-  ngOnInit(): void {
+	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
+	public carregando = false;
+	selecaoCategoria: Categoria[] = [
+		{ value: 'TODOS', viewValue: 'Todos' },
+		{ value: 'CABELOF', viewValue: 'Cabelo Feminino' },
+		{ value: 'CABELOM', viewValue: 'Cabelo Masculino' },
+		{ value: 'UNHA', viewValue: 'Unha' },
+		{ value: 'PELE', viewValue: 'Pele' },
+
+	];
+
+	constructor(private router: Router,
+		private fb: FormBuilder,
+		public dialog: MatDialog,
+		private servicoService: ServicoService) {
+
+		this.botaoGradeListaPorPixel();
+	}
+
+	ngOnInit(): void {
     EventEmitterService.get('buscarServicos').subscribe(() => this.listarServicos())
-    this.listarServicos()
-  }
+		this.inicializarFiltro();
+		this.listarServicos();
+	}
 
-  listarServicos(){
-    this.carregando = true;
-    this.servicoService.listarServicos(this.estabelecimentoID).subscribe(response =>{
-      this.carregando = false
-      this.servicos = response.body
+	@HostListener('window:resize', ['$event'])
+	botaoGradeListaPorPixel(event?) {
 
-      this.dataSource = new MatTableDataSource<Servico>(this.servicos)
-      setTimeout(() => {
-        this.dataSource.paginator = this.paginator
-        this.dataSource.sort = this.matSort
-      })
-    }, (error) => {
-      console.log(error);
+		this.alturaTela = window.innerHeight;
+		this.larguraTela = window.innerWidth;
+		if (this.larguraTela >= 407 && this.larguraTela <= 767) {
+			this.mostraBotaoListaGradeNaTabela = true
+			this.mostraBotaoListaGradeNoFiltro = false
+		} else if(this.larguraTela > 767){
+			this.mostraBotaoListaGradeNaTabela = false
+			this.mostraBotaoListaGradeNoFiltro = true;
+		} else {
+			this.mostraBotaoListaGradeNaTabela = false
+			this.mostraBotaoListaGradeNoFiltro = false;
+		}
+	}
+
+	inicializarFiltro() { //inicializar filtros de pesquisa
+		this.form = this.fb.group({
+			filtro: [''],
+			categoria: ['']
+		});
+		this.categoria = this.selecaoCategoria[0].value;
+	}
+
+	// modal criado para adição de formulario inclusão de servicos
+	abrirModalAdicionarServico(isAdicionar: boolean) {
+		let dialogRef;
+		if (isAdicionar) {
+			dialogRef = this.dialog.open(ConstrucaoModal)
+		}
+	}
+
+	listarServicos() {
+		this.carregando = true;
+		this.servicoService.listarServicos(this.estabelecimentoID).subscribe(response => {
+			this.carregando = false
+			this.servicos = response.body
+
+			this.dataSource = new MatTableDataSource<Servico>(this.servicos)
+			setTimeout(() => {
+				this.dataSource.paginator = this.paginator
+				this.dataSource.sort = this.matSort
+			})
+		}, (error) => {
+			console.log(error);
 			this.carregando = false;
-    })
-  }
+		})
+	}
 
   trocarStatusServico(servico: Servico) {
 		const dialogRef = this.dialog.open(ModalOcultarServico, {
@@ -84,10 +143,26 @@ export class ListagemServicosComponent implements OnInit {
 		});
 	}
 
+	filtrar() {
+		this.servicoService.filtrar(this.estabelecimentoID, this.filtroCategoria, this.categoria)
+			.subscribe(resposta => {
+				this.servico = resposta.body
+				/*renderizando a tabela*/
+				this.carregando = false;
+				this.dataSource = new MatTableDataSource<Servico>(this.servicos)
 
-  ngAfterViewInit() {
+			})
+	}
+
+	botaoVisualizacao() {
+		this.visible = this.visible ? false : true
+
+	}
+
+	ngAfterViewInit() {
 		this.dataSource.sort = this.matSort;
 	}
-  
 
 }
+
+

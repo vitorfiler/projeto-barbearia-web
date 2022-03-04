@@ -50,7 +50,8 @@
 
     <mat-form-field fxFlex="grow">
       <mat-label>Responsável</mat-label>
-      <input matInput formControlName="responsavel" [(ngModel)]="agendamento.responsavel" required>
+      <input matInput formControlName="responsavel" [(ngModel)]="agendamento.responsavel" 
+      (change)="limparStatus(agendamento.responsavel)">
     </mat-form-field>
 
     <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
@@ -62,14 +63,14 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field style="color: red!important" fxFlex="grow">
+      <mat-form-field style="color: red!important" fxFlex="grow" *ngIf="agendamento.id">
         <mat-label>Status</mat-label>
-        <mat-select name="status" formControlName="status" [(ngModel)]="agendamento.status" required>
+        <mat-select name="status" formControlName="status" [(ngModel)]="agendamento.status">
           <mat-option *ngFor="let status of status" [value]="status.value" [ngStyle]="{
                 'color':status.value === 'PENDENTE' ? 
                 '#DAAA00' : status.value === 'ACEITO' ? 
                 '#219653' : '#EB5757'
-              }">
+              }" [disabled] = "agendamento.responsavel && status.value =='PENDENTE'">
             {{status.viewValue}}
           </mat-option>
         </mat-select>

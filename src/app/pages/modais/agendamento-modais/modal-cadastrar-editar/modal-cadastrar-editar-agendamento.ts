@@ -32,34 +32,26 @@ export class ModalCadastrarEditarAgendamento implements OnInit,AfterViewInit  {
 	];
 
 	agendamento: Agendamento = new Agendamento();
-
-	//   Campo tempo de Serviço
 	form: FormGroup;
 	legendaBotao = 'Cadastrar';
-	estabelecimentoID = 1;
+	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
 	cliente = new Cliente();
 	clientes = this.buscarClientesAtivos();
 	filteredOptions: Observable<Cliente[]>;
 	myControl = new FormControl();
 	public carregando = false;
-
 	textoAutoComplete = '';
+
 
 	constructor(
 		private fb: FormBuilder,
 		private agendamentoService: AgendamentoService,
 		private clientesService: ClientesService,
 		private snackbar: MatSnackBar,
-		@Optional() @Inject(MAT_DIALOG_DATA) public agendamentoToEdit: any) {
-		this.legendaBotao = agendamentoToEdit ? 'Alterar' : 'Cadastrar';
+		@Optional() @Inject(MAT_DIALOG_DATA) public alterarAgendamento: any) {
+		this.legendaBotao = alterarAgendamento ? 'Alterar' : 'Cadastrar';
 	}
-	ngAfterViewInit(): void {
-		this.filteredOptions = this.myControl.valueChanges
-		.pipe(
-		  startWith(''),
-		  map(value => this._filter(value))
-		);
-	}
+	
 	ngOnInit(): void {
 
 		this.filteredOptions = this.myControl.valueChanges
@@ -68,8 +60,8 @@ export class ModalCadastrarEditarAgendamento implements OnInit,AfterViewInit  {
 		  map(value => this._filter(value))
 		);
 
-		if (this.agendamentoToEdit) {
-			this.agendamento = new Agendamento(this.agendamentoToEdit)
+		if (this.alterarAgendamento) {
+			this.agendamento = new Agendamento(this.alterarAgendamento)
 		}
 
 		this.form = this.fb.group({
@@ -77,9 +69,9 @@ export class ModalCadastrarEditarAgendamento implements OnInit,AfterViewInit  {
 			tempoEstimado: ['', Validators.required],
 			valorServico: ['', Validators.required],
 			dtAtendimento: ['', Validators.required],
-			responsavel: ['', Validators.required],
+			responsavel: [''],
 			cliente: ['', Validators.required],
-			status: ['', Validators.required]
+			status: ['']
 		});
 	}
 
@@ -138,8 +130,16 @@ export class ModalCadastrarEditarAgendamento implements OnInit,AfterViewInit  {
 
 	  enviarAgendamento(agendamento: Agendamento) {
 		agendamento.clienteID = this.form.get('cliente').value;
-		agendamento.estabelecimentoID = this.estabelecimentoID;
+		agendamento.estabelecimentoID = +this.estabelecimentoID;
+		
+		// Regra do campo status
 
+		if(agendamento.responsavel){
+			agendamento.status = "Aceito"
+		}
+		else{
+			agendamento.status = "Pendente"
+		}
 		agendamento.id ? this.alterar(agendamento) : this.cadastrar(agendamento);
 	}
 
@@ -176,5 +176,18 @@ export class ModalCadastrarEditarAgendamento implements OnInit,AfterViewInit  {
 		})
 	}
 
+	limparStatus(agendamentoResponsavel: String){
+
+		agendamentoResponsavel? this.agendamento.status = "ACEITO" : this.agendamento.status = "PENDENTE";
+
+	}
+
+	ngAfterViewInit(): void {
+		this.filteredOptions = this.myControl.valueChanges
+		.pipe(
+		  startWith(''),
+		  map(value => this._filter(value))
+		);
+	}
 
 }

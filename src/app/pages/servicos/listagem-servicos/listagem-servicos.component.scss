@@ -1,3 +1,4 @@
+
 table {
     width: 100%;
   }
@@ -10,12 +11,11 @@ table {
   td, th {
     width: 25%;
   }
-  
+  .mat-raised-button, .mat-stroked-button{    
+    margin: auto;
+    color:white; 
+  }
+
   .mat-raised-button, .mat-stroked-button{    
     margin: auto;
   }
-
-  mat-icon{
-    color:#DAAA00;
-  }
-  

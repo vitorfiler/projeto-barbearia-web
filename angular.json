@@ -99,6 +99,64 @@
               },
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "customWebpackConfig": {
+                "path": "./webpack.prod.config.js"
+              },
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "hml": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hml.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "customWebpackConfig": {
+                "path": "./webpack.prod.config.js"
+              },
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
@@ -110,6 +168,12 @@
           "configurations": {
             "production": {
               "browserTarget": "vex:build:production"
+            },
+            "test": {
+              "browserTarget": "vex:build:test"
+            },
+            "hml": {
+              "browserTarget": "vex:build:hml"
             }
           }
         },
@@ -126,6 +190,10 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "fileReplacements": [{
+              "replace": "src/environments/environment.ts",
+              "with": "src/environments/environment.test.ts"
+            }],
             "assets": [
               "src/favicon.ico",
               "src/assets"

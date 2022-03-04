@@ -19,4 +19,7 @@ export enum MessagesSnackBar {
     STATUS_PROMOCIONAL_SERVICO_ALTERADO_ERRO = "Falha ao alterar o status promocional do serviço",
     DELETAR_SERVICO_SUCESSO = "Servico deletado com sucesso",
     DELETAR_SERVICO_ERRO = "Falha ao deletar servico",
+    CONTRATAR_PLANO_SUCESSO = "Plano contratado com sucesso",
+    CONTRATAR_PLANO_ERRO = "Falha ao contratar plano",
+    LISTAR_PLANO_ERRO = "Falha ao alterar plano"
   }

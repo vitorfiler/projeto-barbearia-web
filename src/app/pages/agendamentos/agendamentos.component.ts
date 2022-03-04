@@ -16,7 +16,6 @@ export class AgendamentosComponent implements OnInit {
   }
 
   trocaTitulo($event){
-    console.log($event.index);
     this.isAgendamentos = $event.index == 0? true : false;
   }
 }
