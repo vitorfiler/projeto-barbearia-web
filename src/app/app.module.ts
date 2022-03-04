@@ -45,14 +45,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
-import { ServicosComponent } from './pages/servicos/servicos.component';
 import { ListagemServicosComponent } from './pages/servicos/listagem-servicos/listagem-servicos.component';
 import { ListagemProdutosComponent } from './pages/servicos/listagem-produtos/listagem-produtos.component';
 import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/listagem-promocoes.component';
 import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 import { PlanosModalComponent } from './pages/modais/planos/planos-modal.component';
 import { ComentariosComponent } from './pages/comentarios/comentarios.component';
-import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { PainelComponent } from './pages/painel/painel.component';
 import { FluxoDeCaixa } from './pages/fluxo-de-caixa/fluxo-de-caixa.component';
@@ -68,6 +66,8 @@ import { ModalAdicionarServico } from './pages/modais/servicos-modais/modal-adic
 import { ListagemReservasComponent } from './pages/agendamentos/listagem-reservas/listagem-reservas.component';
 import { ConstrucaoComponent } from './pages/construcao/construcao.component';
 import { ConstrucaoModal } from './pages/modais/construcao-modal/modal-adicionar-servicos';
+import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
+import { ServicosComponent } from './pages/servicos/servicos.component';
 import { ValueTimePipe } from './value-time.pipe';
 
 
@@ -148,8 +148,6 @@ import { ValueTimePipe } from './value-time.pipe';
 		MatTabsModule,
 		MatPaginatorModule,
 		MatSortModule,
-
-
 		CoreModule,
 		// Vex
 		VexModule,
