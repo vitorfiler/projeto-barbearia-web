@@ -29,9 +29,6 @@ export class CadastroEstabelecimentoModal implements OnInit {
 	imagemPerfil: String = '../../../../assets/CentralizadorImagem.png';
 	imagemPerfilFundo: String = '../../../../assets/img/demo/landscape.jpg';
 	mostraIcone: boolean = true;
-	// imagemPerfil: any;
-
-	//   Campo tempo de Serviço
 	form: FormGroup;
 	legendaBotao = 'Cadastrar';
 
@@ -78,20 +75,9 @@ export class CadastroEstabelecimentoModal implements OnInit {
 		})
 	}
 
-	//metodo que sera utilizado para fazer busca de endereço por CEP
+	
 	consultarCEP(cep: string) {
-		// this.CommomService.consultaCep(cep).subscribe(response =>{
-		// 	console.log(response)
-
-		// })
+		
 	}
 
-	
-  	// enviarFotoPerfil(event) {
-	// 	for (let index = 0; index < event.length; index++) {
-	// 	const element = event[index];
-	// 	let fileElement = <File>event[index]
-	// 	this.imagemPerfil = fileElement;
-	// 	}
-  	// }
 }
