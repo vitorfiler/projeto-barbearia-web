@@ -23,5 +23,9 @@ export class ServicoService {
       return this.http.put(`${environment.URL_API}/servicos`, body, { observe: "response"});   
   }
 
-  
+  deletarServico(servicoId: string): Observable<any> {
+    return this.http.delete(`${environment.URL_API}/servicos`, { params:{
+      servico_ID: servicoId
+    }, observe: "response"});   
+}
 }

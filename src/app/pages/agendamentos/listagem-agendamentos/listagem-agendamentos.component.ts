@@ -19,7 +19,7 @@ import { MatSort } from '@angular/material/sort';
 import { Status } from 'src/app/_models/status';
 import { EventEmitterService } from 'src/app/services/event.service';
 
-import { ModalDeletarAgendamento } from '../../modais/agendamento-modais/modal-deletar/modal-deletar-agendamento';
+import { ModalDeletarAgendamento } from '../../modais/agendamento-modais/modal-deletar-agendamento/modal-deletar-agendamento';
 import { ModalAlterarStatusAgendamento } from '../../modais/agendamento-modais/modal-alterar-status/modal-alterar-status-agendamento';
 import { ModalCadastrarEditarAgendamento } from '../../modais/agendamento-modais/modal-cadastrar-editar/modal-cadastrar-editar-agendamento';
 

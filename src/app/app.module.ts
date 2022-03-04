@@ -56,7 +56,7 @@ import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.comp
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { PainelComponent } from './pages/painel/painel.component';
 import { FluxoDeCaixa } from './pages/fluxo-de-caixa/fluxo-de-caixa.component';
-import { ModalDeletarAgendamento } from './pages/modais/agendamento-modais/modal-deletar/modal-deletar-agendamento';
+import { ModalDeletarAgendamento } from './pages/modais/agendamento-modais/modal-deletar-agendamento/modal-deletar-agendamento';
 import { ModalAlterarStatusAgendamento } from './pages/modais/agendamento-modais/modal-alterar-status/modal-alterar-status-agendamento';
 import { ModalCadastrarEditarAgendamento } from './pages/modais/agendamento-modais/modal-cadastrar-editar/modal-cadastrar-editar-agendamento';
 import { ListagemAgendamentosComponent } from './pages/agendamentos/listagem-agendamentos/listagem-agendamentos.component';
@@ -64,7 +64,9 @@ import { AgendamentosComponent } from './pages/agendamentos/agendamentos.compone
 import { CaixaComponent } from './pages/fluxo-de-caixa/caixa/caixa.component';
 import { NovaVendaComponent } from './pages/fluxo-de-caixa/nova-venda/nova-venda.component';
 import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-venda/historico-de-venda.component';
-import ModalOcultarServico from './pages/modais/agendamento-modais/modeal-ocultar-servicos/modal-ocultar-servico';
+import ModalServicoPromocional from './pages/modais/servico-modais/modal-servico-promocional/modal-servico-promocional';
+import { ModalDeletarServico } from './pages/modais/servico-modais/modal-deletar-servico/modal-deletar-servico';
+import ModalOcultarServico from './pages/modais/servico-modais/modal-ocultar-servicos/modal-ocultar-servico';
 
 
 @NgModule({
@@ -94,8 +96,9 @@ import ModalOcultarServico from './pages/modais/agendamento-modais/modeal-oculta
     CaixaComponent,
     NovaVendaComponent,
     HistoricoDeVendaComponent,
-    ModalOcultarServico
-
+    ModalOcultarServico,
+    ModalServicoPromocional,
+    ModalDeletarServico
 
   ],
   imports: [

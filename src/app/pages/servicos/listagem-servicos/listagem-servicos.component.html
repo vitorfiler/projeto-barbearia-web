@@ -32,19 +32,21 @@
         <td mat-cell *matCellDef="let servico">
 
           <button mat-icon-button (click)="trocarStatusServico(servico)">
-            <mat-icon>visibility</mat-icon>
+            <mat-icon *ngIf="servico.ativo">visibility</mat-icon>
+            <mat-icon *ngIf="!servico.ativo">visibility_off</mat-icon>
           </button>
 
           <button mat-icon-button>
             <mat-icon>edit</mat-icon>
           </button>
 
-          <button mat-icon-button>
+          <button mat-icon-button (click)="deletarServico(servico)">
             <mat-icon>delete</mat-icon>
           </button>
 
-          <button mat-icon-button>
-            <mat-icon>confirmation_number</mat-icon>
+          <button mat-icon-button (click)="trocarPromocionalServico(servico)">
+            <mat-icon *ngIf="servico.promocional">attach_money</mat-icon>
+            <mat-icon *ngIf="!servico.promocional">money_off</mat-icon>
           </button>
           
         </td>
