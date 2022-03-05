@@ -54,7 +54,7 @@ import { ComentariosComponent } from './pages/comentarios/comentarios.component'
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { PainelComponent } from './pages/painel/painel.component';
 import { FluxoDeCaixa } from './pages/fluxo-de-caixa/fluxo-de-caixa.component';
-import { ModalDeletarAgendamento } from './pages/modais/agendamento-modais/modal-deletar/modal-deletar-agendamento';
+import { ModalDeletarAgendamento } from './pages/modais/agendamento-modais/modal-deletar-agendamento/modal-deletar-agendamento';
 import { ModalAlterarStatusAgendamento } from './pages/modais/agendamento-modais/modal-alterar-status/modal-alterar-status-agendamento';
 import { ModalCadastrarEditarAgendamento } from './pages/modais/agendamento-modais/modal-cadastrar-editar/modal-cadastrar-editar-agendamento';
 import { ListagemAgendamentosComponent } from './pages/agendamentos/listagem-agendamentos/listagem-agendamentos.component';
@@ -69,8 +69,10 @@ import { ConstrucaoModal } from './pages/modais/construcao-modal/modal-adicionar
 import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
 import { ServicosComponent } from './pages/servicos/servicos.component';
 import { ValueTimePipe } from './value-time.pipe';
+import { ModalDeletarServico } from './pages/modais/servico-modais/modal-deletar-servico/modal-deletar-servico';
+import ModalOcultarServico from './pages/modais/servico-modais/modal-ocultar-servicos/modal-ocultar-servico';
+import ModalServicoPromocional from './pages/modais/servico-modais/modal-servico-promocional/modal-servico-promocional';
 import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-produtos';
-
 
 @NgModule({
 	declarations: [
@@ -104,8 +106,11 @@ import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-pro
 		ListagemReservasComponent,
 		ConstrucaoComponent,
 		ConstrucaoModal,
+		ValueTimePipe,
+		ModalOcultarServico,
+		ModalServicoPromocional,
+		ModalDeletarServico,
 		ProdutosConstrucaoModal,
-		ValueTimePipe
 	],
 	imports: [
 		BrowserModule,

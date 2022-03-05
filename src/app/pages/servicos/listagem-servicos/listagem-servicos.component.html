@@ -67,22 +67,24 @@
 
 			<ng-container matColumnDef="acoes">
 				<th class="colum" mat-header-cell (click)="abrirModalAdicionarServico(true)" *matHeaderCellDef> Ações </th>
-				<td mat-cell *matCellDef="let agendamento">
+				<td mat-cell *matCellDef="let servico">
 
-					<button mat-icon-button>
-						<mat-icon [ngStyle]="{'color': '#DAAA00'}">visibility</mat-icon>
-					</button>
+          <button mat-icon-button (click)="trocarStatusServico(servico)">
+            <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="servico.ativo">visibility</mat-icon>
+            <mat-icon [ngStyle]="{'color': '#DAAA00'}"*ngIf="!servico.ativo">visibility_off</mat-icon>
+          </button>
 
 					<button mat-icon-button color="primary">
 						<mat-icon color="primary">edit</mat-icon>
 					</button>
 
-					<button mat-icon-button color="warn">
+					<button mat-icon-button color="warn" (click)="deletarServico(servico)">
 						<mat-icon>delete</mat-icon>
 					</button>
 
-					<button mat-icon-button>
-						<mat-icon [ngStyle]="{'color': '#DAAA00'}">confirmation_number</mat-icon>
+					<button mat-icon-button (click)="trocarPromocionalServico(servico)">
+            <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="servico.promocional">attach_money</mat-icon>
+            <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="!servico.promocional">money_off</mat-icon>
 					</button>
 
 				</td>
