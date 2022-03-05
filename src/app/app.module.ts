@@ -72,7 +72,7 @@ import { ValueTimePipe } from './value-time.pipe';
 import { ModalDeletarServico } from './pages/modais/servico-modais/modal-deletar-servico/modal-deletar-servico';
 import ModalOcultarServico from './pages/modais/servico-modais/modal-ocultar-servicos/modal-ocultar-servico';
 import ModalServicoPromocional from './pages/modais/servico-modais/modal-servico-promocional/modal-servico-promocional';
-
+import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-produtos';
 
 @NgModule({
 	declarations: [
@@ -107,9 +107,10 @@ import ModalServicoPromocional from './pages/modais/servico-modais/modal-servico
 		ConstrucaoComponent,
 		ConstrucaoModal,
 		ValueTimePipe,
-    ModalOcultarServico,
-    ModalServicoPromocional,
-    ModalDeletarServico
+		ModalOcultarServico,
+		ModalServicoPromocional,
+		ModalDeletarServico,
+		ProdutosConstrucaoModal,
 	],
 	imports: [
 		BrowserModule,
