@@ -30,7 +30,7 @@ export default class ModalOcultarServico implements OnInit{
 	trocarStatusServico() {
 		this.servico.ativo = this.servico.ativo? false : true;
 
-		this.servicoService.trocarStatusServico(this.servico).subscribe(response => {
+		this.servicoService.alterarAgendamento(this.servico).subscribe(response => {
 			// EventEmitterService.get('buscar').emit();
 			this.dialogRef.close(this.servico);
 			this.snackbar.open(MessagesSnackBar.VISUALIZACAO_SERVICO_ALTERADA_SUCESSO, 'Fechar', { duration: 4000 })

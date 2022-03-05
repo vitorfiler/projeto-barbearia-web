@@ -38,7 +38,7 @@ export default class ModalServicoPromocional implements OnInit{
 	trocarStatusServico() {
 		this.servico.promocional = this.servico.promocional? false : true;
 
-		this.servicoService.trocarStatusServico(this.servico).subscribe(response => {
+		this.servicoService.alterarAgendamento(this.servico).subscribe(response => {
 			// EventEmitterService.get('buscar').emit();
 			this.dialogRef.close(this.servico);
 			this.snackbar.open(MessagesSnackBar.STATUS_PROMOCIONAL_SERVICO_ALTERADO_SUCESSO, 'Fechar', { duration: 4000 })

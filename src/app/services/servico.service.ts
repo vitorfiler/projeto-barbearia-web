@@ -28,13 +28,19 @@ export class ServicoService {
     });
   }
 
-  trocarStatusServico(body: Servico): Observable<any> {
-      return this.http.put(`${environment.URL_API}/servicos`, body, { observe: "response"});   
+  alterarAgendamento(body: Servico): Observable<any> {
+    return this.http.put(`${environment.URL_API}/servicos`, body, { observe: "response" });
   }
 
   deletarServico(servicoId: string): Observable<any> {
-    return this.http.delete(`${environment.URL_API}/servicos`, { params:{
-      servico_ID: servicoId
-    }, observe: "response"});   
-}
+    return this.http.delete(`${environment.URL_API}/servicos`, {
+      params: {
+        servico_ID: servicoId
+      }, observe: "response"
+    });
+  }
+
+  cadastrar(body: Servico): Observable<any> {
+    return this.http.post(`${environment.URL_API}/servicos`, body, { observe: "response" });
+  }
 }

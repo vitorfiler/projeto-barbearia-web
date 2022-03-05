@@ -2,7 +2,6 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,7 +14,7 @@ import { Categoria } from 'src/app/_models/categoria';
 import { Router } from '@angular/router';
 import { ServicoService } from 'src/app/services/servico.service';
 import { Servico } from 'src/app/_models/servico';
-import { ConstrucaoModal } from '../../modais/construcao-modal/modal-adicionar-servicos';
+import { ModalCadastrarEditarServico } from '../../modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
 
 @Component({
 	selector: 'vex-listagem-servicos',
@@ -35,7 +34,7 @@ export class ListagemServicosComponent implements OnInit {
 	servico: Servico;
 	servicos: Servico[] = []
 	dataSource = new MatTableDataSource<Servico>()
-	displayedColumns: string[] = ['categoria', 'descricao', 'tempoEstimado', 'valor', 'acoes'];
+	displayedColumns: string[] = ['nomeServico', 'categoria', 'descricao', 'tempoEstimado', 'valor', 'acoes'];
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) matSort: MatSort;
 	alturaTela: any;
@@ -43,9 +42,9 @@ export class ListagemServicosComponent implements OnInit {
 	mostraBotaoListaGradeNaTabela = false;
 	mostraBotaoListaGradeNoFiltro = false;
 
-
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
 	public carregando = false;
+
 	selecaoCategoria: Categoria[] = [
 		{ value: 'TODOS', viewValue: 'Todos' },
 		{ value: 'CABELOF', viewValue: 'Cabelo Feminino' },
@@ -95,11 +94,11 @@ export class ListagemServicosComponent implements OnInit {
 	}
 
 	// modal criado para adição de formulario inclusão de servicos
-	abrirModalAdicionarServico(isAdicionar: boolean) {
-		let dialogRef;
-		if (isAdicionar) {
-			dialogRef = this.dialog.open(ConstrucaoModal)
-		}
+	abrirModalAdicionarServico(servico?: Servico) {
+		const dialogRef = this.dialog.open(ModalCadastrarEditarServico, {
+			data: servico
+		});
+		dialogRef.afterClosed().subscribe(result => {});
 	}
 
 	listarServicos() {
