@@ -82,11 +82,9 @@ export class ListagemAgendamentosComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		EventEmitterService.get('grifarAgendamento').subscribe(() => window.location.reload())
 		EventEmitterService.get('buscar').subscribe(() => this.listar())
 		this.inicializarFiltro();
-		
-		
-
 	}
 
 	clearForm() {
@@ -173,6 +171,7 @@ export class ListagemAgendamentosComponent implements OnInit {
 			setTimeout(() => {
 				this.dataSource.sort = this.matSort
 			});
+			window.localStorage.removeItem('agendamentoID')
 		}, (error)=>{
 			console.log(error);
 			this.carregando = false;
@@ -227,7 +226,12 @@ export class ListagemAgendamentosComponent implements OnInit {
 
 	}
 	
-
+	trocaCor(): string{
+		return 'red'
+	}
+	recarregaTabela(){;
+		this.dataSource = new MatTableDataSource<Agendamento>(this.agendamentos)
+	}
 	ngAfterViewInit() {
 		this.dataSource.sort = this.matSort;
 	}

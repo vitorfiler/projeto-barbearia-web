@@ -31,7 +31,7 @@ export class QuickpanelComponent implements OnInit {
   }
 
   mudarRotaAgendamento(agendamentoID: string){
-    EventEmitterService.get('buscar').emit();
+    EventEmitterService.get('grifarAgendamento').emit();
     localStorage.setItem("agendamentoID", agendamentoID)
     this.route.navigate(['/agendamentos'])
     
