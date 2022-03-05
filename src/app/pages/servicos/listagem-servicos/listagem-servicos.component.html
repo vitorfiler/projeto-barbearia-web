@@ -20,7 +20,8 @@
 				</mat-form-field>
 			</div>
 			<div class="col-md-2">
-				<button fxFlex="grow" mat-raised-button color="primary" (click)="abrirModalAdicionarServico(true)">Adicionar</button>
+				<button fxFlex="grow" mat-raised-button color="primary"
+					(click)="abrirModalAdicionarServico(true)">Adicionar</button>
 			</div>
 			<div class="col-md-1">
 				<button *ngIf="visible && mostraBotaoListaGradeNoFiltro" style="transform: scale(1.6);" fxFlex="grow"
@@ -29,7 +30,7 @@
 				</button>
 				<button *ngIf="!visible && mostraBotaoListaGradeNoFiltro" style="transform: scale(1.6);" fxFlex="grow"
 					title="visualização em lista" (click)="botaoVisualizacao()">
-					<mat-icon style="vertical-align: middle;"  [ngStyle]="{'color': '#5c77ff'}">view_headline</mat-icon>
+					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#5c77ff'}">view_headline</mat-icon>
 				</button>
 			</div>
 		</div>
@@ -55,33 +56,35 @@
 			<!-- Coluna Tempo -->
 			<ng-container matColumnDef="tempoEstimado">
 				<th mat-header-cell mat-sort-header *matHeaderCellDef> Tempo </th>
-				<td mat-cell *matCellDef="let servico"> {{servico.tempoEstimado}} </td>
+				<td mat-cell *matCellDef="let servico"> {{servico.tempoEstimado | valueTime}} </td>
 			</ng-container>
 
 			<!-- Coluna Valor -->
 			<ng-container matColumnDef="valor">
 				<th mat-header-cell mat-sort-header *matHeaderCellDef> Valor </th>
-				<td mat-cell *matCellDef="let servico"> {{servico.valor}} </td>
+				<td mat-cell *matCellDef="let servico"> {{servico.valor | currency:'BRL'}} </td>
 			</ng-container>
 
 			<ng-container matColumnDef="acoes">
 				<th class="colum" mat-header-cell (click)="abrirModalAdicionarServico(true)" *matHeaderCellDef> Ações </th>
-				<td mat-cell *matCellDef="let agendamento">
+				<td mat-cell *matCellDef="let servico">
 
-					<button mat-icon-button>
-						<mat-icon [ngStyle]="{'color': '#DAAA00'}">visibility</mat-icon>
-					</button>
+          <button mat-icon-button (click)="trocarStatusServico(servico)">
+            <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="servico.ativo">visibility</mat-icon>
+            <mat-icon [ngStyle]="{'color': '#DAAA00'}"*ngIf="!servico.ativo">visibility_off</mat-icon>
+          </button>
 
 					<button mat-icon-button color="primary">
 						<mat-icon color="primary">edit</mat-icon>
 					</button>
 
-					<button mat-icon-button color="warn">
+					<button mat-icon-button color="warn" (click)="deletarServico(servico)">
 						<mat-icon>delete</mat-icon>
 					</button>
 
-					<button mat-icon-button>
-						<mat-icon [ngStyle]="{'color': '#DAAA00'}">confirmation_number</mat-icon>
+					<button mat-icon-button (click)="trocarPromocionalServico(servico)">
+            <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="servico.promocional">attach_money</mat-icon>
+            <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="!servico.promocional">money_off</mat-icon>
 					</button>
 
 				</td>
