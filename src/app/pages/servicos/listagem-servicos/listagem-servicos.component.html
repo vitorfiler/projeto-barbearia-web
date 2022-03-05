@@ -82,7 +82,7 @@
 						<mat-icon>delete</mat-icon>
 					</button>
 
-					<button mat-icon-button>
+					<button mat-icon-button (click)="trocarPromocionalServico(servico)">
             <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="servico.promocional">attach_money</mat-icon>
             <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="!servico.promocional">money_off</mat-icon>
 					</button>

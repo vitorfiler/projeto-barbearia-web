@@ -27,8 +27,8 @@ export default class ModalServicoPromocional implements OnInit{
 		//   this.dialogRef.close(this.servico);
 		// })
 
-		this.textoModal = this.servico.promocional? 'Tem certeza que deseja tornar este serviço como promocional?' 
-			:'Tem certeza que deseja remover a promoção deste serviço?'
+		this.textoModal = this.servico.promocional? 'Tem certeza que deseja remover a promoção deste serviço?'
+			: 'Tem certeza que deseja tornar este serviço como promocional?' 
 		
 	}
 	// @HostListener('window:keyup.esc') onKeyUp() {
