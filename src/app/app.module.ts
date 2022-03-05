@@ -69,6 +69,7 @@ import { ConstrucaoModal } from './pages/modais/construcao-modal/modal-adicionar
 import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
 import { ServicosComponent } from './pages/servicos/servicos.component';
 import { ValueTimePipe } from './value-time.pipe';
+import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-produtos';
 
 
 @NgModule({
@@ -103,6 +104,7 @@ import { ValueTimePipe } from './value-time.pipe';
 		ListagemReservasComponent,
 		ConstrucaoComponent,
 		ConstrucaoModal,
+		ProdutosConstrucaoModal,
 		ValueTimePipe
 	],
 	imports: [
