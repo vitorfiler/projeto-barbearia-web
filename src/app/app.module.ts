@@ -74,6 +74,7 @@ import ModalServicoPromocional from './pages/modais/servico-modais/modal-servico
 import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-produtos';
 import { ModalCadastrarEditarServico } from './pages/modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
 	declarations: [
@@ -158,7 +159,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 		MatSortModule,
 		CoreModule,
 		MatSlideToggleModule,
-		
+		MatTooltipModule,
 		// Vex
 		VexModule,
 		CustomLayoutModule,

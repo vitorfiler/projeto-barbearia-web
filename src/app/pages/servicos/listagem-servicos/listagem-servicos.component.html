@@ -24,17 +24,17 @@
 				</mat-form-field>
 			</div>
 			<div class="col-md-2">
-				<button fxFlex="grow" mat-raised-button color="primary"
-					(click)="abrirModalAdicionarServico()">Adicionar</button>
+				<button fxFlex="grow" mat-raised-button color="primary" (click)="abrirModalAdicionarServico()"
+					matTooltip="Adicionar serviço">Adicionar</button>
 			</div>
 			<div class="col-md-1">
 				<button *ngIf="visible && mostraBotaoListaGradeNoFiltro" style="transform: scale(1.6);" fxFlex="grow"
-					title="visualização em grade" (click)="botaoVisualizacao()">
-					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#5c77ff'}">view_module</mat-icon>
+					(click)="botaoVisualizacao()" >
+					<mat-icon matTooltip="Visualização em grade" style="vertical-align: middle;" [ngStyle]="{'color': '#5c77ff'}">view_module</mat-icon>
 				</button>
 				<button *ngIf="!visible && mostraBotaoListaGradeNoFiltro" style="transform: scale(1.6);" fxFlex="grow"
-					title="visualização em lista" (click)="botaoVisualizacao()">
-					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#5c77ff'}">view_headline</mat-icon>
+					 (click)="botaoVisualizacao()">
+					<mat-icon matTooltip="Visualização em lista" style="vertical-align: middle;" [ngStyle]="{'color': '#5c77ff'}">view_headline</mat-icon>
 				</button>
 			</div>
 		</div>
@@ -79,20 +79,22 @@
 				<th class="colum" mat-header-cell *matHeaderCellDef> Ações </th>
 				<td mat-cell *matCellDef="let servico">
 
-					<button mat-icon-button (click)="trocarStatusServico(servico)">
+					<button mat-icon-button (click)="trocarStatusServico(servico)" matTooltip="Ocultar serviço">
 						<mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="servico.ativo">visibility</mat-icon>
 						<mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="!servico.ativo">visibility_off</mat-icon>
 					</button>
 
-					<button mat-icon-button color="primary" (click)="abrirModalAdicionarServico(servico)">
+					<button mat-icon-button color="primary" (click)="abrirModalAdicionarServico(servico)"
+						matTooltip="Editar serviço">
 						<mat-icon color="primary">edit</mat-icon>
 					</button>
 
-					<button mat-icon-button color="warn" (click)="deletarServico(servico)">
+					<button mat-icon-button color="warn" (click)="deletarServico(servico)" matTooltip="Deletar serviço">
 						<mat-icon>delete</mat-icon>
 					</button>
 
-					<button mat-icon-button (click)="trocarPromocionalServico(servico)">
+					<button mat-icon-button (click)="trocarPromocionalServico(servico)"
+						matTooltip="Serviço promocional">
 						<mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="servico.promocional">attach_money</mat-icon>
 						<mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="!servico.promocional">money_off</mat-icon>
 					</button>
