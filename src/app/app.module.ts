@@ -62,7 +62,6 @@ import { AgendamentosComponent } from './pages/agendamentos/agendamentos.compone
 import { CaixaComponent } from './pages/fluxo-de-caixa/caixa/caixa.component';
 import { NovaVendaComponent } from './pages/fluxo-de-caixa/nova-venda/nova-venda.component';
 import { HistoricoDeVendaComponent } from './pages/fluxo-de-caixa/historico-de-venda/historico-de-venda.component';
-import { ModalAdicionarServico } from './pages/modais/servicos-modais/modal-adicionar-servicos';
 import { ListagemReservasComponent } from './pages/agendamentos/listagem-reservas/listagem-reservas.component';
 import { ConstrucaoComponent } from './pages/construcao/construcao.component';
 import { ConstrucaoModal } from './pages/modais/construcao-modal/modal-adicionar-servicos';
@@ -73,6 +72,8 @@ import { ModalDeletarServico } from './pages/modais/servico-modais/modal-deletar
 import ModalOcultarServico from './pages/modais/servico-modais/modal-ocultar-servicos/modal-ocultar-servico';
 import ModalServicoPromocional from './pages/modais/servico-modais/modal-servico-promocional/modal-servico-promocional';
 import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-produtos';
+import { ModalCadastrarEditarServico } from './pages/modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
 	declarations: [
@@ -102,7 +103,6 @@ import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-pro
 		CaixaComponent,
 		NovaVendaComponent,
 		HistoricoDeVendaComponent,
-		ModalAdicionarServico,
 		ListagemReservasComponent,
 		ConstrucaoComponent,
 		ConstrucaoModal,
@@ -111,6 +111,7 @@ import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-pro
 		ModalServicoPromocional,
 		ModalDeletarServico,
 		ProdutosConstrucaoModal,
+		ModalCadastrarEditarServico
 	],
 	imports: [
 		BrowserModule,
@@ -156,6 +157,8 @@ import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-pro
 		MatPaginatorModule,
 		MatSortModule,
 		CoreModule,
+		MatSlideToggleModule,
+		
 		// Vex
 		VexModule,
 		CustomLayoutModule,

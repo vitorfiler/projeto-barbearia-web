@@ -21,5 +21,9 @@ export enum MessagesSnackBar {
     DELETAR_SERVICO_ERRO = "Falha ao deletar servico",
     CONTRATAR_PLANO_SUCESSO = "Plano contratado com sucesso",
     CONTRATAR_PLANO_ERRO = "Falha ao contratar plano",
-    LISTAR_PLANO_ERRO = "Falha ao alterar plano"
+    LISTAR_PLANO_ERRO = "Falha ao alterar plano",
+    CADASTRO_SERVICO_SUCESSO = "Servico cadastrado com sucesso",
+    CADASTRO_SERVICO_ERRO = "Falha ao cadastrar servico",
+    ALTERACAO_SERVICO_SUCESSO = "Servico alterado com sucesso",
+    ALTERACAO_SERVICO_ERRO = "Falha ao alterar servico",
   }

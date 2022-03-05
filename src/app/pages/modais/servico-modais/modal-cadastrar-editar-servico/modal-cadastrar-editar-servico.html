@@ -1,0 +1,61 @@
+<!-- <ng-template #customLoadingTemplate>
+</ng-template>
+<ngx-loading [show]="carregando" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+</ngx-loading> -->
+<div class="px-6 py-3 border-b" fxLayout="row" fxLayoutAlign="start center">
+  <h2 class="title m-0" mat-dialog-tittle>Novo Serviço</h2>
+</div>
+<mat-dialog-content class="mat-typography">
+  <div @fadeInUp fxFlex="auto" [formGroup]="form">
+    <div class="px-6 py-4" fxLayout="column">
+      <mat-form-field fxFlex="grow">
+        <mat-label>Nome do serviço</mat-label>
+        <input [(ngModel)]="servico.nomeServico" matInput formControlName="nomeServico" required>
+      </mat-form-field>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+        <mat-form-field fxFlex="grow">
+          <mat-label>Tempo Estimado</mat-label>
+          <input [(ngModel)]="servico.tempoEstimado" matInput type="number" placeholder="Ex. 12" min="10" formControlName="tempoEstimado"
+             required>
+          <span matSuffix>Minutos</span>
+          <mat-error *ngIf="">Tempo Mínimo: 10 minutos</mat-error>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow">
+          <mat-label>Categoria</mat-label>
+          <input  [(ngModel)]="servico.categoria" matInput formControlName="categoria" required>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field fxFlex="grow">
+        <mat-label>Descrição do serviço</mat-label>
+        <textarea  [(ngModel)]="servico.dsServico" matInput formControlName="dsServico" [matTextareaAutosize]="true"
+         ></textarea>
+      </mat-form-field>
+
+      <mat-slide-toggle color="primary" [(ngModel)]="servico.promocional" formControlName="promocional" [checked]="servico.promocional">Este serviço mostrará o valor promocional
+      </mat-slide-toggle>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+        <mat-form-field fxFlex="grow">
+          <mat-label>Valor</mat-label>
+          <input [(ngModel)]="servico.valor" matInput type="number" placeholder="Ex. 12" min="10" formControlName="valor"
+             required>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow">
+          <mat-label>Valor promocional</mat-label>
+          <input  [(ngModel)]="servico.valorPromocional" matInput type="number" placeholder="Ex. 12" min="10" formControlName="valorPromocional"
+            required>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" mat-dialog-close>Cancelar</button>
+  <button color="primary" mat-raised-button type="button" [mat-dialog-close]="true" [disabled]="form.invalid"
+    (click)="enviarServico(servico)">{{legendaBotao}}</button>
+</mat-dialog-actions>
