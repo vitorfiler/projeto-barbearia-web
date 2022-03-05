@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DateTime } from 'luxon';
 import { AgendamentoService } from 'src/app/services/agendamento.service';
 import { EventEmitterService } from 'src/app/services/event.service';
 import { Agendamento } from 'src/app/_models/agendamento';
@@ -12,22 +11,20 @@ import { Agendamento } from 'src/app/_models/agendamento';
 })
 export class QuickpanelComponent implements OnInit {
 
-   
   diasDaSemana = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
   mesDoAno = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul","Ago","Set","Out","Nov","Dez"];
+  
   dataDeHoje = new Date().getDate()+" de "+this.mesDoAno[new Date().getMonth()];
   nomeDia = this.diasDaSemana[new Date().getDay()];
-  estabelecimentoId = localStorage.getItem('estabelecimento_ID')
   agendamentosDoDia: Agendamento[] = [];
+
+  estabelecimentoId = localStorage.getItem('estabelecimento_ID')
 
   constructor(private route: Router, private agendamentoService: AgendamentoService) { }
 
   ngOnInit() {
-    
     console.log(this.nomeDia);
     this.buscarAgendamentos()
-    
-    
   }
 
   mudarRotaAgendamento(agendamentoID: string){
@@ -42,6 +39,6 @@ export class QuickpanelComponent implements OnInit {
     },(error)=>{
       console.log(error);
     })
-
   }
+  
 }
