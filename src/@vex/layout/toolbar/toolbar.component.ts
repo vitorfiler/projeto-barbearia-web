@@ -22,6 +22,8 @@ import icPerson from '@iconify/icons-ic/twotone-person';
 import { ToolbarUserDropdownComponent } from './toolbar-user/toolbar-user-dropdown/toolbar-user-dropdown.component';
 import icContactSupport from '@iconify/icons-ic/twotone-contact-support';
 import icAssigment from '@iconify/icons-ic/twotone-assignment';
+import icCalendar from '@iconify/icons-ic/baseline-calendar-today';
+
 @Component({
   selector: 'vex-toolbar',
   templateUrl: './toolbar.component.html',
@@ -58,6 +60,7 @@ export class ToolbarComponent implements OnInit {
   icReceipt = icReceipt;
   icDoneAll = icDoneAll;
   icArrowDropDown = icArrowDropDown;
+  icCalendar= icCalendar;
   dropdownOpen: boolean;
   botao: string = 'Vitor Nunes'
   userName: String = this.getUser();
