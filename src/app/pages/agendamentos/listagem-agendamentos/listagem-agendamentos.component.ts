@@ -49,6 +49,7 @@ export class ListagemAgendamentosComponent implements OnInit {
 	//variaveis
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
 	public carregando = false;
+	recebeIdDoPainel:number;
 	
 	//objetos
 	agendamento: Agendamento;
@@ -83,6 +84,8 @@ export class ListagemAgendamentosComponent implements OnInit {
 	ngOnInit(): void {
 		EventEmitterService.get('buscar').subscribe(() => this.listar())
 		this.inicializarFiltro();
+		
+		
 
 	}
 
@@ -158,6 +161,8 @@ export class ListagemAgendamentosComponent implements OnInit {
 	}
 
 	listar() {
+		this.recebeIdDoPainel = +localStorage.getItem('agendamentoID');
+		console.log(this.recebeIdDoPainel);
 		this.carregando = true;
 		this.agendamentoService.buscarAgendamentos(this.estabelecimentoID).subscribe(resposta => {
 			this.agendamentos = resposta.body
@@ -221,6 +226,7 @@ export class ListagemAgendamentosComponent implements OnInit {
 
 
 	}
+	
 
 	ngAfterViewInit() {
 		this.dataSource.sort = this.matSort;

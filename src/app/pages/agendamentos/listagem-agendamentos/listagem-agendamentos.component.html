@@ -61,7 +61,7 @@
       <!-- Coluna Cliente -->
       <ng-container matColumnDef="cliente">
         <th mat-header-cell mat-sort-header *matHeaderCellDef> Cliente </th>
-        <td mat-cell *matCellDef="let agendamento"> {{agendamento.cliente.nome}} </td>
+        <td mat-cell *matCellDef="let agendamento" [ngStyle]="{'color': agendamento.id == recebeIdDoPainel?'':'#010540'}"> {{agendamento.cliente.nome}} </td>
       </ng-container>
 
       <!-- Coluna Serviços -->
