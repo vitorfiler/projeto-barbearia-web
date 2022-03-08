@@ -76,6 +76,7 @@ import { ModalCadastrarEditarServico } from './pages/modais/servico-modais/modal
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
+
 @NgModule({
 	declarations: [
 		AppComponent,
