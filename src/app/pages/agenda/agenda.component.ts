@@ -9,6 +9,7 @@ import { CommomService } from 'src/app/services/commom.service';
 import { CalendarEditComponent } from '../login-final/calendar/calendar-edit/calendar-edit.component';
 import icChevronLeft from '@iconify/icons-ic/twotone-chevron-left';
 import icChevronRight from '@iconify/icons-ic/twotone-chevron-right';
+import { AgendaEdicaoComponent } from './agenda-edicao/agenda-edicao.component';
 
 const colors: any = {
   blue: {
@@ -148,7 +149,7 @@ export class AgendaComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     console.log(event);
 
-    const dialogRef = this.dialog.open(CalendarEditComponent, {
+    const dialogRef = this.dialog.open(AgendaEdicaoComponent, {
       data: event
     });
 

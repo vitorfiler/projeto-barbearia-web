@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CalendarEvent } from 'angular-calendar';
-import { CalendarEditComponent } from '../../login-final/calendar/calendar-edit/calendar-edit.component';
 
 @Component({
   selector: 'vex-agenda-edicao',
@@ -17,7 +16,7 @@ export class AgendaEdicaoComponent implements OnInit {
     end: null
   });
 
-  constructor(private dialogRef: MatDialogRef<CalendarEditComponent>,
+  constructor(private dialogRef: MatDialogRef<AgendaEdicaoComponent>,
     @Inject(MAT_DIALOG_DATA) public event: CalendarEvent<any>,
     private fb: FormBuilder) {
   }
