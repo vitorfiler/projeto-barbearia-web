@@ -23,7 +23,6 @@ export class QuickpanelComponent implements OnInit {
   constructor(private route: Router, private agendamentoService: AgendamentoService) { }
 
   ngOnInit() {
-    console.log(this.nomeDia);
     this.buscarAgendamentos()
   }
 

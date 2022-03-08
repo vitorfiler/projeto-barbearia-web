@@ -13,6 +13,8 @@ import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { MatDialog } from '@angular/material/dialog';
 import { PlanosModalComponent } from '../modais/planos/planos-modal.component';
+import { EventEmitterService } from 'src/app/services/event.service';
+import { LayoutService } from 'src/@vex/services/layout.service';
 
 @Component({
 	selector: 'vex-login-final',
@@ -45,7 +47,8 @@ export class LoginFinalComponent implements OnInit {
 		private cd: ChangeDetectorRef,
 		private snackbar: MatSnackBar,
 		private loginService: LoginService,
-		public dialog: MatDialog
+		public dialog: MatDialog,
+		private layoutService: LayoutService,
 	) { }
 
 
@@ -96,6 +99,7 @@ export class LoginFinalComponent implements OnInit {
 				localStorage.setItem("planoId", response.body.plano_ID)
 				localStorage.setItem("planoId", response.body.plano_ID)
 				localStorage.setItem("nomePlano", "BASIC")
+				this.layoutService.closeQuickpanel();
 				this.router.navigate(['/']);
 				this.MostrarModalCadastroCompleto()
 				this.logando = false;
