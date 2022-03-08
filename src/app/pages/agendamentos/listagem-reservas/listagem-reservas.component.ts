@@ -18,7 +18,6 @@ import { ConstrucaoModal } from '../../modais/construcao-modal/modal-adicionar-s
 })
 export class ListagemReservasComponent implements OnInit {
 
-	filtroReserva: string;
 	formReserva: FormGroup;
 	public carregando = false;
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
@@ -77,6 +76,9 @@ export class ListagemReservasComponent implements OnInit {
 		let dt_inicial = this.formReserva.get('dt_inicial').value
 		let dt_final = this.formReserva.get('dt_final').value
 		let selecaoStatus = this.formReserva.get('status').value
+		let filtroReserva = this.formReserva.get('filtro').value
+
+		console.log(dt_final, dt_inicial)
 		if (dt_inicial && dt_final) {
 
 			if (dt_inicial > dt_final) {
@@ -85,10 +87,10 @@ export class ListagemReservasComponent implements OnInit {
 			}
 			dt_inicial = (dt_inicial.getFullYear() + "-" + ((dt_inicial.getMonth() + 1)) + "-" + (dt_inicial.getDate()));
 			dt_final = (dt_final.getFullYear() + "-" + ((dt_final.getMonth() + 1)) + "-" + (dt_final.getDate()));
-			this.filtrar(this.filtroReserva, selecaoStatus, dt_inicial, dt_final);
+			this.filtrar(filtroReserva, selecaoStatus, dt_inicial, dt_final);
 		}
 		else {
-			this.filtrar(this.filtroReserva, selecaoStatus, dt_inicial, dt_final);
+			this.filtrar(filtroReserva, selecaoStatus, dt_inicial, dt_final);
 		}
 	}
 
