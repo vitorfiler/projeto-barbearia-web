@@ -73,6 +73,11 @@ import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-pro
 import { ModalCadastrarEditarServico } from './pages/modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { GraficoDeBarrasHorizontaisComponent } from './pages/painel/grafico-de-barras-horizontais/grafico-de-barras-horizontais.component';
+import { GraficoDeBarrasVerticaisComponent } from './pages/painel/grafico-de-barras-verticais/grafico-de-barras-verticais.component';
+import { GraficoDeBarrasVerticalAgrupadasComponent } from './pages/painel/grafico-de-barras-vertical-agrupadas/grafico-de-barras-vertical-agrupadas.component';
+import { GraficoDeLinhasComponent } from './pages/painel/grafico-de-linhas/grafico-de-linhas.component';
+import { GraficoPizzaComponent } from './pages/painel/grafico-pizza/grafico-pizza.component';
 import { AgendaModule } from './pages/agenda/agenda.module';
 
 @NgModule({
@@ -110,7 +115,12 @@ import { AgendaModule } from './pages/agenda/agenda.module';
 		ModalServicoPromocional,
 		ModalDeletarServico,
 		ProdutosConstrucaoModal,
-		ModalCadastrarEditarServico
+		ModalCadastrarEditarServico,
+		GraficoDeBarrasHorizontaisComponent,
+		GraficoDeBarrasVerticaisComponent,
+		GraficoDeBarrasVerticalAgrupadasComponent,
+		GraficoDeLinhasComponent,
+		GraficoPizzaComponent
 	],
 	imports: [
 		BrowserModule,
