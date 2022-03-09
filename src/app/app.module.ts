@@ -73,8 +73,13 @@ import ModalOcultarServico from './pages/modais/servico-modais/modal-ocultar-ser
 import ModalServicoPromocional from './pages/modais/servico-modais/modal-servico-promocional/modal-servico-promocional';
 import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-produtos';
 import { ModalCadastrarEditarServico } from './pages/modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { GraficoDeBarrasHorizontaisComponent } from './pages/painel/grafico-de-barras-horizontais/grafico-de-barras-horizontais.component';
+import { GraficoDeBarrasVerticaisComponent } from './pages/painel/grafico-de-barras-verticais/grafico-de-barras-verticais.component';
+import { GraficoDeBarrasVerticalAgrupadasComponent } from './pages/painel/grafico-de-barras-vertical-agrupadas/grafico-de-barras-vertical-agrupadas.component';
+import { GraficoDeLinhasComponent } from './pages/painel/grafico-de-linhas/grafico-de-linhas.component';
+import { GraficoPizzaComponent } from './pages/painel/grafico-pizza/grafico-pizza.component';
 
 @NgModule({
 	declarations: [
@@ -112,7 +117,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 		ModalServicoPromocional,
 		ModalDeletarServico,
 		ProdutosConstrucaoModal,
-		ModalCadastrarEditarServico
+		ModalCadastrarEditarServico,
+		GraficoDeBarrasHorizontaisComponent,
+		GraficoDeBarrasVerticaisComponent,
+		GraficoDeBarrasVerticalAgrupadasComponent,
+		GraficoDeLinhasComponent,
+		GraficoPizzaComponent
 	],
 	imports: [
 		BrowserModule,
