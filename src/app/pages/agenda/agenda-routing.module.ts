@@ -6,19 +6,19 @@ import { AgendaComponent } from './agenda.component';
 
 
 const routes: VexRoutes = [
-  {
-    path: '',
-    component: AgendaComponent,
-    data: {
-      toolbarShadowEnabled: true,
-      scrollDisabled: true
+    {
+        path: '',
+        component: AgendaComponent,
+        data: {
+            toolbarShadowEnabled: true,
+            scrollDisabled: true
+        }
     }
-  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class AgendaRoutingModule {
 }

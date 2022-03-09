@@ -20,27 +20,27 @@ import { AgendaRoutingModule } from './agenda-routing.module';
 
 
 @NgModule({
-  declarations: [AgendaComponent, AgendaEdicaoComponent],
-  imports: [
-    CommonModule,
-    AgendaRoutingModule,
-    AngularCalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-    ScrollbarModule,
-    MatSnackBarModule,
-    MatInputModule,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    PageLayoutModule,
-    MatNativeDateModule,
-    IconModule,
-    ContainerModule
-  ],
-  entryComponents: [AgendaEdicaoComponent]
+	declarations: [AgendaComponent, AgendaEdicaoComponent],
+	imports: [
+		CommonModule,
+		AgendaRoutingModule,
+		AngularCalendarModule.forRoot({
+			provide: DateAdapter,
+			useFactory: adapterFactory
+		}),
+		MatDialogModule,
+		MatButtonModule,
+		MatIconModule,
+		ScrollbarModule,
+		MatSnackBarModule,
+		MatInputModule,
+		MatDatepickerModule,
+		ReactiveFormsModule,
+		PageLayoutModule,
+		MatNativeDateModule,
+		IconModule,
+		ContainerModule
+	],
+	entryComponents: [AgendaEdicaoComponent]
 })
 export class AgendaModule { }

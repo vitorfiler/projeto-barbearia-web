@@ -28,7 +28,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
 import { GaugeModule, NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxGaugeModule } from 'ngx-gauge';
-import { LoginFinalComponent } from './pages/login-final/login-final.component';
+import { LoginComponent } from './pages/login/login.component';
 import { CalendarModule as AngularCalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
@@ -78,7 +78,7 @@ import { AgendaModule } from './pages/agenda/agenda.module';
 @NgModule({
 	declarations: [
 		AppComponent,
-		LoginFinalComponent,
+		LoginComponent,
 		CadastroComponent,
 		RecuperarSenhaComponent,
 		RedefinirSenhaComponent,
