@@ -1,6 +1,5 @@
 
 export class Reserva {
-
   id: number;
   cliente: string;
   produto: string;
@@ -9,11 +8,4 @@ export class Reserva {
   dataRetirada: Date;
   status: string;
   estabelecimentoID: number;
-  value: string;
-  viewValue: string;
-
-  constructor(value: string, viewValue: string) {
-    this.value = value;
-    this.viewValue = viewValue;
-  }
 }

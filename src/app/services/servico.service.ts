@@ -2,6 +2,7 @@ import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Servico } from '../_models/servico';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,19 @@ export class ServicoService {
     });
   }
 
+  alterarAgendamento(body: Servico): Observable<any> {
+    return this.http.put(`${environment.URL_API}/servicos`, body, { observe: "response" });
+  }
 
+  deletarServico(servicoId: string): Observable<any> {
+    return this.http.delete(`${environment.URL_API}/servicos`, {
+      params: {
+        servico_ID: servicoId
+      }, observe: "response"
+    });
+  }
+
+  cadastrar(body: Servico): Observable<any> {
+    return this.http.post(`${environment.URL_API}/servicos`, body, { observe: "response" });
+  }
 }

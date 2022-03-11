@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 import { VexRoutes } from 'src/@vex/interfaces/vex-route.interface';
-import { LoginFinalComponent } from './pages/login-final/login-final.component';
+import { LoginComponent } from './pages/login/login.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { RedefinirSenhaComponent } from './pages/redefinir-senha/redefinir-senha.component';
@@ -27,15 +27,15 @@ const routes: VexRoutes = [
       { path: 'caixa', component: FluxoDeCaixa },
       { path: 'comentarios', component: ComentariosComponent },
       { path: 'configuracoes', component: ConfiguracoesComponent },
-      { path: 'painel', component: PainelComponent }   
+      { path: 'painel', component: PainelComponent }
     ],
   },
-  { path: 'login', component: LoginFinalComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'recuperar-senha', component: RecuperarSenhaComponent },
   { path: 'enviado', component: RecuperarSenhaSucessoComponent },
   { path: 'redefinir-senha', component: RedefinirSenhaComponent }
-  
+
 ];
 
 @NgModule({
