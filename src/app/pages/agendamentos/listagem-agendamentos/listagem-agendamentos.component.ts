@@ -14,12 +14,10 @@ import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MatSelect } from '@angular/material/select';
 import { MatDialog } from '@angular/material/dialog';
-
 import { MatSort } from '@angular/material/sort';
 import { Status } from 'src/app/_models/status';
 import { EventEmitterService } from 'src/app/services/event.service';
-
-import { ModalDeletarAgendamento } from '../../modais/agendamento-modais/modal-deletar/modal-deletar-agendamento';
+import { ModalDeletarAgendamento } from '../../modais/agendamento-modais/modal-deletar-agendamento/modal-deletar-agendamento';
 import { ModalAlterarStatusAgendamento } from '../../modais/agendamento-modais/modal-alterar-status/modal-alterar-status-agendamento';
 import { ModalCadastrarEditarAgendamento } from '../../modais/agendamento-modais/modal-cadastrar-editar/modal-cadastrar-editar-agendamento';
 
@@ -49,6 +47,7 @@ export class ListagemAgendamentosComponent implements OnInit {
 	//variaveis
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
 	public carregando = false;
+	recebeIdDoPainel:number;
 	
 	//objetos
 	agendamento: Agendamento;
@@ -68,9 +67,6 @@ export class ListagemAgendamentosComponent implements OnInit {
 		{ value: 'RECUSADO', viewValue: 'Recusado' },
 	];
 
-
-
-
 	constructor(private router: Router,
 		private fb: FormBuilder,
 		private agendamentoService: AgendamentoService,
@@ -81,9 +77,9 @@ export class ListagemAgendamentosComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		EventEmitterService.get('grifarAgendamento').subscribe(() => window.location.reload())
 		EventEmitterService.get('buscar').subscribe(() => this.listar())
 		this.inicializarFiltro();
-
 	}
 
 	clearForm() {
@@ -111,9 +107,7 @@ export class ListagemAgendamentosComponent implements OnInit {
 		let dt_inicial = this.form.get('dt_inicial').value
 		let dt_final = this.form.get('dt_final').value
 
-
 		if (dt_inicial && dt_final) {
-
 			if (dt_inicial > dt_final) {
 				this.snackbar.open("Insira uma data final maior que inicial", 'Ok', { duration: 4000 });
 				return;
@@ -135,7 +129,6 @@ export class ListagemAgendamentosComponent implements OnInit {
 			this.carregando = false;
 			this.dataSource = new MatTableDataSource<Agendamento>(this.agendamentos)
 			this.dataSource.paginator = this.paginator;
-
 		})
 	}
 
@@ -158,6 +151,8 @@ export class ListagemAgendamentosComponent implements OnInit {
 	}
 
 	listar() {
+		this.recebeIdDoPainel = +localStorage.getItem('agendamentoID');
+		console.log(this.recebeIdDoPainel);
 		this.carregando = true;
 		this.agendamentoService.buscarAgendamentos(this.estabelecimentoID).subscribe(resposta => {
 			this.agendamentos = resposta.body
@@ -168,6 +163,7 @@ export class ListagemAgendamentosComponent implements OnInit {
 			setTimeout(() => {
 				this.dataSource.sort = this.matSort
 			});
+			window.localStorage.removeItem('agendamentoID')
 		}, (error)=>{
 			console.log(error);
 			this.carregando = false;
@@ -175,7 +171,6 @@ export class ListagemAgendamentosComponent implements OnInit {
 	}
 
 	abrirModalTrocaStatus(agendamentoId: number) {
-
 		this.agendamento = this.agendamentos.find(s => s.id == agendamentoId);
 		const dialogRef = this.dialog.open(ModalAlterarStatusAgendamento, {
 			data: this.agendamento
@@ -216,10 +211,15 @@ export class ListagemAgendamentosComponent implements OnInit {
 
 			}
 		}
-
 		dialogRef.afterClosed().subscribe(result => {});
+	}
+	
+	trocaCor(): string{
+		return 'red'
+	}
 
-
+	recarregaTabela(){;
+		this.dataSource = new MatTableDataSource<Agendamento>(this.agendamentos)
 	}
 
 	ngAfterViewInit() {

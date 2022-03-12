@@ -24,6 +24,7 @@ export class SidenavComponent implements OnInit {
   trackByRoute = trackByRoute;
   icRadioButtonChecked = icRadioButtonChecked;
   icRadioButtonUnchecked = icRadioButtonUnchecked;
+  nomePlano = localStorage.getItem("nomePlano")
 
   constructor(private navigationService: NavigationService,
               private layoutService: LayoutService,

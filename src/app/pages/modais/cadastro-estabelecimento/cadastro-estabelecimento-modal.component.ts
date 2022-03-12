@@ -14,7 +14,8 @@ import { MessagesSnackBar } from "src/app/_constants/messagesSnackBar";
 
 @Component({
 	selector: 'cadastro-estabelecimento-modal',
-	templateUrl: 'cadastro-estabelecimento-modal.html',
+	templateUrl: 'cadastro-estabelecimento-modal.component.html',
+	styleUrls: ['cadastro-estabelecimento-modal.component.scss'],
 	animations: [
 		stagger60ms,
 		fadeInUp400ms
@@ -23,10 +24,11 @@ import { MessagesSnackBar } from "src/app/_constants/messagesSnackBar";
 
 export class CadastroEstabelecimentoModal implements OnInit {
 
-	estabelecimentoID: string = localStorage.getItem('estabelecimento_ID')
-	endereco: Endereco = new Endereco()
-
-	//   Campo tempo de Serviço
+	estabelecimentoID: string = localStorage.getItem('estabelecimento_ID');
+	endereco: Endereco = new Endereco();
+	imagemPerfil: String = '../../../../assets/CentralizadorImagem.png';
+	imagemPerfilFundo: String = '../../../../assets/img/demo/landscape.jpg';
+	mostraIcone: boolean = true;
 	form: FormGroup;
 	legendaBotao = 'Cadastrar';
 
@@ -48,6 +50,9 @@ export class CadastroEstabelecimentoModal implements OnInit {
 			bairro: ['', Validators.required],
 			estado: ['', Validators.required],
 			cidade: ['', Validators.required],
+			email: ['', Validators.required],
+			celular: ['',Validators.required],
+			telefone: ['',Validators.required]
 		});
 	}
 
@@ -70,11 +75,9 @@ export class CadastroEstabelecimentoModal implements OnInit {
 		})
 	}
 
-	//metodo que sera utilizado para fazer busca de endereço por CEP
+	
 	consultarCEP(cep: string) {
-		// this.CommomService.consultaCep(cep).subscribe(response =>{
-		// 	console.log(response)
-
-		// })
+		
 	}
+
 }

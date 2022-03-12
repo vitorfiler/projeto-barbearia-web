@@ -28,6 +28,14 @@ export class AgendamentoService {
     })
   }
 
+  buscarAgendamentosDoDia(estabelecimentoID: string): Observable<any> {
+    return this.http.get(`${environment.URL_API}/agendamentos/hoje`, {
+      params: {
+        estabelecimento_ID: estabelecimentoID,
+      }, observe: 'response'
+    })
+  }
+
   alterarAgendamento(body: Agendamento): Observable<any> {
     return this.http.put(`${environment.URL_API}/agendamentos`, body, { observe: "response"});
   }

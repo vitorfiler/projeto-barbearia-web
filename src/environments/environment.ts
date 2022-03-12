@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   hmr       : false,
-  URL_API: "https://easycut-api.herokuapp.com",
+  URL_API: "https://easycut-dev.herokuapp.com",
   //URL_API: "http://localhost:8080",
   URL_AWS: "",
   ambiente: "dsv",
