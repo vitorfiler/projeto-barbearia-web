@@ -1,4 +1,4 @@
-import { Component, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,25 +8,42 @@ import { ReservasService } from 'src/app/services/reservas.service';
 import { Reserva } from 'src/app/_models/reserva';
 import { Status } from 'src/app/_models/status';
 import { ConstrucaoModal } from '../../modais/construcao-modal/modal-adicionar-servicos';
+import { stagger20ms } from 'src/@vex/animations/stagger.animation';
+import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSelect } from '@angular/material/select';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
 	selector: 'vex-listagem-reservas',
 	templateUrl: './listagem-reservas.component.html',
 	styleUrls: ['./listagem-reservas.component.scss'],
 	providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
-
+	animations: [
+		fadeInUp400ms,
+		stagger20ms
+	]
 })
+
 export class ListagemReservasComponent implements OnInit {
 
-	formReserva: FormGroup;
+	//variaveis
 	public carregando = false;
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
-	reservas: Reserva[] = [];
-	dataSource = new MatTableDataSource<Reserva>()
 	statusPadrao: String;
 
-	displayedColumns: string[] = ['cliente', 'produto', 'quantidade', 'valor', 'dataRetirada', 'status', 'acoes'];
+	//Objeto
+	formReserva: FormGroup;
 
+	//Tabela
+	displayedColumns: string[] = ['cliente', 'produto', 'quantidade', 'valor', 'dataRetirada', 'status', 'acoes'];
+	dataSource = new MatTableDataSource<Reserva>()
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild('select') matSelect: MatSelect;
+	@ViewChild(MatSort) matSort: MatSort;
+
+	//Listas
+	reservas: Reserva[] = [];
 	status: Status[] = [
 		{ value: 'AGUARDANDORETIRADA', viewValue: 'Aguardando Retirada' },
 		{ value: 'CANCELADO', viewValue: 'Cancelado' },
@@ -39,6 +56,7 @@ export class ListagemReservasComponent implements OnInit {
 		{ value: 'CANCELADO', viewValue: 'Cancelado' },
 		{ value: 'ENTREGUE', viewValue: 'Entregue' },
 	];
+
 	constructor(private fb: FormBuilder,
 		private reservasService: ReservasService,
 		/* correção de data para Português, importanções feitas no app.module.ts*/
@@ -61,6 +79,7 @@ export class ListagemReservasComponent implements OnInit {
 		});
 		this.statusPadrao = this.statusReserva[0].value
 	}
+
 	clearForm() {
 		this.formReserva.reset();
 	}
@@ -78,7 +97,6 @@ export class ListagemReservasComponent implements OnInit {
 		let selecaoStatus = this.formReserva.get('status').value
 		let filtroReserva = this.formReserva.get('filtro').value
 
-		console.log(dt_final, dt_inicial)
 		if (dt_inicial && dt_final) {
 
 			if (dt_inicial > dt_final) {
@@ -99,8 +117,8 @@ export class ListagemReservasComponent implements OnInit {
 		this.reservasService.filtrar(this.estabelecimentoID, filtroReserva, selecaoStatus, dt_inicial, dt_final).subscribe(resposta => {
 			this.reservas = resposta.body
 			/*renderizando a tabela*/
-			this.carregando = false;
-			this.dataSource = new MatTableDataSource<Reserva>(this.reservas)
+			// this.carregando = false;
+			// this.dataSource = new MatTableDataSource<Reserva>(this.reservas)
 
 		})
 	}

@@ -15,8 +15,8 @@ export class ReservasService {
 		return this.http.get(`${environment.URL_API}/reservas/filtro`, {
 			params: {
 				estabelecimento_ID: estabelecimentoID,
-				filtro_reserva: filtroReserva,
-				selecao_status: selecaoStatus,
+				filtro: filtroReserva,
+				status: selecaoStatus,
 				dt_inicial: dt_inicial,
 				dt_final: dt_final
 			}, observe: 'response'
