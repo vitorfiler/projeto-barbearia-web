@@ -1,4 +1,4 @@
-import { CadastroEstabelecimentoModal } from './../modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
+import { CadastroEstabelecimentoModal } from '../modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,16 +17,15 @@ import { EventEmitterService } from 'src/app/services/event.service';
 import { LayoutService } from 'src/@vex/services/layout.service';
 
 @Component({
-	selector: 'vex-login-final',
-	templateUrl: './login-final.component.html',
-	styleUrls: ['./login-final.component.scss'],
+	selector: 'vex-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.scss'],
 	animations: [
 		fadeInUp400ms,
 		stagger20ms
 	]
 })
-export class LoginFinalComponent implements OnInit {
-
+export class LoginComponent implements OnInit {
 
 	form: FormGroup;
 	arrowBack = arrowBack;
@@ -64,7 +63,7 @@ export class LoginFinalComponent implements OnInit {
 	MostrarModalCadastroCompleto() {
 		let cadastroCompleto = JSON.parse(localStorage.getItem('cadastroCompleto'))
 		if (!cadastroCompleto) {
-			const dialogRef = this.dialog.open(CadastroEstabelecimentoModal,{
+			const dialogRef = this.dialog.open(CadastroEstabelecimentoModal, {
 				maxWidth: '600px'
 			});
 			dialogRef.afterClosed().subscribe(result => {

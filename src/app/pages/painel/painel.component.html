@@ -1,14 +1,32 @@
-<ngx-charts-bar-vertical
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="single"
-  [gradient]="gradient"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [legend]="showLegend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  (select)="onSelect($event)">
-</ngx-charts-bar-vertical>
+<div class="painel">
+  <h1 *ngIf="graficoPizza"> Grafico Pizza </h1>
+  <h1 *ngIf="graficoHorizontal"> Grafico de Barras Horizontal</h1>
+  <h1 *ngIf="graficoVertical"> Grafico de Barras Verticais</h1>
+  <h1 *ngIf="graficoLinhas"> Grafico de Linhas</h1>
+  <h1 *ngIf="graficoVerticalAgrupado"> Grafico de Barras Verticais Agrupadas</h1>
+</div>
+
+
+<mat-tab-group (selectedTabChange)="alterarTitulo($event)">
+
+  <mat-tab label="Grafico Pizza">
+    <vex-grafico-pizza></vex-grafico-pizza>
+  </mat-tab>
+
+  <mat-tab label="Grafico de Barras Verticais">
+    <vex-grafico-de-barras-verticais></vex-grafico-de-barras-verticais>
+  </mat-tab>
+
+  <mat-tab label="Grafico de Barras Horizontais">
+    <vex-grafico-de-barras-horizontais></vex-grafico-de-barras-horizontais>
+  </mat-tab>
+
+  <mat-tab label="Grafico de linhas">
+    <vex-grafico-de-linhas></vex-grafico-de-linhas>
+  </mat-tab>
+
+  <mat-tab label="Grafico de Barras Verticais Agr.">
+    <vex-grafico-de-barras-vertical-agrupadas></vex-grafico-de-barras-vertical-agrupadas>
+  </mat-tab>
+
+</mat-tab-group>

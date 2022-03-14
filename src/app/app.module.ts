@@ -28,10 +28,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
 import { GaugeModule, NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxGaugeModule } from 'ngx-gauge';
-import { LoginFinalComponent } from './pages/login-final/login-final.component';
+import { LoginComponent } from './pages/login/login.component';
 import { CalendarModule as AngularCalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { CalendarModule } from './pages/login-final/calendar/calendar.module';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ScrollbarModule } from 'src/@vex/components/scrollbar/scrollbar.module';
@@ -51,7 +50,6 @@ import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/
 import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 import { PlanosModalComponent } from './pages/modais/planos/planos-modal.component';
 import { ComentariosComponent } from './pages/comentarios/comentarios.component';
-import { AgendaComponent } from './pages/agenda/agenda.component';
 import { PainelComponent } from './pages/painel/painel.component';
 import { FluxoDeCaixa } from './pages/fluxo-de-caixa/fluxo-de-caixa.component';
 import { ModalDeletarAgendamento } from './pages/modais/agendamento-modais/modal-deletar-agendamento/modal-deletar-agendamento';
@@ -73,14 +71,20 @@ import ModalOcultarServico from './pages/modais/servico-modais/modal-ocultar-ser
 import ModalServicoPromocional from './pages/modais/servico-modais/modal-servico-promocional/modal-servico-promocional';
 import { ProdutosConstrucaoModal } from './pages/modais/produtos-modal/modal-produtos';
 import { ModalCadastrarEditarServico } from './pages/modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { GraficoDeBarrasHorizontaisComponent } from './pages/painel/grafico-de-barras-horizontais/grafico-de-barras-horizontais.component';
+import { GraficoDeBarrasVerticaisComponent } from './pages/painel/grafico-de-barras-verticais/grafico-de-barras-verticais.component';
+import { GraficoDeBarrasVerticalAgrupadasComponent } from './pages/painel/grafico-de-barras-vertical-agrupadas/grafico-de-barras-vertical-agrupadas.component';
+import { GraficoDeLinhasComponent } from './pages/painel/grafico-de-linhas/grafico-de-linhas.component';
+import { GraficoPizzaComponent } from './pages/painel/grafico-pizza/grafico-pizza.component';
+import { AgendaModule } from './pages/agenda/agenda.module';
 
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		LoginFinalComponent,
+		LoginComponent,
 		CadastroComponent,
 		RecuperarSenhaComponent,
 		RedefinirSenhaComponent,
@@ -100,7 +104,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 		FluxoDeCaixa,
 		ComentariosComponent,
 		ConfiguracoesComponent,
-		AgendaComponent,
 		PainelComponent,
 		CaixaComponent,
 		NovaVendaComponent,
@@ -113,14 +116,18 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 		ModalServicoPromocional,
 		ModalDeletarServico,
 		ProdutosConstrucaoModal,
-		ModalCadastrarEditarServico
+		ModalCadastrarEditarServico,
+		GraficoDeBarrasHorizontaisComponent,
+		GraficoDeBarrasVerticaisComponent,
+		GraficoDeBarrasVerticalAgrupadasComponent,
+		GraficoDeLinhasComponent,
+		GraficoPizzaComponent
 	],
 	imports: [
 		BrowserModule,
 		FormsModule,
 		ReactiveFormsModule,
 		AppRoutingModule,
-		CalendarModule,
 		MatDialogModule,
 		MatNativeDateModule,
 		MatDatepickerModule,
@@ -161,6 +168,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 		CoreModule,
 		MatSlideToggleModule,
 		MatTooltipModule,
+		AgendaModule,
 		// Vex
 		VexModule,
 		CustomLayoutModule,
