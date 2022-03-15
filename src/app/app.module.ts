@@ -79,6 +79,7 @@ import { GraficoDeBarrasVerticalAgrupadasComponent } from './pages/painel/grafic
 import { GraficoDeLinhasComponent } from './pages/painel/grafico-de-linhas/grafico-de-linhas.component';
 import { GraficoPizzaComponent } from './pages/painel/grafico-pizza/grafico-pizza.component';
 import { AgendaModule } from './pages/agenda/agenda.module';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
 	declarations: [
@@ -168,6 +169,7 @@ import { AgendaModule } from './pages/agenda/agenda.module';
 		MatSlideToggleModule,
 		MatTooltipModule,
 		AgendaModule,
+		MatButtonToggleModule,
 		// Vex
 		VexModule,
 		CustomLayoutModule,

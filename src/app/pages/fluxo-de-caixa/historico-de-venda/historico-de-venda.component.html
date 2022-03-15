@@ -1,1 +1,35 @@
-<vex-construcao></vex-construcao>
+
+<div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
+	<div fxFlex="auto" fxLayout="column">
+		<mat-label>Selecione um Periodo Desejado</mat-label>
+		<div class="row">
+			<div class="col-md-2">
+				<mat-form-field fxFlex="grow" color="accent" appearance="standard">
+					<mat-label>Data Inicial</mat-label>
+					<input matInput [matDatepicker]="picker1" (ngModelChange)="validarFiltro(periodo)"
+						formControlName="dt_inicial">
+					<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+					<mat-datepicker #picker1></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<div class="col-md-2">
+				<mat-form-field fxFlex="grow" color="accent" appearance="standard">
+					<mat-label>Data final</mat-label>
+					<input matInput [matDatepicker]="picker2" (ngModelChange)="validarFiltro(periodo)"
+						formControlName="dt_final">
+					<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+					<mat-datepicker #picker2 color="primary"></mat-datepicker>
+				</mat-form-field>
+			</div>
+			
+			<mat-button-toggle-group [value]="periodo" (change)="validarFiltro($event.value)" name="fontStyle" aria-label="Font Style">
+				<mat-button-toggle value="7">7 dias</mat-button-toggle>
+				<mat-button-toggle value="15">15 dias</mat-button-toggle>
+				<mat-button-toggle value="30">30 dias</mat-button-toggle>
+				<mat-button-toggle value="90">3 meses</mat-button-toggle>
+				<mat-button-toggle value="180">6 meses</mat-button-toggle>
+				<mat-button-toggle value="365">12 meses</mat-button-toggle>
+			</mat-button-toggle-group>
+		</div>
+	</div>
+</div>

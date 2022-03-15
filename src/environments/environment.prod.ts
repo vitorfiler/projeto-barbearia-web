@@ -5,5 +5,6 @@ export const environment = {
   URL_AWS: "",
   ambiente: "prd",
 
+
     recuperarSenha: '/estabelecimento/recuperar-senha'
 };
