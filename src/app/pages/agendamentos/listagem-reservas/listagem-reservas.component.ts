@@ -13,6 +13,7 @@ import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelect } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
+import { EventEmitterService } from 'src/app/services/event.service';
 
 @Component({
 	selector: 'vex-listagem-reservas',
@@ -67,9 +68,26 @@ export class ListagemReservasComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		EventEmitterService.get('buscar').subscribe(() => this.listar())
 		this.inicializarFiltro();
 	}
 
+	listar() {
+		this.reservasService.listarReservas(this.estabelecimentoID).subscribe(response => {
+			this.carregando = false
+			this.reservas = response.body
+
+			this.dataSource = new MatTableDataSource<Reserva>(this.reservas)
+			setTimeout(() => {
+				this.dataSource.paginator = this.paginator
+				this.dataSource.sort = this.matSort
+			})
+		}, (error) => {
+			console.log(error);
+			this.carregando = false;
+		})
+
+	}
 	inicializarFiltro() {
 		this.formReserva = this.fb.group({
 			filtro: [''],
@@ -77,11 +95,15 @@ export class ListagemReservasComponent implements OnInit {
 			dt_inicial: [''],
 			dt_final: [''],
 		});
-		this.statusPadrao = this.statusReserva[0].value
+		this.statusPadrao = this.statusReserva[0].value;
+		this.listar();
 	}
 
 	clearForm() {
 		this.formReserva.reset();
+		setTimeout(() => {
+			this.inicializarFiltro();
+		});
 	}
 
 	abrirModalAdicionarServico(isAdicionar: boolean) {
@@ -97,8 +119,13 @@ export class ListagemReservasComponent implements OnInit {
 		let selecaoStatus = this.formReserva.get('status').value
 		let filtroReserva = this.formReserva.get('filtro').value
 
-		if (dt_inicial && dt_final) {
-
+		// condicional para que seja possivel fazer filtragem com apenas um valor de entrada
+		if (dt_inicial != "" && dt_final == "") {
+			dt_inicial = (dt_inicial.getFullYear() + "-" + ((dt_inicial.getMonth() + 1)) + "-" + (dt_inicial.getDate()));
+			this.filtrar(filtroReserva, selecaoStatus, dt_inicial);
+		}
+		//condicional para conversão de data com 2 variaveis com valor atribuido 
+		else if (dt_inicial && dt_final) {
 			if (dt_inicial > dt_final) {
 				this.snackbar.open("Insira uma data final maior que inicial", 'Ok', { duration: 4000 });
 				return;
@@ -112,14 +139,17 @@ export class ListagemReservasComponent implements OnInit {
 		}
 	}
 
-	filtrar(filtroReserva, selecaoStatus, dt_inicial, dt_final) {
+	filtrar(filtroReserva, selecaoStatus, dt_inicial, dt_final?) {
 		this.carregando = true;
 		this.reservasService.filtrar(this.estabelecimentoID, filtroReserva, selecaoStatus, dt_inicial, dt_final).subscribe(resposta => {
 			this.reservas = resposta.body
 			/*renderizando a tabela*/
-			// this.carregando = false;
-			// this.dataSource = new MatTableDataSource<Reserva>(this.reservas)
+			this.carregando = false;
+			this.dataSource = new MatTableDataSource<Reserva>(this.reservas)
 
 		})
+	}
+	ngAfterViewInit() {
+		this.dataSource.sort = this.matSort;
 	}
 }
