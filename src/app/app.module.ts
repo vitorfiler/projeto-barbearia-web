@@ -132,6 +132,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 		MatNativeDateModule,
 		MatDatepickerModule,
 		NgxLoadingModule.forRoot({}),
+		NgxChartsModule,
 		AngularCalendarModule.forRoot({
 			provide: DateAdapter,
 			useFactory: adapterFactory
