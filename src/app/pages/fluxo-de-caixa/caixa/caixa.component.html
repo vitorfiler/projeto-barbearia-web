@@ -1,1 +1,34 @@
-<vex-construcao></vex-construcao>
+<div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
+	<div fxFlex="auto" fxLayout="column">
+		<div class="row">
+			<div class="col-md-7">
+				<mat-form-field fxFlex="grow" appearance="standard">
+					<mat-label>Filtro</mat-label>
+					<input placeholder="Ex. nome do cliente" formControlName="filtro" [(ngModel)]="filtroCategoria"
+						(ngModelChange)="filtrar()" matInput />
+				</mat-form-field>
+			</div>
+			<div class="col-md-2">
+				<mat-form-field fxFlex="grow" appearance="standard">
+					<mat-label>Status</mat-label>
+					<mat-select formControlName="categoria" name="filtroCategoria" [(ngModel)]="categoria"
+						(ngModelChange)="filtrar()">
+						<mat-option *ngFor="let selecaoCategoria of selecaoCategoria" [value]="selecaoCategoria.value">
+							{{selecaoCategoria.viewValue}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div class="col-md-2">
+				<button fxFlex="grow" mat-raised-button color="primary"
+					(click)="abrirModalAdicionarServico(true)">Adicionar</button>
+			</div>
+			<div class="col-md-1">
+				<button *ngIf="visible && mostraBotaoListaGradeNoFiltro" style="transform: scale(1.6);" fxFlex="grow"
+					title="visualização em grade" (click)="botaoVisualizacao()">
+					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#5c77ff'}">view_module</mat-icon>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

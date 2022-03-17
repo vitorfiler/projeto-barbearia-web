@@ -120,7 +120,7 @@ import { AgendaModule } from './pages/agenda/agenda.module';
 		GraficoDeBarrasVerticaisComponent,
 		GraficoDeBarrasVerticalAgrupadasComponent,
 		GraficoDeLinhasComponent,
-		GraficoPizzaComponent
+		GraficoPizzaComponent,
 	],
 	imports: [
 		BrowserModule,
