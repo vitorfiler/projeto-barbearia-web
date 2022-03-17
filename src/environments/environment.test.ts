@@ -4,6 +4,6 @@ export const environment = {
   URL_API: "https://easycut-dev.herokuapp.com",
   URL_AWS: "",
   ambiente: "test",
-
-    recuperarSenha: '/estabelecimento/recuperar-senha'
+  recuperarSenha: '/estabelecimento/recuperar-senha',
+  
 };
