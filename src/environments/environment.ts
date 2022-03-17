@@ -9,6 +9,7 @@ export const environment = {
   //URL_API: "http://localhost:8080",
   URL_AWS: "",
   ambiente: "dsv",
+  URL_Mockon: "http://localhost:3001/historico-vendas/1/1/1",
 
   //SERVIÇOS
     recuperarSenha: '/estabelecimento/recuperar-senha'
