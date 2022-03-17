@@ -79,7 +79,7 @@ import { GraficoDeBarrasVerticalAgrupadasComponent } from './pages/painel/grafic
 import { GraficoDeLinhasComponent } from './pages/painel/grafico-de-linhas/grafico-de-linhas.component';
 import { GraficoPizzaComponent } from './pages/painel/grafico-pizza/grafico-pizza.component';
 import { AgendaModule } from './pages/agenda/agenda.module';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
 	declarations: [
@@ -132,7 +132,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 		MatNativeDateModule,
 		MatDatepickerModule,
 		NgxLoadingModule.forRoot({}),
-		NgxChartsModule,
 		AngularCalendarModule.forRoot({
 			provide: DateAdapter,
 			useFactory: adapterFactory
