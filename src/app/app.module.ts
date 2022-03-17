@@ -131,6 +131,7 @@ import { AgendaModule } from './pages/agenda/agenda.module';
 		MatNativeDateModule,
 		MatDatepickerModule,
 		NgxLoadingModule.forRoot({}),
+		NgxChartsModule,
 		AngularCalendarModule.forRoot({
 			provide: DateAdapter,
 			useFactory: adapterFactory

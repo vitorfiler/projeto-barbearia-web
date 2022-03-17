@@ -1,1 +1,8 @@
-<vex-construcao></vex-construcao>
+<div class="grafico" align="center">
+	<ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+		[xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+		[showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [barPadding]="barPadding"
+		[showGridLines]="showGridLines" (select)="onSelect($event)" (activate)="onActivate($event)"
+		(deactivate)="onDeactivate($event)">
+	</ngx-charts-bar-horizontal>
+</div>

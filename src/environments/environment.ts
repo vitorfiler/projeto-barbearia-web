@@ -4,14 +4,15 @@
 
 export const environment = {
   production: false,
-  hmr       : false,
+  hmr: false,
   URL_API: "https://easycut-dev.herokuapp.com",
   //URL_API: "http://localhost:8080",
+  URL_MOCKOON: "http://localhost:8080/graficos",
   URL_AWS: "",
   ambiente: "dsv",
 
   //SERVIÇOS
-    recuperarSenha: '/estabelecimento/recuperar-senha'
+  recuperarSenha: '/estabelecimento/recuperar-senha'
 };
 
 
