@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GraficosService } from 'src/app/services/graficos.service';
 
+
 @Component({
 	selector: 'vex-grafico-de-barras-horizontais',
 	templateUrl: './grafico-de-barras-horizontais.component.html',
@@ -33,13 +34,7 @@ export class GraficoDeBarrasHorizontaisComponent implements OnInit {
 	ngOnInit(): void {
 		this.graficoService.dadosGrafico().subscribe(response => {
 			this.single = response.body
-			console.log(this.single)
 			return this.single;
 		})
 	}
-
-	onSelect(data: any): void {
-		console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-	}
-
 }
