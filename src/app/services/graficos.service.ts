@@ -11,7 +11,7 @@ export class GraficosService {
 	constructor(private http: HttpClient) { }
 
 	dadosGrafico(): Observable<any> {
-		return this.http.get(`${environment.URL_MOCKOON}/grafico-horizontal`, { observe: 'response' })
+		return this.http.get(`${environment.URL_MOCKOON}/grafico/grafico-horizontal`, { observe: 'response' })
 	}
 
 }
