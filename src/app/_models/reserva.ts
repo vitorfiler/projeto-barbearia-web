@@ -15,7 +15,9 @@ export class Reserva {
 	nomeCliente: string;
 	produtos: Produto;
 	estabelecimentoID: number;
-	clienteID: number;
-	produtoID: number;
 	cliente: Cliente;
+
+	constructor(reserva: Reserva = {} as Reserva) {
+		Object.assign(this, reserva);
+	}
 }

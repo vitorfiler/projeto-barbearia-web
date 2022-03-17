@@ -1,4 +1,4 @@
-import { Component, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,6 +14,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSelect } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
 import { EventEmitterService } from 'src/app/services/event.service';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @Component({
 	selector: 'vex-listagem-reservas',
@@ -27,21 +31,21 @@ import { EventEmitterService } from 'src/app/services/event.service';
 })
 
 export class ListagemReservasComponent implements OnInit {
+	//Tabela
+	dataSource = new MatTableDataSource<Reserva>()
+	displayedColumns: string[] = ['cliente', 'produto', 'quantidade', 'valor', 'dataRetirada', 'status', 'acoes'];
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild('select') matSelect: MatSelect;
+	@ViewChild(MatSort, { static: false }) matSort: MatSort;
+
 
 	//variaveis
-	public carregando = false;
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
+	public carregando = false;
 	statusPadrao: String;
 
 	//Objeto
-	formReserva: FormGroup;
-
-	//Tabela
-	displayedColumns: string[] = ['cliente', 'produto', 'quantidade', 'valor', 'dataRetirada', 'status', 'acoes'];
-	dataSource = new MatTableDataSource<Reserva>()
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-	@ViewChild('select') matSelect: MatSelect;
-	@ViewChild(MatSort) matSort: MatSort;
+	form: FormGroup;
 
 	//Listas
 	reservas: Reserva[] = [];
@@ -73,23 +77,22 @@ export class ListagemReservasComponent implements OnInit {
 	}
 
 	listar() {
+		this.carregando = true;
 		this.reservasService.listarReservas(this.estabelecimentoID).subscribe(response => {
-			this.carregando = false
 			this.reservas = response.body
-
+			this.carregando = false;
 			this.dataSource = new MatTableDataSource<Reserva>(this.reservas)
-			setTimeout(() => {
-				this.dataSource.paginator = this.paginator
-				this.dataSource.sort = this.matSort
-			})
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.matSort
+
 		}, (error) => {
 			console.log(error);
 			this.carregando = false;
 		})
-
 	}
+
 	inicializarFiltro() {
-		this.formReserva = this.fb.group({
+		this.form = this.fb.group({
 			filtro: [''],
 			status: [''],
 			dt_inicial: [''],
@@ -100,7 +103,7 @@ export class ListagemReservasComponent implements OnInit {
 	}
 
 	clearForm() {
-		this.formReserva.reset();
+		this.form.reset();
 		setTimeout(() => {
 			this.inicializarFiltro();
 		});
@@ -114,10 +117,10 @@ export class ListagemReservasComponent implements OnInit {
 	}
 
 	validarFiltro() {
-		let dt_inicial = this.formReserva.get('dt_inicial').value
-		let dt_final = this.formReserva.get('dt_final').value
-		let selecaoStatus = this.formReserva.get('status').value
-		let filtroReserva = this.formReserva.get('filtro').value
+		let dt_inicial = this.form.get('dt_inicial').value
+		let dt_final = this.form.get('dt_final').value
+		let selecaoStatus = this.form.get('status').value
+		let filtroReserva = this.form.get('filtro').value
 
 		// condicional para que seja possivel fazer filtragem com apenas um valor de entrada
 		if (dt_inicial != "" && dt_final == "") {
@@ -146,10 +149,14 @@ export class ListagemReservasComponent implements OnInit {
 			/*renderizando a tabela*/
 			this.carregando = false;
 			this.dataSource = new MatTableDataSource<Reserva>(this.reservas)
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.matSort;
 
 		})
 	}
+
 	ngAfterViewInit() {
-		this.dataSource.sort = this.matSort;
+
 	}
+
 }
