@@ -1,3 +1,21 @@
-*{
-    height: 400px;
+
+table {
+  width: 100%;
+}
+  
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+  
+td, th {
+  width: 25%;
+}
+.mat-raised-button, .mat-stroked-button{    
+  margin: auto;
+  color:white; 
+}
+
+.mat-raised-button, .mat-stroked-button{    
+  margin: auto;
 }
