@@ -36,7 +36,6 @@ export class ListagemReservasComponent implements OnInit {
 	displayedColumns: string[] = ['cliente', 'produto', 'quantidade', 'valor', 'dataRetirada', 'status', 'acoes'];
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild('select') matSelect: MatSelect;
-	// @ViewChild(MatSort, { static: false }) matSort: MatSort;
 
 
 	//variaveis
@@ -81,33 +80,33 @@ export class ListagemReservasComponent implements OnInit {
 	ordenarTabela(ordem: Sort) {
 		const data = this.reservas.slice();
 		if (!ordem.active || ordem.direction === '') {
-		  this.reservas = data;
-		  return;
+			this.reservas = data;
+			return;
 		}
-	
+
 		this.reservas = data.sort((a, b) => {
-		  const isAsc = ordem.direction === 'asc';
-		  switch (ordem.active) {
-			case 'cliente':
-			  return this.comparar(a.nomeCliente, b.nomeCliente, isAsc);
-			case 'valor':
-			  return this.comparar(a.valorTotalReserva, b.valorTotalReserva, isAsc);
-			case 'dtRetirada':
-			  return this.comparar(a.dtAbertura, b.dtAbertura, isAsc);
-			case 'status':
-			  return this.comparar(a.statusReserva, b.statusReserva, isAsc);
-			default:
-			  return 0;
-		  }
+			const isAsc = ordem.direction === 'asc';
+			switch (ordem.active) {
+				case 'cliente':
+					return this.comparar(a.nomeCliente, b.nomeCliente, isAsc);
+				case 'valor':
+					return this.comparar(a.valorTotalReserva, b.valorTotalReserva, isAsc);
+				case 'dtRetirada':
+					return this.comparar(a.dtAbertura, b.dtAbertura, isAsc);
+				case 'status':
+					return this.comparar(a.statusReserva, b.statusReserva, isAsc);
+				default:
+					return 0;
+			}
 		});
 		this.dataSource = new MatTableDataSource<Reserva>(this.reservas)
 		this.dataSource.paginator = this.paginator;
-	  }
+	}
 
 	comparar(a: number | string | Date, b: number | string | Date, isAsc: boolean) {
 		return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 	}
-	
+
 	listar() {
 		this.carregando = true;
 		this.reservasService.listarReservas(this.estabelecimentoID).subscribe(response => {
@@ -184,9 +183,4 @@ export class ListagemReservasComponent implements OnInit {
 
 		})
 	}
-
-	ngAfterViewInit() {
-
-	}
-
 }
