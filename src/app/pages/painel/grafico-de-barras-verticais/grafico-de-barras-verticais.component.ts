@@ -1,7 +1,5 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { single } from './data';
+import { GraficosService } from 'src/app/services/graficos.service';
 
 @Component({
   selector: 'vex-grafico-de-barras-verticais',
@@ -11,7 +9,6 @@ import { single } from './data';
 export class GraficoDeBarrasVerticaisComponent implements OnInit {
 
   single: any[];
-  multi: any[];
 
   view: any[] = [700, 400];
 
@@ -29,11 +26,13 @@ export class GraficoDeBarrasVerticaisComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
-  constructor() {
-    Object.assign(this, { single })
+  constructor(private graficoService : GraficosService) {
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.graficoService.dadosGraficoVertical().subscribe(response => {
+			this.single = response.body
+			return this.single;
+		})
   }
 
   onSelect(event) {
