@@ -80,6 +80,7 @@ import { GraficoDeLinhasComponent } from './pages/painel/grafico-de-linhas/grafi
 import { GraficoPizzaComponent } from './pages/painel/grafico-pizza/grafico-pizza.component';
 import { AgendaModule } from './pages/agenda/agenda.module';
 
+
 @NgModule({
 	declarations: [
 		AppComponent,
