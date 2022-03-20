@@ -80,6 +80,7 @@ import { GraficoDeLinhasComponent } from './pages/painel/grafico-de-linhas/grafi
 import { GraficoPizzaComponent } from './pages/painel/grafico-pizza/grafico-pizza.component';
 import { AgendaModule } from './pages/agenda/agenda.module';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
 	declarations: [
@@ -170,6 +171,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 		MatTooltipModule,
 		AgendaModule,
 		MatButtonToggleModule,
+		MatExpansionModule,
 		// Vex
 		VexModule,
 		CustomLayoutModule,

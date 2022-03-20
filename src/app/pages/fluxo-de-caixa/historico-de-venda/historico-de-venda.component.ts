@@ -17,6 +17,8 @@ export class HistoricoDeVendaComponent implements OnInit {
 
   historicoVendas: HistoricoVendas	
   form: FormGroup
+
+  detalhesVendas = false;
   
   constructor(
 	  private snackbar: MatSnackBar,
