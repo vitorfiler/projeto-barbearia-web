@@ -122,7 +122,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 		GraficoDeBarrasVerticaisComponent,
 		GraficoDeBarrasVerticalAgrupadasComponent,
 		GraficoDeLinhasComponent,
-		GraficoPizzaComponent
+		GraficoPizzaComponent,
 	],
 	imports: [
 		BrowserModule,
