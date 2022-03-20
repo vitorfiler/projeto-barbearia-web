@@ -81,6 +81,7 @@ import { GraficoPizzaComponent } from './pages/painel/grafico-pizza/grafico-pizz
 import { AgendaModule } from './pages/agenda/agenda.module';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
+
 @NgModule({
 	declarations: [
 		AppComponent,
