@@ -1,6 +1,15 @@
-<div align="center" style="margin-top: 3%;" >
-  <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
-    [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
-  </ngx-charts-bar-vertical>
+<div class="row">
+	<div class="col-lg-6 col-md-12 col-sm-12">
+		<mat-card style="height:400px; display: grid; margin:7px 0px 7px 0px !important;">
+			<mat-card-header>
+				Number of Rides for last week days
+			</mat-card-header> 
+			<mat-card-content style="padding-bottom: 0px">
+				<ngx-charts-bar-vertical [view]="view" [scheme] ="colorScheme" [results]="single" [gradient]="gradient" [xAxis]="showXAxis"
+				 [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+				 [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+				</ngx-charts-bar-vertical>
+			</mat-card-content>
+		</mat-card>
+	</div>
 </div>

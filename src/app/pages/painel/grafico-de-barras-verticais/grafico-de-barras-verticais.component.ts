@@ -34,4 +34,8 @@ export class GraficoDeBarrasVerticaisComponent implements OnInit {
 			return this.single;
 		})
   }
+
+  onSelect(event) {
+    console.log(event);
+  }
 }
