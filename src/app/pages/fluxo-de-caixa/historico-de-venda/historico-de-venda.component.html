@@ -40,9 +40,11 @@
 				Historio detalhado
 			</mat-panel-title>
 			<mat-panel-description>
-				<mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="!detalhesVendas">visibility</mat-icon>
-				<mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="detalhesVendas">visibility_off</mat-icon>
-				 {{detalhesVendas ? 'Esconder' : 'Visualizar'}} detalhes
+				<div class="alinhar-expansor">
+					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#DAAA00'}" *ngIf="!detalhesVendas">visibility</mat-icon>
+					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#DAAA00'}" *ngIf="detalhesVendas">visibility_off</mat-icon>
+					{{detalhesVendas ? 'Esconder' : 'Visualizar'}} detalhes
+				</div>
 			</mat-panel-description>
 		</mat-expansion-panel-header>
 		<p>No dia em que saí de casa minha mãe me disse filho vem cá
