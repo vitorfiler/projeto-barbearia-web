@@ -10,17 +10,24 @@ export class ReservasService {
 
 	constructor(private http: HttpClient) { }
 
-	filtrar(estabelecimentoID: string, filtro: string, status: string, dt_inicial: string, dt_final: string): Observable<any> {
+	filtrar(estabelecimentoID: string, filtroReserva: string, selecaoStatus: string, dt_inicial: string, dt_final?: string): Observable<any> {
 
 		return this.http.get(`${environment.URL_API}/reservas/filtro`, {
 			params: {
-				estabelecimento_ID: estabelecimentoID, 
-				filtroReserva: filtro, 
-				selecaoStatus: status, 
-				dt_inicial: dt_inicial, 
+				estabelecimento_ID: estabelecimentoID,
+				filtro: filtroReserva,
+				status: selecaoStatus || "",
+				dt_inicial: dt_inicial,
 				dt_final: dt_final
 			}, observe: 'response'
 		})
+	}
+	listarReservas(estabelecimentoID: string): Observable<any> {
+		return this.http.get(`${environment.URL_API}/reservas/todas`, {
+			params: {
+				estabelecimento_ID: estabelecimentoID,
+			}, observe: 'response'
+		});
 	}
 
 }
