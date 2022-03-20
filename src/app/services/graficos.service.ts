@@ -14,4 +14,8 @@ export class GraficosService {
 		return this.http.get(`${environment.URL_MOCKOON}/grafico/grafico-horizontal`, { observe: 'response' })
 	}
 
+	dadosGraficoVertical(): Observable<any> {
+		return this.http.get(`${environment.URL_MOCKOON}/grafico/grafico-veritcal`, { observe: 'response' })
+	}
+
 }
