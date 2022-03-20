@@ -17,7 +17,7 @@
 
       <div class="body-1" *ngFor="let beneficio of plano.beneficios"> {{beneficio.dsBeneficio}}</div>
 
-      <h3 class="display-2 font-bold my-6"><span class="text-secondary headline align-top"></span>{{plano.preco}}</h3>
+      <h3 class="display-2 font-bold my-6"><span class="text-secondary headline align-top">R$</span>{{plano.preco}}</h3>
 
       <button class="rounded-full max-w-full w-200" (click)="contratarPlano(plano.id)" color="primary" mat-raised-button
         type="button" [mat-dialog-close]="true">Contratar</button>

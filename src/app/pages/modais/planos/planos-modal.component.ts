@@ -5,9 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { Plano } from 'src/app/_models/plano';
 
-const BASIC = 4;
-const PREMIUM = 14;
-const PRO = 24;
 @Component({
   selector: 'vex-planos',
   templateUrl: './planos-modal.component.html',
@@ -33,8 +30,8 @@ export class PlanosModalComponent implements OnInit {
     this.planosServices.listarPlanos().subscribe(resposta => {
       this.listaPlanos = resposta.body;
       this.listaPlanos.forEach(plano => {
-        plano.id == BASIC ? plano.icone = "assets/img/icones/basico.svg" 
-        : plano.id == PREMIUM ? plano.icone = "assets/img/icones/premium.svg"
+        plano.id == 4 ? plano.icone = "assets/img/icones/basico.svg" 
+        : plano.id == 14 ? plano.icone = "assets/img/icones/premium.svg"
         : plano.icone = "assets/img/icones/pro.svg"
       });
       console.log(this.listaPlanos);
