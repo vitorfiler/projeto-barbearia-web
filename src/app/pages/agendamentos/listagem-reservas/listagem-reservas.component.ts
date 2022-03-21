@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
+import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,52 +8,23 @@ import { ReservasService } from 'src/app/services/reservas.service';
 import { Reserva } from 'src/app/_models/reserva';
 import { Status } from 'src/app/_models/status';
 import { ConstrucaoModal } from '../../modais/construcao-modal/modal-adicionar-servicos';
-import { stagger20ms } from 'src/@vex/animations/stagger.animation';
-import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSelect } from '@angular/material/select';
-import { MatSort, Sort } from '@angular/material/sort';
-import { EventEmitterService } from 'src/app/services/event.service';
-import { registerLocaleData } from '@angular/common';
-import localePt from '@angular/common/locales/pt';
-
-registerLocaleData(localePt);
 
 @Component({
 	selector: 'vex-listagem-reservas',
 	templateUrl: './listagem-reservas.component.html',
 	styleUrls: ['./listagem-reservas.component.scss'],
 	providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
-	animations: [
-		fadeInUp400ms,
-		stagger20ms
-	]
+
 })
-
 export class ListagemReservasComponent implements OnInit {
-	//Tabela
-	dataSource = new MatTableDataSource<Reserva>()
-	displayedColumns: string[] = ['cliente', 'produto', 'quantidade', 'valor', 'dataRetirada', 'status', 'acoes'];
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-	@ViewChild('select') matSelect: MatSelect;
 
-
-	//variaveis
-	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
+	filtroReserva: string;
+	formReserva: FormGroup;
 	public carregando = false;
-	statusPadrao: String;
-
-	//Objeto
-	form: FormGroup;
-
-	//Listas
+	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
 	reservas: Reserva[] = [];
-
-	status: Status[] = [
-		{ value: 'AGUARDANDORETIRADA', viewValue: 'Aguardando Retirada' },
-		{ value: 'CANCELADO', viewValue: 'Cancelado' },
-		{ value: 'ENTREGUE', viewValue: 'Entregue' },
-	];
+	dataSource = new MatTableDataSource<Reserva>()
+	statusPadrao: String;
 
 	statusReserva: Status[] = [
 		{ value: 'TODOS', viewValue: 'Todos' },
@@ -61,7 +32,6 @@ export class ListagemReservasComponent implements OnInit {
 		{ value: 'CANCELADO', viewValue: 'Cancelado' },
 		{ value: 'ENTREGUE', viewValue: 'Entregue' },
 	];
-
 	constructor(private fb: FormBuilder,
 		private reservasService: ReservasService,
 		/* correção de data para Português, importanções feitas no app.module.ts*/
@@ -69,74 +39,23 @@ export class ListagemReservasComponent implements OnInit {
 		public dialog: MatDialog
 	) {
 		this.dateAdapter.setLocale('pt-BR');
-		this.reservas = this.reservas.slice();
 	}
 
 	ngOnInit(): void {
-		EventEmitterService.get('buscar').subscribe(() => this.listar())
 		this.inicializarFiltro();
 	}
 
-	ordenarTabela(ordem: Sort) {
-		const data = this.reservas.slice();
-		if (!ordem.active || ordem.direction === '') {
-			this.reservas = data;
-			return;
-		}
-
-		this.reservas = data.sort((a, b) => {
-			const isAsc = ordem.direction === 'asc';
-			switch (ordem.active) {
-				case 'cliente':
-					return this.comparar(a.nomeCliente, b.nomeCliente, isAsc);
-				case 'valor':
-					return this.comparar(a.valorTotalReserva, b.valorTotalReserva, isAsc);
-				case 'dtRetirada':
-					return this.comparar(a.dtAbertura, b.dtAbertura, isAsc);
-				case 'status':
-					return this.comparar(a.statusReserva, b.statusReserva, isAsc);
-				default:
-					return 0;
-			}
-		});
-		this.dataSource = new MatTableDataSource<Reserva>(this.reservas)
-		this.dataSource.paginator = this.paginator;
-	}
-
-	comparar(a: number | string | Date, b: number | string | Date, isAsc: boolean) {
-		return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-	}
-
-	listar() {
-		this.carregando = true;
-		this.reservasService.listarReservas(this.estabelecimentoID).subscribe(response => {
-			this.reservas = response.body
-			this.carregando = false;
-			this.dataSource = new MatTableDataSource<Reserva>(this.reservas)
-			this.dataSource.paginator = this.paginator;
-
-		}, (error) => {
-			console.log(error);
-			this.carregando = false;
-		})
-	}
-
 	inicializarFiltro() {
-		this.form = this.fb.group({
+		this.formReserva = this.fb.group({
 			filtro: [''],
 			status: [''],
 			dt_inicial: [''],
 			dt_final: [''],
 		});
-		this.statusPadrao = this.statusReserva[0].value;
-		this.listar();
+		this.statusPadrao = this.statusReserva[0].value
 	}
-
 	clearForm() {
-		this.form.reset();
-		setTimeout(() => {
-			this.inicializarFiltro();
-		});
+		this.formReserva.reset();
 	}
 
 	abrirModalAdicionarServico(isAdicionar: boolean) {
@@ -147,39 +66,31 @@ export class ListagemReservasComponent implements OnInit {
 	}
 
 	validarFiltro() {
-		let dt_inicial = this.form.get('dt_inicial').value
-		let dt_final = this.form.get('dt_final').value
-		let selecaoStatus = this.form.get('status').value
-		let filtroReserva = this.form.get('filtro').value
+		let dt_inicial = this.formReserva.get('dt_inicial').value
+		let dt_final = this.formReserva.get('dt_final').value
+		let selecaoStatus = this.formReserva.get('status').value
+		if (dt_inicial && dt_final) {
 
-		// condicional para que seja possivel fazer filtragem com apenas um valor de entrada
-		if (dt_inicial != "" && dt_final == "") {
-			dt_inicial = (dt_inicial.getFullYear() + "-" + ((dt_inicial.getMonth() + 1)) + "-" + (dt_inicial.getDate()));
-			this.filtrar(filtroReserva, selecaoStatus, dt_inicial);
-		}
-		//condicional para conversão de data com 2 variaveis com valor atribuido 
-		else if (dt_inicial && dt_final) {
 			if (dt_inicial > dt_final) {
 				this.snackbar.open("Insira uma data final maior que inicial", 'Ok', { duration: 4000 });
 				return;
 			}
 			dt_inicial = (dt_inicial.getFullYear() + "-" + ((dt_inicial.getMonth() + 1)) + "-" + (dt_inicial.getDate()));
 			dt_final = (dt_final.getFullYear() + "-" + ((dt_final.getMonth() + 1)) + "-" + (dt_final.getDate()));
-			this.filtrar(filtroReserva, selecaoStatus, dt_inicial, dt_final);
+			this.filtrar(this.filtroReserva, selecaoStatus, dt_inicial, dt_final);
 		}
 		else {
-			this.filtrar(filtroReserva, selecaoStatus, dt_inicial, dt_final);
+			this.filtrar(this.filtroReserva, selecaoStatus, dt_inicial, dt_final);
 		}
 	}
 
-	filtrar(filtroReserva, selecaoStatus, dt_inicial, dt_final?) {
+	filtrar(filtroReserva, selecaoStatus, dt_inicial, dt_final) {
 		this.carregando = true;
 		this.reservasService.filtrar(this.estabelecimentoID, filtroReserva, selecaoStatus, dt_inicial, dt_final).subscribe(resposta => {
 			this.reservas = resposta.body
 			/*renderizando a tabela*/
 			this.carregando = false;
 			this.dataSource = new MatTableDataSource<Reserva>(this.reservas)
-			this.dataSource.paginator = this.paginator;
 
 		})
 	}
