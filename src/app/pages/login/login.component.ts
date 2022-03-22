@@ -1,4 +1,4 @@
-import { CadastroEstabelecimentoModal } from './../modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
+import { CadastroEstabelecimentoModal } from '../modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,18 +13,19 @@ import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { MatDialog } from '@angular/material/dialog';
 import { PlanosModalComponent } from '../modais/planos/planos-modal.component';
+import { EventEmitterService } from 'src/app/services/event.service';
+import { LayoutService } from 'src/@vex/services/layout.service';
 
 @Component({
-	selector: 'vex-login-final',
-	templateUrl: './login-final.component.html',
-	styleUrls: ['./login-final.component.scss'],
+	selector: 'vex-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.scss'],
 	animations: [
 		fadeInUp400ms,
 		stagger20ms
 	]
 })
-export class LoginFinalComponent implements OnInit {
-
+export class LoginComponent implements OnInit {
 
 	form: FormGroup;
 	arrowBack = arrowBack;
@@ -45,7 +46,8 @@ export class LoginFinalComponent implements OnInit {
 		private cd: ChangeDetectorRef,
 		private snackbar: MatSnackBar,
 		private loginService: LoginService,
-		public dialog: MatDialog
+		public dialog: MatDialog,
+		private layoutService: LayoutService,
 	) { }
 
 
@@ -61,7 +63,7 @@ export class LoginFinalComponent implements OnInit {
 	MostrarModalCadastroCompleto() {
 		let cadastroCompleto = JSON.parse(localStorage.getItem('cadastroCompleto'))
 		if (!cadastroCompleto) {
-			const dialogRef = this.dialog.open(CadastroEstabelecimentoModal,{
+			const dialogRef = this.dialog.open(CadastroEstabelecimentoModal, {
 				maxWidth: '600px'
 			});
 			dialogRef.afterClosed().subscribe(result => {
@@ -96,6 +98,7 @@ export class LoginFinalComponent implements OnInit {
 				localStorage.setItem("planoId", response.body.plano_ID)
 				localStorage.setItem("planoId", response.body.plano_ID)
 				localStorage.setItem("nomePlano", "BASIC")
+				this.layoutService.closeQuickpanel();
 				this.router.navigate(['/']);
 				this.MostrarModalCadastroCompleto()
 				this.logando = false;

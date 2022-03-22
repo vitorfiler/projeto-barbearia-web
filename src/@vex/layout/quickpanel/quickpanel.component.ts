@@ -23,7 +23,6 @@ export class QuickpanelComponent implements OnInit {
   constructor(private route: Router, private agendamentoService: AgendamentoService) { }
 
   ngOnInit() {
-    console.log(this.nomeDia);
     this.buscarAgendamentos()
   }
 
@@ -34,7 +33,7 @@ export class QuickpanelComponent implements OnInit {
     
   }
   buscarAgendamentos(){
-    this.agendamentoService.buscarAgendamentos(this.estabelecimentoId).subscribe(response => {
+    this.agendamentoService.buscarAgendamentosDoDia(this.estabelecimentoId).subscribe(response => {
       this.agendamentosDoDia = response.body;
     },(error)=>{
       console.log(error);

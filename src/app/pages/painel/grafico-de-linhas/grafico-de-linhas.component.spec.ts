@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginFinalComponent } from './login-final.component';
+import { GraficoDeLinhasComponent } from './grafico-de-linhas.component';
 
-describe('LoginFinalComponent', () => {
-  let component: LoginFinalComponent;
-  let fixture: ComponentFixture<LoginFinalComponent>;
+describe('GraficoDeLinhasComponent', () => {
+  let component: GraficoDeLinhasComponent;
+  let fixture: ComponentFixture<GraficoDeLinhasComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginFinalComponent ]
+      declarations: [ GraficoDeLinhasComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginFinalComponent);
+    fixture = TestBed.createComponent(GraficoDeLinhasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
