@@ -20,10 +20,10 @@ export class ModalDeletarProduto {
     deletar() {
         this.produtoService.deletarProduto(this.produto.id).subscribe(response => {
             EventEmitterService.get('buscarProduto').emit();
-            this.snackbar.open(MessagesSnackBar.DELETAR_SERVICO_SUCESSO, 'Fechar', { duration: 4000 })
+            this.snackbar.open(MessagesSnackBar.DELETAR_PRODUTO_SUCESSO, 'Fechar', { duration: 4000 })
         }, (error) => {
             console.log(error);
-            this.snackbar.open(MessagesSnackBar.DELETAR_SERVICO_ERRO, 'Fechar', { duration: 4000 })
+            this.snackbar.open(MessagesSnackBar.DELETAR_PRODUTO_ERRO, 'Fechar', { duration: 4000 })
         })
     }
 }
