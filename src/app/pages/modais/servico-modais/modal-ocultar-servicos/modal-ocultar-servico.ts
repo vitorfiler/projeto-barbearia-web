@@ -10,7 +10,7 @@ import { MessagesSnackBar } from "src/app/_constants/messagesSnackBar";
 	selector: 'modal-ocultar-servico',
 	templateUrl: 'modal-ocultar-servico.html',
 })
-export default class ModalOcultarServico implements OnInit{
+export default class ModalOcultarServico implements OnInit {
 
 	textoModal: String;
 	botaoModal: String;
@@ -22,16 +22,16 @@ export default class ModalOcultarServico implements OnInit{
 		@Optional() @Inject(MAT_DIALOG_DATA) public servico: any) { }
 
 	ngOnInit(): void {
-		this.textoModal = this.servico.ativo? 'Tem certeza que deseja ocultar este serviço para seus clientes?' 
-			:'Tem certeza que deseja exibir este serviço para seus clientes?'
-		this.botaoModal = this.servico.ativo? 'Ocultar':'Exibir'
+		this.textoModal = this.servico.ativo ? 'Tem certeza que deseja ocultar este serviço para seus clientes?'
+			: 'Tem certeza que deseja exibir este serviço para seus clientes?'
+		this.botaoModal = this.servico.ativo ? 'Ocultar' : 'Exibir'
 	}
 
 	trocarStatusServico() {
-		this.servico.ativo = this.servico.ativo? false : true;
+		this.servico.ativo = this.servico.ativo ? false : true;
 
 		this.servicoService.alterarAgendamento(this.servico).subscribe(response => {
-			// EventEmitterService.get('buscar').emit();
+			EventEmitterService.get('buscar').emit();
 			this.dialogRef.close(this.servico);
 			this.snackbar.open(MessagesSnackBar.VISUALIZACAO_SERVICO_ALTERADA_SUCESSO, 'Fechar', { duration: 4000 })
 		}, (error) => {
@@ -41,5 +41,5 @@ export default class ModalOcultarServico implements OnInit{
 		})
 	}
 
-	
+
 }
