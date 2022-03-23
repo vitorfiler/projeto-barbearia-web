@@ -48,7 +48,7 @@ export class ModalAdicionarProduto implements OnInit, AfterViewInit {
 
         this.form = this.fb.group({
             nomeProduto: ['', Validators.required],
-            qntEstoque: ['', Validators.required],
+            qtdEstoque: ['', Validators.required],
             categoria: ['', Validators.required],
             dsProduto: ['', Validators.required],
             promocional: [''],
