@@ -16,15 +16,11 @@
                         formControlName="qtdEstoque" required>
                 </mat-form-field>
 
-                <!-- <mat-form-field fxFlex="grow">
-                    <mat-label>Categoria</mat-label>
-                    <input [(ngModel)]="produto.categoria" matInput formControlName="categoria" required>
-                </mat-form-field> -->
-
                 <mat-form-field fxFlex="grow" appearance="standard">
                     <mat-label>Categoria</mat-label>
                     <mat-select formControlName="categoria" [(ngModel)]="produto.categoria">
-                        <mat-option *ngFor="let selecaoCategoria of selecaoCategoria" [value]="selecaoCategoria.value">
+                        <mat-option *ngFor="let selecaoCategoria    of selecaoCategoria"
+                            [value]="selecaoCategoria.value">
                             {{selecaoCategoria.viewValue}}
                         </mat-option>
                     </mat-select>
