@@ -10,7 +10,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { EventEmitterService } from 'src/app/services/event.service';
-import { ProdutosConstrucaoModal } from '../../modais/produtos-modal/modal-produtos';
 import ModalOcultarProduto from '../../modais/produtos-modal/modal-ocultar-produtos/modal-ocultar-produtos';
 import ModalPromocaoProdutos from '../../modais/produtos-modal/modal-promocao-produtos/modal-promocao-produto';
 import { ModalDeletarProduto } from '../../modais/produtos-modal/modal-deletar-produtos/modal-deletar-produto';
@@ -69,8 +68,9 @@ export class ListagemProdutosComponent implements OnInit {
 
 
 	ngOnInit(): void {
+		EventEmitterService.get('buscarProduto').subscribe(() => this.listarProdutos())
 		this.inicializarFiltro();
-		EventEmitterService.get('buscarProdutos').subscribe(() => this.listarProdutos())
+		this.listarProdutos();
 	}
 
 
@@ -80,14 +80,13 @@ export class ListagemProdutosComponent implements OnInit {
 			categoria: ['']
 		});
 		this.categoria = this.selecaoCategoria[0].value;
-		this.listarProdutos();
 	}
 
 	listarProdutos() {
 		this.carregando = true;
 		this.produtoService.listarProdutos(this.estabelecimentoID).subscribe(response => {
-			this.produto = response.body
 			this.carregando = false;
+			this.produto = response.body
 			this.dataSource = new MatTableDataSource<Produto>(this.produto)
 			this.dataSource.paginator = this.paginator
 		}, (error) => {

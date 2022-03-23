@@ -65,8 +65,9 @@ export class ModalAdicionarProduto implements OnInit, AfterViewInit {
     }
 
     cadastrar(produto: Produto) {
+        produto.ativo = true;
         this.produtoService.cadastrar(produto).subscribe(response => {
-            EventEmitterService.get('buscarProdutos').emit();
+            EventEmitterService.get('buscarProduto').emit();
             this.snackbar.open(MessagesSnackBar.CADASTRO_PRODUTO_SUCESSO, 'Fechar', { duration: 4000 })
         }, (error) => {
             console.log(error);

@@ -12,10 +12,10 @@ export class ProdutoService {
 	constructor(private http: HttpClient) { }
 
 	//trocar parametro filtroReserva após back end for alterado
-	filtrar(estabelecimentoID: string, filtroReserva: string, categoria: string): Observable<any> {
+	filtrar(estabelecimentoID: string, filtro: string, categoria: string): Observable<any> {
 		return this.http.get(`${environment.URL_API}/produtos/filtro`, {
 			params: {
-				estabelecimento_ID: estabelecimentoID, filtro: filtroReserva, categoria: categoria
+				estabelecimento_ID: estabelecimentoID, filtro: filtro, categoria: categoria
 			}, observe: 'response'
 		})
 	}
