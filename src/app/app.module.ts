@@ -79,6 +79,12 @@ import { GraficoDeBarrasVerticalAgrupadasComponent } from './pages/painel/grafic
 import { GraficoDeLinhasComponent } from './pages/painel/grafico-de-linhas/grafico-de-linhas.component';
 import { GraficoPizzaComponent } from './pages/painel/grafico-pizza/grafico-pizza.component';
 import { AgendaModule } from './pages/agenda/agenda.module';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import ModalOcultarProduto from './pages/modais/produtos-modal/modal-ocultar-produtos/modal-ocultar-produtos';
+import ModalPromocaoProdutos from './pages/modais/produtos-modal/modal-promocao-produtos/modal-promocao-produto';
+import { ModalDeletarProduto } from './pages/modais/produtos-modal/modal-deletar-produtos/modal-deletar-produto';
+import { ModalAdicionarProduto } from './pages/modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
+
 
 @NgModule({
 	declarations: [
@@ -120,7 +126,11 @@ import { AgendaModule } from './pages/agenda/agenda.module';
 		GraficoDeBarrasVerticaisComponent,
 		GraficoDeBarrasVerticalAgrupadasComponent,
 		GraficoDeLinhasComponent,
-		GraficoPizzaComponent
+		GraficoPizzaComponent,
+		ModalOcultarProduto,
+		ModalPromocaoProdutos,
+		ModalDeletarProduto,
+		ModalAdicionarProduto
 	],
 	imports: [
 		BrowserModule,
@@ -168,6 +178,7 @@ import { AgendaModule } from './pages/agenda/agenda.module';
 		MatSlideToggleModule,
 		MatTooltipModule,
 		AgendaModule,
+		MatButtonToggleModule,
 		// Vex
 		VexModule,
 		CustomLayoutModule,

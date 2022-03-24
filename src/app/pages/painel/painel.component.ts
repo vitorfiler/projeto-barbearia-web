@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { single } from './data';
 
 @Component({
   selector: 'vex-painel',
@@ -13,9 +16,11 @@ export class PainelComponent implements OnInit {
   graficoLinhas: boolean = false;
   graficoVerticalAgrupado: boolean = false;
 
-  constructor() { }
-
+  constructor() {
+    Object.assign(this, { single })
+  }
   ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
   alterarTitulo($event) {
     switch ($event.index) {
@@ -69,4 +74,7 @@ export class PainelComponent implements OnInit {
   }
 
 
+  onSelect(event) {
+    console.log(event);
+  }
 }
