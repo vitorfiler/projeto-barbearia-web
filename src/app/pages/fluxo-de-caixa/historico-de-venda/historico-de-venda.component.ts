@@ -87,20 +87,9 @@ export class HistoricoDeVendaComponent implements OnInit {
 
 	expandirVenda(expandir: boolean, vendaID: number){
 		this.listaVendas.forEach(venda => {
-			// venda.expandir = venda.id == vendaID && expandir? true : venda.id == vendaID && !expandir? false : undefined
-			if(expandir && venda.id == vendaID){
-				venda.expandir = true
-			}
-			else if (expandir && venda.id != vendaID ){
-				venda.expandir = venda.expandir
-			}
-			else if (!expandir && venda.id != vendaID)
-			{
-				venda.expandir = true
-			}
-			else {
-				venda.expandir = false
-			}
+			venda.expandir  = venda.id === vendaID && expandir? true 
+			: venda.id != vendaID && venda.expandir? venda.expandir
+			: false;
 		});
 		
 	}
