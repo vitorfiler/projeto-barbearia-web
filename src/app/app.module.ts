@@ -79,6 +79,12 @@ import { GraficoDeBarrasVerticalAgrupadasComponent } from './pages/painel/grafic
 import { GraficoDeLinhasComponent } from './pages/painel/grafico-de-linhas/grafico-de-linhas.component';
 import { GraficoPizzaComponent } from './pages/painel/grafico-pizza/grafico-pizza.component';
 import { AgendaModule } from './pages/agenda/agenda.module';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import ModalOcultarProduto from './pages/modais/produtos-modal/modal-ocultar-produtos/modal-ocultar-produtos';
+import ModalPromocaoProdutos from './pages/modais/produtos-modal/modal-promocao-produtos/modal-promocao-produto';
+import { ModalDeletarProduto } from './pages/modais/produtos-modal/modal-deletar-produtos/modal-deletar-produto';
+import { ModalAdicionarProduto } from './pages/modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/fechamento-caixa.component';
 
 
@@ -123,7 +129,11 @@ import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/f
 		GraficoDeBarrasVerticalAgrupadasComponent,
 		GraficoDeLinhasComponent,
 		GraficoPizzaComponent,
-		ModalFechamentoCaixa
+		ModalFechamentoCaixa,
+		ModalOcultarProduto,
+		ModalPromocaoProdutos,
+		ModalDeletarProduto,
+		ModalAdicionarProduto
 	],
 	imports: [
 		BrowserModule,
@@ -171,6 +181,8 @@ import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/f
 		MatSlideToggleModule,
 		MatTooltipModule,
 		AgendaModule,
+		MatButtonToggleModule,
+		MatExpansionModule,
 		// Vex
 		VexModule,
 		CustomLayoutModule,

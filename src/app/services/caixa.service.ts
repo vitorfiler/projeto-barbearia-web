@@ -1,8 +1,7 @@
-
-import { HttpClient } from '@angular/common/http';
+import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,4 +14,14 @@ export class CaixaService {
   fecharCaixa(): Observable<any>{
     return this.http.get(`${environment.URL_MOCKOON}/fechamento-caixa`, {observe: 'response'})
   }
+  
+  filtrar(estabelecimentoID: string, filtro: string, status: string): Observable<any> {
+
+    return this.http.get(`${environment.URL_API}/caixa/filtro`, {
+      params: {
+        estabelecimento_ID: estabelecimentoID, filtroStatus: filtro, status: status
+      }, observe: 'response'
+    })
+  }
+
 }
