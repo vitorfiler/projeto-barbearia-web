@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HistoricoVendasService } from 'src/app/services/historico-vendas.service';
+import { MessagesSnackBar } from 'src/app/_constants/messagesSnackBar';
 import { HistoricoVendas } from 'src/app/_models/historico-vendas';
 
 @Component({
@@ -19,14 +20,18 @@ export class HistoricoDeVendaComponent implements OnInit {
   form: FormGroup
 
   detalhesVendas = false;
+
+  listaVendas: HistoricoVendas[] = [];
   
   constructor(
 	  private snackbar: MatSnackBar,
 	  private historicoVendaService: HistoricoVendasService,
-	  private fb: FormBuilder,) { }
+	  private fb: FormBuilder,
+	  private listaVendasService: HistoricoVendasService) { }
 
   ngOnInit(): void {
-	this.inicializarFiltro()
+	this.inicializarFiltro();
+	this.listarVendas()
   }
 
   filtrar(dt_inicial: string, dt_final: string) {
@@ -65,6 +70,37 @@ export class HistoricoDeVendaComponent implements OnInit {
 		this.form = this.fb.group({
 			dt_inicial: [''],
 			dt_final: [''],
+		});
+		
+	}
+
+	listarVendas() {
+		this.listaVendasService.listarVendas().subscribe(resposta => {
+		  this.listaVendas = resposta.body;
+		  console.log(this.listaVendas);
+		}, (error) => {
+		  console.log(error);
+		  this.snackbar.open(MessagesSnackBar.LISTAR_VENDA_ERRO, 'Fechar', { duration: 4000 })
+		}
+		)
+	  }
+
+	expandirVenda(expandir: boolean, vendaID: number){
+		this.listaVendas.forEach(venda => {
+			// venda.expandir = venda.id == vendaID && expandir? true : venda.id == vendaID && !expandir? false : undefined
+			if(expandir && venda.id == vendaID){
+				venda.expandir = true
+			}
+			else if (expandir && venda.id != vendaID ){
+				venda.expandir = venda.expandir
+			}
+			else if (!expandir && venda.id != vendaID)
+			{
+				venda.expandir = true
+			}
+			else {
+				venda.expandir = false
+			}
 		});
 		
 	}

@@ -33,17 +33,23 @@
 		</div>
 	</div>
 </div>
-<mat-accordion>
-	<mat-expansion-panel (opened)="detalhesVendas = true" (closed)="detalhesVendas = false">
+<mat-accordion *ngFor="let venda of listaVendas">
+	<mat-expansion-panel (opened)="expandirVenda(true, venda.id)" (closed)="expandirVenda(false, venda.id)" style="margin-bottom: 1%;">
 		<mat-expansion-panel-header>
 			<mat-panel-title>
-				Historio detalhado
+				{{venda.tipoHistorico}} - Periodo:
+				{{venda.dtInicial | date:'dd/MM/yyyy'}} a 
+				{{venda.dtFinal | date:'dd/MM/yyyy'}}
+				<br>
+				Valor total de fechamento: {{venda.valorTotal | currency:'BRL'}}
 			</mat-panel-title>
 			<mat-panel-description>
 				<div class="alinhar-expansor">
-					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#DAAA00'}" *ngIf="!detalhesVendas">visibility</mat-icon>
-					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#DAAA00'}" *ngIf="detalhesVendas">visibility_off</mat-icon>
-					{{detalhesVendas ? 'Esconder' : 'Visualizar'}} detalhes
+					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#DAAA00'}" *ngIf="venda.expandir">
+						visibility</mat-icon>
+					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#DAAA00'}" *ngIf="!venda.expandir">
+						visibility_off</mat-icon>
+					{{venda.expandir ? 'Esconder' : 'Visualizar'}} detalhes
 				</div>
 			</mat-panel-description>
 		</mat-expansion-panel-header>

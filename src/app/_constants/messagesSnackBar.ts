@@ -26,4 +26,5 @@ export enum MessagesSnackBar {
     ALTERACAO_SERVICO_ERRO = "Falha ao alterar serviço",
     DELETAR_SERVICO_SUCESSO = "Serviço deletado com sucesso",
     DELETAR_SERVICO_ERRO = "Falha ao deletar serviço",
+    LISTAR_VENDA_ERRO = "Falha ao listar vendas"
   }
