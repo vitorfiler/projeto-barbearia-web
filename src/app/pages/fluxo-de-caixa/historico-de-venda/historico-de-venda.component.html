@@ -1,4 +1,3 @@
-
 <div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
 	<div fxFlex="auto" fxLayout="column">
 		<mat-label>Selecione um Periodo Desejado</mat-label>
@@ -21,8 +20,9 @@
 					<mat-datepicker #picker2 color="primary"></mat-datepicker>
 				</mat-form-field>
 			</div>
-			
-			<mat-button-toggle-group [value]="periodo" (change)="validarFiltro($event.value)" name="fontStyle" aria-label="Font Style">
+
+			<mat-button-toggle-group [value]="periodo" (change)="validarFiltro($event.value)" name="fontStyle"
+				aria-label="Font Style">
 				<mat-button-toggle value="7">7 dias</mat-button-toggle>
 				<mat-button-toggle value="15">15 dias</mat-button-toggle>
 				<mat-button-toggle value="30">30 dias</mat-button-toggle>
@@ -33,3 +33,32 @@
 		</div>
 	</div>
 </div>
+<mat-accordion *ngFor="let venda of listaVendas">
+	<mat-expansion-panel (opened)="expandirVenda(true, venda.id)" (closed)="expandirVenda(false, venda.id)" style="margin-bottom: 1%;">
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				{{venda.tipoHistorico}} - Periodo:
+				{{venda.dtInicial | date:'dd/MM/yyyy'}} a 
+				{{venda.dtFinal | date:'dd/MM/yyyy'}}
+				<br>
+				Valor total de fechamento: {{venda.valorTotal | currency:'BRL'}}
+			</mat-panel-title>
+			<mat-panel-description>
+				<div class="alinhar-expansor">
+					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#DAAA00'}" *ngIf="venda.expandir">
+						visibility</mat-icon>
+					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#DAAA00'}" *ngIf="!venda.expandir">
+						visibility_off</mat-icon>
+					{{venda.expandir ? 'Esconder' : 'Visualizar'}} detalhes
+				</div>
+			</mat-panel-description>
+		</mat-expansion-panel-header>
+		<p>No dia em que saí de casa minha mãe me disse filho vem cá
+			Passou a mão em meus cabelos
+			olhou em meus olhos começou falar
+			Por onde você for eu sigo com meu pensamento
+			sempre onde estiver
+			Em minhas orações eu vou pedir a Deus
+			Que ilumine os passos seus</p>
+	</mat-expansion-panel>
+</mat-accordion>

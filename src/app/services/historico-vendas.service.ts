@@ -27,4 +27,8 @@ export class HistoricoVendasService {
        observe: 'response'
     })
   }
+
+  listarVendas(): Observable<any> {
+    return this.http.get(`${environment.URL_MOCKOON}/caixa`, { observe: 'response' })
+}
 }

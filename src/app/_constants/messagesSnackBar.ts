@@ -34,5 +34,5 @@ export enum MessagesSnackBar {
   ALTERACAO_PRODUTO_ERRO = "Falha ao alterar produto",
   DELETAR_PRODUTO_SUCESSO = "Produto deletado com sucesso",
   DELETAR_PRODUTO_ERRO = "Falha ao deletar produto",
-
+  LISTAR_VENDA_ERRO = "Falha ao listar vendas"
 }
