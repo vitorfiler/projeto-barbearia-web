@@ -1,0 +1,60 @@
+<div class="px-6 py-3 border-b" fxLayout="row" fxLayoutAlign="start center">
+    <h2 class="title m-0" mat-dialog-tittle>Novo Produto</h2>
+</div>
+<mat-dialog-content class="mat-typography">
+    <div @fadeInUp fxFlex="auto" [formGroup]="form">
+        <div class="px-6 py-4" fxLayout="column">
+            <mat-form-field fxFlex="grow">
+                <mat-label>Nome do produto</mat-label>
+                <input [(ngModel)]="produto.nomeProduto" matInput formControlName="nomeProduto" required>
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <mat-form-field fxFlex="grow">
+                    <mat-label>Quantidade em Estoque</mat-label>
+                    <input [(ngModel)]="produto.qtdEstoque" matInput type="number" placeholder="Ex. 10" min="1"
+                        formControlName="qtdEstoque" required>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="grow" appearance="standard">
+                    <mat-label>Categoria</mat-label>
+                    <mat-select formControlName="categoria" [(ngModel)]="produto.categoria">
+                        <mat-option *ngFor="let selecaoCategoria    of selecaoCategoria"
+                            [value]="selecaoCategoria.value">
+                            {{selecaoCategoria.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field fxFlex="grow">
+                <mat-label>Descrição do produto</mat-label>
+                <textarea [(ngModel)]="produto.dsProduto" matInput formControlName="dsProduto"
+                    [matTextareaAutosize]="true"></textarea>
+            </mat-form-field>
+
+            <mat-slide-toggle color="primary" [(ngModel)]="produto.promocional" formControlName="promocional"
+                [checked]="produto.promocional">Este produto mostrará o valor promocional
+            </mat-slide-toggle>
+
+            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <mat-form-field fxFlex="grow">
+                    <mat-label>Valor</mat-label>
+                    <input [(ngModel)]="produto.valor" matInput type="number" formControlName="valor" required>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="grow">
+                    <mat-label>Valor promocional</mat-label>
+                    <input [(ngModel)]="produto.valorPromocional" matInput type="number"
+                        formControlName="valorPromocional" required>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button type="button" mat-dialog-close>Cancelar</button>
+    <button color="primary" mat-raised-button type="button" [mat-dialog-close]="true" [disabled]="form.invalid"
+        (click)="enviarProduto(produto)">{{legendaBotao}}</button>
+</mat-dialog-actions>

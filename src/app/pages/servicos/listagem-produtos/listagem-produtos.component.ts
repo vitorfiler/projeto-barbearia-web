@@ -1,30 +1,56 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ProdutoService } from 'src/app/services/produtos.service';
 import { Categoria } from 'src/app/_models/categoria';
 import { Produto } from 'src/app/_models/produto';
-import { ProdutosConstrucaoModal } from '../../modais/produtos-modal/modal-produtos';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
+import { stagger20ms } from 'src/@vex/animations/stagger.animation';
+import { EventEmitterService } from 'src/app/services/event.service';
+import ModalOcultarProduto from '../../modais/produtos-modal/modal-ocultar-produtos/modal-ocultar-produtos';
+import ModalPromocaoProdutos from '../../modais/produtos-modal/modal-promocao-produtos/modal-promocao-produto';
+import { ModalDeletarProduto } from '../../modais/produtos-modal/modal-deletar-produtos/modal-deletar-produto';
+import { ModalAdicionarProduto } from '../../modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
+
 
 @Component({
 	selector: 'vex-listagem-produtos',
 	templateUrl: './listagem-produtos.component.html',
-	styleUrls: ['./listagem-produtos.component.scss']
+	styleUrls: ['./listagem-produtos.component.scss'],
+	animations: [
+		fadeInUp400ms,
+		stagger20ms
+	]
 })
+
 export class ListagemProdutosComponent implements OnInit {
+	//objeto
 	form: FormGroup;
+
+	//variaveis
 	filtroCategoria: string;
-	lista: boolean = true;
-	visible = false;
 	categoria: string;
+	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
+	public carregando = false;
+
+	//visualização em grade e lista
+	visible = false;
 	alturaTela: any;
 	larguraTela: any;
-	produto: Produto;
 	mostraBotaoListaGradeNaTabela = false;
 	mostraBotaoListaGradeNoFiltro = false;
-	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
 
+	//tabela	
+	dataSource = new MatTableDataSource<Produto>()
+	displayedColumns: string[] = ['nomeProduto', 'dsProduto', 'qtdEstoque', 'valor', 'valorPromocional', 'acoes'];
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) matSort: MatSort;
 
+	//Listas
+	produto: Produto[] = [];
 	selecaoCategoria: Categoria[] = [
 		{ value: 'TODOS', viewValue: 'Todos' },
 		{ value: 'CABELOF', viewValue: 'Cabelo Feminino' },
@@ -32,17 +58,21 @@ export class ListagemProdutosComponent implements OnInit {
 		{ value: 'UNHA', viewValue: 'Unha' },
 		{ value: 'PELE', viewValue: 'Pele' },
 	];
+
 	constructor(
 		private fb: FormBuilder,
 		public dialog: MatDialog,
-		private produtoService: ProdutoService
-	) {
+		private produtoService: ProdutoService) {
 		this.botaoGradeListaPorPixel();
 	}
 
+
 	ngOnInit(): void {
+		EventEmitterService.get('buscarProduto').subscribe(() => this.listarProdutos())
 		this.inicializarFiltro();
+		this.listarProdutos();
 	}
+
 
 	inicializarFiltro() { //inicializar filtros de pesquisa
 		this.form = this.fb.group({
@@ -52,12 +82,17 @@ export class ListagemProdutosComponent implements OnInit {
 		this.categoria = this.selecaoCategoria[0].value;
 	}
 
-	// modal criado para adição de formulario inclusão de servicos
-	abrirModalAdicionarServico(isAdicionar: boolean) {
-		let dialogRef;
-		if (isAdicionar) {
-			dialogRef = this.dialog.open(ProdutosConstrucaoModal)
-		}
+	listarProdutos() {
+		this.carregando = true;
+		this.produtoService.listarProdutos(this.estabelecimentoID).subscribe(response => {
+			this.carregando = false;
+			this.produto = response.body
+			this.dataSource = new MatTableDataSource<Produto>(this.produto)
+			this.dataSource.paginator = this.paginator
+		}, (error) => {
+			console.log(error);
+			this.carregando = false;
+		})
 	}
 
 	filtrar() {
@@ -85,9 +120,47 @@ export class ListagemProdutosComponent implements OnInit {
 		}
 	}
 
-
 	botaoVisualizacao() {
 		this.visible = this.visible ? false : true
+	}
 
+
+	/**MODAIS**/
+
+	// modal criado para adição de formulario inclusão de produtos
+	abrirModalAdicionarProduto(produto?: Produto) {
+		const dialogRef = this.dialog.open(ModalAdicionarProduto, {
+			data: produto
+		});
+		dialogRef.afterClosed().subscribe(result => {
+		});
+	}
+
+	trocarPromocionalProduto(produto: Produto) {
+		const dialogRef = this.dialog.open(ModalPromocaoProdutos, {
+			data: produto
+		});
+		dialogRef.afterClosed().subscribe(result => {
+		});
+	}
+
+	ocultarProduto(produto: Produto) {
+		const dialogRef = this.dialog.open(ModalOcultarProduto, {
+			data: produto
+		});
+		dialogRef.afterClosed().subscribe(result => {
+		});
+	}
+
+	deletarProduto(produto: Produto) {
+		const dialogRef = this.dialog.open(ModalDeletarProduto, {
+			data: produto
+		});
+		dialogRef.afterClosed().subscribe(result => {
+		});
+	}
+
+	ngAfterViewInit() {
+		this.dataSource.sort = this.matSort;
 	}
 }
