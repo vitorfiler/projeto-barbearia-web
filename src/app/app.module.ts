@@ -85,6 +85,7 @@ import ModalPromocaoProdutos from './pages/modais/produtos-modal/modal-promocao-
 import { ModalDeletarProduto } from './pages/modais/produtos-modal/modal-deletar-produtos/modal-deletar-produto';
 import { ModalAdicionarProduto } from './pages/modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/fechamento-caixa.component';
 
 
 @NgModule({
@@ -128,6 +129,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 		GraficoDeBarrasVerticalAgrupadasComponent,
 		GraficoDeLinhasComponent,
 		GraficoPizzaComponent,
+		ModalFechamentoCaixa,
 		ModalOcultarProduto,
 		ModalPromocaoProdutos,
 		ModalDeletarProduto,
