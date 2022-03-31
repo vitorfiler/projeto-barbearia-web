@@ -44,7 +44,7 @@ export class ExibicaoServicosComponent implements OnInit {
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
 	public carregando = false;
     sevicosEmGrade: boolean = false;
-	card: Card;
+	cards: Card[];
 
 
 	selecaoCategoria: Categoria[] = [
@@ -107,8 +107,12 @@ export class ExibicaoServicosComponent implements OnInit {
 		this.carregando = true;
 		this.servicoService.listarServicos(this.estabelecimentoID).subscribe(response => {
 			this.carregando = false
+			response.body.forEach(servico => {
+				servico.nome = servico.nomeServico
+				servico.descricao = servico.dsServico
+			});
 			this.servicos = response.body
-
+			this.cards = this.servicos.map(s=> new Card(s))
 		}, (error) => {
 			console.log(error);
 			this.carregando = false;
