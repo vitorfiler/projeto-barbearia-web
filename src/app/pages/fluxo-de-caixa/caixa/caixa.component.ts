@@ -5,6 +5,7 @@ import { ProdutoService } from 'src/app/services/produtos.service';
 import { Categoria } from 'src/app/_models/categoria';
 import { Produto } from 'src/app/_models/produto';
 import { ProdutosConstrucaoModal } from '../../modais/produtos-modal/modal-produtos';
+import { ModalFechamentoCaixa } from '../../modais/fechamento-de-caixa-modal/fechamento-caixa.component';
 
 @Component({
 	selector: 'vex-caixa',
@@ -50,6 +51,18 @@ export class CaixaComponent implements OnInit {
 		});
 		this.categoria = this.selecaoCategoria[0].value;
 	}
+
+	abrirFechamentoCaixa(): void {
+		const dialogRef = this.dialog.open(ModalFechamentoCaixa, {
+		  width: '60%',
+		 
+		});
+	
+		dialogRef.afterClosed().subscribe(result => {
+		  console.log('The dialog was closed');
+		  
+		});
+	  }
 
 	// modal criado para adição de formulario inclusão de servicos
 	abrirModalAdicionarServico(isAdicionar: boolean) {

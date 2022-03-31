@@ -17,5 +17,8 @@ export class GraficosService {
 	dadosGraficoVertical(): Observable<any> {
 		return this.http.get(`${environment.URL_MOCKOON}/grafico/grafico-veritcal`, { observe: 'response' })
 	}
+	mockoonVerticalAgrupado(): Observable<any> {
+		return this.http.get(`${environment.URL_MOCKOON}/grafico/grafico-vertical-agrupado`, {observe: 'response'})
+	}
 
 }

@@ -8,8 +8,13 @@ import { Injectable } from '@angular/core';
 })
 export class CaixaService {
 
-  constructor(private http: HttpClient) { }
+ 
+  constructor( private http: HttpClient) { }
 
+  fecharCaixa(): Observable<any>{
+    return this.http.get(`${environment.URL_MOCKOON}/fechamento-caixa`, {observe: 'response'})
+  }
+  
   filtrar(estabelecimentoID: string, filtro: string, status: string): Observable<any> {
 
     return this.http.get(`${environment.URL_API}/caixa/filtro`, {
