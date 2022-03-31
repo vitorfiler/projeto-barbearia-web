@@ -1,11 +1,11 @@
 export class Servico {
     id: number;
-    nomeServico: string;
+    nome: string;
     categoria: string;
-    dsServico: string;
+    descricao: string;
     tempoEstimado: string;
     valor: number; 
-    valorPromocional: string;
+    valorPromocional: number;
     ativo: boolean;
     promocional: boolean;
     estabelecimentoID: number;

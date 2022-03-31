@@ -44,7 +44,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
-import { ListagemServicosComponent } from './pages/servicos/listagem-servicos/listagem-servicos.component';
+import { ListagemServicosComponent } from './pages/servicos/exibicao-servicos/listagem-servicos/listagem-servicos.component';
 import { ListagemProdutosComponent } from './pages/servicos/listagem-produtos/listagem-produtos.component';
 import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/listagem-promocoes.component';
 import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
@@ -86,6 +86,9 @@ import { ModalDeletarProduto } from './pages/modais/produtos-modal/modal-deletar
 import { ModalAdicionarProduto } from './pages/modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/fechamento-caixa.component';
+import { GradeServicosComponent } from './pages/servicos/exibicao-servicos/grade-servicos/grade-servicos.component';
+import { ExibicaoServicosComponent } from './pages/servicos/exibicao-servicos/exibicao-servicos.component';
+import { CardComponent } from './_utils/card/card.component';
 
 
 @NgModule({
@@ -133,7 +136,10 @@ import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/f
 		ModalOcultarProduto,
 		ModalPromocaoProdutos,
 		ModalDeletarProduto,
-		ModalAdicionarProduto
+		ModalAdicionarProduto,
+		GradeServicosComponent,
+		ExibicaoServicosComponent,
+		CardComponent
 	],
 	imports: [
 		BrowserModule,

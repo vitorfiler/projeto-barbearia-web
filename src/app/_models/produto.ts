@@ -1,9 +1,9 @@
 export class Produto {
 	id: number;
-	codProduto: number;
+	codigo: number;
 	categoria: string;
-	nomeProduto: string;
-	dsProduto: string;
+	nome: string;
+	descricao: string;
 	qtdEstoque: number;
 	valor: number;
 	valorPromocional: number;

@@ -6,15 +6,15 @@ import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MatDialog } from '@angular/material/dialog';
 import { EventEmitterService } from 'src/app/services/event.service';
-import ModalServicoPromocional from '../../modais/servico-modais/modal-servico-promocional/modal-servico-promocional';
-import { ModalDeletarServico } from '../../modais/servico-modais/modal-deletar-servico/modal-deletar-servico';
-import ModalOcultarServico from '../../modais/servico-modais/modal-ocultar-servicos/modal-ocultar-servico';
+import ModalServicoPromocional from '../../../modais/servico-modais/modal-servico-promocional/modal-servico-promocional';
+import { ModalDeletarServico } from '../../../modais/servico-modais/modal-deletar-servico/modal-deletar-servico';
+import ModalOcultarServico from '../../../modais/servico-modais/modal-ocultar-servicos/modal-ocultar-servico';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Categoria } from 'src/app/_models/categoria';
 import { Router } from '@angular/router';
 import { ServicoService } from 'src/app/services/servico.service';
 import { Servico } from 'src/app/_models/servico';
-import { ModalCadastrarEditarServico } from '../../modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
+import { ModalCadastrarEditarServico } from '../../../modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
 
 @Component({
 	selector: 'vex-listagem-servicos',

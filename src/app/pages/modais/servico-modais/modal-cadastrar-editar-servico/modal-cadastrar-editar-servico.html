@@ -10,7 +10,7 @@
     <div class="px-6 py-4" fxLayout="column">
       <mat-form-field fxFlex="grow">
         <mat-label>Nome do serviço</mat-label>
-        <input [(ngModel)]="servico.nomeServico" matInput formControlName="nomeServico" required>
+        <input [(ngModel)]="servico.nome" matInput formControlName="nomeServico" required>
       </mat-form-field>
 
       <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
@@ -30,7 +30,7 @@
 
       <mat-form-field fxFlex="grow">
         <mat-label>Descrição do serviço</mat-label>
-        <textarea  [(ngModel)]="servico.dsServico" matInput formControlName="dsServico" [matTextareaAutosize]="true"
+        <textarea  [(ngModel)]="servico.descricao" matInput formControlName="dsServico" [matTextareaAutosize]="true"
          ></textarea>
       </mat-form-field>
 
