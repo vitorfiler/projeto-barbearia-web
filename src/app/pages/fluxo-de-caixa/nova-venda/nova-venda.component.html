@@ -1,1 +1,31 @@
-<vex-construcao></vex-construcao>
+<div class="row detalhesDaVenda">
+    <div class="col-md-4">
+        <div class="row">
+            <mat-form-field fxFlex="grow" appearance="outline">
+                <mat-label>Responsável</mat-label>
+                <input formControlName="Responsável pela venda" matInput required>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field fxFlex="grow" appearance="outline">
+                <mat-label>Cliente</mat-label>
+                <input formControlName="nome do cliente" matInput required>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-radio-group aria-label="Select an option">
+                <mat-radio-button style="margin-right: 10px;" color="primary" value="1">Serviços</mat-radio-button>
+                <mat-radio-button color="primary" value="2">Produto</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="row">
+            <mat-form-field fxFlex="grow" appearance="outline">
+                <mat-label>Pesquisar</mat-label>
+                <input formControlName="pesquisar serviços ou produtos" matInput required>
+            </mat-form-field> 
+        </div>
+    </div>
+    <div class="col-md-8">
+        <vex-construcao></vex-construcao>
+    </div>
+</div>
