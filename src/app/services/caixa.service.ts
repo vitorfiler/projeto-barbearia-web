@@ -19,4 +19,14 @@ export class CaixaService {
     })
   }
 
+  buscarServicos(): Observable<any> {
+
+    return this.http.get(`${environment.URL_MOCKOON}/caixa/servicos`, {observe: 'response'})
+  }
+
+  buscarProdutos(): Observable<any> {
+
+    return this.http.get(`${environment.URL_MOCKOON}/caixa/produtos`, {observe: 'response'})
+  }
+
 }
