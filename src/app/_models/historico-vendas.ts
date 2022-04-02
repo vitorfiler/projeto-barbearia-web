@@ -6,5 +6,5 @@ export class HistoricoVendas{
     descricao: string;
     tipoHistorico: string;
     estabelecimentoID: number;
-
+    expandir?: boolean;
 }
