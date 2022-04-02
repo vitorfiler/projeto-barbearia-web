@@ -6,6 +6,7 @@ import icChat from '@iconify/icons-ic/twotone-chat';
 import icStar from '@iconify/icons-ic/twotone-star';
 import icStarBorder from '@iconify/icons-ic/twotone-star-border';
 import { Card } from 'src/app/_models/card';
+import { ExibicaoServicosComponent } from 'src/app/pages/servicos/exibicao-servicos/exibicao-servicos.component';
 
 @Component({
   selector: 'vex-card',
@@ -24,6 +25,8 @@ export class CardComponent implements OnInit {
   icChat = icChat;
   icStar = icStar;
   icStarBorder = icStarBorder;
+  exibicaoServicosComponent = new ExibicaoServicosComponent()
+
 
   constructor() { }
 

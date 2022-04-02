@@ -75,9 +75,8 @@ export class GradeServicosComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		EventEmitterService.get('buscarServicos').subscribe(() => this.listarServicos())
 		this.inicializarFiltro();
-		// this.listarServicos();
+		console.log(this.servicos);		
 	}
 
 	@HostListener('window:resize', ['$event'])
@@ -111,23 +110,6 @@ export class GradeServicosComponent implements OnInit {
 			data: servico
 		});
 		dialogRef.afterClosed().subscribe(result => { });
-	}
-
-	listarServicos() {
-		this.carregando = true;
-		this.servicoService.listarServicos(this.estabelecimentoID).subscribe(response => {
-			this.carregando = false
-			this.servicos = response.body
-
-			this.dataSource = new MatTableDataSource<Servico>(this.servicos)
-			setTimeout(() => {
-				this.dataSource.paginator = this.paginator
-				this.dataSource.sort = this.matSort
-			})
-		}, (error) => {
-			console.log(error);
-			this.carregando = false;
-		})
 	}
 
 	trocarStatusServico(servico: Servico) {

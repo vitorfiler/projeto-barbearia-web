@@ -31,7 +31,7 @@ export class ExibicaoServicosComponent implements OnInit {
 	filtroCategoria: string;
 	lista: boolean = true;
 	categoria: string;
-	servico: Servico;
+	servico: Servico[];
 	servicos: Servico[] = []
 	dataSource = new MatTableDataSource<Servico>()
 	displayedColumns: string[] = ['nomeServico', 'categoria', 'descricao', 'tempoEstimado', 'valor', 'acoes'];
@@ -135,8 +135,14 @@ export class ExibicaoServicosComponent implements OnInit {
 
 	}
 
-
-
+	trocarStatusServico(servico: Servico) {
+		const dialogRef = this.dialog.open(ModalOcultarServico, {
+			data: servico
+		});
+		dialogRef.afterClosed().subscribe(result => { 
+		});
+	}
+	
 	ngAfterViewInit() {
 		this.dataSource.sort = this.matSort;
 	}

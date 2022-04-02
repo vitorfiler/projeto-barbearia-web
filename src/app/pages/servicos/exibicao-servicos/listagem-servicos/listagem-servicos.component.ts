@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -32,7 +32,7 @@ export class ListagemServicosComponent implements OnInit {
 	visible = false;
 	categoria: string;
 	servico: Servico;
-	servicos: Servico[] = []
+	@Input() servicos: Servico[] = []
 	dataSource = new MatTableDataSource<Servico>()
 	displayedColumns: string[] = ['nomeServico', 'categoria', 'descricao', 'tempoEstimado', 'valor', 'acoes'];
 	@ViewChild(MatPaginator) paginator: MatPaginator;
@@ -102,20 +102,11 @@ export class ListagemServicosComponent implements OnInit {
 	}
 
 	listarServicos() {
-		this.carregando = true;
-		this.servicoService.listarServicos(this.estabelecimentoID).subscribe(response => {
-			this.carregando = false
-			this.servicos = response.body
-
-			this.dataSource = new MatTableDataSource<Servico>(this.servicos)
+		this.dataSource = new MatTableDataSource<Servico>(this.servicos)
 			setTimeout(() => {
 				this.dataSource.paginator = this.paginator
 				this.dataSource.sort = this.matSort
 			})
-		}, (error) => {
-			console.log(error);
-			this.carregando = false;
-		})
 	}
 
   trocarStatusServico(servico: Servico) {
