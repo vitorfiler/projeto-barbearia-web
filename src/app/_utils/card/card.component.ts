@@ -7,6 +7,12 @@ import icStar from '@iconify/icons-ic/twotone-star';
 import icStarBorder from '@iconify/icons-ic/twotone-star-border';
 import { Card } from 'src/app/_models/card';
 import { ExibicaoServicosComponent } from 'src/app/pages/servicos/exibicao-servicos/exibicao-servicos.component';
+import { EventEmitterService } from 'src/app/services/event.service';
+import ModalOcultarProduto from 'src/app/pages/modais/produtos-modal/modal-ocultar-produtos/modal-ocultar-produtos';
+import { MatDialog } from '@angular/material/dialog';
+import ModalOcultarServico from 'src/app/pages/modais/servico-modais/modal-ocultar-servicos/modal-ocultar-servico';
+import { ModalCadastrarEditarServico } from 'src/app/pages/modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
+import { ModalAdicionarProduto } from 'src/app/pages/modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
 
 @Component({
   selector: 'vex-card',
@@ -16,6 +22,7 @@ import { ExibicaoServicosComponent } from 'src/app/pages/servicos/exibicao-servi
 export class CardComponent implements OnInit {
 
   @Input() card: Card;
+  @Input() ehServico: boolean;
   @Output() openContact = new EventEmitter<Card['id']>();
   @Output() toggleStar = new EventEmitter<Card['id']>();
 
@@ -25,10 +32,8 @@ export class CardComponent implements OnInit {
   icChat = icChat;
   icStar = icStar;
   icStarBorder = icStarBorder;
-  exibicaoServicosComponent = new ExibicaoServicosComponent()
 
-
-  constructor() { }
+  constructor(public dialog: MatDialog,) { }
 
   ngOnInit() {
   }
@@ -38,5 +43,32 @@ export class CardComponent implements OnInit {
     this.toggleStar.emit(contactId);
   }
 
-  
+	trocarStatusServico(card) {
+		let dialogRef; 
+    if(this.ehServico){
+      this.dialog.open(ModalOcultarServico, {
+        data: card
+      });
+    }else{
+      this.dialog.open(ModalOcultarProduto, {
+        data: card
+      });
+    }
+		dialogRef.afterClosed().subscribe(result => { 
+		});
+	}
+
+  abrirModalAdicionarServico(card) {
+		let dialogRef;
+    if(this.ehServico){
+      dialogRef = this.dialog.open(ModalCadastrarEditarServico, {
+        data: card
+      });
+    }else{
+      dialogRef = this.dialog.open(ModalAdicionarProduto, {
+        data: card
+      });
+    }
+		dialogRef.afterClosed().subscribe(result => {});
+	}
 }

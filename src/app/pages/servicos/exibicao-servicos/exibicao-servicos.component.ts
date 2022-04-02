@@ -45,7 +45,7 @@ export class ExibicaoServicosComponent implements OnInit {
 	public carregando = false;
     sevicosEmGrade: boolean = false;
 	cards: Card[];
-
+	ehProduto: boolean = true;
 
 	selecaoCategoria: Categoria[] = [
 		{ value: 'TODOS', viewValue: 'Todos' },

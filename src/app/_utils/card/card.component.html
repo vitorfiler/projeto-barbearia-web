@@ -12,22 +12,17 @@
     </div>
     <div class="row">
       <h2 class="title mb-1 mt-3">{{ card?.descricao }}</h2>
-
-
     </div>
-
-
   </div>
 
-
   <div class="bg-app-bar p-2" fxLayout="row" fxLayoutAlign="space-around center">
-    <button class="text-secondary" (click)="trocarStatusServico(servico)" mat-icon-button type="button">
-      <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="servico.ativo">visibility</mat-icon>
-      <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="!servico.ativo">visibility_off</mat-icon>
+    <button class="text-secondary" (click)="trocarStatusServico(card)" mat-icon-button type="button">
+      <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="card.ativo">visibility</mat-icon>
+      <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="!card.ativo">visibility_off</mat-icon>
     </button>
 
-    <button class="text-secondary" mat-icon-button type="button">
-      <mat-icon>edit</mat-icon>
+    <button mat-icon-button color="primary" (click)="abrirModalAdicionarServico(card)" matTooltip="Editar serviço">
+      <mat-icon color="primary">edit</mat-icon>
     </button>
 
     <button class="text-secondary" mat-icon-button type="button">
