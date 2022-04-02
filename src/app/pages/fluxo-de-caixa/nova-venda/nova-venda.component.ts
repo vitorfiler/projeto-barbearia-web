@@ -11,7 +11,7 @@ export class NovaVendaComponent implements OnInit {
 
   venda = new Venda();
   form: FormGroup;
-  radioButton: String;
+  radioButton: String = "serv";
 
   constructor(
     private fb: FormBuilder,
@@ -28,17 +28,14 @@ export class NovaVendaComponent implements OnInit {
 
   }
 
-  buscaProdutosServicos(varProduto:String){
-    console.log(varProduto);
-    
-    let buscaNomeProdServ = this.form.get('pesquisaProdServ').value;
+  buscaProdutosServicos(varProduto:String, buscaNomeProdServ: String){
     varProduto=='prod'?this.buscaProdutos(buscaNomeProdServ):this.buscaServicos(buscaNomeProdServ);
   }
   buscaProdutos(buscaNomeProdServ:String){
-    console.log(buscaNomeProdServ);
+    console.log("Produtinho" + buscaNomeProdServ);
   }
   buscaServicos(buscaNomeProdServ:String){
-    console.log(buscaNomeProdServ);
+    console.log("Servicinho" + buscaNomeProdServ);
   }
 
 }

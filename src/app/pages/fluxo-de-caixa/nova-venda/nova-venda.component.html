@@ -1,4 +1,4 @@
-<div class="row detalhesDaVenda" [formGroup]="form">
+<div class="row detalhesDaVenda">
     <div class="col-md-4">
         <div class="row">
             <h2 class="corPrimaria" mat-dialog-tittle >Detalhes da Venda</h2>
@@ -6,17 +6,17 @@
         <div class="row">
             <mat-form-field fxFlex="grow" appearance="outline">
                 <mat-label>Responsável</mat-label>
-                <input [(ngModel)]="venda.responsavel" formControlName="responsavel" matInput required>
+                <input [(ngModel)]="venda.responsavel" matInput required>
             </mat-form-field>
         </div>
         <div class="row">
             <mat-form-field fxFlex="grow" appearance="outline">
                 <mat-label>Cliente</mat-label>
-                <input [(ngModel)]="venda.cliente" formControlName="cliente" matInput required>
+                <input [(ngModel)]="venda.cliente" matInput required>
             </mat-form-field>
         </div>
         <div class="row">
-            <mat-radio-group aria-label="Select an option" [(ngModel)]="radioButton" required>
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="radioButton" (ngModelChange)="buscaProdutosServicos(radioButton, venda.pesquisaProdServ)" required>
                 <mat-radio-button style="margin-right: 10px;" color="primary" value="serv" checked>Serviços</mat-radio-button>
                 <mat-radio-button color="primary" value="prod">Produto</mat-radio-button>
             </mat-radio-group>
@@ -25,7 +25,7 @@
             <mat-form-field fxFlex="grow" appearance="outline">
                 <mat-label *ngIf="radioButton == 'serv'">Pesquisar Serviço</mat-label>
                 <mat-label *ngIf="radioButton == 'prod'">Pesquisar Produto</mat-label>
-                <input matInput formControlName="pesquisaProdServ" (ngModelChange)="buscaProdutosServicos(radioButton)">
+                <input [(ngModel)]="venda.pesquisaProdServ" (ngModelChange)="buscaProdutosServicos(radioButton, venda.pesquisaProdServ)" matInput>
             </mat-form-field> 
         </div>
         <div class="row">
