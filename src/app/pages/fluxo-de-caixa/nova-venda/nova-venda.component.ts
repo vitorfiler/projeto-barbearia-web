@@ -1,7 +1,5 @@
-import { DetalhePagamentoService } from './../../../services/detalhe-pagamento.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CaixaService } from 'src/app/services/caixa.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Venda } from 'src/app/_models/venda';
 import { MatTableDataSource } from '@angular/material/table';
 import { CaixaService } from 'src/app/services/caixa.service';
