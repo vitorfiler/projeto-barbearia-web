@@ -1,4 +1,3 @@
-import { stagger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
@@ -9,8 +8,7 @@ import { Venda } from 'src/app/_models/venda';
 @Component({
   selector: 'vex-nova-venda',
   templateUrl: './nova-venda.component.html',
-  styleUrls: ['./nova-venda.component.scss'],
-  animations: [stagger20ms, fadeInUp400ms]
+  styleUrls: ['./nova-venda.component.scss']
 })
 export class NovaVendaComponent implements OnInit {
 
