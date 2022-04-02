@@ -84,6 +84,7 @@ import ModalOcultarProduto from './pages/modais/produtos-modal/modal-ocultar-pro
 import ModalPromocaoProdutos from './pages/modais/produtos-modal/modal-promocao-produtos/modal-promocao-produto';
 import { ModalDeletarProduto } from './pages/modais/produtos-modal/modal-deletar-produtos/modal-deletar-produto';
 import { ModalAdicionarProduto } from './pages/modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -179,6 +180,7 @@ import { ModalAdicionarProduto } from './pages/modais/produtos-modal/modal-adici
 		MatTooltipModule,
 		AgendaModule,
 		MatButtonToggleModule,
+		MatListModule,
 		// Vex
 		VexModule,
 		CustomLayoutModule,

@@ -1,28 +1,39 @@
-<div class="row detalhesDaVenda">
+<div class="row detalhesDaVenda" [formGroup]="form">
     <div class="col-md-4">
+        <div class="row">
+            <h2 class="corPrimaria" mat-dialog-tittle >Detalhes da Venda</h2>
+        </div>
         <div class="row">
             <mat-form-field fxFlex="grow" appearance="outline">
                 <mat-label>Responsável</mat-label>
-                <input formControlName="Responsável pela venda" matInput required>
+                <input [(ngModel)]="venda.responsavel" formControlName="responsavel" matInput required>
             </mat-form-field>
         </div>
         <div class="row">
             <mat-form-field fxFlex="grow" appearance="outline">
                 <mat-label>Cliente</mat-label>
-                <input formControlName="nome do cliente" matInput required>
+                <input [(ngModel)]="venda.cliente" formControlName="cliente" matInput required>
             </mat-form-field>
         </div>
         <div class="row">
-            <mat-radio-group aria-label="Select an option">
-                <mat-radio-button style="margin-right: 10px;" color="primary" value="1">Serviços</mat-radio-button>
-                <mat-radio-button color="primary" value="2">Produto</mat-radio-button>
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="radioButton" required>
+                <mat-radio-button style="margin-right: 10px;" color="primary" value="serv" checked>Serviços</mat-radio-button>
+                <mat-radio-button color="primary" value="prod">Produto</mat-radio-button>
             </mat-radio-group>
         </div>
         <div class="row">
             <mat-form-field fxFlex="grow" appearance="outline">
-                <mat-label>Pesquisar</mat-label>
-                <input formControlName="pesquisar serviços ou produtos" matInput required>
+                <mat-label *ngIf="radioButton == 'serv'">Pesquisar Serviço</mat-label>
+                <mat-label *ngIf="radioButton == 'prod'">Pesquisar Produto</mat-label>
+                <input matInput formControlName="pesquisaProdServ" (ngModelChange)="buscaProdutosServicos(radioButton)">
             </mat-form-field> 
+        </div>
+        <div class="row">
+            <mat-nav-list>
+                <a mat-list-item>
+                    <h4 matLine>Ainda não possui agendamentos</h4>
+                </a>
+            </mat-nav-list>
         </div>
     </div>
     <div class="col-md-8">
