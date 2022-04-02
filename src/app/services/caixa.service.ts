@@ -24,4 +24,8 @@ export class CaixaService {
     })
   }
 
+  detalharPagamento(): Observable<any> {
+    return this.http.get(`${environment.URL_MOCKOON}/detalhe-do-pagamento`, { observe: 'response' })
+}
+
 }

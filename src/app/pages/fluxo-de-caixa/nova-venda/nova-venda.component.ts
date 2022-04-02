@@ -1,4 +1,26 @@
+import { DetalhePagamentoService } from './../../../services/detalhe-pagamento.service';
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { CaixaService } from 'src/app/services/caixa.service';
+import { FormControl, Validators } from '@angular/forms';
+
+export class DetalhePagamento{
+  produtoServico: string
+  quantidade: number
+  valor: number  
+}
+
+interface Quantidade{
+  value: number;
+}
+
+interface Pagamento{
+  value: string
+}
+
+interface Parcelamento{
+  value: string
+}
 
 @Component({
   selector: 'vex-nova-venda',
@@ -7,9 +29,49 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NovaVendaComponent implements OnInit {
 
-  constructor() { }
+  qtd: Quantidade[] = [
+    {value: 1},
+    {value: 2},
+    {value: 3},
+    {value: 4},
+    {value: 5},
+    {value: 6},
+  ];
+
+  pgto: Pagamento[] = [
+    {value: 'Dinheiro'},
+    {value: 'Credito'},
+    {value: 'Debito'},
+    {value: 'PIX'}
+  ];
+
+  parcela: Parcelamento[] = [
+    {value: 'a vista'},
+    {value: '2 parcelas'},
+    {value: '3 parcelas'},
+    
+  ];
+
+  dados: DetalhePagamento[] = [];
+
+  dataSource = new MatTableDataSource<DetalhePagamento>()
+  displayedColumns: string[] = ['imagem','Produto/Servico', 'Quantidade', 'Valor'];
+
+  selectFormControl = new FormControl('', Validators.required);
+
+  constructor(private caixaService: CaixaService) { }
 
   ngOnInit(): void {
+    this.detalharPagamento()
+  }
+
+  
+  detalharPagamento(){
+    this.caixaService.detalharPagamento().subscribe(response => {
+      console.log(response)
+      this.dados = response.body
+      this.dataSource = new MatTableDataSource<DetalhePagamento>(this.dados)
+    })
   }
 
 }
