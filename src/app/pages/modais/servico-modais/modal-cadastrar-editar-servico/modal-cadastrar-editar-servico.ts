@@ -45,10 +45,10 @@ export class ModalCadastrarEditarServico implements OnInit, AfterViewInit {
 		}
 
 		this.form = this.fb.group({
-			nomeServico: ['', Validators.required],
+			nome: ['', Validators.required],
 			tempoEstimado: ['', Validators.required],
 			categoria: ['', Validators.required],
-			dsServico: ['', Validators.required],
+			descricao: ['', Validators.required],
 			promocional: [''],
 			valor: ['', Validators.required],
 			valorPromocional: ['', Validators.required],

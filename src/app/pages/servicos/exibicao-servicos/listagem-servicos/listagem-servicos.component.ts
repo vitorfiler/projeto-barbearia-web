@@ -34,7 +34,7 @@ export class ListagemServicosComponent implements OnInit {
 	servico: Servico;
 	@Input() servicos: Servico[] = []
 	dataSource = new MatTableDataSource<Servico>()
-	displayedColumns: string[] = ['nomeServico', 'categoria', 'descricao', 'tempoEstimado', 'valor', 'acoes'];
+	displayedColumns: string[] = ['nome', 'categoria', 'descricao', 'tempoEstimado', 'valor', 'acoes'];
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) matSort: MatSort;
 	alturaTela: any;

@@ -43,11 +43,6 @@ export class GradeServicosComponent implements OnInit {
 	categoria: string;
 	servico: Servico;
 	@Input() servicos: Servico[] = []
-	dataSource = new MatTableDataSource<Servico>()
-	displayedColumns: string[] = ['nomeServico', 'categoria', 'descricao', 'tempoEstimado', 'valor', 'acoes'];
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-	@ViewChild(MatSort) matSort: MatSort;
-	alturaTela: any;
 	larguraTela: any;
 	mostraBotaoListaGradeNaTabela = false;
 	mostraBotaoListaGradeNoFiltro = false;
@@ -70,30 +65,11 @@ export class GradeServicosComponent implements OnInit {
 		public dialog: MatDialog,
 		private servicoService: ServicoService,
 		private route: ActivatedRoute) {
-
-		this.botaoGradeListaPorPixel();
 	}
 
 	ngOnInit(): void {
 		this.inicializarFiltro();
 		console.log(this.servicos);		
-	}
-
-	@HostListener('window:resize', ['$event'])
-	botaoGradeListaPorPixel(event?) {
-
-		this.alturaTela = window.innerHeight;
-		this.larguraTela = window.innerWidth;
-		if (this.larguraTela >= 407 && this.larguraTela <= 767) {
-			this.mostraBotaoListaGradeNaTabela = true
-			this.mostraBotaoListaGradeNoFiltro = false
-		} else if (this.larguraTela > 767) {
-			this.mostraBotaoListaGradeNaTabela = false
-			this.mostraBotaoListaGradeNoFiltro = true;
-		} else {
-			this.mostraBotaoListaGradeNaTabela = false
-			this.mostraBotaoListaGradeNoFiltro = false;
-		}
 	}
 
 	inicializarFiltro() { //inicializar filtros de pesquisa
@@ -142,7 +118,6 @@ export class GradeServicosComponent implements OnInit {
 				this.servico = resposta.body
 				/*renderizando a tabela*/
 				this.carregando = false;
-				this.dataSource = new MatTableDataSource<Servico>(this.servicos)
 
 			})
 	}
@@ -160,7 +135,7 @@ export class GradeServicosComponent implements OnInit {
 	}
 
 	ngAfterViewInit() {
-		this.dataSource.sort = this.matSort;
+	
 	}
 
 }

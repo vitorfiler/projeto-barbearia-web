@@ -107,10 +107,6 @@ export class ExibicaoServicosComponent implements OnInit {
 		this.carregando = true;
 		this.servicoService.listarServicos(this.estabelecimentoID).subscribe(response => {
 			this.carregando = false
-			response.body.forEach(servico => {
-				servico.nome = servico.nomeServico
-				servico.descricao = servico.dsServico
-			});
 			this.servicos = response.body
 			this.cards = this.servicos.map(s=> new Card(s))
 		}, (error) => {

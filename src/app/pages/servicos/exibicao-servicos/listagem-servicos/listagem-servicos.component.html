@@ -3,7 +3,7 @@
 		<table mat-table matSort [dataSource]="dataSource" matSort>
 
 			<!-- Coluna Nome Serviço -->
-			<ng-container matColumnDef="nomeServico">
+			<ng-container matColumnDef="nome">
 				<th mat-header-cell mat-sort-header *matHeaderCellDef> Nome </th>
 				<td mat-cell *matCellDef="let servico"> {{servico.nome}} </td>
 			</ng-container>

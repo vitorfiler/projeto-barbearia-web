@@ -1,4 +1,4 @@
-<div *ngIf="(servicos).length > 0"
+<div *ngIf="servicos.length > 0"
 	@stagger
 	class="overflow-y-auto"
 	fxFlex="auto">
@@ -17,7 +17,7 @@
 
 
 <!-- SEM DADOS PARA EXIBIR -->
-<div *ngIf="(servicos).length === 0"
+<div *ngIf="servicos.length === 0"
 	@scaleFadeIn
 	fxFlex="auto"
 	fxLayout="column"
