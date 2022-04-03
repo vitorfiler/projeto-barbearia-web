@@ -1,12 +1,13 @@
 <div class="px-6 py-3 border-b" fxLayout="row" fxLayoutAlign="start center">
-    <h2 class="title m-0" mat-dialog-tittle>Novo Produto</h2>
+    <h2 class="title m-0" mat-dialog-tittle *ngIf="!produto.id">Novo Produto</h2>
+    <h2 class="title m-0" mat-dialog-tittle *ngIf="produto.id">Alterar Produto</h2>
 </div>
 <mat-dialog-content class="mat-typography">
     <div @fadeInUp fxFlex="auto" [formGroup]="form">
         <div class="px-6 py-4" fxLayout="column">
             <mat-form-field fxFlex="grow">
                 <mat-label>Nome do produto</mat-label>
-                <input [(ngModel)]="produto.nomeProduto" matInput formControlName="nomeProduto" required>
+                <input [(ngModel)]="produto.nome" matInput formControlName="nomeProduto" required>
             </mat-form-field>
 
             <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
@@ -29,7 +30,7 @@
 
             <mat-form-field fxFlex="grow">
                 <mat-label>Descrição do produto</mat-label>
-                <textarea [(ngModel)]="produto.dsProduto" matInput formControlName="dsProduto"
+                <textarea [(ngModel)]="produto.descricao" matInput formControlName="dsProduto"
                     [matTextareaAutosize]="true"></textarea>
             </mat-form-field>
 

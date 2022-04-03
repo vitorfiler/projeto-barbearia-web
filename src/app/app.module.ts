@@ -44,8 +44,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
-import { ListagemServicosComponent } from './pages/servicos/listagem-servicos/listagem-servicos.component';
-import { ListagemProdutosComponent } from './pages/servicos/listagem-produtos/listagem-produtos.component';
+import { ListagemServicosComponent } from './pages/servicos/exibicao-servicos/listagem-servicos/listagem-servicos.component';
+import { ExibicaoProdutosComponent } from './pages/servicos/exibicao-produtos/exibicao-produtos.component';
 import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/listagem-promocoes.component';
 import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 import { PlanosModalComponent } from './pages/modais/planos/planos-modal.component';
@@ -87,6 +87,11 @@ import { ModalAdicionarProduto } from './pages/modais/produtos-modal/modal-adici
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/fechamento-caixa.component';
+import { GradeServicosComponent } from './pages/servicos/exibicao-servicos/grade-servicos/grade-servicos.component';
+import { ExibicaoServicosComponent } from './pages/servicos/exibicao-servicos/exibicao-servicos.component';
+import { CardComponent } from './_utils/card/card.component';
+import { ListaProdutosComponent } from './pages/servicos/exibicao-produtos/lista-produtos/lista-produtos.component';
+import { GradeProdutosComponent } from './pages/servicos/exibicao-produtos/grade-produtos/grade-produtos.component';
 
 
 @NgModule({
@@ -104,7 +109,7 @@ import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/f
 		ModalDeletarAgendamento,
 		ServicosComponent,
 		ListagemServicosComponent,
-		ListagemProdutosComponent,
+		ExibicaoProdutosComponent,
 		CadastroEstabelecimentoModal,
 		PlanosModalComponent,
 		ListagemPromocoesComponent,
@@ -134,7 +139,12 @@ import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/f
 		ModalOcultarProduto,
 		ModalPromocaoProdutos,
 		ModalDeletarProduto,
-		ModalAdicionarProduto
+		ModalAdicionarProduto,
+		GradeServicosComponent,
+		ExibicaoServicosComponent,
+		CardComponent,
+		ListaProdutosComponent,
+		GradeProdutosComponent
 	],
 	imports: [
 		BrowserModule,
@@ -185,6 +195,7 @@ import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/f
 		MatButtonToggleModule,
 		MatListModule,
 		MatExpansionModule,
+		
 		// Vex
 		VexModule,
 		CustomLayoutModule,

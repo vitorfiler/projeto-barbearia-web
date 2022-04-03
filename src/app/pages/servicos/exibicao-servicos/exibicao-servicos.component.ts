@@ -7,7 +7,6 @@ import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { MatDialog } from '@angular/material/dialog';
 import { EventEmitterService } from 'src/app/services/event.service';
 import ModalServicoPromocional from '../../modais/servico-modais/modal-servico-promocional/modal-servico-promocional';
-import { ModalDeletarServico } from '../../modais/servico-modais/modal-deletar-servico/modal-deletar-servico';
 import ModalOcultarServico from '../../modais/servico-modais/modal-ocultar-servicos/modal-ocultar-servico';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Categoria } from 'src/app/_models/categoria';
@@ -15,23 +14,25 @@ import { Router } from '@angular/router';
 import { ServicoService } from 'src/app/services/servico.service';
 import { Servico } from 'src/app/_models/servico';
 import { ModalCadastrarEditarServico } from '../../modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
+import { ModalDeletarServico } from '../../modais/servico-modais/modal-deletar-servico/modal-deletar-servico';
+import { Card } from 'src/app/_models/card';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-	selector: 'vex-listagem-servicos',
-	templateUrl: './listagem-servicos.component.html',
-	styleUrls: ['./listagem-servicos.component.scss'],
+	selector: 'vex-exibicao-servicos',
+	templateUrl: './exibicao-servicos.component.html',
+	styleUrls: ['./exibicao-servicos.component.scss'],
 	animations: [
 		fadeInUp400ms,
 		stagger20ms
 	]
 })
-export class ListagemServicosComponent implements OnInit {
+export class ExibicaoServicosComponent implements OnInit {
 	form: FormGroup;
 	filtroCategoria: string;
 	lista: boolean = true;
-	visible = false;
 	categoria: string;
-	servico: Servico;
+	servico: Servico[];
 	servicos: Servico[] = []
 	dataSource = new MatTableDataSource<Servico>()
 	displayedColumns: string[] = ['nomeServico', 'categoria', 'descricao', 'tempoEstimado', 'valor', 'acoes'];
@@ -41,9 +42,11 @@ export class ListagemServicosComponent implements OnInit {
 	larguraTela: any;
 	mostraBotaoListaGradeNaTabela = false;
 	mostraBotaoListaGradeNoFiltro = false;
-
-	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
+	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
 	public carregando = false;
+    sevicosEmGrade: boolean = false;
+	cards: Card[];
+	ehProduto: boolean = true;
 
 	selecaoCategoria: Categoria[] = [
 		{ value: 'TODOS', viewValue: 'Todos' },
@@ -57,7 +60,8 @@ export class ListagemServicosComponent implements OnInit {
 	constructor(private router: Router,
 		private fb: FormBuilder,
 		public dialog: MatDialog,
-		private servicoService: ServicoService) {
+		private servicoService: ServicoService,
+		private snackbar: MatSnackBar) {
 
 		this.botaoGradeListaPorPixel();
 	}
@@ -103,64 +107,55 @@ export class ListagemServicosComponent implements OnInit {
 
 	listarServicos() {
 		this.carregando = true;
+		this.dataSource.paginator = this.paginator
+			this.dataSource.sort = this.matSort
 		this.servicoService.listarServicos(this.estabelecimentoID).subscribe(response => {
 			this.carregando = false
 			this.servicos = response.body
-
-			this.dataSource = new MatTableDataSource<Servico>(this.servicos)
-			setTimeout(() => {
-				this.dataSource.paginator = this.paginator
-				this.dataSource.sort = this.matSort
-			})
+			this.cards = this.servicos.map(s=> new Card(s))
 		}, (error) => {
 			console.log(error);
 			this.carregando = false;
 		})
 	}
 
-  trocarStatusServico(servico: Servico) {
+	validarFiltro() {
+
+		let filtro = this.form.get('filtro').value
+		let categoria = this.form.get('categoria').value
+		this.filtrar(filtro, this.categoria);
+
+		
+	}
+
+	filtrar(filtro: string, categoria: string) {
+		this.carregando = true;
+		this.servicoService.filtrar(this.estabelecimentoID, filtro, categoria).subscribe(resposta => {
+			this.servicos = resposta.body
+			/*renderizando a tabela*/
+			this.carregando = false;
+			this.dataSource = new MatTableDataSource<Servico>(this.servicos)
+			this.dataSource.paginator = this.paginator;
+		})
+	}
+
+	botaoVisualizacao() {
+		this.sevicosEmGrade = this.sevicosEmGrade ? false : true
+
+	}
+
+	trocarStatusServico(servico: Servico) {
 		const dialogRef = this.dialog.open(ModalOcultarServico, {
 			data: servico
 		});
 		dialogRef.afterClosed().subscribe(result => { 
 		});
 	}
-
-  trocarPromocionalServico(servico: Servico) {
-		const dialogRef = this.dialog.open(ModalServicoPromocional, {
-			data: servico
-		});
-		dialogRef.afterClosed().subscribe(result => {
-		});
-	}
-
-  deletarServico(servico: Servico) {
-		const dialogRef = this.dialog.open(ModalDeletarServico, {
-			data: servico
-		});
-		dialogRef.afterClosed().subscribe(result => {
-		});
-	}
-
-	filtrar() {
-		this.servicoService.filtrar(this.estabelecimentoID, this.filtroCategoria, this.categoria)
-			.subscribe(resposta => {
-				this.servico = resposta.body
-				/*renderizando a tabela*/
-				this.carregando = false;
-				this.dataSource = new MatTableDataSource<Servico>(this.servicos)
-
-			})
-	}
-
-	botaoVisualizacao() {
-		this.visible = this.visible ? false : true
-
-	}
-
+	
 	ngAfterViewInit() {
 		this.dataSource.sort = this.matSort;
 	}
+
 
 }
 
