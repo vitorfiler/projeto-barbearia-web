@@ -15,6 +15,10 @@ import { ModalCadastrarEditarServico } from 'src/app/pages/modais/servico-modais
 import { ModalAdicionarProduto } from 'src/app/pages/modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
 import { Servico } from 'src/app/_models/servico';
 import { ModalDeletarServico } from 'src/app/pages/modais/servico-modais/modal-deletar-servico/modal-deletar-servico';
+import ModalServicoPromocional from 'src/app/pages/modais/servico-modais/modal-servico-promocional/modal-servico-promocional';
+import { Produto } from 'src/app/_models/produto';
+import { ModalDeletarProduto } from './../../pages/modais/produtos-modal/modal-deletar-produtos/modal-deletar-produto';
+import ModalPromocaoProdutos from './../../pages/modais/produtos-modal/modal-promocao-produtos/modal-promocao-produto';
 
 @Component({
   selector: 'vex-card',
@@ -25,8 +29,11 @@ export class CardComponent implements OnInit {
 
   @Input() card: Card;
   @Input() ehServico: boolean;
+  @Input() ehProduto: boolean;
   @Output() openContact = new EventEmitter<Card['id']>();
   @Output() toggleStar = new EventEmitter<Card['id']>();
+  servico: Servico;
+  produto: Produto;
 
   icBusiness = icBusiness;
   icPhone = icPhone;
@@ -45,40 +52,65 @@ export class CardComponent implements OnInit {
     this.toggleStar.emit(contactId);
   }
 
-	trocarStatusServico(card) {
-		let dialogRef; 
-    if(this.ehServico){
+  trocarStatus(card) {
+    let dialogRef;
+    if (this.ehServico) {
       this.dialog.open(ModalOcultarServico, {
         data: card
       });
-    }else{
+    } else {
       this.dialog.open(ModalOcultarProduto, {
         data: card
       });
     }
-		dialogRef.afterClosed().subscribe(result => { 
-		});
-	}
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 
-  abrirModalAdicionarServico(card) {
-		let dialogRef;
-    if(this.ehServico){
+  abrirModalAdicionar(card) {
+    let dialogRef;
+    if (this.ehServico) {
       dialogRef = this.dialog.open(ModalCadastrarEditarServico, {
         data: card
       });
-    }else{
+    } else {
       dialogRef = this.dialog.open(ModalAdicionarProduto, {
         data: card
       });
     }
-		dialogRef.afterClosed().subscribe(result => {});
-	}
+    dialogRef.afterClosed().subscribe(result => { });
+  }
 
-  deletarServico(servico: Card) {
-		const dialogRef = this.dialog.open(ModalDeletarServico, {
-			data: servico
-		});
-		dialogRef.afterClosed().subscribe(result => {
-		});
-	}
+  deletarServico(card: Card) {
+    let dialogRef;
+    if (this.ehServico) {
+      dialogRef = this.dialog.open(ModalDeletarServico, {
+        data: card
+      });
+    } else {
+      dialogRef = this.dialog.open(ModalDeletarProduto, {
+        data: card
+      });
+    }
+
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  trocarPromocionalServico(card: Card) {
+    let dialogRef;
+    if (this.ehServico) {
+      dialogRef = this.dialog.open(ModalServicoPromocional, {
+        data: card
+      });
+    } else {
+      dialogRef = this.dialog.open(ModalPromocaoProdutos, {
+        data: card
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
+  }
+
 }

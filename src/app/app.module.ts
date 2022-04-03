@@ -45,7 +45,7 @@ import { CoreModule } from './core.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ListagemServicosComponent } from './pages/servicos/exibicao-servicos/listagem-servicos/listagem-servicos.component';
-import { ListagemProdutosComponent } from './pages/servicos/listagem-produtos/listagem-produtos.component';
+import { ExibicaoProdutosComponent } from './pages/servicos/exibicao-produtos/exibicao-produtos.component';
 import { ListagemPromocoesComponent } from './pages/servicos/listagem-promocoes/listagem-promocoes.component';
 import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 import { PlanosModalComponent } from './pages/modais/planos/planos-modal.component';
@@ -89,6 +89,8 @@ import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/f
 import { GradeServicosComponent } from './pages/servicos/exibicao-servicos/grade-servicos/grade-servicos.component';
 import { ExibicaoServicosComponent } from './pages/servicos/exibicao-servicos/exibicao-servicos.component';
 import { CardComponent } from './_utils/card/card.component';
+import { ListaProdutosComponent } from './pages/servicos/exibicao-produtos/lista-produtos/lista-produtos.component';
+import { GradeProdutosComponent } from './pages/servicos/exibicao-produtos/grade-produtos/grade-produtos.component';
 
 
 @NgModule({
@@ -106,7 +108,7 @@ import { CardComponent } from './_utils/card/card.component';
 		ModalDeletarAgendamento,
 		ServicosComponent,
 		ListagemServicosComponent,
-		ListagemProdutosComponent,
+		ExibicaoProdutosComponent,
 		CadastroEstabelecimentoModal,
 		PlanosModalComponent,
 		ListagemPromocoesComponent,
@@ -139,7 +141,9 @@ import { CardComponent } from './_utils/card/card.component';
 		ModalAdicionarProduto,
 		GradeServicosComponent,
 		ExibicaoServicosComponent,
-		CardComponent
+		CardComponent,
+		ListaProdutosComponent,
+		GradeProdutosComponent
 	],
 	imports: [
 		BrowserModule,

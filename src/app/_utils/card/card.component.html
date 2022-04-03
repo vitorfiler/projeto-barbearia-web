@@ -1,9 +1,9 @@
 <div class="card overflow-hidden">
-  <div (click)="openContact.emit(card.id)" class="p-6 text-center hover:bg-hover trans-ease-out cursor-pointer relative"
-    matRipple>
+  <div (click)="openContact.emit(card.id)" class="p-6 h-36 hover:bg-hover trans-ease-out cursor-pointer relative" matRipple>
     <div class="row text-left">
       <div class="col">
-        <img class="m-6 h-24" style="margin: auto;" src="assets/img/profile/servicos.svg">
+        <img class="m-6 h-24" style="margin: auto;" *ngIf="ehServico" src="assets/img/profile/servicos.svg">
+        <img class="m-6 h-24" style="margin: auto;" *ngIf="ehProduto" src="assets/img/profile/produtos.svg">
       </div>
       <div class="col">
         <h2 class="title mb-1 mt-3">{{ card?.nome }}</h2>
@@ -11,11 +11,12 @@
       </div>
     </div>
     <div class="row">
-      <h2 class="title mb-1 mt-3">{{ card?.descricao}}</h2>
+      <h2 class="title mb-1 mt-3" style="margin-left: 5%">{{ card?.descricao}}</h2>
     </div>
     <div class="row">
       <div class="col">
-        <h2 class="title mb-1 mt-3">{{ card?.tempoEstimado | valueTime}}</h2>
+        <h2 class="title mb-1 mt-3" *ngIf="ehServico">{{ card?.tempoEstimado | valueTime}}</h2>
+        <h2 class="title mb-1 mt-3" *ngIf="ehProduto">{{ card?.qtdEstoque}}Uni.</h2>
       </div>
       <div class="col">
         <h2 class="title mb-1 mt-3">{{ card?.valor | currency:'BRL'}}</h2>
@@ -24,21 +25,22 @@
   </div>
 
   <div class="bg-app-bar p-2" fxLayout="row" fxLayoutAlign="space-around center">
-    <button class="text-secondary" (click)="trocarStatusServico(card)" mat-icon-button type="button">
+    <button class="text-secondary" (click)="trocarStatus(card)" mat-icon-button type="button">
       <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="card.ativo">visibility</mat-icon>
       <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="!card.ativo">visibility_off</mat-icon>
     </button>
 
-    <button mat-icon-button color="primary" (click)="abrirModalAdicionarServico(card)" matTooltip="Editar serviço">
+    <button mat-icon-button color="primary" (click)="abrirModalAdicionar(card)" matTooltip="Editar serviço">
       <mat-icon color="primary">edit</mat-icon>
     </button>
 
-    <button class="text-secondary" (click)="deletarServico(card)" mat-icon-button type="button">
+    <button mat-icon-button color="warn" (click)="deletarServico(card)" matTooltip="Deletar serviço">
       <mat-icon>delete</mat-icon>
     </button>
 
-    <button class="text-secondary" mat-icon-button type="button">
-      <mat-icon>attach_money</mat-icon>
+    <button mat-icon-button (click)="trocarPromocionalServico(card)" matTooltip="Serviço promocional">
+      <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="card.promocional">attach_money</mat-icon>
+      <mat-icon [ngStyle]="{'color': '#DAAA00'}" *ngIf="!card.promocional">money_off</mat-icon>
     </button>
   </div>
 </div>

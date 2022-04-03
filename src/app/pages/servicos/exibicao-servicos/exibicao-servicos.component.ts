@@ -16,6 +16,7 @@ import { Servico } from 'src/app/_models/servico';
 import { ModalCadastrarEditarServico } from '../../modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
 import { ModalDeletarServico } from '../../modais/servico-modais/modal-deletar-servico/modal-deletar-servico';
 import { Card } from 'src/app/_models/card';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'vex-exibicao-servicos',
@@ -59,7 +60,8 @@ export class ExibicaoServicosComponent implements OnInit {
 	constructor(private router: Router,
 		private fb: FormBuilder,
 		public dialog: MatDialog,
-		private servicoService: ServicoService) {
+		private servicoService: ServicoService,
+		private snackbar: MatSnackBar) {
 
 		this.botaoGradeListaPorPixel();
 	}
@@ -105,6 +107,8 @@ export class ExibicaoServicosComponent implements OnInit {
 
 	listarServicos() {
 		this.carregando = true;
+		this.dataSource.paginator = this.paginator
+			this.dataSource.sort = this.matSort
 		this.servicoService.listarServicos(this.estabelecimentoID).subscribe(response => {
 			this.carregando = false
 			this.servicos = response.body
@@ -115,15 +119,24 @@ export class ExibicaoServicosComponent implements OnInit {
 		})
 	}
 
-	filtrar() {
-		this.servicoService.filtrar(this.estabelecimentoID, this.filtroCategoria, this.categoria)
-			.subscribe(resposta => {
-				this.servico = resposta.body
-				/*renderizando a tabela*/
-				this.carregando = false;
-				this.dataSource = new MatTableDataSource<Servico>(this.servicos)
+	validarFiltro() {
 
-			})
+		let filtro = this.form.get('filtro').value
+		let categoria = this.form.get('categoria').value
+		this.filtrar(filtro, this.categoria);
+
+		
+	}
+
+	filtrar(filtro: string, categoria: string) {
+		this.carregando = true;
+		this.servicoService.filtrar(this.estabelecimentoID, filtro, categoria).subscribe(resposta => {
+			this.servicos = resposta.body
+			/*renderizando a tabela*/
+			this.carregando = false;
+			this.dataSource = new MatTableDataSource<Servico>(this.servicos)
+			this.dataSource.paginator = this.paginator;
+		})
 	}
 
 	botaoVisualizacao() {

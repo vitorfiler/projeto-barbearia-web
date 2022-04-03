@@ -9,6 +9,7 @@ export class Servico {
     ativo: boolean;
     promocional: boolean;
     estabelecimentoID: number;
+    qtdEstoque: number;
 
     
     constructor(servico: Servico= {} as Servico){

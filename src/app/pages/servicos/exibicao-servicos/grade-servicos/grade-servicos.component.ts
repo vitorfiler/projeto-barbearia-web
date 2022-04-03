@@ -103,6 +103,7 @@ export class GradeServicosComponent implements OnInit {
 		dialogRef.afterClosed().subscribe(result => {
 		});
 	}
+	
 
 	deletarServico(servico: Servico) {
 		const dialogRef = this.dialog.open(ModalDeletarServico, {
@@ -125,13 +126,6 @@ export class GradeServicosComponent implements OnInit {
 	botaoVisualizacao() {
 		this.visible = this.visible ? false : true
 
-	}
-
-	openContact(id?: Card['id']) {
-		this.dialog.open(ConstrucaoModal, {
-			data: id || null,
-			width: '600px'
-		});
 	}
 
 	ngAfterViewInit() {

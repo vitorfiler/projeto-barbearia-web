@@ -22,6 +22,7 @@ export class Card {
       this.nome = card.nome;
       this.categoria = card.categoria;
       this.descricao = card.descricao;
+      this.qtdEstoque = card.qtdEstoque;
       this.valor = card.valor;
       this.valorPromocional = card.valorPromocional;
       this.promocional = card.promocional;
