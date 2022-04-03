@@ -13,6 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 import ModalOcultarServico from 'src/app/pages/modais/servico-modais/modal-ocultar-servicos/modal-ocultar-servico';
 import { ModalCadastrarEditarServico } from 'src/app/pages/modais/servico-modais/modal-cadastrar-editar-servico/modal-cadastrar-editar-servico';
 import { ModalAdicionarProduto } from 'src/app/pages/modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
+import { Servico } from 'src/app/_models/servico';
+import { ModalDeletarServico } from 'src/app/pages/modais/servico-modais/modal-deletar-servico/modal-deletar-servico';
 
 @Component({
   selector: 'vex-card',
@@ -70,5 +72,13 @@ export class CardComponent implements OnInit {
       });
     }
 		dialogRef.afterClosed().subscribe(result => {});
+	}
+
+  deletarServico(servico: Card) {
+		const dialogRef = this.dialog.open(ModalDeletarServico, {
+			data: servico
+		});
+		dialogRef.afterClosed().subscribe(result => {
+		});
 	}
 }

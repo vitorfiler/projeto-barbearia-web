@@ -189,6 +189,7 @@ import { CardComponent } from './_utils/card/card.component';
 		AgendaModule,
 		MatButtonToggleModule,
 		MatExpansionModule,
+		
 		// Vex
 		VexModule,
 		CustomLayoutModule,
