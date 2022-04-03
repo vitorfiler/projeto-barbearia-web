@@ -1,0 +1,27 @@
+.detalhesDaVenda{
+    margin-left: 2%;
+    margin-top: 2%;
+}
+.corPrimaria{
+    color: rgb(92,119,255);
+    margin-bottom: 2%;
+}
+table{
+    margin-top: 3%;
+    width: 100%;   
+}
+th.mat-header-cell{
+   border-bottom-style: none;
+}
+mat-form-field{
+    width: 40%;
+} 
+.btn_adicionar_venda{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+span{
+    font-size: 25px;
+}
