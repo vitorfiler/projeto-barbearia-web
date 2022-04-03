@@ -14,6 +14,7 @@ export class Card {
     valorPromocional?: number;
     ativo?: boolean;
     promocional?: boolean;
+    tempoEstimado: string;
     estabelecimentoID?: number;
 
     constructor(card: Servico | Produto | Promocao){
@@ -26,6 +27,7 @@ export class Card {
       this.promocional = card.promocional;
       this.ativo = card.ativo;
       this.estabelecimentoID = card.estabelecimentoID;
+      this.tempoEstimado = card.tempoEstimado;
     }
   }
   

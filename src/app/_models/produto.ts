@@ -10,6 +10,7 @@ export class Produto {
 	ativo: boolean;
 	promocional: boolean;
 	estabelecimentoID: number;
+	tempoEstimado: string;
 
 	constructor(produto: Produto = {} as Produto) {
 		Object.assign(this, produto);

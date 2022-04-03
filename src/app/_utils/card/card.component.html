@@ -1,17 +1,25 @@
 <div class="card overflow-hidden">
-  <div (click)="openContact.emit(card.id)" class="p-4 text-center hover:bg-hover trans-ease-out cursor-pointer relative"
+  <div (click)="openContact.emit(card.id)" class="p-6 text-center hover:bg-hover trans-ease-out cursor-pointer relative"
     matRipple>
     <div class="row text-left">
       <div class="col">
-        <img class="m-6 h-24" src="assets/img/profile/servicos.svg">
+        <img class="m-6 h-24" style="margin: auto;" src="assets/img/profile/servicos.svg">
       </div>
       <div class="col">
-        <h2 class="title mb-1 mt-3">{{ card?.categoria }}</h2>
         <h2 class="title mb-1 mt-3">{{ card?.nome }}</h2>
+        <h2 class="title mb-1 mt-3">{{ card?.categoria }}</h2>
       </div>
     </div>
     <div class="row">
-      <h2 class="title mb-1 mt-3">{{ card?.descricao }}</h2>
+      <h2 class="title mb-1 mt-3">{{ card?.descricao}}</h2>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h2 class="title mb-1 mt-3">{{ card?.tempoEstimado | valueTime}}</h2>
+      </div>
+      <div class="col">
+        <h2 class="title mb-1 mt-3">{{ card?.valor | currency:'BRL'}}</h2>
+      </div>
     </div>
   </div>
 

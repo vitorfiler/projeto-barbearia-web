@@ -10,5 +10,6 @@ export class Promocao{
     valorPromocional?: number;
     ativo?: boolean;
     promocional?: boolean;
+    tempoEstimado: string;
     estabelecimentoID?: number;
 }
