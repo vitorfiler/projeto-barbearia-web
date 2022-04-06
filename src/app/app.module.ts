@@ -84,14 +84,15 @@ import ModalOcultarProduto from './pages/modais/produtos-modal/modal-ocultar-pro
 import ModalPromocaoProdutos from './pages/modais/produtos-modal/modal-promocao-produtos/modal-promocao-produto';
 import { ModalDeletarProduto } from './pages/modais/produtos-modal/modal-deletar-produtos/modal-deletar-produto';
 import { ModalAdicionarProduto } from './pages/modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
-import {MatListModule} from '@angular/material/list';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { ModalFechamentoCaixa } from './pages/modais/fechamento-de-caixa-modal/fechamento-caixa.component';
 import { GradeServicosComponent } from './pages/servicos/exibicao-servicos/grade-servicos/grade-servicos.component';
 import { ExibicaoServicosComponent } from './pages/servicos/exibicao-servicos/exibicao-servicos.component';
 import { CardComponent } from './_utils/card/card.component';
 import { ListaProdutosComponent } from './pages/servicos/exibicao-produtos/lista-produtos/lista-produtos.component';
 import { GradeProdutosComponent } from './pages/servicos/exibicao-produtos/grade-produtos/grade-produtos.component';
+import { ExibicaoPromocoesComponent } from './pages/servicos/exibicao-promocoes/exibicao-promocoes.component';
 
 
 @NgModule({
@@ -144,7 +145,8 @@ import { GradeProdutosComponent } from './pages/servicos/exibicao-produtos/grade
 		ExibicaoServicosComponent,
 		CardComponent,
 		ListaProdutosComponent,
-		GradeProdutosComponent
+		GradeProdutosComponent,
+		ExibicaoPromocoesComponent
 	],
 	imports: [
 		BrowserModule,
@@ -195,7 +197,7 @@ import { GradeProdutosComponent } from './pages/servicos/exibicao-produtos/grade
 		MatButtonToggleModule,
 		MatListModule,
 		MatExpansionModule,
-		
+
 		// Vex
 		VexModule,
 		CustomLayoutModule,
