@@ -14,19 +14,20 @@ import ModalOcultarProduto from '../../modais/produtos-modal/modal-ocultar-produ
 import ModalPromocaoProdutos from '../../modais/produtos-modal/modal-promocao-produtos/modal-promocao-produto';
 import { ModalDeletarProduto } from '../../modais/produtos-modal/modal-deletar-produtos/modal-deletar-produto';
 import { ModalAdicionarProduto } from '../../modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
+import { Card } from 'src/app/_models/card';
 
 
 @Component({
-	selector: 'vex-listagem-produtos',
-	templateUrl: './listagem-produtos.component.html',
-	styleUrls: ['./listagem-produtos.component.scss'],
+	selector: 'vex-exibicao-produtos',
+	templateUrl: './exibicao-produtos.component.html',
+	styleUrls: ['./exibicao-produtos.component.scss'],
 	animations: [
 		fadeInUp400ms,
 		stagger20ms
 	]
 })
 
-export class ListagemProdutosComponent implements OnInit {
+export class ExibicaoProdutosComponent implements OnInit {
 	//objeto
 	form: FormGroup;
 
@@ -35,7 +36,10 @@ export class ListagemProdutosComponent implements OnInit {
 	categoria: string;
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
 	public carregando = false;
-
+	cards: Card[];
+	produtos: Produto[] = []
+	produtosEmGrade: boolean = false;
+	
 	//visualização em grade e lista
 	visible = false;
 	alturaTela: any;
@@ -84,11 +88,12 @@ export class ListagemProdutosComponent implements OnInit {
 
 	listarProdutos() {
 		this.carregando = true;
+		this.dataSource.paginator = this.paginator
+			this.dataSource.sort = this.matSort
 		this.produtoService.listarProdutos(this.estabelecimentoID).subscribe(response => {
-			this.carregando = false;
-			this.produto = response.body
-			this.dataSource = new MatTableDataSource<Produto>(this.produto)
-			this.dataSource.paginator = this.paginator
+			this.carregando = false
+			this.produtos = response.body
+			this.cards = this.produtos.map(s=> new Card(s))
 		}, (error) => {
 			console.log(error);
 			this.carregando = false;
@@ -121,7 +126,7 @@ export class ListagemProdutosComponent implements OnInit {
 	}
 
 	botaoVisualizacao() {
-		this.visible = this.visible ? false : true
+		this.produtosEmGrade = this.produtosEmGrade ? false : true
 	}
 
 

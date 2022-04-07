@@ -8,7 +8,6 @@ import { Injectable } from '@angular/core';
 })
 export class CaixaService {
 
- 
   constructor( private http: HttpClient) { }
 
   fecharCaixa(): Observable<any>{
@@ -22,6 +21,16 @@ export class CaixaService {
         estabelecimento_ID: estabelecimentoID, filtroStatus: filtro, status: status
       }, observe: 'response'
     })
+  }
+
+  buscarServicos(): Observable<any> {
+    return this.http.get(`${environment.URL_MOCKOON}/caixa/servicos`, {observe: 'response'})
+  }
+  buscarProdutos(): Observable<any> {
+    return this.http.get(`${environment.URL_MOCKOON}/caixa/produtos`, {observe: 'response'})
+  }
+  detalharPagamento(): Observable<any> {
+    return this.http.get(`${environment.URL_MOCKOON}/detalhe-do-pagamento`, { observe: 'response' })
   }
 
 }

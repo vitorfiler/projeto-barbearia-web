@@ -9,14 +9,14 @@
 				<mat-form-field fxFlex="grow" appearance="standard">
 					<mat-label>Filtro</mat-label>
 					<input placeholder="Ex. nome do serviço" formControlName="filtro" [(ngModel)]="filtroCategoria"
-						(ngModelChange)="filtrar()" matInput />
+						(ngModelChange)="filtrar(categoria, filtroCategoria)" matInput />
 				</mat-form-field>
 			</div>
 			<div class="col-md-2">
 				<mat-form-field fxFlex="grow" appearance="standard">
 					<mat-label>Categoria</mat-label>
 					<mat-select formControlName="categoria" name="filtroCategoria" [(ngModel)]="categoria"
-						(ngModelChange)="filtrar()">
+						(ngModelChange)="filtrar(categoria, filtroCategoria)">
 						<mat-option *ngFor="let selecaoCategoria of selecaoCategoria" [value]="selecaoCategoria.value">
 							{{selecaoCategoria.viewValue}}
 						</mat-option>
@@ -39,7 +39,9 @@
 			</div>
 		</div>
 	</div>
+	
 </div>
 
 <vex-listagem-servicos *ngIf="sevicosEmGrade" [servicos]=servicos></vex-listagem-servicos>
 <vex-grade-servicos *ngIf="!sevicosEmGrade" [servicos]=cards ></vex-grade-servicos>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>

@@ -4,7 +4,7 @@ export class Promocao{
     codigo?: number;
     categoria?: string;
     nome?: string;
-    descricao?: string;
+    descricao: string;
     qtdEstoque?: number;
     valor?: number;
     valorPromocional?: number;

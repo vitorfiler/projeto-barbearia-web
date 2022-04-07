@@ -140,7 +140,6 @@ export class ListagemServicosComponent implements OnInit {
 				/*renderizando a tabela*/
 				this.carregando = false;
 				this.dataSource = new MatTableDataSource<Servico>(this.servicos)
-
 			})
 	}
 
