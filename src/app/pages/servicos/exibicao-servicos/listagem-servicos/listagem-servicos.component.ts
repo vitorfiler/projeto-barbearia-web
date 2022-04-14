@@ -41,6 +41,7 @@ export class ListagemServicosComponent implements OnInit {
 	larguraTela: any;
 	mostraBotaoListaGradeNaTabela = false;
 	mostraBotaoListaGradeNoFiltro = false;
+	label: string = "serviços";
 
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
 	public carregando = false;
@@ -63,7 +64,7 @@ export class ListagemServicosComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-    EventEmitterService.get('buscarServicos').subscribe(() => this.listarServicos())
+		EventEmitterService.get('buscarServicos').subscribe(() => this.listarServicos())
 		this.inicializarFiltro();
 		this.listarServicos();
 	}
@@ -76,7 +77,7 @@ export class ListagemServicosComponent implements OnInit {
 		if (this.larguraTela >= 407 && this.larguraTela <= 767) {
 			this.mostraBotaoListaGradeNaTabela = true
 			this.mostraBotaoListaGradeNoFiltro = false
-		} else if(this.larguraTela > 767){
+		} else if (this.larguraTela > 767) {
 			this.mostraBotaoListaGradeNaTabela = false
 			this.mostraBotaoListaGradeNoFiltro = true;
 		} else {
@@ -98,26 +99,26 @@ export class ListagemServicosComponent implements OnInit {
 		const dialogRef = this.dialog.open(ModalCadastrarEditarServico, {
 			data: servico
 		});
-		dialogRef.afterClosed().subscribe(result => {});
+		dialogRef.afterClosed().subscribe(result => { });
 	}
 
 	listarServicos() {
 		this.dataSource = new MatTableDataSource<Servico>(this.servicos)
-			setTimeout(() => {
-				this.dataSource.paginator = this.paginator
-				this.dataSource.sort = this.matSort
-			})
+		setTimeout(() => {
+			this.dataSource.paginator = this.paginator
+			this.dataSource.sort = this.matSort
+		})
 	}
 
-  trocarStatusServico(servico: Servico) {
+	trocarStatusServico(servico: Servico) {
 		const dialogRef = this.dialog.open(ModalOcultarServico, {
 			data: servico
 		});
-		dialogRef.afterClosed().subscribe(result => { 
+		dialogRef.afterClosed().subscribe(result => {
 		});
 	}
 
-  trocarPromocionalServico(servico: Servico) {
+	trocarPromocionalServico(servico: Servico) {
 		const dialogRef = this.dialog.open(ModalServicoPromocional, {
 			data: servico
 		});
@@ -125,7 +126,7 @@ export class ListagemServicosComponent implements OnInit {
 		});
 	}
 
-  deletarServico(servico: Servico) {
+	deletarServico(servico: Servico) {
 		const dialogRef = this.dialog.open(ModalDeletarServico, {
 			data: servico
 		});

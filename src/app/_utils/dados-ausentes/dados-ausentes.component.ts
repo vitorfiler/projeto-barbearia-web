@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'vex-dados-ausentes',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dados-ausentes.component.scss']
 })
 export class DadosAusentesComponent implements OnInit {
+
+  @Input() label: string;
+
 
   constructor() { }
 

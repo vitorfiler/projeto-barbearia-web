@@ -1,5 +1,5 @@
 <vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
-	<div class="lista">
+	<div *ngIf="produtos.length > 0" class="lista">
 		<table mat-table [dataSource]="dataSource" matSort>
 
 			<!-- Coluna Nome Produto -->
@@ -63,6 +63,11 @@
 			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 		</table>
+	</div>
+
+	<!-- SEM DADOS PARA EXIBIR -->
+	<div *ngIf="produtos.length === 0" @scaleFadeIn fxFlex="auto" fxLayout="column" fxLayoutAlign="center center">
+		<vex-dados-ausentes [label]="label"></vex-dados-ausentes>
 	</div>
 </vex-scrollbar>
 
