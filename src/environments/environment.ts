@@ -10,7 +10,7 @@ export const environment = {
   URL_MOCKOON: "http://localhost:8081",
   URL_AWS: "",
   ambiente: "dsv",
-  URL_Mockon: "http://localhost:3001/historico-vendas/1/1/1",
+  URL_Mockon: "http://localhost:8082/detalhe-do-pagamento",
 
   //SERVIÇOS
   recuperarSenha: '/estabelecimento/recuperar-senha'
