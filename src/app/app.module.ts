@@ -91,9 +91,7 @@ import { ExibicaoServicosComponent } from './pages/servicos/exibicao-servicos/ex
 import { CardComponent } from './_utils/card/card.component';
 import { ListaProdutosComponent } from './pages/servicos/exibicao-produtos/lista-produtos/lista-produtos.component';
 import { GradeProdutosComponent } from './pages/servicos/exibicao-produtos/grade-produtos/grade-produtos.component';
-import { ExibicaoPromocoesComponent } from './pages/servicos/exibicao-promocoes/exibicao-promocoes.component';
-import { GradePromocoesComponent } from './pages/servicos/exibicao-promocoes/grade-promocoes/grade-promocoes.component';
-import { ListaPromocoesComponent } from './pages/servicos/exibicao-promocoes/lista-promocoes/lista-promocoes.component';
+import { DadosAusentesComponent } from './_utils/dados-ausentes/dados-ausentes.component';
 
 
 @NgModule({
@@ -146,9 +144,8 @@ import { ListaPromocoesComponent } from './pages/servicos/exibicao-promocoes/lis
 		CardComponent,
 		ListaProdutosComponent,
 		GradeProdutosComponent,
-		ExibicaoPromocoesComponent,
-		ListaPromocoesComponent,
-		GradePromocoesComponent
+		DadosAusentesComponent
+
 	],
 	imports: [
 		BrowserModule,

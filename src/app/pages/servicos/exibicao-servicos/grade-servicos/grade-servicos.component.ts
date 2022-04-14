@@ -48,6 +48,7 @@ export class GradeServicosComponent implements OnInit {
 	mostraBotaoListaGradeNoFiltro = false;
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
 	public carregando = false;
+	label: string = "serviços";
 
 	// filteredCard = dadosServicos;
 
@@ -69,7 +70,7 @@ export class GradeServicosComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.inicializarFiltro();
-		console.log(this.servicos);		
+		console.log(this.servicos);
 	}
 
 	inicializarFiltro() { //inicializar filtros de pesquisa
@@ -103,7 +104,7 @@ export class GradeServicosComponent implements OnInit {
 		dialogRef.afterClosed().subscribe(result => {
 		});
 	}
-	
+
 
 	deletarServico(servico: Servico) {
 		const dialogRef = this.dialog.open(ModalDeletarServico, {
@@ -129,7 +130,7 @@ export class GradeServicosComponent implements OnInit {
 	}
 
 	ngAfterViewInit() {
-	
+
 	}
 
 }

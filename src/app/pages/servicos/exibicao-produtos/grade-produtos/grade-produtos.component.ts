@@ -15,6 +15,7 @@ import ModalPromocaoProdutos from '../../../modais/produtos-modal/modal-promocao
 import { ModalDeletarProduto } from '../../../modais/produtos-modal/modal-deletar-produtos/modal-deletar-produto';
 import { ModalAdicionarProduto } from '../../../modais/produtos-modal/modal-adicionar-editar-produto/modal-adicionar-editar-produto';
 import { Card } from 'src/app/_models/card';
+import { scaleFadeIn400ms } from 'src/@vex/animations/scale-fade-in.animation';
 
 
 @Component({
@@ -22,6 +23,7 @@ import { Card } from 'src/app/_models/card';
 	templateUrl: './grade-produtos.component.html',
 	styleUrls: ['./grade-produtos.component.scss'],
 	animations: [
+		scaleFadeIn400ms,
 		fadeInUp400ms,
 		stagger20ms
 	]
@@ -38,8 +40,9 @@ export class GradeProdutosComponent implements OnInit {
 	public carregando = false;
 	cards: Card[];
 	produtosEmGrade: boolean = false;
-  	@Input() produtos: Produto[] = []
-	
+	@Input() produtos: Produto[] = []
+	label: string = "produtos";
+
 	//visualização em grade e lista
 	visible = false;
 	alturaTela: any;
@@ -98,7 +101,7 @@ export class GradeProdutosComponent implements OnInit {
 				this.dataSource.paginator = this.paginator
 				this.dataSource.sort = this.matSort
 			})
-			this.cards = this.produtos.map(s=> new Card(s))
+			this.cards = this.produtos.map(s => new Card(s))
 			this.dataSource.paginator = this.paginator
 		}, (error) => {
 			console.log(error);
