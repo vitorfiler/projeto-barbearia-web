@@ -7,6 +7,7 @@ import { PromocaoService } from 'src/app/services/promocao.service';
 import { ServicoService } from 'src/app/services/servico.service';
 import { Categoria } from 'src/app/_models/categoria';
 
+
 @Component({
   selector: 'vex-exibicao-promocoes',
   templateUrl: './exibicao-promocoes.component.html',

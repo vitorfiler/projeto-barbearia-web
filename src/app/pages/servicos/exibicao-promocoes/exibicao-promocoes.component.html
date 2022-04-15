@@ -1,1 +1,51 @@
-<vex-construcao></vex-construcao>
+<ng-template #customLoadingTemplate>
+</ng-template>
+<ngx-loading [show]="carregando" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+</ngx-loading>
+<div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
+    <div fxFlex="auto" fxLayout="column">
+        <div class="row">
+            <div class="col-md-8">
+                <mat-form-field fxFlex="grow" appearance="standard">
+                    <mat-label>Filtro</mat-label>
+                    <input placeholder="Ex. nome do serviço" formControlName="filtro" [(ngModel)]="filtroCategoria"
+                        (ngModelChange)="filtrar()" matInput />
+                </mat-form-field>
+            </div>
+            <div class="col-md-2">
+                <mat-form-field fxFlex="grow" appearance="standard">
+                    <mat-label>Categoria</mat-label>
+                    <mat-select formControlName="categoria" name="filtroCategoria" [(ngModel)]="categoria"
+                        (ngModelChange)="filtrar()">
+                        <mat-option *ngFor="let selecaoCategoria of selecaoCategoria" [value]="selecaoCategoria.value">
+                            {{selecaoCategoria.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2">
+                <button *ngIf="promocoesEmGrade" style="transform: scale(1.6);" fxFlex="grow"
+                    title="visualização em grade" (click)="botaoVisualizacao()">
+                    <mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#5c77ff'}">view_module</mat-icon>
+                </button>
+                <button *ngIf="!promocoesEmGrade" style="transform: scale(1.6);" fxFlex="grow"
+                    title="visualização em lista" (click)="botaoVisualizacao()">
+                    <mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#5c77ff'}">view_headline</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
+    <div *ngIf="promocoes.length > 0" class="lista">
+        <vex-listagem-promocoes *ngIf="promocoesEmGrade" [promocoes]="promocoes"></vex-listagem-promocoes>
+        <vex-grade-promocoes *ngIf="!promocoesEmGrade" [promocoes]="promocoes">
+        </vex-grade-promocoes>
+    </div>
+
+    <!-- SEM DADOS PARA EXIBIR -->
+    <div *ngIf="promocoes.length === 0" @scaleFadeIn fxFlex="auto" fxLayout="column" fxLayoutAlign="center center">
+        <vex-dados-ausentes [label]="label"></vex-dados-ausentes>
+    </div>
+</vex-scrollbar>
