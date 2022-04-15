@@ -42,10 +42,10 @@ export class ToolbarUserDropdownComponent implements OnInit {
     {
       id: '1',
       icon: icAccountCircle,
-      label: 'My Profile',
+      label: 'Meu perfil',
       description: 'Personal Information',
       colorClass: 'text-teal',
-      route: '/apps/social'
+      route: '/app/pages/social'
     },
     {
       id: '2',
@@ -61,7 +61,7 @@ export class ToolbarUserDropdownComponent implements OnInit {
       label: 'My Projects',
       description: 'Tasks & Active Projects',
       colorClass: 'text-amber',
-      route: '/apps/scrumboard'
+      route: '../../apps/scrumboard'
     },
     {
       id: '4',
@@ -112,38 +112,38 @@ export class ToolbarUserDropdownComponent implements OnInit {
   icLock = icLock;
   icNotificationsOff = icNotificationsOff;
   userName: string = this.getUser();
-  
+
   constructor(private cd: ChangeDetectorRef,
-              private popoverRef: PopoverRef<ToolbarUserDropdownComponent>,
-              private commomService: CommomService,
-              private route: Router) { }
+    private popoverRef: PopoverRef<ToolbarUserDropdownComponent>,
+    private commomService: CommomService,
+    private route: Router) { }
 
   ngOnInit() {
   }
 
-  logout(){ 
+  logout() {
     this.close();
     this.commomService.logout()
   }
 
-  getUser(){
+  getUser() {
     var nome = localStorage.getItem('currentUser');
     if (nome == null) {
       var nomeEmpe = localStorage.getItem('usuarioLogadoEmpresa');
-      if (nomeEmpe == null){
+      if (nomeEmpe == null) {
         return "";
       }
       return nomeEmpe.replace('"', '').replace('"', '');
     }
     return nome.replace('"', '').replace('"', '');
   }
-  
+
   setStatus(status: OnlineStatus) {
     this.activeStatus = status;
     this.cd.markForCheck();
   }
 
-  cadastro(){
+  cadastro() {
     this.close();
     this.route.navigate(['/cadastro']);
   }
