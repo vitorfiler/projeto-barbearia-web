@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { fadeInUp400ms } from "src/@vex/animations/fade-in-up.animation";
 import { stagger20ms } from "src/@vex/animations/stagger.animation";
+import { Card } from "src/app/_models/card";
 
 @Component({
   selector: 'vex-exibicao-promocoes',
@@ -13,6 +14,8 @@ import { stagger20ms } from "src/@vex/animations/stagger.animation";
 })
 
 export class ExibicaoPromocoesComponent implements OnInit {
+
+  cards: Card[];
 
   ngOnInit() {
 

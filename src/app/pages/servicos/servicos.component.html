@@ -2,25 +2,25 @@
     <h1 *ngIf="produtos"> Meus Produtos </h1>
     <h1 *ngIf="promocoes"> Minhas Promoções </h1>
     <h1 *ngIf="servicos"> Meus Serviços </h1>
-    
+
 </div>
-    
+
 <mat-tab-group (selectedTabChange)="trocaTitulo($event)">
-  
-        <mat-tab label="Serviços" >
-            <vex-exibicao-servicos></vex-exibicao-servicos>
-        </mat-tab>
-    
-        
-        
-        <mat-tab label="Produtos" >
-            <vex-exibicao-produtos></vex-exibicao-produtos>
-        </mat-tab>
-    
-        
-    
-        <mat-tab label="Promoções" >
-            <vex-exibicao-promocoes></vex-exibicao-promocoes>
-        </mat-tab>
-   
+
+    <mat-tab label="Serviços">
+        <vex-exibicao-servicos></vex-exibicao-servicos>
+    </mat-tab>
+
+
+
+    <mat-tab label="Produtos">
+        <vex-exibicao-produtos></vex-exibicao-produtos>
+    </mat-tab>
+
+
+
+    <mat-tab label="Promoções">
+        <vex-grade-promocoes></vex-grade-promocoes>
+    </mat-tab>
+
 </mat-tab-group>
