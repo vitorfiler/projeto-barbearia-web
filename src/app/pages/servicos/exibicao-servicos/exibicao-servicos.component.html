@@ -28,20 +28,22 @@
 					matTooltip="Adicionar serviço">Adicionar</button>
 			</div>
 			<div class="col-md-1">
-				<button *ngIf="sevicosEmGrade && mostraBotaoListaGradeNoFiltro" style="transform: scale(1.6);" fxFlex="grow"
-					(click)="botaoVisualizacao()" >
-					<mat-icon matTooltip="Visualização em grade" style="vertical-align: middle;" [ngStyle]="{'color': '#5c77ff'}">view_module</mat-icon>
+				<button *ngIf="sevicosEmGrade && mostraBotaoListaGradeNoFiltro" style="transform: scale(1.6);"
+					fxFlex="grow" (click)="botaoVisualizacao()">
+					<mat-icon matTooltip="Visualização em grade" style="vertical-align: middle;"
+						[ngStyle]="{'color': '#5c77ff'}">view_module</mat-icon>
 				</button>
-				<button *ngIf="!sevicosEmGrade && mostraBotaoListaGradeNoFiltro" style="transform: scale(1.6);" fxFlex="grow"
-					 (click)="botaoVisualizacao()">
-					<mat-icon matTooltip="Visualização em lista" style="vertical-align: middle;" [ngStyle]="{'color': '#5c77ff'}">view_headline</mat-icon>
+				<button *ngIf="!sevicosEmGrade && mostraBotaoListaGradeNoFiltro" style="transform: scale(1.6);"
+					fxFlex="grow" (click)="botaoVisualizacao()">
+					<mat-icon matTooltip="Visualização em lista" style="vertical-align: middle;"
+						[ngStyle]="{'color': '#5c77ff'}">view_headline</mat-icon>
 				</button>
 			</div>
 		</div>
 	</div>
-	
+
 </div>
 
 <vex-listagem-servicos *ngIf="sevicosEmGrade" [servicos]=servicos></vex-listagem-servicos>
-<vex-grade-servicos *ngIf="!sevicosEmGrade" [servicos]=cards ></vex-grade-servicos>
+<vex-grade-servicos *ngIf="!sevicosEmGrade" [servicos]=cards></vex-grade-servicos>
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>

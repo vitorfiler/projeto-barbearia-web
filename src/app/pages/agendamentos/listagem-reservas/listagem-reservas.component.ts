@@ -16,6 +16,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { EventEmitterService } from 'src/app/services/event.service';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { scaleFadeIn400ms } from 'src/@vex/animations/scale-fade-in.animation';
 
 registerLocaleData(localePt);
 
@@ -25,6 +26,7 @@ registerLocaleData(localePt);
 	styleUrls: ['./listagem-reservas.component.scss'],
 	providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
 	animations: [
+		scaleFadeIn400ms,
 		fadeInUp400ms,
 		stagger20ms
 	]
@@ -42,6 +44,7 @@ export class ListagemReservasComponent implements OnInit {
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
 	public carregando = false;
 	statusPadrao: String;
+	label: string = "reservas";
 
 	//Objeto
 	form: FormGroup;

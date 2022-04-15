@@ -1,7 +1,7 @@
 import { Agendamento } from '../../../_models/agendamento';
 import { MatTableDataSource } from '@angular/material/table';
 import { AgendamentoService } from '../../../services/agendamento.service';
-import { Component,  LOCALE_ID, OnInit, ViewChild } from '@angular/core';
+import { Component, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
@@ -20,6 +20,7 @@ import { EventEmitterService } from 'src/app/services/event.service';
 import { ModalDeletarAgendamento } from '../../modais/agendamento-modais/modal-deletar-agendamento/modal-deletar-agendamento';
 import { ModalAlterarStatusAgendamento } from '../../modais/agendamento-modais/modal-alterar-status/modal-alterar-status-agendamento';
 import { ModalCadastrarEditarAgendamento } from '../../modais/agendamento-modais/modal-cadastrar-editar/modal-cadastrar-editar-agendamento';
+import { scaleFadeIn400ms } from 'src/@vex/animations/scale-fade-in.animation';
 
 registerLocaleData(localePt);
 
@@ -29,6 +30,7 @@ registerLocaleData(localePt);
 	styleUrls: ['./listagem-agendamentos.component.scss'],
 	providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
 	animations: [
+		scaleFadeIn400ms,
 		fadeInUp400ms,
 		stagger20ms
 	]
@@ -43,16 +45,17 @@ export class ListagemAgendamentosComponent implements OnInit {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild('select') matSelect: MatSelect;
 	@ViewChild(MatSort) matSort: MatSort;
-	
+
 	//variaveis
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID')
 	public carregando = false;
-	recebeIdDoPainel:number;
-	
+	recebeIdDoPainel: number;
+	label: string = "agendamentos";
+
 	//objetos
 	agendamento: Agendamento;
 	form: FormGroup;
-	
+
 	//listas
 	agendamentos: Agendamento[] = []
 	status: Status[] = [
@@ -164,7 +167,7 @@ export class ListagemAgendamentosComponent implements OnInit {
 				this.dataSource.sort = this.matSort
 			});
 			window.localStorage.removeItem('agendamentoID')
-		}, (error)=>{
+		}, (error) => {
 			console.log(error);
 			this.carregando = false;
 		})
@@ -184,10 +187,10 @@ export class ListagemAgendamentosComponent implements OnInit {
 			}
 		});
 	}
-	
+
 	abrirModalDeletar(agendamentoID) {
 		const dialogRef = this.dialog.open(ModalDeletarAgendamento, {
-			data: agendamentoID 
+			data: agendamentoID
 		});
 		dialogRef.afterClosed().subscribe(result => {
 		});
@@ -201,7 +204,7 @@ export class ListagemAgendamentosComponent implements OnInit {
 			dialogRef = this.dialog.open(ModalCadastrarEditarAgendamento)
 		} else {
 			dialogRef = this.dialog.open(ModalCadastrarEditarAgendamento, {
-				data: agendamento 
+				data: agendamento
 			});
 			if (status == "PENDENTE") {
 				this.agendamento.responsavel = "";
@@ -211,14 +214,15 @@ export class ListagemAgendamentosComponent implements OnInit {
 
 			}
 		}
-		dialogRef.afterClosed().subscribe(result => {});
+		dialogRef.afterClosed().subscribe(result => { });
 	}
-	
-	trocaCor(): string{
+
+	trocaCor(): string {
 		return 'red'
 	}
 
-	recarregaTabela(){;
+	recarregaTabela() {
+		;
 		this.dataSource = new MatTableDataSource<Agendamento>(this.agendamentos)
 	}
 

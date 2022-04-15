@@ -1,27 +1,14 @@
-<div *ngIf="servicos.length > 0"
-	@stagger
-	class="overflow-y-auto"
-	fxFlex="auto">
- <div class="p-gutter"
-	  vexContainer
-	  gdColumns="1fr 1fr 1fr 1fr"
-	  gdColumns.lt-md="1fr 1fr"
-	  gdColumns.xs="1fr"
-	  gdGap="24px">
-   <vex-card *ngFor="let card of servicos;" 
-   	(openContact)="abrirModalAdicionarServico(card)"				  
-					  @fadeInUp
-					  [card]="card" [ehServico]="true"></vex-card>
- </div>
+<div *ngIf="servicos.length > 0" @stagger class="overflow-y-auto" fxFlex="auto">
+	<div class="p-gutter" vexContainer gdColumns="1fr 1fr 1fr 1fr" gdColumns.lt-md="1fr 1fr" gdColumns.xs="1fr"
+		gdGap="24px">
+		<vex-card *ngFor="let card of servicos;" (openContact)="abrirModalAdicionarServico(card)" @fadeInUp
+			[card]="card" [ehServico]="true"></vex-card>
+	</div>
 </div>
 
 
 <!-- SEM DADOS PARA EXIBIR -->
-<div *ngIf="servicos.length === 0"
-	@scaleFadeIn
-	fxFlex="auto"
-	fxLayout="column"
-	fxLayoutAlign="center center">
- <img class="m-12 h-64" src="assets/img/illustrations/idea.svg">
- <h2 class="headline m-0 text-center">Não foram encontrados serviços cadastrados.</h2>
+<div *ngIf="servicos.length === 0" @scaleFadeIn fxFlex="auto" fxLayout="column" fxLayoutAlign="center center">
+
+	<vex-dados-ausentes [label]="label"></vex-dados-ausentes>
 </div>

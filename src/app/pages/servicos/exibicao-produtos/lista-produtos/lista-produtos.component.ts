@@ -37,6 +37,7 @@ export class ListaProdutosComponent implements OnInit {
 	public carregando = false;
 	@Input() produtos: Produto[] = []
 	produtosEmGrade: boolean = false;
+	label: string = "produtos";
 
 	//visualização em grade e lista
 	visible = false;
@@ -86,10 +87,10 @@ export class ListaProdutosComponent implements OnInit {
 
 	listarProdutos() {
 		this.dataSource = new MatTableDataSource<Produto>(this.produtos)
-			setTimeout(() => {
-				this.dataSource.paginator = this.paginator
-				this.dataSource.sort = this.matSort
-			})
+		setTimeout(() => {
+			this.dataSource.paginator = this.paginator
+			this.dataSource.sort = this.matSort
+		})
 	}
 
 

@@ -44,7 +44,7 @@ export class ExibicaoServicosComponent implements OnInit {
 	mostraBotaoListaGradeNoFiltro = false;
 	estabelecimentoID = localStorage.getItem('estabelecimento_ID');
 	public carregando = false;
-    sevicosEmGrade: boolean = false;
+	sevicosEmGrade: boolean = false;
 	cards: Card[];
 	ehProduto: boolean = true;
 
@@ -67,7 +67,7 @@ export class ExibicaoServicosComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-    EventEmitterService.get('buscarServicos').subscribe(() => this.listarServicos())
+		EventEmitterService.get('buscarServicos').subscribe(() => this.listarServicos())
 		this.inicializarFiltro();
 		this.listarServicos();
 	}
@@ -80,7 +80,7 @@ export class ExibicaoServicosComponent implements OnInit {
 		if (this.larguraTela >= 407 && this.larguraTela <= 767) {
 			this.mostraBotaoListaGradeNaTabela = true
 			this.mostraBotaoListaGradeNoFiltro = false
-		} else if(this.larguraTela > 767){
+		} else if (this.larguraTela > 767) {
 			this.mostraBotaoListaGradeNaTabela = false
 			this.mostraBotaoListaGradeNoFiltro = true;
 		} else {
@@ -102,17 +102,17 @@ export class ExibicaoServicosComponent implements OnInit {
 		const dialogRef = this.dialog.open(ModalCadastrarEditarServico, {
 			data: servico
 		});
-		dialogRef.afterClosed().subscribe(result => {});
+		dialogRef.afterClosed().subscribe(result => { });
 	}
 
 	listarServicos() {
 		this.carregando = true;
 		this.dataSource.paginator = this.paginator
-			this.dataSource.sort = this.matSort
+		this.dataSource.sort = this.matSort
 		this.servicoService.listarServicos(this.estabelecimentoID).subscribe(response => {
 			this.carregando = false
 			this.servicos = response.body
-			this.cards = this.servicos.map(s=> new Card(s))
+			this.cards = this.servicos.map(s => new Card(s))
 		}, (error) => {
 			console.log(error);
 			this.carregando = false;
@@ -125,7 +125,7 @@ export class ExibicaoServicosComponent implements OnInit {
 		let categoria = this.form.get('categoria').value
 		this.filtrar(filtro, this.categoria);
 
-		
+
 	}
 
 	filtrar(filtro: string, categoria: string) {
@@ -148,10 +148,10 @@ export class ExibicaoServicosComponent implements OnInit {
 		const dialogRef = this.dialog.open(ModalOcultarServico, {
 			data: servico
 		});
-		dialogRef.afterClosed().subscribe(result => { 
+		dialogRef.afterClosed().subscribe(result => {
 		});
 	}
-	
+
 	ngAfterViewInit() {
 		this.dataSource.sort = this.matSort;
 	}
