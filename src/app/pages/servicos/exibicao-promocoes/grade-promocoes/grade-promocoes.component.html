@@ -1,13 +1,1 @@
-<div *ngIf="promocoes.length > 0" @stagger class="overflow-y-auto" fxFlex="auto">
-    <div class="p-gutter" vexContainer gdColumns="1fr 1fr 1fr 1fr" gdColumns.lt-md="1fr 1fr" gdColumns.xs="1fr"
-        gdGap="24px">
-        <vex-card *ngFor="let card of promocoes;" @fadeInUp [card]="card" [ehProduto]="true"></vex-card>
-    </div>
-</div>
-
-
-<!-- SEM DADOS PARA EXIBIR -->
-<div *ngIf="promocoes.length === 0" @scaleFadeIn fxFlex="auto" fxLayout="column" fxLayoutAlign="center center">
-    <vex-dados-ausentes [label]="label">
-    </vex-dados-ausentes>
-</div>
+<p>grade-promocoes works!</p>

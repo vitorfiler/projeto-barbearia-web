@@ -77,7 +77,6 @@ export class HistoricoDeVendaComponent implements OnInit {
 	listarVendas() {
 		this.listaVendasService.listarVendas().subscribe(resposta => {
 			this.listaVendas = resposta.body;
-			console.log(this.listaVendas);
 		}, (error) => {
 			console.log(error);
 			this.snackbar.open(MessagesSnackBar.LISTAR_VENDA_ERRO, 'Fechar', { duration: 4000 })
