@@ -23,7 +23,7 @@
 					</mat-select>
 				</mat-form-field>
 			</div>
-            <div class="col-md-2">
+			<div class="col-md-2">
 				<button *ngIf="promocoesEmGrade" style="transform: scale(1.6);" fxFlex="grow"
 					title="visualização em grade" (click)="botaoVisualizacao()">
 					<mat-icon style="vertical-align: middle;" [ngStyle]="{'color': '#5c77ff'}">view_module</mat-icon>
@@ -39,8 +39,9 @@
 
 <vex-scrollbar [@stagger]="10" class="p-4 flex-auto">
 	<div *ngIf="promocoes.length > 0" class="lista">
-		<vex-listagem-promocoes [promocoes]="promocoes"></vex-listagem-promocoes>
-        
+		<vex-listagem-promocoes *ngIf="promocoesEmGrade" [promocoes]="promocoes"></vex-listagem-promocoes>
+		<vex-grade-promocoes *ngIf="!promocoesEmGrade" [promocoes]="promocoes"></vex-grade-promocoes>
+
 	</div>
 
 	<!-- SEM DADOS PARA EXIBIR -->
