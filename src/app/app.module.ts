@@ -46,6 +46,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ListagemServicosComponent } from './pages/servicos/exibicao-servicos/listagem-servicos/listagem-servicos.component';
 import { ExibicaoProdutosComponent } from './pages/servicos/exibicao-produtos/exibicao-produtos.component';
+import { ListagemPromocoesComponent } from './pages/servicos/exibicao-promocoes/listagem-promocoes/listagem-promocoes.component';
 import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 import { PlanosModalComponent } from './pages/modais/planos/planos-modal.component';
 import { ComentariosComponent } from './pages/comentarios/comentarios.component';
