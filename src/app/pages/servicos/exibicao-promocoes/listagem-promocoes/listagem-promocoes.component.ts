@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServicoService } from 'src/app/services/servico.service';
 import { Categoria } from 'src/app/_models/categoria';
@@ -15,10 +17,13 @@ export class ListagemPromocoesComponent implements OnInit {
   form: FormGroup;
   categoria: string;
   filtroCategoria: string;
-  dataSource = new MatTableDataSource<Servico>()
-  servico: Servico;
-	servicos: Servico[] = []
 
+  dataSource = new MatTableDataSource<any>()
+  displayedColumns: string[] = ['nome', 'descricao', 'valorPromocional', 'acoes'];
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) matSort: MatSort;
+
+  @Input() promocoes: any[] = []
   estabelecimentoID = localStorage.getItem('estabelecimento_ID')
 	public carregando = false;
 
@@ -26,8 +31,6 @@ export class ListagemPromocoesComponent implements OnInit {
 		{ value: 'TODOS', viewValue: 'Todos' },
 		{ value: 'SERVICOS', viewValue: 'Serviços' },
 		{ value: 'PRODUTOS', viewValue: 'Produtos' },
-	
-
 	];
 
   constructor(
@@ -36,25 +39,7 @@ export class ListagemPromocoesComponent implements OnInit {
     ){}
 
   ngOnInit(): void {
-    this.inicializarFiltro() 
+    this.dataSource = new MatTableDataSource<any>(this.promocoes)
   }
-
-  filtrar() {
-		this.servicoService.filtrar(this.estabelecimentoID, this.filtroCategoria, this.categoria)
-			.subscribe(resposta => {
-				this.servico = resposta.body
-				this.carregando = false;
-				this.dataSource = new MatTableDataSource<Servico>(this.servicos)
-
-			})
-	}
-
-  inicializarFiltro() { 
-		this.form = this.fb.group({
-			filtro: [''],
-			categoria: ['']
-		});
-		this.categoria = this.selecaoCategoria[0].value;
-	}
 
 }
