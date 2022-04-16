@@ -3,13 +3,6 @@ import { fadeInRight400ms } from 'src/@vex/animations/fade-in-right.animation';
 import { scaleIn400ms } from 'src/@vex/animations/scale-in.animation';
 import { Link } from 'src/@vex/interfaces/link.interface';
 
-export interface FriendSuggestion {
-  name: string;
-  imageSrc: string;
-  friends: number;
-  added: boolean;
-}
-
 @Component({
   selector: 'vex-social',
   templateUrl: './social.component.html',
@@ -20,7 +13,7 @@ export interface FriendSuggestion {
   ]
 })
 export class SocialComponent implements OnInit {
-
+  userName: string = this.getUser();
   links: Link[] = [
     {
       label: 'ABOUT',
@@ -46,5 +39,16 @@ export class SocialComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+  getUser() {
+    var nome = localStorage.getItem('currentUser');
+    if (nome == null) {
+      var nomeEmpe = localStorage.getItem('usuarioLogadoEmpresa');
+      if (nomeEmpe == null) {
+        return "";
+      }
+      return nomeEmpe.replace('"', '').replace('"', '');
+    }
+    return nome.replace('"', '').replace('"', '');
   }
 }

@@ -29,7 +29,7 @@ import { CommomService } from 'src/app/services/commom.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'vex';
 
   constructor(private configService: ConfigService,
@@ -44,12 +44,12 @@ export class AppComponent implements OnInit{
     private splashScreenService: SplashScreenService,
     private commomService: CommomService,
     private router: Router) {
-      Settings.defaultLocale = this.localeId;
-      
-      if (this.platform.BLINK) {
-        this.renderer.addClass(this.document.body, 'is-blink');
-      }
-      
+    Settings.defaultLocale = this.localeId;
+
+    if (this.platform.BLINK) {
+      this.renderer.addClass(this.document.body, 'is-blink');
+    }
+
     /**
      * Customize the template to your needs with the ConfigService
      * Example:
@@ -103,7 +103,7 @@ export class AppComponent implements OnInit{
         type: 'link',
         route: '/painel',
         icon: icDashboard
-      }, 
+      },
       {
         label: 'Caixa',
         type: 'link',
@@ -133,7 +133,7 @@ export class AppComponent implements OnInit{
         type: 'link',
         route: '/configuracoes',
         icon: icSetting
-      }
+      },
     ];
   }
   ngOnInit(): void {
