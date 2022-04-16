@@ -8,9 +8,9 @@ describe('DadosAusentesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DadosAusentesComponent ]
+      declarations: [DadosAusentesComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

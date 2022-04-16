@@ -46,7 +46,6 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ListagemServicosComponent } from './pages/servicos/exibicao-servicos/listagem-servicos/listagem-servicos.component';
 import { ExibicaoProdutosComponent } from './pages/servicos/exibicao-produtos/exibicao-produtos.component';
-import { ListagemPromocoesComponent } from './pages/servicos/exibicao-promocoes/listagem-promocoes/listagem-promocoes.component';
 import { CadastroEstabelecimentoModal } from './pages/modais/cadastro-estabelecimento/cadastro-estabelecimento-modal.component';
 import { PlanosModalComponent } from './pages/modais/planos/planos-modal.component';
 import { ComentariosComponent } from './pages/comentarios/comentarios.component';
@@ -92,9 +91,10 @@ import { ExibicaoServicosComponent } from './pages/servicos/exibicao-servicos/ex
 import { CardComponent } from './_utils/card/card.component';
 import { ListaProdutosComponent } from './pages/servicos/exibicao-produtos/lista-produtos/lista-produtos.component';
 import { GradeProdutosComponent } from './pages/servicos/exibicao-produtos/grade-produtos/grade-produtos.component';
-import { DadosAusentesComponent } from './_utils/dados-ausentes/dados-ausentes.component';
 import { ExibicaoPromocoesComponent } from './pages/servicos/exibicao-promocoes/exibicao-promocoes.component';
 import { GradePromocoesComponent } from './pages/servicos/exibicao-promocoes/grade-promocoes/grade-promocoes.component';
+import { DadosAusentesComponent } from './_utils/dados-ausentes/dados-ausentes.component';
+import { ListagemPromocoesComponent } from './pages/servicos/exibicao-promocoes/listagem-promocoes/listagem-promocoes.component';
 
 
 @NgModule({
@@ -115,7 +115,6 @@ import { GradePromocoesComponent } from './pages/servicos/exibicao-promocoes/gra
 		ExibicaoProdutosComponent,
 		CadastroEstabelecimentoModal,
 		PlanosModalComponent,
-		ListagemPromocoesComponent,
 		CadastroEstabelecimentoModal,
 		FluxoDeCaixa,
 		ComentariosComponent,
@@ -148,10 +147,10 @@ import { GradePromocoesComponent } from './pages/servicos/exibicao-promocoes/gra
 		CardComponent,
 		ListaProdutosComponent,
 		GradeProdutosComponent,
-		DadosAusentesComponent,
 		ExibicaoPromocoesComponent,
-		GradePromocoesComponent
-
+		ListagemPromocoesComponent,
+		GradePromocoesComponent,
+		DadosAusentesComponent
 	],
 	imports: [
 		BrowserModule,
