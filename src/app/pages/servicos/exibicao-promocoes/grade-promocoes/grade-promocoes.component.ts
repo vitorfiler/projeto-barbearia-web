@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'vex-grade-promocoes',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GradePromocoesComponent implements OnInit {
 
-  constructor() { }
+
+  @Input() promocoes: any[] = []
+  estabelecimentoID = localStorage.getItem('estabelecimento_ID')
+  public carregando = false;
+
+
+
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }
-
 }

@@ -1,1 +1,4 @@
-<p>grade-promocoes works!</p>
+<div class="p-gutter" vexContainer gdColumns="1fr 1fr 1fr 1fr" gdColumns.lt-md="1fr 1fr" gdColumns.xs="1fr"
+    gdGap="24px">
+    <vex-card *ngFor="let card of promocoes;" @fadeInUp [card]="card" [ehServico]="true"></vex-card>
+</div>

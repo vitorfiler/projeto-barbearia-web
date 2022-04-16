@@ -1,16 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { scaleFadeIn400ms } from 'src/@vex/animations/scale-fade-in.animation';
 import { stagger20ms } from 'src/@vex/animations/stagger.animation';
 import { PromocaoService } from 'src/app/services/promocao.service';
 import { ServicoService } from 'src/app/services/servico.service';
 import { Categoria } from 'src/app/_models/categoria';
-import { Produto } from 'src/app/_models/produto';
-import { Servico } from 'src/app/_models/servico';
 
 @Component({
   selector: 'vex-exibicao-promocoes',
