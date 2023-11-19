@@ -95,6 +95,7 @@ import { GradeProdutosComponent } from './pages/servicos/exibicao-produtos/grade
 import { DadosAusentesComponent } from './_utils/dados-ausentes/dados-ausentes.component';
 import { ExibicaoPromocoesComponent } from './pages/servicos/exibicao-promocoes/exibicao-promocoes.component';
 import { GradePromocoesComponent } from './pages/servicos/exibicao-promocoes/grade-promocoes/grade-promocoes.component';
+import { SocialComponent } from './pages/social/social.component';
 
 
 @NgModule({
@@ -115,7 +116,6 @@ import { GradePromocoesComponent } from './pages/servicos/exibicao-promocoes/gra
 		ExibicaoProdutosComponent,
 		CadastroEstabelecimentoModal,
 		PlanosModalComponent,
-		ListagemPromocoesComponent,
 		CadastroEstabelecimentoModal,
 		FluxoDeCaixa,
 		ComentariosComponent,
@@ -150,7 +150,9 @@ import { GradePromocoesComponent } from './pages/servicos/exibicao-promocoes/gra
 		GradeProdutosComponent,
 		DadosAusentesComponent,
 		ExibicaoPromocoesComponent,
-		GradePromocoesComponent
+		GradePromocoesComponent,
+		ListagemPromocoesComponent,
+		SocialComponent
 
 	],
 	imports: [

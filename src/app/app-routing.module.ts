@@ -14,6 +14,7 @@ import { ComentariosComponent } from './pages/comentarios/comentarios.component'
 import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
 import { PainelComponent } from './pages/painel/painel.component';
 import { AgendamentosComponent } from './pages/agendamentos/agendamentos.component';
+import { SocialComponent } from './pages/social/social.component';
 
 
 const routes: VexRoutes = [
@@ -27,14 +28,15 @@ const routes: VexRoutes = [
       { path: 'caixa', component: FluxoDeCaixa },
       { path: 'comentarios', component: ComentariosComponent },
       { path: 'configuracoes', component: ConfiguracoesComponent },
-      { path: 'painel', component: PainelComponent }
+      { path: 'painel', component: PainelComponent },
+      { path: 'social', component: SocialComponent },
     ],
   },
   { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'recuperar-senha', component: RecuperarSenhaComponent },
   { path: 'enviado', component: RecuperarSenhaSucessoComponent },
-  { path: 'redefinir-senha', component: RedefinirSenhaComponent }
+  { path: 'redefinir-senha', component: RedefinirSenhaComponent },
 
 ];
 
